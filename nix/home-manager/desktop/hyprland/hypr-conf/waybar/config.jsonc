@@ -1,0 +1,247 @@
+{
+  "position": "top",
+  "layer": "top",
+
+  "modules-left": [
+    "custom/launcher",
+    "temperature",
+    "hyprland/submap",
+    "hyprland/workspaces",
+    "sway/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "custom/weather",
+    "custom/playerctl"
+  ],
+  "modules-right": [
+    "cava",
+    "wireplumber",
+    "memory",
+    "cpu",
+    "network",
+    "battery",
+    "idle_inhibitor",
+    "clock",
+    "tray",
+    "custom/powermenu"
+  ],
+  "hyprland/window": {
+    "format": "[ {} ]"
+  },
+  "hyprland/submap": {
+    "format": "{}",
+    "tooltip": false,
+    "on-click": "hyprctl dispatch submap reset"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "󱋊",
+      "2": "",
+      "3": "",
+      "8": "",
+      "9": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "sway/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "󱋊",
+      "2": "",
+      "3": "",
+      "8": "",
+      "9": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "clock": {
+    "interval": 60,
+    "align": 0,
+    "rotate": 0,
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": " {:%H:%M}",
+    "format-alt": " {:%a %b %d}"
+  },
+  "cpu": {
+    "format": "\udb80\udf5b {usage}%",
+    "interval": 1
+  },
+  "custom/launcher": {
+    "format": "\uf313 ",
+    "on-click": "$HOME/.config/hypr/scripts/menu",
+    "on-click-middle": "exec default_wall",
+    "on-click-right": "exec wallpaper_random",
+    "tooltip": false
+  },
+  "custom/powermenu": {
+    "format": "\uf011",
+    "on-click": "$HOME/.config/hypr/scripts/wlogout",
+    "tooltip": false
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+    "tooltip": false
+  },
+  "memory": {
+    "format": "\udb83\udee0 {percentage}%",
+    "interval": 1,
+    "states": {
+      "warning": 85
+    }
+  },
+  "mpd": {
+      "interval": 2,
+      "unknown-tag": "N/A",
+      "format": "{stateIcon} {artist} - {title}",
+      "format-disconnected": " Disconnected",
+      "format-paused": "{stateIcon} {artist} - {title}",
+      "format-stopped": "Stopped ",
+      "state-icons": {
+          "paused": "",
+          "playing": ""
+      },
+      "tooltip-format": "MPD (connected)",
+      "tooltip-format-disconnected": "MPD (disconnected)",
+      // Commands to execute on events
+      "on-click": "mpc toggle",
+      "on-click-middle": "mpc prev",
+      "on-click-right": "mpc next",
+      "on-update": "",
+      "on-scroll-up": "mpc seek +00:00:01",
+      "on-scroll-down": "mpc seek -00:00:01",
+      "smooth-scrolling-threshold": 1
+  },
+  "custom/playerctl": {
+     "format": "{icon}  <span>{}</span>",
+     "return-type": "json",
+     "max-length": 30,
+     "exec": "playerctl -a metadata --format '{\"text\": \"  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+     "on-click-middle": "playerctl previous",
+     "on-click": "playerctl play-pause",
+     "on-click-right": "playerctl next",
+     "format-icons": {
+       "Paused":  "<span foreground='#f2cdcd'></span>",
+       "Playing": "<span foreground='#6dd9d9'></span>"
+     }
+  },
+  "custom/weather": {
+    "format": "{} °",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar --location Marrakech",
+    "return-type": "json",
+    "exec-on-event": "click"
+  },
+  "network": {
+      "interval": 5,
+      //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
+      "format-wifi": " {essid}",
+      "format-ethernet": " {ipaddr}/{cidr}",
+      "format-linked": " {ifname} (No IP)",
+      "format-disconnected": "睊 Disconnected",
+      "format-disabled": "睊 Disabled",
+      "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+      "tooltip-format": " {ifname} via {gwaddr}",
+  },
+  "pulseaudio": {
+      //"format": "{volume}% {icon} {format_source}",
+      "format": "{icon} {volume}%",
+      "format-muted": " Mute",
+      "format-bluetooth": " {volume}% {format_source}",
+      "format-bluetooth-muted": " Mute",
+      "format-source": " {volume}%",
+      "format-source-muted": "",
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": [
+              "",
+              "",
+              ""
+          ]
+      },
+      "scroll-step": 5.0,
+      // Commands to execute on events
+      "on-click": "amixer set Master toggle",
+      "on-click-right": "pavucontrol",
+      "smooth-scrolling-threshold": 1,
+  },
+
+  "wireplumber": {
+      //"format": "{volume}% {icon} {format_source}",
+      "format": "{icon} {volume}%",
+      "format-muted": " Mute",
+      "format-bluetooth": " {volume}% {format_source}",
+      "format-bluetooth-muted": " Mute",
+      "format-source": " {volume}%",
+      "format-source-muted": "",
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": [
+              "",
+              "",
+              ""
+          ]
+      },
+      "scroll-step": 5.0,
+      // Commands to execute on events
+      "on-click": "amixer set Master toggle",
+      "on-click-right": "pavucontrol",
+      "smooth-scrolling-threshold": 1,
+  },
+  "temperature": {
+    "format": "\uf2c9 {temperatureC}\u00b0C",
+    "tooltip": false,
+    "critical-threshold": 80,
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 5
+  },
+  "cava": {
+        "framerate": 30,
+        "autosens": 1,
+        "bars": 14,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pipewire",
+        "source": "auto",
+        "stereo": false,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "input_delay": 2,
+        "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+        "actions": {
+                   "on-click-right": "mode"
+                   }
+    },
+    "battery": {
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-icons": ["", "", "", "", ""]
+  }
+}

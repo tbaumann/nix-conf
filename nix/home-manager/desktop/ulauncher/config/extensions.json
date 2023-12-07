@@ -1,0 +1,30 @@
+{
+    "com.github.rdnetto.ulauncher-sway": {
+        "id": "com.github.rdnetto.ulauncher-sway",
+        "url": "https://github.com/rdnetto/ulauncher-sway",
+        "updated_at": "2023-11-04T16:47:32.516416",
+        "last_commit": "9fc141f01959fb5086518699229af97d920ca865",
+        "last_commit_time": "2021-07-22T12:29:13"
+    },
+    "com.github.elken.terminal-runner": {
+        "id": "com.github.elken.terminal-runner",
+        "url": "https://github.com/elken/Terminal-Runner",
+        "updated_at": "2023-11-04T16:47:44.156598",
+        "last_commit": "6807ebe6047462bcce6063c63228eddcb8c6b481",
+        "last_commit_time": "2020-02-22T23:04:04"
+    },
+    "com.github.kbialek.ulauncher-bitwarden": {
+        "id": "com.github.kbialek.ulauncher-bitwarden",
+        "url": "https://github.com/kbialek/ulauncher-bitwarden",
+        "updated_at": "2023-11-04T16:51:45.120082",
+        "last_commit": "e5c25ebc24142f064eaebb29f6e473ded6d6b315",
+        "last_commit_time": "2022-10-19T06:09:55"
+    },
+    "com.github.iboyperson.ulauncher-system": {
+        "id": "com.github.iboyperson.ulauncher-system",
+        "url": "https://github.com/iboyperson/ulauncher-system",
+        "updated_at": "2023-11-04T18:42:29.652133",
+        "last_commit": "b2b9e8d9ec84f3eca4818811242920c418f47ffe",
+        "last_commit_time": "2023-08-29T19:27:57"
+    }
+}
