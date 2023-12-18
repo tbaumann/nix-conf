@@ -107,6 +107,7 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               nix-colors.homeManagerModules.default
+              nix-flatpak.homeManagerModules.nix-flatpak
             ];
             home-manager.extraSpecialArgs = {
               flake-inputs = inputs;

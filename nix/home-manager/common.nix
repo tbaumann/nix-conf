@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   nix-colors,
+  packages,
   ...
 }: {
   imports = [
@@ -9,7 +10,7 @@
     ./packages.nix
     ./programs
     ./services.nix
-#    nix-colors.homeManagerModules.default
+    ./flatpak.nix
   ];
 
  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;

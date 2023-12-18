@@ -1,10 +1,8 @@
 {
-  colors,
-  inputs,
+inputs,
   ...
 }: {
   imports = [
-#    inputs.home-manager.nixosModules.home-manager
   ];
 
   home-manager = {
@@ -25,8 +23,7 @@
       };
     };
     extraSpecialArgs = {
-      inherit colors;
-      inherit inputs;
+    inherit inputs;
     };
   };
 }
