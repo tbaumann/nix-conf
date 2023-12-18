@@ -231,7 +231,7 @@
         {command = "wpaperd --use-scaled-window";}
         {command = "firefox";}
         {command = "google-chrome";}
-        {command = "rambox";}
+        {command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
         {command = "thunderbird";}
       ];
     };
