@@ -3,10 +3,10 @@
   config,
   pkgs,
   environment,
+  nix-colors,
   ...
 }: {
   imports = [
-    inputs.agenix.nixosModules.default
     ./programs
     ./user-group.nix
     ./fhs-fonts.nix

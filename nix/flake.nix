@@ -27,6 +27,7 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
     # AstroNvim is an aesthetic and feature-rich neovim config.
     astronvim = {
       url = "github:AstroNvim/AstroNvim/v3.37.8";
@@ -91,32 +92,51 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-colors, home-manager, agenix, ...} @inputs:
+  outputs = { self, nixpkgs, nix-colors, home-manager, agenix, nix-flatpak, wpaperd, nixpkgs-coolercontrol, update-systemd-resolved, ...} @inputs:
   let
-    lib = nixpkgs.lib;
+    mkNixosConfiguration =
+      { baseModules ? [
+          ./common/secrets.nix
+          agenix.nixosModules.default
+          nix-flatpak.nixosModules.nix-flatpak
+          update-systemd-resolved.nixosModules.update-systemd-resolved
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              nix-colors.homeManagerModules.default
+            ];
+            home-manager.extraSpecialArgs = {
+              flake-inputs = inputs;
+              inherit nix-colors;
+            };
+          }
+        ]
+      , extraModules ? [ ]
+      }: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = baseModules ++ extraModules;
+        specialArgs = {
+          inherit inputs;
+          inherit nix-colors;
+        };
+      };
+
   in {
     formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
-      zuse-klappi = lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./common/secrets.nix
+      zuse-klappi = mkNixosConfiguration {
+        extraModules = [
+          nixpkgs-coolercontrol.nixosModules.coolercontrol
           ./hosts/zuse-klappi
         ];
-        specialArgs = {
-          inherit inputs;
-        };
       };
-      zuse = lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          inputs.update-systemd-resolved.nixosModules.update-systemd-resolved
-          ./common/secrets.nix
+      zuse = mkNixosConfiguration {
+        extraModules = [
           ./hosts/zuse
         ];
-        specialArgs = {
-          inherit inputs;
-        };
       };
     };
   };

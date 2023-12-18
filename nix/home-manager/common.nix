@@ -1,17 +1,19 @@
 {
   inputs,
   pkgs,
+  nix-colors,
   ...
 }: {
   imports = [
-    inputs.nix-colors.homeManagerModules.default
     ./desktop
     ./packages.nix
     ./programs
     ./services.nix
+#    nix-colors.homeManagerModules.default
   ];
 
-    colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+ colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
+
   #  xdg.userDirs = {
   #    enable = true;
   #    createDirectories = true;
