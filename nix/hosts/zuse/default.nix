@@ -9,6 +9,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
     (inputs.nixpkgs-coolercontrol + "/nixos/modules/programs/coolercontrol.nix")
@@ -36,6 +37,7 @@
   environment.systemPackages = with pkgs; [
     liquidctl
   ];
+  services.hardware.openrgb.enable = true;
   hardware.gkraken.enable = true;
   hardware.openrazer.enable = true;
   hardware.openrazer.users = ["tilli"];

@@ -22,8 +22,5 @@ inputs,
         ];
       };
     };
-    extraSpecialArgs = {
-    inherit inputs;
-    };
   };
 }

@@ -8,20 +8,27 @@
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    nix-colors.url = "github:misterio77/nix-colors";
+    stylix.url = "github:danth/stylix";
+    base16.url = "github:SenchoPens/base16.nix";
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:tbaumann/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-networkmanager-profiles = {
       url = "github:jmackie/nixos-networkmanager-profiles";
       flake = false;
     };
-    agenix.url = "github:ryantm/agenix";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # anyrun - a wayland launcher
     anyrun = {
       url = "github:Kirottu/anyrun";
@@ -32,6 +39,13 @@
     astronvim = {
       url = "github:AstroNvim/AstroNvim/v3.37.8";
       flake = false;
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      # url = "github:nix-community/nixvim/nixos-23.05";
+
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # color scheme - catppuccin
     catppuccin-btop = {
@@ -92,7 +106,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-colors, home-manager, agenix, nix-flatpak, wpaperd, nixpkgs-coolercontrol, update-systemd-resolved, ...} @inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, nix-flatpak, wpaperd, nixpkgs-coolercontrol, update-systemd-resolved, stylix, base16, nix-index-database, nixvim, ...} @inputs:
   let
     mkNixosConfiguration =
       { baseModules ? [
@@ -100,18 +114,21 @@
           agenix.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
           update-systemd-resolved.nixosModules.update-systemd-resolved
+          stylix.nixosModules.stylix
+          base16.nixosModule
+          nix-index-database.nixosModules.nix-index
+          nixvim.nixosModules.nixvim
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
-              nix-colors.homeManagerModules.default
               nix-flatpak.homeManagerModules.nix-flatpak
+              nixvim.homeManagerModules.nixvim
             ];
             home-manager.extraSpecialArgs = {
-              flake-inputs = inputs;
-              inherit nix-colors;
+              inherit inputs;
             };
           }
         ]
@@ -121,7 +138,6 @@
         modules = baseModules ++ extraModules;
         specialArgs = {
           inherit inputs;
-          inherit nix-colors;
         };
       };
 

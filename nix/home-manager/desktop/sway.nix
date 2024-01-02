@@ -6,8 +6,11 @@
 }: {
   imports = [
   ];
+  #Global theming off
+  stylix.targets.sway.enable = false;
   #Theme file
   home.file.".config/sway/themes/".source = "${inputs.catppuccin-i3}/themes";
+
 
   services.swayidle = {
     enable = true;
@@ -32,13 +35,10 @@
     extraConfigEarly = ''
       include themes/catppuccin-mocha
     '';
-    extraConfig = ''
-      include ~/.config/sway/config.d/*
-    '';
     config = {
       modifier = "Mod4";
       terminal = "foot";
-      menu = "nwggrid";
+      menu = "anyrun";
       input = {
         "type:pointer" = {
           natural_scroll = "enabled";
@@ -52,7 +52,8 @@
         };
       };
       bars = [];
-      colors.focused = { border = "$lavender"; childBorder = "$mauve"; background = "$peach"; text = "$crust"; indicator = "$rosewater"; };
+
+      colors.focused = { border = "$lavender"; childBorder = "$mauve"; background = "$red"; text = "$crust"; indicator = "$rosewater"; };
       colors.unfocused = { border = "$overlay0"; childBorder = "$overlay0"; background = "$mauve"; text = "$crust"; indicator = "$rosewater"; };
       colors.focusedInactive = { border = "$overlay0"; childBorder = "$overlay0"; background = "$peach"; text = "$crust"; indicator = "$rosewater"; };
       colors.urgent = { border = "$peach"; childBorder = "$peach"; background = "$red"; text = "$crust"; indicator = "$overlay0"; };
@@ -217,7 +218,7 @@
             {app_id = "thunderbird";}
         ];
         "2" = [{ app_id = "firefox"; }];
-        "8" = [{ app_id = "Google-chrome"; }];
+        "8" = [{ app_id = "chromium-browser"; }];
         "9" = [{ title = "CoolerControl"; }];
       };
       startup = [
@@ -230,7 +231,7 @@
         {command = "wl-clip-persist --clipboard regular";}
         {command = "wpaperd --use-scaled-window";}
         {command = "firefox";}
-        {command = "google-chrome";}
+        {command = "chromium";}
         {command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
         {command = "thunderbird";}
       ];

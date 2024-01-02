@@ -19,6 +19,8 @@
   # to install chrome, you need to enable unfree packages
   nixpkgs.config.allowUnfree = lib.mkForce true;
 
+  boot.plymouth.enable = true;
+
   # add user's shell into /etc/shells
   environment.shells = with pkgs; [
     bash

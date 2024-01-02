@@ -17,6 +17,7 @@
       withGtkWrapper = config.programs.sway.wrapperFeatures.gtk;
     };
   };
+  services.logind.killUserProcesses = true;
   environment.systemPackages = with pkgs; [
     yambar
     nwg-launchers

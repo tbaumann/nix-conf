@@ -34,18 +34,12 @@
     # all the built-in themes are packaged into an extra package named `kitty-themes`
     # and it's installed by home-manager if `theme` is specified.
     theme = "Catppuccin-Mocha";
-    font = {
-      name = "JetBrainsMono Nerd Font";
-      #      size = 10;
-    };
 
     keybindings = {
       "ctrl+shift+m" = "toggle_maximized";
     };
 
     settings = {
-      background_opacity = "0.93";
-      macos_option_as_alt = true; # Option key acts as Alt on macOS
       scrollback_lines = 10000;
       enable_audio_bell = false;
       tab_bar_edge = "top"; # tab bar on top

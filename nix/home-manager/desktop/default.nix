@@ -11,6 +11,7 @@
     ./ulauncher
     ./hikari.nix
     ./nwg-panel.nix
+    ./dt.nix
   ];
 
   home.packages = with pkgs; [

@@ -40,10 +40,8 @@
     prismlauncher
     scc
     slurp
-    swaybg
     swaylock-effects
     thefuck
-    ungoogled-chromium
     usbutils # For lsusb
     vlc
     wget

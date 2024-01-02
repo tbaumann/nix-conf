@@ -11,8 +11,22 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   boot.extraModulePackages = [];
+  virtualisation.libvirtd.enable = true;
+  nix.settings.system-features = [
+    "kvm"
+    "big-parallel"
+  ];
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    extraPackages = with pkgs; [
+      intel-compute-runtime
+      intel-media-driver
+    ];
+  };
 
   fileSystems."/" = {
     device = "/dev/nvme0n1p4";

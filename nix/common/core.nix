@@ -1,9 +1,6 @@
 {
   inputs,
-  config,
   pkgs,
-  environment,
-  nix-colors,
   ...
 }: {
   imports = [
@@ -28,11 +25,19 @@
     settings = {
       auto-optimise-store = true;
       trusted-users = ["@wheel"];
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
   };
 
   nixpkgs.config.allowUnfree = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
     systemd-boot = {
       enable = true;
@@ -75,6 +80,10 @@
     autorestic
     nixpkgs-review
     zip
+    comma
+    gnumake
+    quickemu
+    quickgui
   ];
 
   services = {
@@ -129,6 +138,7 @@
     "power" = {};
   };
 
+  
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

@@ -20,6 +20,8 @@
       xterm.enable = false;
     };
   };
+  stylix.image = pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
   programs.regreet = {
     enable = true;
     settings.background = {

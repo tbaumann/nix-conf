@@ -25,7 +25,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     waybar # the status bar
-    swaybg # the wallpaper
     swayidle # the idle timeout
     swaylock # locking the screen
     wlogout # logout menu

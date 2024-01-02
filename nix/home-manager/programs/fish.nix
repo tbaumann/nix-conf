@@ -8,6 +8,7 @@
   };
   programs.fish.enable = true;
 
+
   home.file.catppuccin-fish-theme = {
     source = "${inputs.catppuccin-fish}/themes/";
     recursive = true;
