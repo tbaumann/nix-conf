@@ -1,8 +1,4 @@
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   imports = [
     ./neovim
     ./fish.nix
@@ -22,6 +18,6 @@
     "x-scheme-handler/http" = ["firefox.desktop"];
     "x-scheme-handler/https" = ["firefox.desktop"];
     "text/html" = ["firefox.desktop"];
-    "application/pdf" = ["evince.desktop" "firefox.desktop"];
+    "application/pdf" = ["zathura.desktop" "evince.desktop" "firefox.desktop"];
   };
 }

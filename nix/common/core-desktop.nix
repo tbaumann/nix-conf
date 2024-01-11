@@ -43,6 +43,7 @@
     restique
     kanshi
     wine
+    zathura
   ];
 
   programs = {
