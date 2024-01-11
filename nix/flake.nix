@@ -48,34 +48,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # color scheme - catppuccin
-    catppuccin-btop = {
-      url = "github:catppuccin/btop";
-      flake = false;
-    };
-    catppuccin-fcitx5 = {
-      url = "github:catppuccin/fcitx5";
-      flake = false;
-    };
-    catppuccin-bat = {
-      url = "github:catppuccin/bat";
-      flake = false;
-    };
-    catppuccin-alacritty = {
-      url = "github:catppuccin/alacritty";
-      flake = false;
-    };
-    catppuccin-wezterm = {
-      url = "github:catppuccin/wezterm";
-      flake = false;
-    };
-    catppuccin-helix = {
-      url = "github:catppuccin/helix";
-      flake = false;
-    };
-    catppuccin-starship = {
-      url = "github:catppuccin/starship";
-      flake = false;
-    };
     catppuccin-hyprland = {
       url = "github:catppuccin/hyprland";
       flake = false;
@@ -84,74 +56,75 @@
       url = "github:catppuccin/i3";
       flake = false;
     };
-    catppuccin-cava = {
-      url = "github:catppuccin/cava";
-      flake = false;
-    };
-    catppuccin-k9s = {
-      url = "github:catppuccin/k9s";
-      flake = false;
-    };
-    catppuccin-fish = {
-      url = "github:catppuccin/fish";
-      flake = false;
-    };
     catppuccin-foot = {
       url = "github:catppuccin/foot";
       flake = false;
     };
-    catppuccin-vsc = {
-      url = "github:catppuccin/vscode";
+    catppuccin-starship = {
+      url = "github:catppuccin/starship";
       flake = false;
     };
   };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    agenix,
+    nix-flatpak,
+    wpaperd,
+    nixpkgs-coolercontrol,
+    update-systemd-resolved,
+    stylix,
+    base16,
+    nix-index-database,
+    nixvim,
+    ...
+  } @ inputs: let
+    mkNixosConfiguration = {
+      baseModules ? [
+        ./common/secrets.nix
+        agenix.nixosModules.default
+        nix-flatpak.nixosModules.nix-flatpak
+        update-systemd-resolved.nixosModules.update-systemd-resolved
+        stylix.nixosModules.stylix
+        base16.nixosModule
+        nix-index-database.nixosModules.nix-index
+        nixvim.nixosModules.nixvim
 
-  outputs = { self, nixpkgs, home-manager, agenix, nix-flatpak, wpaperd, nixpkgs-coolercontrol, update-systemd-resolved, stylix, base16, nix-index-database, nixvim, ...} @inputs:
-  let
-    mkNixosConfiguration =
-      { baseModules ? [
-          ./common/secrets.nix
-          agenix.nixosModules.default
-          nix-flatpak.nixosModules.nix-flatpak
-          update-systemd-resolved.nixosModules.update-systemd-resolved
-          stylix.nixosModules.stylix
-          base16.nixosModule
-          nix-index-database.nixosModules.nix-index
-          nixvim.nixosModules.nixvim
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              nix-flatpak.homeManagerModules.nix-flatpak
-              nixvim.homeManagerModules.nixvim
-            ];
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
-          }
-        ]
-      , extraModules ? [ ]
-      }: nixpkgs.lib.nixosSystem {
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.sharedModules = [
+            agenix.homeManagerModules.default
+            nix-flatpak.homeManagerModules.nix-flatpak
+            nixvim.homeManagerModules.nixvim
+          ];
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+          };
+        }
+      ],
+      extraModules ? [],
+    }:
+      nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = baseModules ++ extraModules;
         specialArgs = {
           inherit inputs;
         };
       };
-
   in {
     formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
       zuse-klappi = mkNixosConfiguration {
         extraModules = [
-          nixpkgs-coolercontrol.nixosModules.coolercontrol
           ./hosts/zuse-klappi
         ];
       };
       zuse = mkNixosConfiguration {
         extraModules = [
+          # nixpkgs-coolercontrol.nixosModules.coolercontrol
           ./hosts/zuse
         ];
       };

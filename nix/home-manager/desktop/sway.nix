@@ -11,19 +11,50 @@
   #Theme file
   home.file.".config/sway/themes/".source = "${inputs.catppuccin-i3}/themes";
 
-
   services.swayidle = {
     enable = true;
     events = [
-      { event = "before-sleep"; command = "~/.config/hypr/scripts/lockscreen"; }
-      { event = "lock"; command = "~/.config/hypr/scripts/lockscreen"; }
-      { event = "unlock"; command = "pkill -SIGUSR1 swaylock";}
-      { event = "after-resume"; command = "swaymsg \"output * dpms on\""; }
+      {
+        event = "before-sleep";
+        command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+      }
+      {
+        event = "lock";
+        command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
+      }
+      {
+        event = "unlock";
+        command = "pkill -SIGUSR1 swaylock";
+      }
+      {
+        event = "after-resume";
+        command = "swaymsg \"output * dpms on\"";
+      }
     ];
     timeouts = [
-      { timeout = 1800; command = "~/.config/hypr/scripts/lockscreen"; }
-      { timeout = 2000; command = "swaymsg \"output * dpms off\""; resumeCommand = "swaymsg \"output * dpms on\"";}
+      {
+        timeout = 1800;
+        command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+      }
+      {
+        timeout = 2000;
+        command = "swaymsg \"output * dpms off\"";
+        resumeCommand = "swaymsg \"output * dpms on\"";
+      }
     ];
+  };
+  programs.swaylock = {
+    enable = true;
+    package = pkgs.swaylock-effects;
+    settings = {
+      "screenshots" = true;
+      "clock" = true;
+      "indicator" = true;
+      "effect-blur" = "7x5";
+      "fade-in" = "0.2";
+      "grace" = 5;
+      "indicator-radius" = "100";
+    };
   };
   wayland.windowManager.sway = {
     enable = true;
@@ -53,19 +84,47 @@
       };
       bars = [];
 
-      colors.focused = { border = "$lavender"; childBorder = "$mauve"; background = "$red"; text = "$crust"; indicator = "$rosewater"; };
-      colors.unfocused = { border = "$overlay0"; childBorder = "$overlay0"; background = "$mauve"; text = "$crust"; indicator = "$rosewater"; };
-      colors.focusedInactive = { border = "$overlay0"; childBorder = "$overlay0"; background = "$peach"; text = "$crust"; indicator = "$rosewater"; };
-      colors.urgent = { border = "$peach"; childBorder = "$peach"; background = "$red"; text = "$crust"; indicator = "$overlay0"; };
-      colors.placeholder = { border = "$overlay0"; childBorder = "$overlay0"; background = "$mauve"; text = "$crust"; indicator = "$overlay0"; };
+      colors.focused = {
+        border = "$lavender";
+        childBorder = "$mauve";
+        background = "$red";
+        text = "$crust";
+        indicator = "$rosewater";
+      };
+      colors.unfocused = {
+        border = "$overlay0";
+        childBorder = "$overlay0";
+        background = "$mauve";
+        text = "$crust";
+        indicator = "$rosewater";
+      };
+      colors.focusedInactive = {
+        border = "$overlay0";
+        childBorder = "$overlay0";
+        background = "$peach";
+        text = "$crust";
+        indicator = "$rosewater";
+      };
+      colors.urgent = {
+        border = "$peach";
+        childBorder = "$peach";
+        background = "$red";
+        text = "$crust";
+        indicator = "$overlay0";
+      };
+      colors.placeholder = {
+        border = "$overlay0";
+        childBorder = "$overlay0";
+        background = "$mauve";
+        text = "$crust";
+        indicator = "$overlay0";
+      };
       colors.background = "$sapphire";
-      keybindings = 
-      let
+      keybindings = let
         terminal = config.wayland.windowManager.sway.config.terminal;
         menu = config.wayland.windowManager.sway.config.menu;
         modifier = config.wayland.windowManager.sway.config.modifier;
-      in 
-      {
+      in {
         # Default keybindings
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+Shift+q" = "kill";
@@ -103,31 +162,21 @@
         "${modifier}+8" = "workspace number 8";
         "${modifier}+9" = "workspace number 9";
 
-        "${modifier}+Shift+1" =
-          "move container to workspace number 1";
-        "${modifier}+Shift+2" =
-          "move container to workspace number 2";
-        "${modifier}+Shift+3" =
-          "move container to workspace number 3";
-        "${modifier}+Shift+4" =
-          "move container to workspace number 4";
-        "${modifier}+Shift+5" =
-          "move container to workspace number 5";
-        "${modifier}+Shift+6" =
-          "move container to workspace number 6";
-        "${modifier}+Shift+7" =
-          "move container to workspace number 7";
-        "${modifier}+Shift+8" =
-          "move container to workspace number 8";
-        "${modifier}+Shift+9" =
-          "move container to workspace number 9";
+        "${modifier}+Shift+1" = "move container to workspace number 1";
+        "${modifier}+Shift+2" = "move container to workspace number 2";
+        "${modifier}+Shift+3" = "move container to workspace number 3";
+        "${modifier}+Shift+4" = "move container to workspace number 4";
+        "${modifier}+Shift+5" = "move container to workspace number 5";
+        "${modifier}+Shift+6" = "move container to workspace number 6";
+        "${modifier}+Shift+7" = "move container to workspace number 7";
+        "${modifier}+Shift+8" = "move container to workspace number 8";
+        "${modifier}+Shift+9" = "move container to workspace number 9";
 
         "${modifier}+Shift+minus" = "move scratchpad";
         "${modifier}+minus" = "scratchpad show";
 
         "${modifier}+Shift+c" = "reload";
-        "${modifier}+Shift+e" =
-          "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+        "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
         "${modifier}+r" = "mode resize";
 
@@ -151,6 +200,7 @@
         "Shift+Print" = "~/.config/hypr/scripts/screenshot --now";
         "Ctrl+Alt+Delete" = "exit";
         "F12" = "exec ~/.config/hypr/scripts/wlogout";
+        "${modifier}+Shift+l" = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
       };
       window.commands = [
         {
@@ -162,12 +212,6 @@
         {
           criteria = {
             class = "zoom";
-          };
-          command = "floating enable";
-        }
-        {
-          criteria = {
-            title = "Slack | Slack cal.*";
           };
           command = "floating enable";
         }
@@ -209,17 +253,38 @@
           };
           command = "floating enable";
         }
-
+        # Baby monitor
+        {
+          criteria = {
+            title = "baby - (.*)";
+            class = "vlc";
+          };
+          command = "floating enable";
+        }
+        {
+          criteria = {
+            title = "baby";
+            app_id = "mpv";
+          };
+          command = "floating enable";
+        }
+        # Huddle
+        {
+          criteria = {
+            title = "^Huddle (.*)?";
+            app_id = "rambox";
+          };
+          command = "floating enable inhibit_idle";
+        }
       ];
-      assigns = 
-      {
+      assigns = {
         "1" = [
-            {class = "rambox";}
-            {app_id = "thunderbird";}
+          {class = "rambox";}
+          {app_id = "thunderbird";}
         ];
-        "2" = [{ app_id = "firefox"; }];
-        "8" = [{ app_id = "chromium-browser"; }];
-        "9" = [{ title = "CoolerControl"; }];
+        "2" = [{app_id = "firefox";}];
+        "8" = [{app_id = "chromium-browser";}];
+        "9" = [{title = "CoolerControl";}];
       };
       startup = [
         {command = "nwg-panel";}
@@ -234,6 +299,7 @@
         {command = "chromium";}
         {command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
         {command = "thunderbird";}
+        {command = "syncthingtray --wait";}
       ];
     };
   };

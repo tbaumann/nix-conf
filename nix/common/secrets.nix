@@ -18,13 +18,13 @@
     };
     direnv-backup-garage = {
       file = ../secrets/direnv-backup-garage.age;
-      path = "/home/tilli/direnvs/backup-=/garage/.envrc";
+      path = "/home/tilli/direnvs/backup/garage/.envrc";
       mode = "600";
       owner = "tilli";
     };
     direnv-backup-rsync = {
       file = ../secrets/direnv-backup-rsync-net.age;
-      path = "/home/tilli/direnvs/backup-=/rsync.net/.envrc";
+      path = "/home/tilli/direnvs/backup/rsync.net/.envrc";
       mode = "600";
       owner = "tilli";
     };
@@ -32,5 +32,4 @@
       file = ../secrets/tailscale-key.age;
     };
   };
-
 }

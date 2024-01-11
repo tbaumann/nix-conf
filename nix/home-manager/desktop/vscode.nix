@@ -43,11 +43,11 @@
     userSettings = {
       "editor.inlineSuggest.enabled" = true; # Copilot
       "github.copilot.enable" = {
-          "*" = true;
-          plaintext = true;
-          markdown = true;
-          scminput = false;
-          yaml = true;
+        "*" = true;
+        plaintext = true;
+        markdown = true;
+        scminput = false;
+        yaml = true;
       };
       "extensions.autoUpdate" = false;
     };

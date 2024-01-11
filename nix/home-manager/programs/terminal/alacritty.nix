@@ -24,18 +24,12 @@
 #
 ###########################################################
 {
-  xdg.configFile."alacritty/theme_catppuccin.yml".source = "${inputs.catppuccin-alacritty}/catppuccin-mocha.yml";
   programs.alacritty = {
     enable = true;
   };
 
   xdg.configFile."alacritty/alacritty.yml".text =
     ''
-      import:
-        # all alacritty themes can be found at
-        #    https://github.com/alacritty/alacritty-theme
-        - ~/.config/alacritty/theme_catppuccin.yml
-
       window:
         # Background opacity
         #

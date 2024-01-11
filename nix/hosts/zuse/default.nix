@@ -18,7 +18,7 @@
     ../../common/core.nix
   ];
 
- # virtualisation.incus.enable = true;
+  # virtualisation.incus.enable = true;
 
   nixpkgs.overlays = [
     (self: super: {

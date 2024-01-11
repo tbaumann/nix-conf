@@ -33,14 +33,14 @@
     '';
 
     "astronvim/lua/user/plugins/community.lua".text = ''
-    return {
-      "AstroNvim/astrocommunity",
-      { import = "astrocommunity.colorscheme.catppuccin", enabled = true},
-      { import = "astrocommunity.completion.copilot-lua-cmp" },
-      { import = "astrocommunity.comment.mini-comment" },
-      { import = "astrocommunity.syntax.vim-cool" },
-      { import = "astrocommunity.scrolling.vim-smoothie" },
-    }
+      return {
+        "AstroNvim/astrocommunity",
+        { import = "astrocommunity.colorscheme.catppuccin", enabled = true},
+        { import = "astrocommunity.completion.copilot-lua-cmp" },
+        { import = "astrocommunity.comment.mini-comment" },
+        { import = "astrocommunity.syntax.vim-cool" },
+        { import = "astrocommunity.scrolling.vim-smoothie" },
+      }
     '';
   };
   programs = {
@@ -54,7 +54,6 @@
       withPython3 = true;
       withNodeJs = true;
       extraPackages = with pkgs; [];
-
     };
   };
   home = {

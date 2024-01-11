@@ -1,14 +1,12 @@
-{
-  ...
-}: {
+{...}: {
   imports = [
     ./desktop
     ./packages.nix
     ./programs
     ./services.nix
     ./flatpak.nix
+    ./dev
   ];
-
 
   home = {
     # This value determines the Home Manager release that your

@@ -1,4 +1,4 @@
-{pkgs, ...}:{
+{pkgs, ...}: {
   imports = [
     ./kde.nix
     ./lxqt.nix
@@ -6,7 +6,7 @@
     ./budgie.nix
     ./sway.nix
     ./wpaperd.nix
-  #  ./gnome.nix  Gnome xdg portal grashes. Don't need it anyway.
+    #  ./gnome.nix  Gnome xdg portal grashes. Don't need it anyway.
   ];
 
   hardware.opengl.driSupport = true;
@@ -21,7 +21,7 @@
     };
   };
   stylix.image = pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
   programs.regreet = {
     enable = true;
     settings.background = {

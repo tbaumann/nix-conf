@@ -11,9 +11,10 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
-  boot.extraModulePackages = [];
+  boot.kernelModules = ["kvm-amd" "kvm-intel"];
+  boot.blacklistedKernelModules = ["qcserial"];
   virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
   nix.settings.system-features = [
     "kvm"
     "big-parallel"

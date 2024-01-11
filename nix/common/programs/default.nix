@@ -17,6 +17,7 @@
     #    openvpn3.enable = true;
     #     neovim.enable = true;
   };
+  stylix.targets.fish.enable = false;
   services = {
     boinc.enable = true;
   };
@@ -26,5 +27,7 @@
     inotify-tools
     libnotify
     s5cmd
+    spice
+    spice-gtk
   ];
 }

@@ -6,5 +6,4 @@
   home.packages = with pkgs; [
     hikari
   ];
-
 }

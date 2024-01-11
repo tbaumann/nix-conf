@@ -14,10 +14,9 @@
   programs = {
     firefox.enable = true;
     home-manager.enable = true;
+    lsd.enable = true;
+    lsd.enableAliases = true;
   };
-  home.packages = with pkgs; [
-    python311Packages.pip
-  ];
 
   xdg.mimeApps.defaultApplications = {
     "x-scheme-handler/http" = ["firefox.desktop"];

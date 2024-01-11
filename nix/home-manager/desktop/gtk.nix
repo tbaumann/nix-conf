@@ -3,7 +3,6 @@
   config,
   ...
 }: {
-
   /*
   # set dpi for 4k monitor
   xresources.properties = {
@@ -20,7 +19,6 @@
   #   3. ~/.config/gtk-4.0/settings.ini
   gtk = {
     enable = true;
-
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 

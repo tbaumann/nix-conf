@@ -8,7 +8,6 @@
     ./hyprland
     ./sway.nix
     ./vscode.nix
-    ./ulauncher
     ./hikari.nix
     ./nwg-panel.nix
     ./dt.nix
@@ -26,6 +25,7 @@
   systemd.user.services.syncthingtray.Service.ExecStart = pkgs.lib.mkForce
     "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 5; ${pkgs.syncthingtray-minimal}/bin/syncthingtray'";
   */
+  stylix.targets.kde.enable = false;
   programs.wpaperd = {
     enable = true;
     settings = {

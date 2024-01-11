@@ -80,7 +80,6 @@
     autorestic
     nixpkgs-review
     zip
-    comma
     gnumake
     quickemu
     quickgui
@@ -115,6 +114,7 @@
   programs = {
     command-not-found.enable = false;
     nix-index.enable = true;
+    nix-index-database.comma.enable = true;
     neovim.enable = true;
     vim.defaultEditor = true;
     dconf.enable = true;
@@ -138,7 +138,6 @@
     "power" = {};
   };
 
-  
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

@@ -5,15 +5,22 @@
   age,
   ...
 }: {
+
   imports = [
+#    inputs.agenix.homeManagerModules.default
+    ./tilli
   ];
 
+  age.secrets = {
+    vpn-password = {
+      file = ../secrets/vpn-password.age;
+    };
+  };
   home = {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     username = "tilli";
     homeDirectory = "/home/tilli";
-
 
     packages = with pkgs; [
       cloak

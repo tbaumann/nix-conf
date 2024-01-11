@@ -12,6 +12,7 @@ let
   systems = [zuse zuse2 klappi1 klappi2];
 in {
   "cloak-accounts.age".publicKeys = users ++ systems;
+  "vpn-password.age".publicKeys = users ++ systems;
   "restic-password.age".publicKeys = users ++ systems;
   "restic-garage-credentials.age".publicKeys = users ++ systems;
   "tilli-id_rsa.age".publicKeys = users ++ systems;

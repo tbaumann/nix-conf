@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  catppuccin-cava,
   ...
 }:
 # media - control and enjoy audio/video
