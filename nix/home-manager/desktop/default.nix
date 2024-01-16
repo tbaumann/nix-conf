@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./creative.nix
     ./gtk.nix
     ./media.nix
     ./xdg.nix
