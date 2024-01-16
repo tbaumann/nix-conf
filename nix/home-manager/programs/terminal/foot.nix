@@ -6,6 +6,9 @@
       main = {
         include = "~/.config/foot/themes/catppuccin-mocha.conf";
       };
+      colors = {
+        alpha = 0.9;
+      };
       mouse = {
         hide-when-typing = "yes";
       };
