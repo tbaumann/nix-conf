@@ -1,6 +1,7 @@
 {
   programs.nixvim = {
     options.completeopt = ["menu" "menuone" "noselect"];
+    #    options.keyword_length = 2;
 
     plugins = {
       luasnip.enable = true;
