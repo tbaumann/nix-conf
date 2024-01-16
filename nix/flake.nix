@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-coolercontrol.url = "github:codifryed/nixpkgs/coolercontrol-0.17.0";
     wpaperd.url = "github:Narice/wpaperd";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
