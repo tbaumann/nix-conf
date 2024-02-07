@@ -7,7 +7,7 @@
     ./floaterm.nix
     ./harpoon.nix
     ./lsp.nix
-    ./lualine.nix
+    #./lualine.nix
     ./markdown-preview.nix
     ./neorg.nix
     ./neo-tree.nix

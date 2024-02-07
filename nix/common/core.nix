@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./programs
+    ./services
     ./user-group.nix
     ./fhs-fonts.nix
     ./core-desktop.nix
@@ -41,9 +42,13 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
+    timeout = 10;
     systemd-boot = {
       enable = true;
+      consoleMode = "max";
       configurationLimit = 15;
+      memtest86.enable = true;
+      netbootxyz.enable = true;
     };
     efi.canTouchEfiVariables = true;
   };
@@ -70,30 +75,35 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    ripgrep
-    lm_sensors
     inputs.agenix.packages.x86_64-linux.default
-    jq
-    parallel
-    expect
-    nix-output-monitor
-    btop
-    lsb-release
     autorestic
-    nixpkgs-review
-    zip
+    btop
+    expect
+    file
     gnumake
+    jq
+    lm_sensors
+    lsb-release
+    nix-output-monitor
+    nixpkgs-review
+    parallel
     quickemu
     quickgui
+    ripgrep
+    zip
   ];
 
   services = {
     resolved.enable = true;
     avahi = {
       enable = true;
-      publish.enable = true;
-      publish.workstation = true;
-      publish.addresses = true;
+      nssmdns = true;
+      publish = {
+        enable = true;
+        workstation = true;
+        addresses = true;
+        userServices = true;
+      };
     };
     dbus.enable = true;
     fstrim.enable = true;
@@ -109,7 +119,6 @@
       wireplumber.enable = true;
     };
     printing.enable = true;
-    thermald.enable = true;
     udisks2.enable = true;
   };
 

@@ -44,6 +44,9 @@
     kanshi
     wine
     zathura
+    ghostscript
+    #    hplip
+    gnome.simple-scan
   ];
 
   programs = {
@@ -72,6 +75,10 @@
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
   services.blueman.enable = true;
+
+  #Scanner
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [pkgs.hplipWithPlugin pkgs.sane-airscan];
 
   # security with polkit
   services.power-profiles-daemon = {

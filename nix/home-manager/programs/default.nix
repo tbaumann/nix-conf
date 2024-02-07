@@ -5,6 +5,7 @@
     ./starship.nix
     ./terminal
     ./chromium.nix
+    ./obsidian.nix
   ];
 
   programs = {

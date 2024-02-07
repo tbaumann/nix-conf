@@ -47,6 +47,10 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # color scheme - catppuccin
     catppuccin-hyprland = {
       url = "github:catppuccin/hyprland";
@@ -78,6 +82,8 @@
     base16,
     nix-index-database,
     nixvim,
+    nixos-hardware,
+    auto-cpufreq,
     ...
   } @ inputs: let
     mkNixosConfiguration = {
@@ -90,12 +96,14 @@
         base16.nixosModule
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
+        auto-cpufreq.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
+            nix-index-database.hmModules.nix-index
             agenix.homeManagerModules.default
             nix-flatpak.homeManagerModules.nix-flatpak
             nixvim.homeManagerModules.nixvim
@@ -106,9 +114,10 @@
         }
       ],
       extraModules ? [],
+      system ? "x86_64-linux",
     }:
       nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = system;
         modules = baseModules ++ extraModules;
         specialArgs = {
           inherit inputs;
@@ -124,8 +133,39 @@
       };
       zuse = mkNixosConfiguration {
         extraModules = [
-          # nixpkgs-coolercontrol.nixosModules.coolercontrol
           ./hosts/zuse
+        ];
+      };
+      nas = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          "${nixos-hardware}/raspberry-pi/4"
+          ./hosts/nas
+        ];
+      };
+      rpi2 = nixpkgs.lib.nixosSystem {
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          "${nixos-hardware}/raspberry-pi/4"
+          {
+            hardware = {
+              #              raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+              deviceTree = {
+                enable = true;
+              };
+            };
+            # hardware.raspberry-pi."4".fkms-3d.enable = true;
+            #            services.hardware.argonone.enable = true;
+            boot.loader.raspberryPi.version = 4;
+            #            boot.kernelPackages = [nixpkgs.pkgs.linuxKernel.kernels.linux_rpi4];
+            boot.loader.grub.enable = false;
+            boot.loader.generic-extlinux-compatible.enable = true;
+            console.enable = false;
+            nixpkgs.config.allowUnsupportedSystem = true;
+            nixpkgs.hostPlatform.system = "aarch64-linux";
+            nixpkgs.buildPlatform.system = "x86_64-linux"; #If you build on x86 other wise changes this.
+            # ... extra configs as above
+          }
         ];
       };
     };

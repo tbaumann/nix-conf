@@ -1,5 +1,6 @@
 {
   programs.nixvim.autoCmd = [
+    /*
     # Vertically center document when entering insert mode
     {
       event = "InsertEnter";
@@ -11,6 +12,7 @@
       event = "BufWrite";
       command = "%s/\\s\\+$//e";
     }
+    */
 
     # Set indentation to 2 spaces for nix files
     {

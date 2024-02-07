@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       main = {
-        include = "~/.config/foot/themes/catppuccin-mocha.conf";
+        include = "~/.config/foot/themes/catppuccin-mocha.ini";
       };
       colors = {
         alpha = 0.9;

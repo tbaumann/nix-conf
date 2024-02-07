@@ -13,6 +13,13 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "kvm-intel"];
   boot.blacklistedKernelModules = ["qcserial"];
+  boot.kernelPatches = lib.singleton {
+    name = "no-i2c_designware-config";
+    patch = null;
+    extraStructuredConfig = with lib.kernel; {
+      I2C_DESIGNWARE_PLATFORM = lib.mkDefault no;
+    };
+  };
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   nix.settings.system-features = [
@@ -73,6 +80,7 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  programs.auto-cpufreq.enable = false;
 }

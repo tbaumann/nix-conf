@@ -19,8 +19,10 @@
       percentageAction = 2;
       criticalPowerAction = "PowerOff";
     };
-    auto-cpufreq.enable = true;
-    auto-cpufreq.settings = {
+  };
+  programs.auto-cpufreq = {
+    enable = true;
+    settings = {
       battery = {
         governor = "powersave";
         turbo = "never";

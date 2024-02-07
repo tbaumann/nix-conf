@@ -19,7 +19,7 @@
   };
   stylix.targets.fish.enable = false;
   services = {
-    boinc.enable = true;
+    boinc.enable = false;
   };
   environment.systemPackages = with pkgs; [
     openvpn

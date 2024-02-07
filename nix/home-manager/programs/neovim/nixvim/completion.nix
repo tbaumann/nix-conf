@@ -1,23 +1,23 @@
 {
   programs.nixvim = {
     options.completeopt = ["menu" "menuone" "noselect"];
-    #    options.keyword_length = 2;
 
     plugins = {
-      luasnip.enable = true;
+      #      luasnip.enable = true;
 
       lspkind = {
-        enable = true;
+        enable = false;
 
         cmp = {
           enable = true;
           menu = {
             nvim_lsp = "[LSP]";
-            nvim_lua = "[api]";
+            #            nvim_lua = "[api]";
             path = "[path]";
-            luasnip = "[snip]";
             buffer = "[buffer]";
-            neorg = "[neorg]";
+            #            neorg = "[neorg]";
+            calc = "[calc]";
+            clippy = "[clippy]";
             #cmp_tabnine = "[TabNine]";
             # FXME maybe more here?
           };
@@ -27,7 +27,8 @@
       nvim-cmp = {
         enable = true;
 
-        snippet.expand = "luasnip";
+        #    snippet.expand = "luasnip";
+        completion.keywordLength = 2;
 
         mapping = {
           "<C-d>" = "cmp.mapping.scroll_docs(-4)";
@@ -48,19 +49,21 @@
         sources = [
           {name = "path";}
           {name = "nvim_lsp";}
-          #          {name = "cmp_tabnine";}
-          {name = "luasnip";}
-          {
-            name = "buffer";
-            # Words from other open buffers can also be suggested.
-            option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-          }
-          {name = "neorg";}
-          {name = "copilot";}
-          {name = "calc";}
-          {name = "clippy";}
-          {name = "cmdline";}
-          {name = "fuzzy-path";}
+          /*
+                   #          {name = "cmp_tabnine";}
+                   {
+                     name = "buffer";
+                     # Words from other open buffers can also be suggested.
+                     option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+                   }
+          #         {name = "neorg";}
+                   {name = "copilot";}
+                   {name = "calc";}
+                   {name = "clippy";}
+                   {name = "cmdline";}
+                   {name = "fuzzy-path";}
+                   {name = "fish";}
+          */
         ];
       };
     };

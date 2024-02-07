@@ -18,8 +18,17 @@
     ../../common/core.nix
   ];
 
-  # virtualisation.incus.enable = true;
+  # BTRFS stuff
+  services.btrfs.autoScrub.enable = true;
+  services.beesd.filesystems = {
+    root = {
+      spec = "/nix/";
+      extraOptions = ["--loadavg-target" "3.0"];
+    };
+  };
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
+  # Cooolercontrol https://github.com/NixOS/nixpkgs/pull/248972
   nixpkgs.overlays = [
     (self: super: {
       coolercontrol = lib.recurseIntoAttrs (super.callPackage (inputs.nixpkgs-coolercontrol + /pkgs/applications/system/coolercontrol) {});

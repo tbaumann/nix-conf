@@ -8,6 +8,7 @@
       folding = true;
       indent = true;
 
+      /*
       grammarPackages = with config.programs.nixvim.plugins.treesitter.package.builtGrammars; [
         bash
         c
@@ -21,6 +22,7 @@
         rust
         vimdoc
       ];
+      */
     };
 
     treesitter-refactor = {
