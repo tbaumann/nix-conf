@@ -45,7 +45,7 @@
     timeout = 10;
     systemd-boot = {
       enable = true;
-      consoleMode = "max";
+      consoleMode = "0";
       configurationLimit = 15;
       memtest86.enable = true;
       netbootxyz.enable = true;
