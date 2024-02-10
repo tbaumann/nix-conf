@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-coolercontrol.url = "github:codifryed/nixpkgs/coolercontrol-0.17.0";
-    wpaperd.url = "github:Narice/wpaperd";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
@@ -39,6 +38,10 @@
     astronvim = {
       url = "github:AstroNvim/AstroNvim/v3.37.8";
       flake = false;
+    };
+    wpaperd = {
+      url = "github:Narice/wpaperd";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -157,7 +160,8 @@
             # hardware.raspberry-pi."4".fkms-3d.enable = true;
             #            services.hardware.argonone.enable = true;
             boot.loader.raspberryPi.version = 4;
-            #            boot.kernelPackages = [nixpkgs.pkgs.linuxKernel.kernels.linux_rpi4];
+            #boot.kernelPackages = [nixpkgs.pkgs.linuxKernel.kernels.linux_rpi4];
+            hardware.raspberry-pi."4".fkms-3d.enable = true;
             boot.loader.grub.enable = false;
             boot.loader.generic-extlinux-compatible.enable = true;
             console.enable = false;

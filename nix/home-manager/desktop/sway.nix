@@ -304,7 +304,7 @@
         {command = "coolercontrol";}
         {command = "joplin-desktop";}
         {command = "wl-clip-persist --clipboard regular";}
-        {command = "wpaperd --use-scaled-window";}
+        {command = "wpaperd";}
         {command = "firefox";}
         {command = "chromium";}
         {command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
