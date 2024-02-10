@@ -14,12 +14,10 @@
     npm.enable = true;
     less.enable = true;
     fish.enable = true;
-    #    openvpn3.enable = true;
-    #     neovim.enable = true;
   };
   stylix.targets.fish.enable = false;
   services = {
-    boinc.enable = false;
+    boinc.enable = true;
   };
   environment.systemPackages = with pkgs; [
     openvpn

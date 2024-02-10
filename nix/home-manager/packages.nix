@@ -54,5 +54,6 @@
     openrazer-daemon
     bitwarden
     bitwarden-cli
+    rink
   ];
 }
