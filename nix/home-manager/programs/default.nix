@@ -6,6 +6,8 @@
     ./terminal
     ./chromium.nix
     ./obsidian.nix
+    ./openscad.nix
+    ./nushell.nix
   ];
 
   programs = {
