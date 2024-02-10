@@ -12,14 +12,8 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "kvm-intel"];
+  boot.kernelParams = ["badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af" "memtest=2" "amd_prefcore=enable"];
   boot.blacklistedKernelModules = ["qcserial"];
-  boot.kernelPatches = lib.singleton {
-    name = "no-i2c_designware-config";
-    patch = null;
-    extraStructuredConfig = with lib.kernel; {
-      I2C_DESIGNWARE_PLATFORM = lib.mkDefault no;
-    };
-  };
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   nix.settings.system-features = [
