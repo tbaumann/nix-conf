@@ -13,8 +13,10 @@
     ./wifi.nix
     ./tailscale.nix
     ../home-manager/default.nix
+    #./hardening.nix
   ];
   nix = {
+    daemonCPUSchedPolicy = "idle";
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
     optimise.automatic = true;
@@ -35,6 +37,7 @@
       ];
       cores = 12;
       max-jobs = 4;
+      access-tokens = "github.com=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";
     };
   };
 
@@ -75,7 +78,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    inputs.agenix.packages.x86_64-linux.default
+    inputs.ragenix.packages.x86_64-linux.default
     autorestic
     btop
     expect
@@ -91,6 +94,7 @@
     quickgui
     ripgrep
     zip
+    unzip
   ];
 
   services = {

@@ -19,6 +19,7 @@
   nix.settings.system-features = [
     "kvm"
     "big-parallel"
+    "gccarch-znver2"
   ];
 
   hardware.opengl = {

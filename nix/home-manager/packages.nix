@@ -55,5 +55,6 @@
     bitwarden
     bitwarden-cli
     rink
+    du-dust
   ];
 }

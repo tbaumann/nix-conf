@@ -12,8 +12,6 @@
     inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
-    (inputs.nixpkgs-coolercontrol + "/nixos/modules/programs/coolercontrol.nix")
-
     ./hardware-configuration.nix
     ../../common/core.nix
   ];
@@ -28,12 +26,11 @@
   };
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-  # Cooolercontrol https://github.com/NixOS/nixpkgs/pull/248972
-  nixpkgs.overlays = [
-    (self: super: {
-      coolercontrol = lib.recurseIntoAttrs (super.callPackage (inputs.nixpkgs-coolercontrol + /pkgs/applications/system/coolercontrol) {});
-    })
-  ];
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+    package = pkgs.openrgb-with-all-plugins;
+  };
   programs.coolercontrol.enable = true;
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
@@ -46,10 +43,9 @@
   environment.systemPackages = with pkgs; [
     liquidctl
   ];
-  services.hardware.openrgb.enable = true;
-  hardware.gkraken.enable = true;
-  hardware.openrazer.enable = true;
-  hardware.openrazer.users = ["tilli"];
+  #  hardware.gkraken.enable = true;
+  #  hardware.openrazer.enable = true;
+  #  hardware.openrazer.users = ["tilli"];
   networking.hostName = "zuse";
   system.stateVersion = "23.05"; # Did you read the comment?
 }

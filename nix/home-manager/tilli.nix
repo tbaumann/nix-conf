@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    #    inputs.agenix.homeManagerModules.default
     ./tilli
   ];
 

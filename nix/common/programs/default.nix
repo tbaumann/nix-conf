@@ -6,14 +6,18 @@
   ...
 }: {
   imports = [
+    ./kicad.nix
+    ./nh.nix
   ];
 
   programs = {
-    direnv.enable = true;
     #    git.enable = true;
-    npm.enable = true;
-    less.enable = true;
+    direnv.enable = true;
     fish.enable = true;
+    less.enable = true;
+    nix-ld.enable = true;
+    npm.enable = true;
+    steam.enable = true;
   };
   stylix.targets.fish.enable = false;
   services = {
@@ -27,5 +31,7 @@
     s5cmd
     spice
     spice-gtk
+    localsend
+    fh
   ];
 }

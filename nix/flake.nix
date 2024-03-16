@@ -1,7 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
-    nixpkgs-coolercontrol.url = "github:codifryed/nixpkgs/coolercontrol-0.17.0";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
@@ -16,15 +15,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:tbaumann/home-manager";
+      url = "github:nix-community/home-manager/";
+      #      url = "github:tbaumann/home-manager";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-networkmanager-profiles = {
       url = "github:jmackie/nixos-networkmanager-profiles";
       flake = false;
     };
-    agenix = {
-      url = "github:ryantm/agenix";
+    ragenix = {
+      #url = "github:ryantm/agenix";
+      url = "github:yaxitech/ragenix/hm-module"; # change back when https://github.com/yaxitech/ragenix/issues/136 is resolved
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -44,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/";
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
       # url = "github:nix-community/nixvim/nixos-23.05";
 
@@ -53,6 +55,10 @@
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nh = {
+      url = "github:viperML/nh";
+      inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
     # color scheme - catppuccin
     catppuccin-hyprland = {
@@ -76,10 +82,9 @@
     self,
     nixpkgs,
     home-manager,
-    agenix,
+    ragenix,
     nix-flatpak,
     wpaperd,
-    nixpkgs-coolercontrol,
     update-systemd-resolved,
     stylix,
     base16,
@@ -87,12 +92,13 @@
     nixvim,
     nixos-hardware,
     auto-cpufreq,
+    nh,
     ...
   } @ inputs: let
     mkNixosConfiguration = {
       baseModules ? [
         ./common/secrets.nix
-        agenix.nixosModules.default
+        ragenix.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         update-systemd-resolved.nixosModules.update-systemd-resolved
         stylix.nixosModules.stylix
@@ -100,6 +106,7 @@
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
         auto-cpufreq.nixosModules.default
+        nh.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {
@@ -107,7 +114,7 @@
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
             nix-index-database.hmModules.nix-index
-            agenix.homeManagerModules.default
+            ragenix.homeManagerModules.default
             nix-flatpak.homeManagerModules.nix-flatpak
             nixvim.homeManagerModules.nixvim
           ];

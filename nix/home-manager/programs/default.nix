@@ -15,6 +15,7 @@
     home-manager.enable = true;
     lsd.enable = true;
     lsd.enableAliases = true;
+    nix-index-database.comma.enable = true;
   };
 
   xdg.mimeApps.defaultApplications = {

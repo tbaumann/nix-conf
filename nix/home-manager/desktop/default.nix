@@ -17,6 +17,7 @@
     flameshot
     joplin-desktop
     syncthingtray-minimal
+    sway-audio-idle-inhibit
   ];
 
   /*

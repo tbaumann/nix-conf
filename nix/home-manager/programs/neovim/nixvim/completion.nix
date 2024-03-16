@@ -3,68 +3,45 @@
     options.completeopt = ["menu" "menuone" "noselect"];
 
     plugins = {
-      #      luasnip.enable = true;
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
+        settings = {
+          sources = [
+            {name = "nvim_lsp";}
+            {name = "copilot-cmp";}
+            {name = "path";}
+            {
+              name = "buffer";
+              option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+            }
+          ];
+          mapping = {
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-e>" = "cmp.mapping.close()";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+            "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+          };
+          preselect = "cmp.PreselectMode.None";
+        };
+      };
 
       lspkind = {
         enable = false;
+        mode = "symbol_text";
 
         cmp = {
           enable = true;
-          menu = {
-            nvim_lsp = "[LSP]";
-            #            nvim_lua = "[api]";
-            path = "[path]";
-            buffer = "[buffer]";
-            #            neorg = "[neorg]";
-            calc = "[calc]";
-            clippy = "[clippy]";
-            #cmp_tabnine = "[TabNine]";
-            # FXME maybe more here?
-          };
         };
       };
 
       nvim-cmp = {
         enable = true;
 
-        #    snippet.expand = "luasnip";
         completion.keywordLength = 2;
-
-        mapping = {
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
-          "<C-Space>" = "cmp.mapping.complete()";
-          "<C-e>" = "cmp.mapping.close()";
-          "<Tab>" = {
-            modes = ["i" "s"];
-            action = "cmp.mapping.select_next_item()";
-          };
-          "<S-Tab>" = {
-            modes = ["i" "s"];
-            action = "cmp.mapping.select_prev_item()";
-          };
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
-        };
-
-        sources = [
-          {name = "path";}
-          {name = "nvim_lsp";}
-          /*
-                   #          {name = "cmp_tabnine";}
-                   {
-                     name = "buffer";
-                     # Words from other open buffers can also be suggested.
-                     option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-                   }
-          #         {name = "neorg";}
-                   {name = "copilot";}
-                   {name = "calc";}
-                   {name = "clippy";}
-                   {name = "cmdline";}
-                   {name = "fuzzy-path";}
-                   {name = "fish";}
-          */
-        ];
       };
     };
   };

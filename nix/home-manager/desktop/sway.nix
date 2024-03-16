@@ -307,9 +307,12 @@
         {command = "wpaperd";}
         {command = "firefox";}
         {command = "chromium";}
-        {command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
+        {command = "rambox";}
+        #{command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
+        {command = "sway-audio-idle-inhibit";}
         {command = "thunderbird";}
         {command = "syncthingtray --wait";}
+        {command = "openrgb --startminimized";}
       ];
     };
   };
