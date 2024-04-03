@@ -37,7 +37,7 @@
       ];
       cores = 12;
       max-jobs = 4;
-      access-tokens = "github.com=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";
+      # access-tokens = "github.com=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";
     };
   };
 
@@ -128,6 +128,7 @@
 
   programs = {
     command-not-found.enable = false;
+    #    programs.nix-ld.enable = true;
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
     neovim.enable = true;

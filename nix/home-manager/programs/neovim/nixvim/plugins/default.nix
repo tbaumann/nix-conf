@@ -12,7 +12,7 @@
     ./markdown-preview.nix
     ./neo-tree.nix
     ./neorg.nix
-#    ./startify.nix
+    #    ./startify.nix
     ./tagbar.nix
     ./telescope.nix
     ./treesitter.nix

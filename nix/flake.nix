@@ -26,9 +26,10 @@
     };
     ragenix = {
       #url = "github:ryantm/agenix";
-      url = "github:yaxitech/ragenix/hm-module"; # change back when https://github.com/yaxitech/ragenix/issues/136 is resolved
+      url = "github:yaxitech/ragenix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-alien.url = "github:thiagokokada/nix-alien";
 
     # anyrun - a wayland launcher
     anyrun = {
@@ -60,6 +61,9 @@
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
+    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
+    waybar_media_display.url = "github:tbaumann/waybar_media_display";
+
     # color scheme - catppuccin
     catppuccin-hyprland = {
       url = "github:catppuccin/hyprland";
@@ -81,18 +85,20 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
-    ragenix,
-    nix-flatpak,
-    wpaperd,
-    update-systemd-resolved,
-    stylix,
-    base16,
-    nix-index-database,
-    nixvim,
-    nixos-hardware,
     auto-cpufreq,
+    base16,
+    home-manager,
     nh,
+    nix-flatpak,
+    nix-index-database,
+    nixos-hardware,
+    nixvim,
+    ragenix,
+    stylix,
+    update-systemd-resolved,
+    waybar_media_display,
+    waybar_weather_display,
+    wpaperd,
     ...
   } @ inputs: let
     mkNixosConfiguration = {

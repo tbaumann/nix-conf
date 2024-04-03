@@ -6,6 +6,7 @@
     ./budgie.nix
     ./sway.nix
     ./wpaperd.nix
+    ./waybar.nix
     #  ./gnome.nix  Gnome xdg portal grashes. Don't need it anyway.
   ];
 

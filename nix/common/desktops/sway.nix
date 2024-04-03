@@ -9,13 +9,6 @@
     enable = true;
     wrapperFeatures.base = true;
     wrapperFeatures.gtk = true;
-    package = pkgs.sway.override {
-      sway-unwrapped = pkgs.swayfx;
-      extraSessionCommands = config.programs.sway.extraSessionCommands;
-      extraOptions = config.programs.sway.extraOptions;
-      withBaseWrapper = config.programs.sway.wrapperFeatures.base;
-      withGtkWrapper = config.programs.sway.wrapperFeatures.gtk;
-    };
   };
   services.logind.killUserProcesses = true;
   environment.systemPackages = with pkgs; [

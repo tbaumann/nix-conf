@@ -66,15 +66,6 @@
     extraConfigEarly = ''
       include themes/catppuccin-mocha
     '';
-    extraConfig = ''
-      # SwayFX
-      ### Appearance
-      # window corner radius in px
-      corner_radius 10
-
-      # inactive window fade amount. 0.0 = no dimming, 1.0 = fully dimmed
-      default_dim_inactive 0.1
-    '';
 
     config = {
       modifier = "Mod4";

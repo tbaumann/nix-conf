@@ -8,6 +8,8 @@
   imports = [
     ./kicad.nix
     ./nh.nix
+    ./nix-alien.nix
+    ./git.nix
   ];
 
   programs = {

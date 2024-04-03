@@ -14,6 +14,7 @@
     deno
     epiphany
     file
+    floorp
     gnome.adwaita-icon-theme
     gnome.dconf-editor
     gnome.eog

@@ -11,10 +11,10 @@
     });
   };
 in {
-  home.packages = [obsidian];
+  home.packages = [pkgs.obsidian];
   programs.nixvim.plugins.obsidian = {
     enable = true;
-    workspaces = [
+    settings.workspaces = [
       {
         name = "Obsidian Vault";
         path = "~/Documents/Obsidian Vault/";
