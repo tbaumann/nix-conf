@@ -19,11 +19,11 @@
     less.enable = true;
     nix-ld.enable = true;
     npm.enable = true;
-    steam.enable = true;
+    steam.enable = false;
   };
   stylix.targets.fish.enable = false;
   services = {
-    boinc.enable = true;
+    boinc.enable = false;
   };
   environment.systemPackages = with pkgs; [
     openvpn
