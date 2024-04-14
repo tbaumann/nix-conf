@@ -10,10 +10,6 @@
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/";
       #      url = "github:tbaumann/home-manager";
@@ -65,10 +61,6 @@
     waybar_media_display.url = "github:tbaumann/waybar_media_display";
 
     # color scheme - catppuccin
-    catppuccin-hyprland = {
-      url = "github:catppuccin/hyprland";
-      flake = false;
-    };
     catppuccin-i3 = {
       url = "github:catppuccin/i3";
       flake = false;

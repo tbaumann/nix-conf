@@ -17,7 +17,6 @@
     # copy the scripts directory recursively
     recursive = true;
   };
-  home.file.".config/hypr/themes".source = "${inputs.catppuccin-hyprland}/themes";
 
   # music player - mpd
   home.file.".config/mpd" = {
