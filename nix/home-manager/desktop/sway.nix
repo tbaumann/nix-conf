@@ -68,6 +68,11 @@
     '';
 
     config = {
+      output = {
+        "eDP-1" = {
+          scale = "1"; #FIXME
+        };
+      };
       modifier = "Mod4";
       terminal = "foot";
       menu = "anyrun";
@@ -85,6 +90,7 @@
       };
       bars = [];
 
+      /*
       colors.focused = {
         border = "$lavender";
         childBorder = "$mauve";
@@ -121,6 +127,7 @@
         indicator = "$overlay0";
       };
       colors.background = "$sapphire";
+      */
       keybindings = let
         terminal = config.wayland.windowManager.sway.config.terminal;
         menu = config.wayland.windowManager.sway.config.menu;

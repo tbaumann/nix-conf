@@ -33,10 +33,6 @@
     optipng
     pavucontrol
     pciutils # For lspci
-    (poetry.withPlugins (ps:
-      with ps; [
-        poetry-plugin-up
-      ]))
     pre-commit
     prismlauncher
     scc

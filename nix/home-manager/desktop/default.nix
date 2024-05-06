@@ -6,6 +6,7 @@
     ./messenger.nix
     ./hyprland
     ./sway.nix
+    ./waybar.nix
     ./vscode.nix
     ./nwg-panel.nix
     ./dt.nix

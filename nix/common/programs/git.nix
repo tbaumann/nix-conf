@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:{
+{pkgs, ...}: {
   programs.git.enable = true;
   programs.git.config = {
     core = {
@@ -14,13 +11,15 @@
       navigate = true;
       side-by-side = true;
       line-numbers = true;
-
     };
     merge = {
       conflictstyle = "diff3";
     };
     diff = {
-       colorMoved = "default";
+      colorMoved = "default";
     };
   };
+  environment.systemPackages = with pkgs; [
+    gist
+  ];
 }

@@ -53,10 +53,6 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nh = {
-      url = "github:viperML/nh";
-      inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
-    };
     waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
     waybar_media_display.url = "github:tbaumann/waybar_media_display";
 
@@ -80,7 +76,6 @@
     auto-cpufreq,
     base16,
     home-manager,
-    nh,
     nix-flatpak,
     nix-index-database,
     nixos-hardware,
@@ -104,7 +99,6 @@
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
         auto-cpufreq.nixosModules.default
-        nh.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {

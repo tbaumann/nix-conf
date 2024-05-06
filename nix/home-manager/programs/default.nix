@@ -1,13 +1,14 @@
 {
   imports = [
-    ./neovim
-    ./fish.nix
-    ./starship.nix
-    ./terminal
     ./chromium.nix
+    ./fish.nix
+    ./neovim
+    ./nushell.nix
     ./obsidian.nix
     ./openscad.nix
-    ./nushell.nix
+    ./sip.nix
+    ./starship.nix
+    ./terminal
   ];
 
   programs = {

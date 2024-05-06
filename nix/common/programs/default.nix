@@ -7,7 +7,7 @@
 }: {
   imports = [
     ./kicad.nix
-    ./nh.nix
+#     ./nh.nix FIXME add back when it's in stable
     ./nix-alien.nix
     ./git.nix
   ];

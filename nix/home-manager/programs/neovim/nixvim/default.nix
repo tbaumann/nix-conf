@@ -13,6 +13,7 @@
     enable = true;
     colorschemes.catppuccin.enable = true;
     defaultEditor = true;
+    enableMan = false;
 
     vimAlias = true;
 
