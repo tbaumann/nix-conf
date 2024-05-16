@@ -53,6 +53,9 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+
     waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
     waybar_media_display.url = "github:tbaumann/waybar_media_display";
 
@@ -86,6 +89,7 @@
     waybar_media_display,
     waybar_weather_display,
     wpaperd,
+    microvm,
     ...
   } @ inputs: let
     mkNixosConfiguration = {
@@ -99,6 +103,7 @@
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
         auto-cpufreq.nixosModules.default
+        microvm.nixosModules.host
 
         home-manager.nixosModules.home-manager
         {

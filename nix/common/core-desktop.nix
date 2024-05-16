@@ -47,6 +47,7 @@
     ghostscript
     #    hplip
     gnome.simple-scan
+    speedtest-cli
   ];
 
   programs = {
@@ -76,9 +77,19 @@
   hardware.logitech.wireless.enableGraphical = true;
   services.blueman.enable = true;
 
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
+
   #Scanner
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [pkgs.hplipWithPlugin pkgs.sane-airscan];
+
+  #QMK
+  hardware.keyboard.qmk.enable = true;
 
   # security with polkit
   services.power-profiles-daemon = {

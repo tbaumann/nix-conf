@@ -23,11 +23,22 @@
     packages = with pkgs; [
       cloak
       openvpn
+      vial
+      qmk
+      via
+      terraform
+      terraform-providers.openstack
     ];
   };
+  programs.openstackclient.enable = true;
+
+
   programs.git.enable = true;
   programs.git.userEmail = "tilman@baumann.name";
   programs.git.userName = "Tilman Baumann";
+  programs.git.aliases = {
+    pr = "pull --rebase";
+  };
 
   /*
   # Default desktop environment

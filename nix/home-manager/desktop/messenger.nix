@@ -7,9 +7,5 @@
 {
   home.packages = with pkgs; [
     rambox
-    slack
-    whatsapp-for-linux
-    threema-desktop
-    dino
   ];
 }

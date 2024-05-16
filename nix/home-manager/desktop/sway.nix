@@ -284,6 +284,13 @@
           };
           command = "floating enable inhibit_idle";
         }
+        # Linphone
+        {
+          criteria = {
+            app_id = "linphone.";
+          };
+          command = "floating enable";
+        }
       ];
       assigns = {
         "1" = [
@@ -311,6 +318,7 @@
         {command = "thunderbird";}
         {command = "syncthingtray --wait";}
         {command = "openrgb --startminimized";}
+        {command = "linphone --iconified";}
       ];
     };
   };

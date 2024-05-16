@@ -95,6 +95,9 @@
     ripgrep
     zip
     unzip
+    qmk-udev-rules
+    gcc-arm-embedded
+    dfu-util
   ];
 
   services = {
@@ -143,6 +146,14 @@
   networking.enableIPv6 = false;
 
   networking.firewall.enable = false;
+
+  networking.bridges = {
+    lan = {
+      interfaces = [
+        "eno1"
+      ];
+    };
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

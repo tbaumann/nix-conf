@@ -28,8 +28,20 @@
       mode = "600";
       owner = "tilli";
     };
+    "openrc-fs.stackxperts.com" = {
+      file = ../secrets/openrc-fs.stackxperts.com.age;
+      path = "/home/tilli/direnvs/clouds/fs.stackxperts.com/.envrc";
+      mode = "600";
+      owner = "tilli";
+    };
     tailscale-key = {
       file = ../secrets/tailscale-key.age;
+    };
+    stack_baumann-cbxgate_cbxnet_de_ovpn = {
+      file = ../secrets/stack_baumann-cbxgate.cbxnet.de.ovpn.age;
+    };
+    stack_baumann-cbxgate_cbxnet_de-password = {
+      file = ../secrets/stack_baumann-cbxgate_cbxnet_de-password.age;
     };
   };
 }

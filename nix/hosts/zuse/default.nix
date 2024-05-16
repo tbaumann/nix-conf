@@ -40,6 +40,7 @@
     };
   };
   boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+  boot.extraModprobeConfig = "options kvm_amd nested=1";
   environment.systemPackages = with pkgs; [
     liquidctl
   ];

@@ -7,7 +7,7 @@
 }: {
   imports = [
     ./kicad.nix
-#     ./nh.nix FIXME add back when it's in stable
+    #     ./nh.nix FIXME add back when it's in stable
     ./nix-alien.nix
     ./git.nix
   ];
@@ -35,5 +35,7 @@
     spice-gtk
     localsend
     fh
+    pv
+    just
   ];
 }

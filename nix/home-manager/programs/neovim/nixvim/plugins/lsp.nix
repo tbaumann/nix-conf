@@ -27,7 +27,6 @@
           clangd.enable = true;
           dockerls.enable = true;
           eslint.enable = true;
-          lua-ls.enable = true;
           nil_ls.enable = true;
           nixd.enable = true;
           svelte.enable = true;
