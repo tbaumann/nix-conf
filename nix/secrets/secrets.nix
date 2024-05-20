@@ -19,7 +19,7 @@ in {
   "direnv-backup-garage.age".publicKeys = users ++ systems;
   "direnv-backup-rsync-net.age".publicKeys = users ++ systems;
   "tailscale-key.age".publicKeys = users ++ systems;
-  "openrc-fs.stackxperts.com.age".publicKeys = users ++  systems;
+  "openrc-fs.stackxperts.com.age".publicKeys = users ++ systems;
   "stack_baumann-cbxgate.cbxnet.de.ovpn.age".publicKeys = users ++ systems;
   "stack_baumann-cbxgate_cbxnet_de-password.age".publicKeys = users ++ systems;
 }

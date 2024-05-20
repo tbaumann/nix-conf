@@ -32,7 +32,6 @@
   };
   programs.openstackclient.enable = true;
 
-
   programs.git.enable = true;
   programs.git.userEmail = "tilman@baumann.name";
   programs.git.userName = "Tilman Baumann";
