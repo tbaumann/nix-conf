@@ -8,7 +8,6 @@
   programs.wshowkeys.enable = true;
   services.xserver.windowManager.hypr.enable = true;
   programs = {
-    hyprland.enable = true;
     xwayland.enable = true;
 
     # monitor backlight control

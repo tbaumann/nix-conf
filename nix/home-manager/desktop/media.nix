@@ -13,6 +13,8 @@
     pulsemixer
     imv # simple image viewer
 
+    sayonara
+
     # nvtop
     amdgpu_top
 
@@ -22,7 +24,8 @@
     vdpauinfo
     vulkan-tools
     glxinfo
-    ffmpeg-full
+    # FIXME compile error ffmpeg-full
+    handbrake
 
     # video
     vlc

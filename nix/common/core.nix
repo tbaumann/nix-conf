@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -18,7 +19,10 @@
   nix = {
     daemonCPUSchedPolicy = "idle";
     package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      !include ${config.age.secrets.nix-access-tokens-github.path}
+    '';
     optimise.automatic = true;
     gc = {
       automatic = true;
@@ -43,7 +47,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.loader = {
     timeout = 10;
     systemd-boot = {
@@ -55,6 +59,7 @@
     };
     efi.canTouchEfiVariables = true;
   };
+  boot.consoleLogLevel = 0;
 
   security.sudo.wheelNeedsPassword = false;
   environment.pathsToLink = ["/libexec"];

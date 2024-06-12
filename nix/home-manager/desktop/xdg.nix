@@ -37,7 +37,7 @@
         name = "Baby Monitor";
         # MPV is natve waiyland but has audio issues with this camera
         # exec = "${pkgs.mpv}/bin/mpv -title=baby r rtsp://admin:OJIFUR@192.168.100.70:554/ch1/main";
-        exec = "${pkgs.vlc}/bin/vlc --qt-minimal-view  --meta-title baby rtsp://admin:OJIFUR@192.168.100.70:554/ch1/main";
+        exec = "${pkgs.vlc}/bin/vlc --qt-minimal-view  --meta-title baby rtsp://admin:OJIFUR@192.168.1.91:554/ch1/main";
         terminal = false;
         categories = ["Application"];
       };

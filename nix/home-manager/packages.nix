@@ -7,11 +7,12 @@
   home.packages = with pkgs; [
     act
     alejandra
-    alsa-utils # For alsamixer
     baobab
-    #clang-tools # For clang-format
+    bitwarden
+    bitwarden-cli
     cmake
-    deno
+    du-dust
+    entr
     epiphany
     file
     floorp
@@ -30,11 +31,14 @@
     ninja
     nodejs
     nvd
+    openrazer-daemon
     optipng
     pavucontrol
     pciutils # For lspci
+    polychromatic
     pre-commit
-    prismlauncher
+    razergenie
+    rink
     scc
     slurp
     swaylock-effects
@@ -42,16 +46,9 @@
     usbutils # For lsusb
     vlc
     wget
-    wl-clipboard
     wl-clip-persist
+    wl-clipboard
     xdg-user-dirs
     yarn
-    razergenie
-    polychromatic
-    openrazer-daemon
-    bitwarden
-    bitwarden-cli
-    rink
-    du-dust
   ];
 }

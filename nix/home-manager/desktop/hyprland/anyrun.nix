@@ -21,6 +21,7 @@
       y.absolute = 15;
       closeOnClick = true;
       hidePluginInfo = false;
+      maxEntries = null;
     };
 
     # custom css for anyrun, based on catppuccin-mocha

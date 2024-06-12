@@ -43,5 +43,15 @@
     stack_baumann-cbxgate_cbxnet_de-password = {
       file = ../secrets/stack_baumann-cbxgate_cbxnet_de-password.age;
     };
+    nix-access-tokens-github = {
+      file = ../secrets/nix-access-tokens-github.age;
+      mode = "644";
+    };
+    gist-cli = {
+      file = ../secrets/gist-cli.age;
+      path = "/home/tilli/.gist";
+      mode = "600";
+      owner = "tilli";
+    };
   };
 }

@@ -7,7 +7,7 @@
     ./hyprland
     ./sway.nix
     ./waybar.nix
-    ./vscode.nix
+    #./vscode.nix
     ./nwg-panel.nix
     ./dt.nix
   ];

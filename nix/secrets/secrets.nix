@@ -22,4 +22,6 @@ in {
   "openrc-fs.stackxperts.com.age".publicKeys = users ++ systems;
   "stack_baumann-cbxgate.cbxnet.de.ovpn.age".publicKeys = users ++ systems;
   "stack_baumann-cbxgate_cbxnet_de-password.age".publicKeys = users ++ systems;
+  "nix-access-tokens-github.age".publicKeys = users ++ systems;
+  "gist-cli.age".publicKeys = users ++ systems;
 }
