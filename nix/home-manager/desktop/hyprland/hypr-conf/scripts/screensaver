@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-swayidle -w timeout 1800 "$HOME/.config/hypr/scripts/lockscreen &" \
-            before-sleep "$HOME/.config/hypr/scripts/lockscreen &"
-
-
-#            timeout 2000 'hyprctl dispatch dpms off' \
-#            resume 'hyprctl dispatch dpms on' \

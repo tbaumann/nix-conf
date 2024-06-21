@@ -4,9 +4,10 @@
   config,
   ...
 }: {
-  imports = [
-  ];
-  stylix.targets.waybar.enable = false;
+  stylix.targets.waybar.enable = true;
+  stylix.targets.waybar.enableLeftBackColors = true;
+  stylix.targets.waybar.enableCenterBackColors = true;
+  stylix.targets.waybar.enableRightBackColors = true;
 
   programs.waybar.enable = true;
   programs.waybar.settings = [
@@ -17,6 +18,8 @@
 
       # If height property would be not present, it'd be calculated dynamically
       height = 30;
+      spacing = 0;
+      reload_style_on_change = true;
 
       "modules-left" = [
         "sway/workspaces"
@@ -32,11 +35,14 @@
         "temperature"
         "mpris"
         "battery"
+        "sway/language"
         "idle_inhibitor"
         "tray"
-        "clock#date"
         "wireplumber"
         "clock#time"
+        "clock#date"
+        "custom/weather"
+        "custom/wlogout"
       ];
 
       # -------------------------------------------------------------------------
@@ -84,15 +90,6 @@
         };
       };
 
-      "custom/keyboard-layout" = {
-        "exec" = "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4";
-        # Interval set only as a fallback, as the value is updated by signal
-        "interval" = 30;
-        "format" = "  {}"; # Icon: keyboard
-        # Signal sent by Sway key binding (~/.config/sway/key-bindings)
-        "signal" = 1; # SIGHUP
-        "tooltip" = false;
-      };
       "idle_inhibitor" = {
         "format" = "{icon}";
         "format-icons" = {
@@ -142,25 +139,36 @@
       };
 
       "sway/workspaces" = {
+        "sort-by-number" = true;
         "all-outputs" = false;
         "disable-scroll" = true;
         "format" = "{icon} {name}";
         "format-icons" = {
-          "1:www" = "龜"; # Icon: firefox-browser
-          "2:mail" = ""; # Icon: mail
-          "3:editor" = ""; # Icon: code
-          "4:terminals" = ""; # Icon: terminal
-          "5:portal" = ""; # Icon: terminal
+          "1" = ""; # Icon: mail
+          "2" = "󰈹"; # Icon: firefox-browser
+          "3" = ""; # Icon: code
+          "4" = ""; # Icon: terminal
+          "5" = ""; # Icon: terminal
           "urgent" = "";
-          "focused" = "";
+          #          "focused" = "";
           "default" = "";
+        };
+        "persistent-workspaces" = {
+          "1" = [];
+          "2" = [];
+          "3" = [];
+          "4" = [];
+          "5" = [];
+          "6" = [];
+          "7" = [];
+          "8" = [];
         };
       };
       wireplumber = {
-        format = "{volume}%";
+        format = "{volume}% {icon}";
         format-muted = "";
-        on-click-right = "${pkgs.helvum}/bin/helvum";
-        on-click = "${pkgs.pwvucontrol}/bin/pwvucontrol";
+        on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        on-click-right = "${pkgs.pwvucontrol}/bin/pwvucontrol";
         max-volume = 150;
       };
 
@@ -199,147 +207,23 @@
         "icon-size" = 21;
         "spacing" = 10;
       };
+      "custom/weather" = {
+        "format" = "{}°";
+        "tooltip" = true;
+        "interval" = 3600;
+        "exec" = "${pkgs.wttrbar}/bin/wttrbar --location Marrakech";
+        "return-type" = "json";
+      };
+      "sway/language" = {
+        "on-click" = "swaymsg input type:keyboard xkb_switch_layout next";
+      };
+      "custom/wlogout" = {
+        "on-click" = "${pkgs.wlogout}/bin/wlogout";
+        "format" = "{}";
+        "exec" = "echo ; echo  logout";
+        "interval" = 86400;
+        "tooltip" = true;
+      };
     }
   ];
-  programs.waybar.style = ''
-    * {
-        border: none;
-        border-radius: 0;
-        font-family: Roboto,'Font Awesome 5', 'SFNS Display',  Helvetica, Arial, sans-serif;
-        font-size: 13px;
-        min-height: 0;
-    }
-
-    window#waybar {
-        background: rgba(43, 48, 59, 0.5);
-        border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-        color: #ffffff;
-    }
-
-    window#waybar.hidden {
-        opacity: 0.0;
-    }
-    /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-    #workspaces button {
-        padding: 0 5px;
-        background: transparent;
-        color: #ffffff;
-        border-bottom: 3px solid transparent;
-    }
-
-    #workspaces button.focused {
-        background: #64727D;
-        border-bottom: 3px solid #ffffff;
-    }
-
-    #workspaces button.urgent {
-        background-color: #eb4d4b;
-    }
-
-    #mode {
-        background: #64727D;
-        border-bottom: 3px solid #ffffff;
-    }
-
-    #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
-        padding: 0 10px;
-        margin: 0 5px;
-    }
-
-    #clock {
-        background-color: #64727D;
-    }
-
-    #battery {
-        background-color: #ffffff;
-        color: #000000;
-    }
-
-    #battery.charging {
-        color: #ffffff;
-        background-color: #26A65B;
-    }
-
-    @keyframes blink {
-        to {
-            background-color: #ffffff;
-            color: #000000;
-        }
-    }
-
-    #battery.critical:not(.charging) {
-        background: #f53c3c;
-        color: #ffffff;
-        animation-name: blink;
-        animation-duration: 0.5s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-    }
-
-    #cpu {
-        background: #2ecc71;
-        color: #000000;
-    }
-
-    #memory {
-        background: #9b59b6;
-    }
-
-    #backlight {
-        background: #90b1b1;
-    }
-
-    #network {
-        background: #2980b9;
-    }
-
-    #network.disconnected {
-        background: #f53c3c;
-    }
-
-    #pulseaudio {
-        background: #f1c40f;
-        color: #000000;
-    }
-
-    #pulseaudio.muted {
-        background: #90b1b1;
-        color: #2a5c45;
-    }
-
-    #custom-media {
-        background: #66cc99;
-        color: #2a5c45;
-    }
-
-    .custom-spotify {
-        background: #66cc99;
-    }
-
-    .custom-vlc {
-        background: #ffa000;
-    }
-
-    #temperature {
-        background: #f0932b;
-    }
-
-    #temperature.critical {
-        background: #eb4d4b;
-    }
-
-    #tray {
-        background-color: #2980b9;
-    }
-
-    #idle_inhibitor {
-        background-color: #2d3436;
-    }
-
-    #idle_inhibitor.activated {
-        background-color: #ecf0f1;
-        color: #2d3436;
-    }
-  '';
 }

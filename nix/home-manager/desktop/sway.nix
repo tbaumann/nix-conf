@@ -81,6 +81,7 @@
           natural_scroll = "enabled";
         };
         "type:keyboard" = {
+          xkb_layout = "us,ara";
           xkb_options = "compose:ralt,compose:rwin";
         };
         "type:touchpad" = {
@@ -204,10 +205,10 @@
         "Mod4+c" = "kill";
         "Mod4+j" = "workspace prev";
         "Mod4+l" = "workspace next";
-        "Print" = "~/.config/hypr/scripts/screenshot --area";
-        "Shift+Print" = "~/.config/hypr/scripts/screenshot --now";
+        #        "Print" = "~/.config/hypr/scripts/screenshot --area";
+        #        "Shift+Print" = "~/.config/hypr/scripts/screenshot --now";
         "Ctrl+Alt+Delete" = "exit";
-        "F12" = "exec ~/.config/hypr/scripts/wlogout";
+        "F12" = "exec ${pkgs.wlogout}/bin/wlogout";
         "${modifier}+Shift+l" = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
       };
       window.commands = [
@@ -302,7 +303,8 @@
         "9" = [{title = "CoolerControl";}];
       };
       startup = [
-        {command = "nwg-panel";}
+        #        {command = "nwg-panel";}
+        {command = "waybar";}
         {command = "nm-applet";}
         {command = "solaar -w hide";}
         {command = "polychromatic-tray-applet";}

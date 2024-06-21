@@ -19,6 +19,7 @@
     syncthingtray-minimal
     sway-audio-idle-inhibit
   ];
+  programs.zathura.enable = true;
 
   /*
   services.syncthing.tray = true;
