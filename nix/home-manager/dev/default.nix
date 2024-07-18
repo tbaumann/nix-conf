@@ -4,5 +4,6 @@
     ./python.nix
     ./rust.nix
     ./shell.nix
+    ./gleam.nix
   ];
 }

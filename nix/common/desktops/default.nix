@@ -10,7 +10,6 @@
     #  ./gnome.nix  Gnome xdg portal grashes. Don't need it anyway.
   ];
 
-  hardware.opengl.driSupport = true;
   services.xserver = {
     enable = true;
     videoDrivers = [
@@ -23,6 +22,7 @@
   };
   stylix.image = pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+  stylix.targets.nixos-icons.enable = true;
   programs.regreet = {
     enable = true;
     settings.background = {

@@ -24,7 +24,6 @@
 
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
       intel-media-driver
@@ -59,6 +58,14 @@
     fsType = "btrfs";
     options = ["subvol=DATA/persist"];
   };
+
+/*
+  fileSystems."/media" = {
+    device = "/dev/nvme0n1p4";
+    fsType = "btrfs";
+    options = ["subvol=DATA/media"];
+  };
+*/
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/ESP";

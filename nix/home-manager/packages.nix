@@ -15,7 +15,6 @@
     entr
     epiphany
     file
-    floorp
     gnome.adwaita-icon-theme
     gnome.dconf-editor
     gnome.eog
@@ -42,7 +41,6 @@
     scc
     slurp
     swaylock-effects
-    thefuck
     usbutils # For lsusb
     vlc
     wget

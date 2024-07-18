@@ -1,14 +1,15 @@
 {pkgs, ...}: {
   imports = [
+    #./vscode.nix
     ./gtk.nix
-    ./media.nix
-    ./xdg.nix
-    ./messenger.nix
     ./hyprland
+    ./media.nix
+    ./messenger.nix
+    ./nwg-panel.nix
     ./sway.nix
     ./waybar.nix
-    #./vscode.nix
-    ./nwg-panel.nix
+    ./wlogout.nix
+    ./xdg.nix
     ./dt.nix
   ];
 
@@ -26,7 +27,7 @@
   systemd.user.services.syncthingtray.Service.ExecStart = pkgs.lib.mkForce
     "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 5; ${pkgs.syncthingtray-minimal}/bin/syncthingtray'";
   */
-  stylix.targets.kde.enable = false;
+  #  stylix.targets.kde.enable = false;
   programs.wpaperd = {
     enable = true;
     settings = {

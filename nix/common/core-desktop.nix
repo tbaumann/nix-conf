@@ -32,8 +32,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # python, some times I may need to use python with root permission.
-    python3Full
     psmisc # killall/pstree/prtstat/fuser/...
     pulseaudio # provides `pactl`, which is required by some apps(e.g. sonic-pi)
     libreoffice
@@ -152,7 +150,8 @@
       source-han-sans
       source-han-serif
 
-      # nerdfonts
+      nerdfonts
+/*
       (nerdfonts.override {
         fonts = [
           "FiraCode"
@@ -160,17 +159,8 @@
           "Iosevka"
         ];
       })
+*/
     ];
-
-    # user defined fonts
-    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
-    # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
-    };
   };
 
   environment.variables = {

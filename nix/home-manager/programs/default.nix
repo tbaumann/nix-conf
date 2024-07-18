@@ -9,6 +9,7 @@
     ./obsidian.nix
     ./openscad.nix
     ./sip.nix
+    ./ssh.nix
     ./starship.nix
     ./terminal
   ];

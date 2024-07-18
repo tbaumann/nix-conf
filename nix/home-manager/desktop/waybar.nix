@@ -10,9 +10,10 @@
   stylix.targets.waybar.enableRightBackColors = true;
 
   programs.waybar.enable = true;
-  programs.waybar.settings = [
-    {
+  programs.waybar.settings = {
+    top = {
       layer = "top";
+      name = "top";
 
       position = "top";
 
@@ -20,6 +21,8 @@
       height = 30;
       spacing = 0;
       reload_style_on_change = true;
+      margin-left = 5;
+      margin-right = 5;
 
       "modules-left" = [
         "sway/workspaces"
@@ -37,8 +40,8 @@
         "battery"
         "sway/language"
         "idle_inhibitor"
-        "tray"
         "wireplumber"
+        "tray"
         "clock#time"
         "clock#date"
         "custom/weather"
@@ -101,6 +104,7 @@
         "format" = "DEFAULT: {player_icon} {dynamic}";
         "format-paused" = "DEFAULT: {status_icon} <i>{dynamic}</i>";
         "format-len" = 10;
+        "dynamic-len" = 30;
         "player-icons" = {
           "default" = "▶";
           "mpv" = "🎵";
@@ -167,6 +171,7 @@
       wireplumber = {
         format = "{volume}% {icon}";
         format-muted = "";
+        "format-icons" = ["" "" ""];
         on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         on-click-right = "${pkgs.pwvucontrol}/bin/pwvucontrol";
         max-volume = 150;
@@ -219,11 +224,41 @@
       };
       "custom/wlogout" = {
         "on-click" = "${pkgs.wlogout}/bin/wlogout";
-        "format" = "{}";
-        "exec" = "echo ; echo  logout";
+        "format" = "  {} ";
+        "exec" = "echo ; echo   logout";
         "interval" = 86400;
         "tooltip" = true;
       };
+    };
+  };
+  programs.waybar.style = ''
+    * {
+        border: none;
+        border-radius: 0;
+        font-family: Roboto,'Font Awesome 5', 'SFNS Display',  Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        min-height: 0;
+        background-color: black;
+        color: #ffffff;
     }
-  ];
+
+    window#waybar {
+        border-bottom: 3px ;
+        color: #ffffff;
+    }
+
+    window#waybar.hidden {
+        opacity: 0.0;
+    }
+
+    #mode {
+        background-color: #64727D;
+    }
+    #temperature #language #wireplumber {
+        color: #ffffff;
+    }
+    #custom-wlogout {
+        color: red;
+    }
+  '';
 }

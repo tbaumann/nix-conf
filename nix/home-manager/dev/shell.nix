@@ -1,4 +1,7 @@
 {
+  home.shellAliases = {
+    vim = "nvim";
+  };
   programs = {
     nixvim = {
       plugins = {

@@ -14,6 +14,7 @@
 
     ./hardware-configuration.nix
     ../../common/core.nix
+# FIXME depends on unstable at the moment    ./nixarr.nix
   ];
 
   # BTRFS stuff

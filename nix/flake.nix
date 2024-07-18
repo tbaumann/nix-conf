@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
@@ -56,8 +57,12 @@
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
-    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
-    waybar_media_display.url = "github:tbaumann/waybar_media_display";
+#    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
+#    waybar_media_display.url = "github:tbaumann/waybar_media_display";
+    nixvim-config.url = "github:mikaelfangel/nixvim-config";
+
+
+    nixarr.url = "github:rasmus-kirk/nixarr";    
 
     # color scheme - catppuccin
     catppuccin-i3 = {
@@ -76,9 +81,11 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     auto-cpufreq,
     base16,
     home-manager,
+    nixarr,
     nix-flatpak,
     nix-index-database,
     nixos-hardware,
@@ -86,10 +93,11 @@
     ragenix,
     stylix,
     update-systemd-resolved,
-    waybar_media_display,
-    waybar_weather_display,
+    #waybar_media_display,
+#    waybar_weather_display,
     wpaperd,
     microvm,
+    nixvim-config,
     ...
   } @ inputs: let
     mkNixosConfiguration = {
@@ -104,6 +112,7 @@
         nixvim.nixosModules.nixvim
         auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
+# FIXME curently depends on unstable	nixarr.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {

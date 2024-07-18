@@ -59,7 +59,6 @@
     };
     efi.canTouchEfiVariables = true;
   };
-  boot.consoleLogLevel = 0;
 
   security.sudo.wheelNeedsPassword = false;
   environment.pathsToLink = ["/libexec"];
@@ -103,6 +102,7 @@
     qmk-udev-rules
     gcc-arm-embedded
     dfu-util
+    sbctl
   ];
 
   services = {

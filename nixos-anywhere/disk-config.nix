@@ -53,6 +53,10 @@
                   mountOptions = [ "compress=zstd" ];
                   mountpoint = "/persist";
                 };
+                "DATA/media" = {
+                  mountOptions = [ "compress=zstd" ];
+                  mountpoint = "/media";
+                };
               };
             };
           };
