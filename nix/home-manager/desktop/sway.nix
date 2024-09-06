@@ -11,6 +11,100 @@
   #Theme file
   home.file.".config/sway/themes/".source = "${inputs.catppuccin-i3}/themes";
 
+  programs.i3status-rust.enable = true;
+  programs.i3status-rust.bars = {
+    default = {
+      theme = "ctp-frappe";
+      icons = "awesome6";
+      blocks = [
+        {
+          theme_overrides = {
+            idle_bg = "#8caaee";
+            idle_fg = "#303446";
+          };
+          block = "focused_window";
+          format = {
+            full = " $title.str(max_w:15) |";
+            short = " $title.str(max_w:10) |";
+          };
+        }
+        {
+          block = "keyboard_layout";
+          driver = "sway";
+          format = " ⌨ $layout ";
+          mappings = {
+            "English (US)" = "us";
+          };
+        }
+        {
+          block = "music";
+          format = "$icon {$combo.str(max_w:20,rot_interval:0.5) $play $next |}";
+        }
+        /*
+        {
+          block = "notify";
+          click = [
+            {
+              button = "left";
+              action = "show";
+            }
+            {
+              button = "right";
+              action = "toggle_paused";
+            }
+          ];
+        }
+        */
+        {
+          block = "privacy";
+          driver = [
+            {
+              name = "v4l";
+            }
+          ];
+        }
+        {
+          block = "sound";
+          click = [
+            {
+              button = "left";
+              cmd = "pavucontrol";
+            }
+          ];
+        }
+
+        {
+          block = "time";
+          format = " $timestamp.datetime(f:'%a %d/%m %R') ";
+          interval = 60;
+        }
+        {
+          block = "custom";
+          interval = 1200;
+          command = "wttrbar --location Marrakech";
+          format = "{ $icon|} $text.pango-str()°";
+          json = true;
+        }
+        {
+          block = "battery";
+          missing_format = "";
+        }
+        {
+          block = "custom";
+          format = " ";
+          command = "/run/current-system/sw/bin/false";
+          interval = "once";
+          click = [
+            {
+              button = "left";
+              cmd = "${pkgs.wlogout}/bin/wlogout";
+            }
+          ];
+        }
+      ];
+    };
+  };
+
   services.swayidle = {
     enable = true;
     events = [
@@ -89,7 +183,18 @@
           natural_scroll = "enabled";
         };
       };
-      bars = [];
+      bars = [
+        {
+          id = "top";
+          position = "top";
+          fonts = {
+            names = ["DejaVu Sans Mono" "FontAwesome6"];
+            style = "Bold Semi-Condensed";
+            size = 11.0;
+          };
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+        }
+      ];
 
       /*
       colors.focused = {
@@ -138,6 +243,7 @@
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+Shift+q" = "kill";
         "${modifier}+d" = "exec ${menu}";
+        "${modifier}+Shift+d" = "exec ${terminal} -a launcher -e ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
 
         "${modifier}+Left" = "focus left";
         "${modifier}+Down" = "focus down";
@@ -157,6 +263,8 @@
         "${modifier}+s" = "layout stacking";
         "${modifier}+w" = "layout tabbed";
         "${modifier}+e" = "layout toggle split";
+
+        "${modifier}+t" = "split toggle";
 
         "${modifier}+Shift+space" = "floating toggle";
         "${modifier}+space" = "focus mode_toggle";
@@ -292,6 +400,12 @@
           };
           command = "floating enable";
         }
+        {
+          criteria = {
+            app_id = "^launcher$";
+          };
+          command = "floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10";
+        }
       ];
       assigns = {
         "1" = [
@@ -304,7 +418,7 @@
       };
       startup = [
         #        {command = "nwg-panel";}
-        {command = "waybar";}
+        # {command = "waybar";}
         {command = "nm-applet";}
         {command = "solaar -w hide";}
         {command = "polychromatic-tray-applet";}
@@ -321,6 +435,7 @@
         {command = "syncthingtray --wait";}
         {command = "openrgb --startminimized";}
         {command = "linphone --iconified";}
+        {command = "blueman-applet";}
       ];
     };
   };

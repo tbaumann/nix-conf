@@ -7,15 +7,20 @@
   ...
 }: {
   imports = [
-    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
   ];
 
-  console.enable = false;
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // {allowMissing = true;});
+    })
+  ];
+
   nixpkgs.config.allowUnsupportedSystem = true;
+  /*
   nixpkgs.hostPlatform.system = "aarch64-linux";
   nixpkgs.buildPlatform.system = "x86_64-linux"; #If you build on x86 other wise changes this.
 
-  /*
   fileSystems."/" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";

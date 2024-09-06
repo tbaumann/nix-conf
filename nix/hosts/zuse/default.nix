@@ -14,7 +14,8 @@
 
     ./hardware-configuration.nix
     ../../common/core.nix
-# FIXME depends on unstable at the moment    ./nixarr.nix
+    ../../core-desktop.nix
+    ../../common/core-pc.nix
   ];
 
   # BTRFS stuff
@@ -30,7 +31,7 @@
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
-    package = pkgs.openrgb-with-all-plugins;
+    package = pkgs.openrgb;
   };
   programs.coolercontrol.enable = true;
   virtualisation.vmVariant = {

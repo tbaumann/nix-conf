@@ -34,11 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    # AstroNvim is an aesthetic and feature-rich neovim config.
-    astronvim = {
-      url = "github:AstroNvim/AstroNvim/v3.37.8";
-      flake = false;
-    };
     wpaperd = {
       url = "github:Narice/wpaperd";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +45,11 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # AstroNvim is an aesthetic and feature-rich neovim config.
+    astronvim = {
+      url = "github:AstroNvim/AstroNvim/v3.37.8";
+      flake = false;
+    };
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,12 +57,15 @@
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
-#    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
-#    waybar_media_display.url = "github:tbaumann/waybar_media_display";
-    nixvim-config.url = "github:mikaelfangel/nixvim-config";
+    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
+    waybar_media_display.url = "github:tbaumann/waybar_media_display";
+    #    nixvim-config.url = "github:mikaelfangel/nixvim-config";
+    nixvim-kickstart = {
+      url = "github:JMartJonesy/kickstart.nixvim";
+      flake = false;
+    };
 
-
-    nixarr.url = "github:rasmus-kirk/nixarr";    
+    nixarr.url = "github:rasmus-kirk/nixarr";
 
     # color scheme - catppuccin
     catppuccin-i3 = {
@@ -77,27 +80,35 @@
       url = "github:catppuccin/starship";
       flake = false;
     };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-sbc.url = "github:nakato/nixos-sbc/main";
+
+    impermanence.url = "github:nix-community/impermanence";
   };
   outputs = {
     self,
-    nixpkgs,
-    nixpkgs-unstable,
     auto-cpufreq,
     base16,
     home-manager,
-    nixarr,
+    impermanence,
+    microvm,
     nix-flatpak,
     nix-index-database,
+    nixarr,
     nixos-hardware,
+    nixos-sbc,
+    nixpkgs,
+    nixpkgs-unstable,
     nixvim,
     ragenix,
     stylix,
     update-systemd-resolved,
-    #waybar_media_display,
-#    waybar_weather_display,
+    waybar_media_display,
+    waybar_weather_display,
     wpaperd,
-    microvm,
-    nixvim-config,
     ...
   } @ inputs: let
     mkNixosConfiguration = {
@@ -112,12 +123,12 @@
         nixvim.nixosModules.nixvim
         auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
-# FIXME curently depends on unstable	nixarr.nixosModules.default
+        nixos-sbc.nixosModules.cache
+        # FIXME curently depends on unstable	nixarr.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
           home-manager.sharedModules = [
             nix-index-database.hmModules.nix-index
             ragenix.homeManagerModules.default
@@ -131,6 +142,7 @@
       ],
       extraModules ? [],
       system ? "x86_64-linux",
+      nixpkgs ? inputs.nixpkgs,
     }:
       nixpkgs.lib.nixosSystem {
         system = system;
@@ -152,38 +164,16 @@
           ./hosts/zuse
         ];
       };
-      nas = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          "${nixos-hardware}/raspberry-pi/4"
+      nas = mkNixosConfiguration {
+        extraModules = [
+          nixarr.nixosModules.default
+          impermanence.nixosModules.impermanence
+          nixos-sbc.nixosModules.default
+          nixos-sbc.nixosModules.boards.raspberrypi.rpi4
           ./hosts/nas
         ];
-      };
-      rpi2 = nixpkgs.lib.nixosSystem {
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          "${nixos-hardware}/raspberry-pi/4"
-          {
-            hardware = {
-              #              raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-              deviceTree = {
-                enable = true;
-              };
-            };
-            # hardware.raspberry-pi."4".fkms-3d.enable = true;
-            #            services.hardware.argonone.enable = true;
-            boot.loader.raspberryPi.version = 4;
-            #boot.kernelPackages = [nixpkgs.pkgs.linuxKernel.kernels.linux_rpi4];
-            hardware.raspberry-pi."4".fkms-3d.enable = true;
-            boot.loader.grub.enable = false;
-            boot.loader.generic-extlinux-compatible.enable = true;
-            console.enable = false;
-            nixpkgs.config.allowUnsupportedSystem = true;
-            nixpkgs.hostPlatform.system = "aarch64-linux";
-            nixpkgs.buildPlatform.system = "x86_64-linux"; #If you build on x86 other wise changes this.
-            # ... extra configs as above
-          }
-        ];
+        system = "aarch64-linux";
+        nixpkgs = inputs.nixpkgs-unstable;
       };
     };
   };

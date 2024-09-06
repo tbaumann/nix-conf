@@ -9,11 +9,9 @@
     ./services
     ./user-group.nix
     ./fhs-fonts.nix
-    ./core-desktop.nix
     ./backup.nix
     ./wifi.nix
     ./tailscale.nix
-    ../home-manager/default.nix
     #./hardening.nix
   ];
   nix = {
@@ -39,25 +37,23 @@
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
-      cores = 12;
-      max-jobs = 4;
+      cores = 24;
+      max-jobs = 24;
       # access-tokens = "github.com=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";
     };
   };
 
+  # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
+  system.switch = {
+    enable = false;
+    enableNg = true;
+  };
+
   nixpkgs.config.allowUnfree = true;
 
-  boot.kernelPackages = pkgs.linuxPackages;
-  boot.loader = {
-    timeout = 10;
-    systemd-boot = {
-      enable = true;
-      consoleMode = "0";
-      configurationLimit = 15;
-      memtest86.enable = true;
-      netbootxyz.enable = true;
-    };
-    efi.canTouchEfiVariables = true;
+  boot.tmp.useTmpfs = true;
+  systemd.services.nix-daemon = {
+    environment.TMPDIR = "/var/tmp";
   };
 
   security.sudo.wheelNeedsPassword = false;
@@ -106,6 +102,8 @@
   ];
 
   services = {
+    ntpd-rs.enable = true;
+    irqbalance.enable = true;
     resolved.enable = true;
     avahi = {
       enable = true;
@@ -119,6 +117,7 @@
     };
     dbus.enable = true;
     fstrim.enable = true;
+    dbus.implementation = "broker";
     fwupd = {
       enable = true;
       extraRemotes = ["lvfs-testing"];

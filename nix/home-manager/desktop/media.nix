@@ -24,7 +24,7 @@
     vdpauinfo
     vulkan-tools
     glxinfo
-    # FIXME compile error ffmpeg-full
+    ffmpeg-full
     handbrake
 
     # video

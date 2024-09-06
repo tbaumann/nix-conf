@@ -59,13 +59,13 @@
     options = ["subvol=DATA/persist"];
   };
 
-/*
+  /*
   fileSystems."/media" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
     options = ["subvol=DATA/media"];
   };
-*/
+  */
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/ESP";

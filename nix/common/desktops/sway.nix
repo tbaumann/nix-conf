@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -24,4 +25,15 @@
     swappy
     wlr-randr
   ];
+  /*
+     FIXME https://github.com/NixOS/nixpkgs/pull/335625 not merged yet
+  programs.uwsm.enable = true;
+  programs.uwsm.waylandCompositors = {
+    sway = {
+      prettyName = "Sway";
+      comment = "Sway managed by UWSM";
+      binPath = "/run/current-system/sw/bin/sway";
+    };
+  };
+  */
 }

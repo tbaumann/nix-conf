@@ -7,10 +7,10 @@
 default: zuse
 
 zuse: 
-	nixos-rebuild switch --flake '.#zuse' --impure --use-remote-sudo --log-format internal-json -v --show-trace  |& nom --json
+	NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --flake '.#zuse' --impure --use-remote-sudo --log-format internal-json -v --show-trace  |& nom --json
 
 zuse-klappi:
-	nixos-rebuild switch --flake '.#zuse-klappi' --impure --use-remote-sudo --log-format internal-json -v --target-host zuse-klappi.local |& nom --json
+	NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --flake '.#zuse-klappi' --impure --use-remote-sudo --log-format internal-json -v --target-host zuse-klappi.local |& nom --json
 
 
 show:

@@ -8,6 +8,7 @@
   imports = [
   ];
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
   environment.etc."NetworkManager/system-connections/BAUMANN.nmconnection" = {
     mode = "0400";
     text = ''

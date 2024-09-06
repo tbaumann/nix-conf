@@ -3,6 +3,7 @@
     ./beets.nix
     ./chromium.nix
     ./fish.nix
+    ./kicad.nix
     ./librewolf.nix
     ./neovim
     ./nushell.nix
@@ -20,6 +21,7 @@
     lsd.enable = true;
     lsd.enableAliases = true;
     nix-index-database.comma.enable = true;
+    fastfetch.enable = true;
     fd.enable = true;
     fd.ignores = [
       ".git/"

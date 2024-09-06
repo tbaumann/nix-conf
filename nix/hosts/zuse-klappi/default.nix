@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ../../common/core.nix
     ../../common/core-desktop.nix
+    ../../common/core-pc.nix
     ../../common/laptop.nix
   ];
   virtualisation.vmVariant = {

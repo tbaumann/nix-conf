@@ -6,8 +6,6 @@
   ...
 }: {
   imports = [
-    ./kicad.nix
-    #     ./nh.nix FIXME add back when it's in stable
     ./nix-alien.nix
     ./git.nix
   ];
@@ -15,6 +13,7 @@
   programs = {
     #    git.enable = true;
     direnv.enable = true;
+    direnv.nix-direnv.enable = true;
     fish.enable = true;
     less.enable = true;
     nix-ld.enable = true;
@@ -37,5 +36,6 @@
     fh
     pv
     just
+    lurk
   ];
 }

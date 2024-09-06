@@ -14,6 +14,7 @@
   imports = [
     ./desktops
     ./syncthing.nix
+    ../home-manager/default.nix
   ];
 
   # to install chrome, you need to enable unfree packages
@@ -151,7 +152,7 @@
       source-han-serif
 
       nerdfonts
-/*
+      /*
       (nerdfonts.override {
         fonts = [
           "FiraCode"
@@ -159,7 +160,7 @@
           "Iosevka"
         ];
       })
-*/
+      */
     ];
   };
 
