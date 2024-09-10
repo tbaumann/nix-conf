@@ -1,10 +1,16 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    #../../common/core.nix
-    ../../common/user-group.nix
-    ../../common/tailscale.nix
+    ../../common/core.nix
+    #../../common/user-group.nix
+    #../../common/tailscale.nix
   ];
+  topology.self = {
+    hardware.info = "Raspberry Pi NAS";
+    interfaces.wlan0 = {
+      network = "home"; # Use the network we define below
+    };
+  };
 
   services.openssh.enable = true;
   nixarr = {

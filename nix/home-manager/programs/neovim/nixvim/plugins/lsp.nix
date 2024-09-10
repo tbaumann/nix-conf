@@ -31,7 +31,7 @@
           nixd.enable = true;
           svelte.enable = true;
           tailwindcss.enable = true;
-          tsserver.enable = true;
+          # broken? tsserver.enable = true;
           yamlls.enable = true;
         };
       };

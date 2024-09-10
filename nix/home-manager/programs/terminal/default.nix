@@ -9,4 +9,7 @@
     lsix
     libsixel
   ];
+  programs.zellij.enable = true;
+  programs.zellij.enableFishIntegration = false;
+  programs.fd.enable = true;
 }

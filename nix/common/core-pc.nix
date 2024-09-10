@@ -12,4 +12,20 @@
     };
     efi.canTouchEfiVariables = true;
   };
+  environment.systemPackages = with pkgs; [
+    quickemu
+    quickgui
+    openvpn
+    update-systemd-resolved
+    inotify-tools
+    libnotify
+    s5cmd
+    spice
+    spice-gtk
+    localsend
+    fh
+    pv
+    just
+    lurk
+  ];
 }

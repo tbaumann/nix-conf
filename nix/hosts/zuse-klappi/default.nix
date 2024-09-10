@@ -17,6 +17,12 @@
     ../../common/core-pc.nix
     ../../common/laptop.nix
   ];
+  topology.self = {
+    hardware.info = "DELL XPS";
+    interfaces.wlan0 = {
+      network = "home"; # Use the network we define below
+    };
+  };
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {

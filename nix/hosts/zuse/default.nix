@@ -14,9 +14,16 @@
 
     ./hardware-configuration.nix
     ../../common/core.nix
-    ../../core-desktop.nix
+    ../../common/core-desktop.nix
     ../../common/core-pc.nix
   ];
+
+  topology.self = {
+    hardware.info = "24 core Threadripper workstation";
+    interfaces.eno1 = {
+      network = "home"; # Use the network we define below
+    };
+  };
 
   # BTRFS stuff
   services.btrfs.autoScrub.enable = true;

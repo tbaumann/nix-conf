@@ -87,16 +87,23 @@
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
 
     impermanence.url = "github:nix-community/impermanence";
+
+    nix-topology.url = "github:oddlama/nix-topology";
+    nix-topology.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
   outputs = {
     self,
     auto-cpufreq,
     base16,
+    flake-parts,
     home-manager,
     impermanence,
     microvm,
     nix-flatpak,
     nix-index-database,
+    nix-topology,
     nixarr,
     nixos-hardware,
     nixos-sbc,
@@ -111,6 +118,10 @@
     wpaperd,
     ...
   } @ inputs: let
+    pkgs = import nixpkgs {
+      #inherit system;
+      overlays = [nix-topology.overlays.default];
+    };
     mkNixosConfiguration = {
       baseModules ? [
         ./common/secrets.nix
@@ -124,6 +135,7 @@
         auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
         nixos-sbc.nixosModules.cache
+        nix-topology.nixosModules.default
         # FIXME curently depends on unstable	nixarr.nixosModules.default
 
         home-manager.nixosModules.home-manager
@@ -164,8 +176,23 @@
           ./hosts/zuse
         ];
       };
+      router = mkNixosConfiguration {
+        extraModules = [
+          ./common/secrets.nix
+          ragenix.nixosModules.default
+          nix-topology.nixosModules.default
+          impermanence.nixosModules.impermanence
+          nixos-sbc.nixosModules.default
+          nixos-sbc.nixosModules.boards.raspberrypi.rpi4
+          ./hosts/router
+        ];
+        system = "aarch64-linux";
+      };
       nas = mkNixosConfiguration {
         extraModules = [
+          ./common/secrets.nix
+          ragenix.nixosModules.default
+          nix-topology.nixosModules.default
           nixarr.nixosModules.default
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
@@ -175,6 +202,15 @@
         system = "aarch64-linux";
         nixpkgs = inputs.nixpkgs-unstable;
       };
+    };
+    topology.x86_64-linux = import nix-topology {
+      inherit pkgs;
+      modules = [
+        # Your own file to define global topology. Works in principle like a nixos module but uses different options.
+        ./topology.nix
+        # Inline module to inform topology of your existing NixOS hosts.
+        {nixosConfigurations = self.nixosConfigurations;}
+      ];
     };
   };
 }

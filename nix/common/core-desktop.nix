@@ -17,6 +17,8 @@
     ../home-manager/default.nix
   ];
 
+  nixpkgs.overlays = [inputs.nix-topology.overlays.default];
+
   # to install chrome, you need to enable unfree packages
   nixpkgs.config.allowUnfree = lib.mkForce true;
 
