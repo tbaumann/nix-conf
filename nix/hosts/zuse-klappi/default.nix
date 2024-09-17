@@ -23,6 +23,9 @@
       network = "home"; # Use the network we define below
     };
   };
+
+  #use the big box
+  nix.distributedBuilds = true;
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {

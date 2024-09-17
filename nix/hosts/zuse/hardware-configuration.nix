@@ -12,7 +12,7 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "kvm-intel"];
-  boot.kernelParams = ["badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af" "memtest=2" "amd_prefcore=enable"];
+  boot.kernelParams = ["badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af" "memtest=2" "amd_prefcore=enable" "amd_pstate=active"];
   boot.blacklistedKernelModules = ["qcserial"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
@@ -84,5 +84,5 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  programs.auto-cpufreq.enable = false;
+  services.auto-cpufreq.enable = false;
 }

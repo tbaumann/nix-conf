@@ -20,7 +20,9 @@
   };
   nixpkgs.config.allowUnsupportedSystem = true;
   nixpkgs.hostPlatform.system = "aarch64-linux";
-  nixpkgs.buildPlatform.system = "x86_64-linux";
+  #nixpkgs.buildPlatform.system = "x86_64-linux";
+
+  #environment.noXlibs = true;
 
   users.users.example = {
     isNormalUser = true;

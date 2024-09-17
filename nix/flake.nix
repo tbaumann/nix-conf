@@ -12,7 +12,8 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager/";
+      url = "github:nix-community/home-manager/release-24.05";
+      #url = "github:nix-community/home-manager/";
       #      url = "github:tbaumann/home-manager";
 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,10 +51,12 @@
       url = "github:AstroNvim/AstroNvim/v3.37.8";
       flake = false;
     };
+    /*
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    */
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -95,7 +98,6 @@
   };
   outputs = {
     self,
-    auto-cpufreq,
     base16,
     flake-parts,
     home-manager,
@@ -132,7 +134,7 @@
         base16.nixosModule
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
-        auto-cpufreq.nixosModules.default
+        #auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
         nixos-sbc.nixosModules.cache
         nix-topology.nixosModules.default

@@ -12,7 +12,6 @@ in {
     connections = mkConnection "f6600p" "wan1";
   };
 
-
   nodes.f6600p = mkRouter "f6600p" {
     info = "ZTE F6600P";
     interfaceGroups = [

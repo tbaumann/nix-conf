@@ -5,20 +5,15 @@
   ...
 }: {
   imports = [
-    ./programs
-    ./services
     ./user-group.nix
-    ./fhs-fonts.nix
-    ./backup.nix
-    ./wifi.nix
-    ./tailscale.nix
-    #./hardening.nix
   ];
   nix = {
     daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
+      builders-use-substitutes = true
       !include ${config.age.secrets.nix-access-tokens-github.path}
     '';
     optimise.automatic = true;
@@ -28,6 +23,7 @@
       randomizedDelaySec = "1h";
     };
     settings = {
+      builders-use-substitutes = true;
       auto-optimise-store = true;
       trusted-users = ["@wheel"];
       substituters = [
@@ -41,6 +37,18 @@
       max-jobs = 24;
       # access-tokens = "github.com=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";
     };
+    buildMachines = [
+      {
+        hostName = "zuse.local";
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        # if the builder supports building for multiple architectures,
+        # replace the previous line by, e.g.
+        # systems = ["x86_64-linux" "aarch64-linux"];
+        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+        mandatoryFeatures = [];
+      }
+    ];
   };
 
   # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
@@ -137,26 +145,15 @@
     #    programs.nix-ld.enable = true;
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
+    fish.enable = true;
     neovim.enable = true;
     vim.defaultEditor = true;
-    dconf.enable = true;
-    fish.enable = true;
-    minipro.enable = true;
-    adb.enable = true; #adbusers group
   };
 
   # FUCK Morocco
   networking.enableIPv6 = false;
 
   networking.firewall.enable = false;
-
-  networking.bridges = {
-    lan = {
-      interfaces = [
-        "eno1"
-      ];
-    };
-  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

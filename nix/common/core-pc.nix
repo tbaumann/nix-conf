@@ -1,4 +1,11 @@
 {pkgs, ...}: {
+  imports = [
+    ./programs
+    ./services
+    ./backup.nix
+    ./wifi.nix
+    ./tailscale.nix
+  ];
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages;
   boot.loader = {
@@ -11,6 +18,18 @@
       netbootxyz.enable = true;
     };
     efi.canTouchEfiVariables = true;
+  };
+  programs = {
+    dconf.enable = true;
+    minipro.enable = true;
+    adb.enable = true; #adbusers group
+  };
+  networking.bridges = {
+    lan = {
+      interfaces = [
+        "eno1"
+      ];
+    };
   };
   environment.systemPackages = with pkgs; [
     quickemu
