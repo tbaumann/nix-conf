@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    ../../common/core.nix
-    #../../common/user-group.nix
+    #../../common/core.nix
+    ../../common/user-group.nix
     #../../common/tailscale.nix
   ];
   topology.self = {
@@ -12,7 +12,9 @@
     };
   };
 
+  documentation.enable = false;
   services.openssh.enable = true;
+  boot.initrd.systemd.enable = false;
   nixarr = {
     enable = true;
     # These two values are also the default, but you can set them to whatever
@@ -35,11 +37,11 @@
     # It is possible for this module to run the *Arrs through a VPN, but it
     # is generally not recommended, as it can cause rate-limiting issues.
     bazarr.enable = true;
-    lidarr.enable = true;
-    prowlarr.enable = true;
+    #lidarr.enable = true;
+    #prowlarr.enable = true;
     radarr.enable = true;
-    readarr.enable = true;
-    sonarr.enable = true;
+    #readarr.enable = true;
+    #sonarr.enable = true;
   };
   networking.hostName = "nas";
 }

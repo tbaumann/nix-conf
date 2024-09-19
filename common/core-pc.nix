@@ -23,6 +23,7 @@
     dconf.enable = true;
     minipro.enable = true;
     adb.enable = true; #adbusers group
+    yazi.enable = true;
   };
   networking.bridges = {
     lan = {
