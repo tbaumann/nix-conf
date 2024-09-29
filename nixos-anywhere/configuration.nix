@@ -1,4 +1,10 @@
-{ modulesPath, config, lib, pkgs, ... }: {
+{
+  modulesPath,
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -19,7 +25,7 @@
   networking.wireless = {
     enable = true;
     networks = {
-      BAUMANN = { psk = "ykuBq6rj";};
+      BAUMANN = {psk = "ykuBq6rj";};
     };
   };
   networking.hostName = "nixos-anywhere";
@@ -37,4 +43,3 @@
 
   system.stateVersion = "23.11";
 }
-

@@ -90,6 +90,7 @@
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
 
     impermanence.url = "github:nix-community/impermanence";
+    niri-flake.url = "github:sodiboo/niri-flake";
 
     nix-topology.url = "github:oddlama/nix-topology";
     nix-topology.inputs.nixpkgs.follows = "nixpkgs";
@@ -118,6 +119,7 @@
     waybar_media_display,
     waybar_weather_display,
     wpaperd,
+    niri-flake,
     ...
   } @ inputs: let
     pkgs = import nixpkgs {
@@ -138,6 +140,7 @@
         microvm.nixosModules.host
         nixos-sbc.nixosModules.cache
         nix-topology.nixosModules.default
+        niri-flake.nixosModules.niri
         # FIXME curently depends on unstable	nixarr.nixosModules.default
 
         home-manager.nixosModules.home-manager
@@ -185,7 +188,7 @@
           nix-topology.nixosModules.default
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
-          nixos-sbc.nixosModules.boards.raspberrypi.rpi4
+          nixos-sbc.nixosModules.boards.bananapi.bpir4
           ./hosts/router
         ];
         system = "aarch64-linux";

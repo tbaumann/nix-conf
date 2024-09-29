@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    #../../common/core.nix
-    ../../common/user-group.nix
+    ../../common/core.nix
+    #../../common/user-group.nix
     #../../common/tailscale.nix
   ];
   topology.self = {
@@ -13,6 +13,7 @@
   };
 
   documentation.enable = false;
+  documentation.man.enable = false;
   services.openssh.enable = true;
   boot.initrd.systemd.enable = false;
   nixarr = {

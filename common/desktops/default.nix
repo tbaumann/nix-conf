@@ -3,6 +3,7 @@
     ./kde.nix
     ./lxqt.nix
     ./gtk-lock.nix
+    ./niri.nix
     #./hyprland.nix
     ./budgie.nix
     ./sway.nix

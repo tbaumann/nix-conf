@@ -65,6 +65,9 @@
   programs.git.aliases = {
     pr = "pull --rebase";
   };
+  home.file.".face" = {
+    source = ./tilli/tilli-face.png;
+  };
 
   /*
   # Default desktop environment

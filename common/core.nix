@@ -87,7 +87,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     inputs.ragenix.packages.x86_64-linux.default
-    autorestic
     btop
     expect
     file
@@ -101,10 +100,6 @@
     ripgrep
     zip
     unzip
-    qmk-udev-rules
-    gcc-arm-embedded
-    dfu-util
-    sbctl
     # FIXME next version wcurl
   ];
 
@@ -142,7 +137,6 @@
 
   programs = {
     command-not-found.enable = false;
-    #    programs.nix-ld.enable = true;
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
     fish.enable = true;

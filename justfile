@@ -22,7 +22,7 @@ router-image:
   nix build '.#nixosConfigurations.router.config.system.build.sdImage' --impure --out-link result-router-image --log-format internal-json -v --show-trace  |& nom --json
 
 nas-image:
-  nix build '.#nixosConfigurations.nas.config.system.build.sdImage' --impure --out-link result-router-image --log-format internal-json -v --show-trace  |& nom --json
+  nix build '.#nixosConfigurations.nas.config.system.build.sdImage' --impure --out-link result-nas-image --log-format internal-json -v --show-trace  |& nom --json
 
 topology:
   nix build '.#topology.x86_64-linux.config.output' --impure --out-link result-topology

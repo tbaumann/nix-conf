@@ -7,7 +7,7 @@
     ./tailscale.nix
   ];
   boot.initrd.systemd.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
     timeout = 10;
     systemd-boot = {
@@ -33,19 +33,23 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    dfu-util
+    fh
+    gcc-arm-embedded
+    inotify-tools
+    just
+    libnotify
+    localsend
+    lurk
+    openvpn
+    pv
+    qmk-udev-rules
     quickemu
     quickgui
-    openvpn
-    update-systemd-resolved
-    inotify-tools
-    libnotify
     s5cmd
+    sbctl
     spice
     spice-gtk
-    localsend
-    fh
-    pv
-    just
-    lurk
+    update-systemd-resolved
   ];
 }

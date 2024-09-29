@@ -1,6 +1,5 @@
 # Example to create a bios compatible gpt partition
-{ lib, ... }:
-{
+{lib, ...}: {
   disko.devices = {
     disk.disk1 = {
       device = lib.mkDefault "/dev/sda";
@@ -31,30 +30,30 @@
               # BTRFS partition is not mounted as it doesn't set a mountpoint explicitly
               subvolumes = {
                 # This subvolume will not be mounted
-                "SYSTEM" = { };
+                "SYSTEM" = {};
                 # mounted as "/"
                 "SYSTEM/rootfs" = {
                   mountpoint = "/";
                 };
                 # mounted as "/nix"
                 "SYSTEM/nix" = {
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = ["compress=zstd" "noatime"];
                   mountpoint = "/nix";
                 };
                 # This subvolume will not be mounted
-                "DATA" = { };
+                "DATA" = {};
                 # mounted as "/home"
                 "DATA/home" = {
-                  mountOptions = [ "compress=zstd" ];
+                  mountOptions = ["compress=zstd"];
                   mountpoint = "/home";
                 };
                 # mounted as "/persist"
                 "DATA/persist" = {
-                  mountOptions = [ "compress=zstd" ];
+                  mountOptions = ["compress=zstd"];
                   mountpoint = "/persist";
                 };
                 "DATA/media" = {
-                  mountOptions = [ "compress=zstd" ];
+                  mountOptions = ["compress=zstd"];
                   mountpoint = "/media";
                 };
               };
