@@ -9,7 +9,8 @@
     ./hardware.nix
   ];
 
-  system.etc.overlay.enable = lib.mkForce false;
+  system.etc.overlay.enable = lib.mkForce false; #FIXME erofs not available on vendor kernel
+  systemd.sysusers.enable = false; #FIXME https://github.com/ryantm/agenix/issues/238
   boot.initrd.systemd.enable = lib.mkForce false;
 
   topology.self = {

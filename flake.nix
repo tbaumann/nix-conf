@@ -189,9 +189,8 @@
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
           nixos-sbc.nixosModules.boards.bananapi.bpir4
-          (nixpkgs.outPath + "/nixos/modules/profiles/headless.nix")
-          (nixpkgs.outPath + "/nixos/modules/profiles/perlless.nix")
-          ./common/minimal.nix
+          ./common/profiles/minimal.nix
+          ./common/profiles/perlless.nix
           ./hosts/router
         ];
         system = "aarch64-linux";
@@ -205,9 +204,8 @@
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
           nixos-sbc.nixosModules.boards.raspberrypi.rpi4
-          (nixpkgs.outPath + "/nixos/modules/profiles/headless.nix")
-          (nixpkgs.outPath + "/nixos/modules/profiles/perlless.nix")
-          ./common/minimal.nix
+          ./common/profiles/minimal.nix
+          ./common/profiles/perlless.nix
           ./hosts/nas
         ];
         system = "aarch64-linux";

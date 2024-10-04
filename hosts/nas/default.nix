@@ -12,6 +12,9 @@
     };
   };
 
+  systemd.sysusers.enable = false; #FIXME https://github.com/ryantm/agenix/issues/238
+
+
   services.openssh.enable = true;
 
   nixarr = {
