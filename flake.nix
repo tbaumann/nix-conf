@@ -182,19 +182,22 @@
         ];
       };
       router = mkNixosConfiguration {
-        extraModules = [
+        baseModules = [
           ./common/secrets.nix
           ragenix.nixosModules.default
           nix-topology.nixosModules.default
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
           nixos-sbc.nixosModules.boards.bananapi.bpir4
+          (nixpkgs.outPath + "/nixos/modules/profiles/headless.nix")
+          (nixpkgs.outPath + "/nixos/modules/profiles/perlless.nix")
+          ./common/minimal.nix
           ./hosts/router
         ];
         system = "aarch64-linux";
       };
       nas = mkNixosConfiguration {
-        extraModules = [
+        baseModules = [
           ./common/secrets.nix
           ragenix.nixosModules.default
           nix-topology.nixosModules.default
@@ -202,6 +205,9 @@
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
           nixos-sbc.nixosModules.boards.raspberrypi.rpi4
+          (nixpkgs.outPath + "/nixos/modules/profiles/headless.nix")
+          (nixpkgs.outPath + "/nixos/modules/profiles/perlless.nix")
+          ./common/minimal.nix
           ./hosts/nas
         ];
         system = "aarch64-linux";

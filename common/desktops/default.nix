@@ -29,6 +29,8 @@
   stylix.targets.plymouth.enable = true;
   stylix.targets.console.enable = true;
   stylix.autoEnable = true;
+  
+  stylix.targets.regreet.enable = false;
   programs.regreet = {
     enable = true;
     settings.background = {

@@ -7,13 +7,13 @@
       plugins = {
         efmls-configs.setup = let
           shellTools = {
-            formatter = "shfmt";
+            #formatter = "shfmt";
             linter = "shellcheck";
           };
         in {
           bash = shellTools;
           sh = shellTools;
-          fish .formatter = "fish_indent";
+          fish.formatter = "fish_indent";
           fish.linter = "fish";
         };
 

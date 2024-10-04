@@ -29,7 +29,8 @@
   };
 
   home.packages = with pkgs; [
-    devour
+    croc
+    # FIXME  still in  unstable wush
   ];
 
   xdg.mimeApps.enable = true;

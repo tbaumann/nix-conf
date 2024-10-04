@@ -12,10 +12,8 @@
     };
   };
 
-  documentation.enable = false;
-  documentation.man.enable = false;
   services.openssh.enable = true;
-  boot.initrd.systemd.enable = false;
+
   nixarr = {
     enable = true;
     # These two values are also the default, but you can set them to whatever

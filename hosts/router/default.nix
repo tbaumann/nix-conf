@@ -1,12 +1,16 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   imports = [
-    ../../common/core.nix
+     ../../common/core.nix
     ./hardware.nix
   ];
+
+  system.etc.overlay.enable = lib.mkForce false;
+  boot.initrd.systemd.enable = lib.mkForce false;
 
   topology.self = {
     name = "router";

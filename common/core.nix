@@ -65,7 +65,6 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  environment.pathsToLink = ["/libexec"];
 
   time.timeZone = "Africa/Casablanca";
 
@@ -74,6 +73,8 @@
   console = {
     keyMap = "us";
   };
+  system.etc.overlay.enable = true;
+  boot.initrd.systemd.enable = true;
 
   # add user's shell into /etc/shells
   environment.shells = with pkgs; [
@@ -87,19 +88,10 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     inputs.ragenix.packages.x86_64-linux.default
-    btop
-    expect
-    file
-    gnumake
-    jq
-    lm_sensors
-    lsb-release
     nix-output-monitor
     nixpkgs-review
     parallel
     ripgrep
-    zip
-    unzip
     # FIXME next version wcurl
   ];
 
@@ -117,28 +109,13 @@
         userServices = true;
       };
     };
-    dbus.enable = true;
     fstrim.enable = true;
     dbus.implementation = "broker";
-    fwupd = {
-      enable = true;
-      extraRemotes = ["lvfs-testing"];
-    };
-    gvfs.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
-    printing.enable = true;
-    udisks2.enable = true;
+    dbus.enable = true;
   };
 
   programs = {
     command-not-found.enable = false;
-    nix-index.enable = true;
-    nix-index-database.comma.enable = true;
     fish.enable = true;
     neovim.enable = true;
     vim.defaultEditor = true;

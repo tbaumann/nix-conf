@@ -8,9 +8,14 @@
   ];
   #Global theming off
   stylix.targets.sway.enable = false;
-  #Theme file
-  home.file.".config/sway/themes/".source = "${inputs.catppuccin-i3}/themes";
 
+  #stylix.targets.fuzzel.enable = true;
+  programs.fuzzel.enable = true;
+  programs.fuzzel.settings = {
+    main = {
+      terminal = "${pkgs.foot}/bin/foot";
+    };
+  };
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars = {
     default = {
@@ -157,9 +162,6 @@
     wrapperFeatures.gtk = true;
     swaynag.enable = true;
     #systemd.xdgAutostart = true;
-    extraConfigEarly = ''
-      include themes/catppuccin-mocha
-    '';
 
     config = {
       output = {
@@ -169,7 +171,7 @@
       };
       modifier = "Mod4";
       terminal = "foot";
-      menu = "anyrun";
+      menu = "${pkgs.fuzzel}/bin/fuzzel";
       input = {
         "type:pointer" = {
           natural_scroll = "enabled";
@@ -196,44 +198,73 @@
         }
       ];
 
-      /*
-      colors.focused = {
-        border = "$lavender";
-        childBorder = "$mauve";
-        background = "$red";
-        text = "$crust";
-        indicator = "$rosewater";
+      colors = let
+        # https://github.com/catppuccin/i3/blob/main/themes/catppuccin-mocha
+        rosewater = "#f5e0dc";
+        flamingo = "#f2cdcd";
+        pink = "#f5c2e7";
+        mauve = "#cba6f7";
+        red = "#f38ba8";
+        maroon = "#eba0ac";
+        peach = "#fab387";
+        yellow = "#f9e2af";
+        green = "#a6e3a1";
+        teal = "#94e2d5";
+        sky = "#89dceb";
+        sapphire = "#74c7ec";
+        blue = "#89b4fa";
+        lavender = "#b4befe";
+        text = "#cdd6f4";
+        subtext1 = "#bac2de";
+        subtext0 = "#a6adc8";
+        overlay2 = "#9399b2";
+        overlay1 = "#7f849c";
+        overlay0 = "#6c7086";
+        surface2 = "#585b70";
+        surface1 = "#45475a";
+        surface0 = "#313244";
+        base = "#1e1e2e";
+        mantle = "#181825";
+        crust = "#11111b";
+      in {
+        focused = {
+          border = "${lavender}";
+          childBorder = "${mauve}";
+          background = "${red}";
+          text = "${crust}";
+          indicator = "${rosewater}";
+        };
+        unfocused = {
+          border = "${overlay0}";
+          childBorder = "${overlay0}";
+          background = "${mauve}";
+          text = "${crust}";
+          indicator = "${rosewater}";
+        };
+        focusedInactive = {
+          border = "${overlay0}";
+          childBorder = "${overlay0}";
+          background = "${peach}";
+          text = "${crust}";
+          indicator = "${rosewater}";
+        };
+        urgent = {
+          border = "${peach}";
+          childBorder = "${peach}";
+          background = "${red}";
+          text = "${crust}";
+          indicator = "${overlay0}";
+        };
+        placeholder = {
+          border = "${overlay0}";
+          childBorder = "${overlay0}";
+          background = "${mauve}";
+          text = "${crust}";
+          indicator = "${overlay0}";
+        };
+        background = "${sapphire}";
       };
-      colors.unfocused = {
-        border = "$overlay0";
-        childBorder = "$overlay0";
-        background = "$mauve";
-        text = "$crust";
-        indicator = "$rosewater";
-      };
-      colors.focusedInactive = {
-        border = "$overlay0";
-        childBorder = "$overlay0";
-        background = "$peach";
-        text = "$crust";
-        indicator = "$rosewater";
-      };
-      colors.urgent = {
-        border = "$peach";
-        childBorder = "$peach";
-        background = "$red";
-        text = "$crust";
-        indicator = "$overlay0";
-      };
-      colors.placeholder = {
-        border = "$overlay0";
-        childBorder = "$overlay0";
-        background = "$mauve";
-        text = "$crust";
-        indicator = "$overlay0";
-      };
-      colors.background = "$sapphire";
-      */
+
       keybindings = let
         terminal = config.wayland.windowManager.sway.config.terminal;
         menu = config.wayland.windowManager.sway.config.menu;
@@ -418,7 +449,6 @@
       };
       startup = [
         #        {command = "nwg-panel";}
-        # {command = "waybar";}
         {command = "nm-applet";}
         {command = "solaar -w hide";}
         {command = "polychromatic-tray-applet";}

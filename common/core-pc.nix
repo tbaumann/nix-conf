@@ -6,6 +6,7 @@
     ./wifi.nix
     ./tailscale.nix
   ];
+  system.etc.overlay.enable = true;
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
@@ -24,6 +25,23 @@
     minipro.enable = true;
     adb.enable = true; #adbusers group
     yazi.enable = true;
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
+  };
+  services = {
+    fwupd = {
+      enable = true;
+      extraRemotes = ["lvfs-testing"];
+    };
+    gvfs.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+    printing.enable = true;
+    udisks2.enable = true;
   };
   networking.bridges = {
     lan = {
@@ -33,23 +51,34 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    btop
     dfu-util
+    expect
     fh
+    file
     gcc-arm-embedded
+    gnumake
     inotify-tools
+    jq
     just
     libnotify
+    lm_sensors
     localsend
+    lsb-release
     lurk
+    nix-du
+    nix-tree
     openvpn
     pv
     qmk-udev-rules
     quickemu
     quickgui
-    s5cmd
     sbctl
     spice
     spice-gtk
+    unzip
     update-systemd-resolved
+    zip
   ];
+  environment.pathsToLink = ["/libexec"];
 }
