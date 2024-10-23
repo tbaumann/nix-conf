@@ -92,6 +92,7 @@
             targets = [
               "localhost:${toString config.services.prometheus.exporters.node.port}"
               "zuse.local:${toString config.services.prometheus.exporters.node.port}"
+              "router.local:${toString config.services.prometheus.exporters.node.port}"
               "zuse-klappi.local:${toString config.services.prometheus.exporters.node.port}"
             ];
           }
