@@ -12,7 +12,7 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "kvm-intel"];
-  boot.kernelParams = ["badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af" "memtest=2" "amd_prefcore=enable" "amd_pstate=active"];
+  boot.kernelParams = ["badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af" "memtest=2" "amd_prefcore=enable" "amd_pstate=active" "initcall_blacklist=dw_i2c_init_driver"];
   boot.blacklistedKernelModules = ["qcserial"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;

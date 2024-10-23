@@ -41,11 +41,34 @@
       {
         hostName = "zuse.local";
         system = "x86_64-linux";
+        systems = ["x86_64-linux" "aarch64-linux"];
         protocol = "ssh-ng";
         # if the builder supports building for multiple architectures,
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
         supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+        mandatoryFeatures = [];
+      }
+      {
+        hostName = "nas.local";
+        system = "aarch64-linux";
+        protocol = "ssh-ng";
+        # if the builder supports building for multiple architectures,
+        # replace the previous line by, e.g.
+        # systems = ["x86_64-linux" "aarch64-linux"];
+        speedFactor = 3;
+        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+        mandatoryFeatures = [];
+      }
+      {
+        hostName = "router.local";
+        system = "aarch64-linux";
+        protocol = "ssh-ng";
+        # if the builder supports building for multiple architectures,
+        # replace the previous line by, e.g.
+        # systems = ["x86_64-linux" "aarch64-linux"];
+        speedFactor = 2;
+        supportedFeatures = ["nixos-test" "benchmark" "kvm"];
         mandatoryFeatures = [];
       }
     ];
@@ -65,6 +88,9 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
+  security.sudo-rs.enable = true;
+  security.sudo-rs.execWheelOnly = true;
+  security.sudo-rs.wheelNeedsPassword = false;
 
   time.timeZone = "Africa/Casablanca";
 
@@ -74,6 +100,7 @@
     keyMap = "us";
   };
   system.etc.overlay.enable = true;
+  system.etc.overlay.mutable = true;
   boot.initrd.systemd.enable = true;
 
   # add user's shell into /etc/shells
@@ -92,12 +119,17 @@
     nixpkgs-review
     parallel
     ripgrep
+    rsync
+    bcachefs-tools
+    btop
+    comma
+    nix-index
     # FIXME next version wcurl
   ];
 
   services = {
+    prometheus.exporters.node.enable = true;
     ntpd-rs.enable = true;
-    irqbalance.enable = true;
     resolved.enable = true;
     avahi = {
       enable = true;

@@ -1,12 +1,11 @@
 # This module defines a small NixOS configuration.  It does not
 # contain any graphical stuff.
-
-{ config, lib, ... }:
-
-with lib;
-
 {
-
+  config,
+  lib,
+  ...
+}:
+with lib; {
   documentation.enable = mkDefault false;
 
   documentation.doc.enable = mkDefault false;
@@ -18,7 +17,7 @@ with lib;
   documentation.nixos.enable = mkDefault false;
 
   # Perl is a default package.
-  environment.defaultPackages = mkDefault [ ];
+  environment.defaultPackages = mkDefault [];
 
   environment.stub-ld.enable = false;
 

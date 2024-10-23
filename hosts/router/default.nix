@@ -5,13 +5,12 @@
   ...
 }: {
   imports = [
-     ../../common/core.nix
+    ../../common/core.nix
     ./hardware.nix
   ];
 
-  system.etc.overlay.enable = lib.mkForce false; #FIXME erofs not available on vendor kernel
   systemd.sysusers.enable = false; #FIXME https://github.com/ryantm/agenix/issues/238
-  boot.initrd.systemd.enable = lib.mkForce false;
+  #boot.initrd.systemd.enable = lib.mkForce false;
 
   topology.self = {
     name = "router";
@@ -28,6 +27,7 @@
   nixpkgs.config.allowUnsupportedSystem = true;
   nixpkgs.hostPlatform.system = "aarch64-linux";
   #nixpkgs.buildPlatform.system = "x86_64-linux";
+  boot.initrd.systemd.enableTpm2 = false;
 
   #environment.noXlibs = true;
 
@@ -37,7 +37,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    pciutils
   ];
 
+  networking.hostName = "router";
   system.stateVersion = "24.05";
 }

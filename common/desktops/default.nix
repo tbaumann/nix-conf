@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./kde.nix
     ./lxqt.nix
@@ -9,7 +13,7 @@
     ./sway.nix
     ./wpaperd.nix
     ./waybar.nix
-    #  ./gnome.nix  Gnome xdg portal grashes. Don't need it anyway.
+    ./gnome.nix  #Gnome xdg portal grashes. Don't need it anyway.
   ];
 
   services.displayManager.enable = true;
@@ -27,10 +31,10 @@
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
   stylix.targets.nixos-icons.enable = true;
   stylix.targets.plymouth.enable = true;
+  stylix.targets.plymouth.logoAnimated = true;
   stylix.targets.console.enable = true;
   stylix.autoEnable = true;
-  
-  stylix.targets.regreet.enable = false;
+
   programs.regreet = {
     enable = true;
     settings.background = {

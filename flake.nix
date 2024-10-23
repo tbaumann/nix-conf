@@ -7,7 +7,7 @@
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.05";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -96,6 +96,7 @@
     nix-topology.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
   outputs = {
     self,
@@ -191,6 +192,8 @@
           nixos-sbc.nixosModules.boards.bananapi.bpir4
           ./common/profiles/minimal.nix
           ./common/profiles/perlless.nix
+        ];
+        extraModules = [
           ./hosts/router
         ];
         system = "aarch64-linux";
@@ -206,6 +209,8 @@
           nixos-sbc.nixosModules.boards.raspberrypi.rpi4
           ./common/profiles/minimal.nix
           ./common/profiles/perlless.nix
+        ];
+        extraModules = [
           ./hosts/nas
         ];
         system = "aarch64-linux";

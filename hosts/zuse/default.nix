@@ -52,6 +52,7 @@
   boot.extraModprobeConfig = "options kvm_amd nested=1";
   environment.systemPackages = with pkgs; [
     liquidctl
+    inputs.zen-browser.packages.x86_64-linux.default
   ];
   #  hardware.gkraken.enable = true;
   #  hardware.openrazer.enable = true;

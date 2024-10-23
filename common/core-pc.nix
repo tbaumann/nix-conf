@@ -14,7 +14,7 @@
     systemd-boot = {
       enable = true;
       consoleMode = "0";
-      configurationLimit = 15;
+      configurationLimit = 5;
       memtest86.enable = true;
       netbootxyz.enable = true;
     };
@@ -29,6 +29,7 @@
     nix-index-database.comma.enable = true;
   };
   services = {
+    irqbalance.enable = true;
     fwupd = {
       enable = true;
       extraRemotes = ["lvfs-testing"];

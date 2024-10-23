@@ -58,6 +58,17 @@
     ];
   };
   programs.openstackclient.enable = true;
+  programs.ssh.matchBlocks.grafanacbx = {
+    hostname = "212.87.48.34";
+    user = "stack_baumann";
+    localForwards = [
+      {
+        bind.port = 12345;
+        host.address = "10.172.4.100";
+        host.port = 3000;
+      }
+    ];
+  };
 
   programs.git.enable = true;
   programs.git.userEmail = "tilman@baumann.name";
@@ -68,36 +79,4 @@
   home.file.".face" = {
     source = ./tilli/tilli-face.png;
   };
-
-  /*
-  # Default desktop environment
-  xsession = {
-    enable = true;
-    windowManager.command = "Hyprland";
-  };
-
-    programs.thunderbird.enable = true;
-    programs.thunderbird.profiles =
-    {
-      "defo" = {
-        name = "defo";
-        isDefault = true;
-        settings = {
-          "mail.spellcheck.inline" = false;
-        };
-      };
-    };
-    accounts.email.accounts = {
-      name = {
-        address = "tilman.baumann@tilman.baumann.name";
-        primary = true;
-        realName = "Tilman Baumann";
-        imap.host = "imap.migadu.com";
-        smtp.host = "smtp.migadu.com";
-        userName = "tilman.baumann@tilman.baumann.name";
-  #      thunderbird.enable = true;
-  #      thunderbird.profiles = ["def"];
-      };
-    };
-  */
 }

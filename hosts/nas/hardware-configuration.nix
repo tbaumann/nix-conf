@@ -17,4 +17,12 @@
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
+  #boot.supportedFilesystems = [ "bcachefs" ];
+  fileSystems = {
+    "/media" = {
+      device = "/dev/disk/by-label/media";
+      fsType = "btrfs";
+      #options = ["subvol=media"];
+    };
+  };
 }

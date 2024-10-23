@@ -41,6 +41,13 @@
         terminal = false;
         categories = ["Application"];
       };
+      /*
+      Jellyfin = {
+        name = "Jellyfin";
+        type = "Link";
+        settings.URL = "http://nas.local:8096/";
+      };
+      */
     };
   };
 }
