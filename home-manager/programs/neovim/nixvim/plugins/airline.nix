@@ -1,7 +1,9 @@
 {
   programs.nixvim.plugins.airline = {
     enable = true;
-    powerlineFonts = true;
-    focuslostInactive = false;
+    settings = {
+      focuslost_inactive = true;
+      powerline_fonts = true;
+    };
   };
 }

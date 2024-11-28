@@ -10,7 +10,7 @@
   nix = {
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
       builders-use-substitutes = true
@@ -29,9 +29,11 @@
       substituters = [
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
+        "https://selfhostblocks.cachix.org"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "selfhostblocks.cachix.org-1:H5h6Uj188DObUJDbEbSAwc377uvcjSFOfpxyCFP7cVs="
       ];
       cores = 24;
       max-jobs = 24;
@@ -122,18 +124,76 @@
     rsync
     bcachefs-tools
     btop
-    comma
     nix-index
     # FIXME next version wcurl
   ];
 
   services = {
-    prometheus.exporters.node.enable = true;
+    prometheus.exporters.node = {
+      enable = true;
+      enabledCollectors = ["systemd" "softirqs" "tcpstat" "wifi" "ethtool" "interrupts" "zoneinfo" "network_route"];
+      extraFlags = ["--collector.filesystem.fs-types-exclude=tmpfs,overlay,erofs"];
+    };
+    promtail = {
+      enable = true;
+      configuration = {
+        server = {
+          http_listen_port = 3031;
+          grpc_listen_port = 0;
+        };
+        positions = {
+          filename = "/tmp/positions.yaml";
+        };
+        clients = [
+          {
+            url = "http://nas.local:3030/loki/api/v1/push";
+          }
+        ];
+        scrape_configs = [
+          {
+            job_name = "journal";
+            journal = {
+              max_age = "12h";
+              labels = {
+                job = "systemd-journal";
+              };
+            };
+            relabel_configs = [
+              {
+                source_labels = ["__journal__systemd_unit"];
+                target_label = "unit";
+              }
+              {
+                source_labels = ["__journal__hostname"];
+                target_label = "hostname";
+              }
+              {
+                source_labels = ["__journal_syslog_identifier"];
+                target_label = "syslog_identifier";
+              }
+              {
+                # A priority value between 0 ("emerg") and 7 ("debug") formatted as a decimal string.
+                # This field is compatible with syslog's priority concept.
+                source_labels = ["__journal_priority"];
+                target_label = "priority";
+              }
+              {
+                # How the entry was received by the journal service. Valid transports are:
+                #  audit, driver, syslog, journal, stdout, kernel
+                source_labels = ["__journal__transport"];
+                target_label = "transport";
+              }
+            ];
+          }
+        ];
+      };
+      # extraFlags
+    };
     ntpd-rs.enable = true;
     resolved.enable = true;
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {
         enable = true;
         workstation = true;
@@ -150,6 +210,7 @@
     command-not-found.enable = false;
     fish.enable = true;
     neovim.enable = true;
+    #vim.enable = true;
     vim.defaultEditor = true;
   };
 

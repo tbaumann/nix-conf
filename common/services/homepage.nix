@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   services.homepage-dashboard = {
     enable = true;
     settings = {
@@ -127,6 +127,24 @@
                 type = "jellyseerr";
                 url = "http://nas.local:5055";
                 key = "MTcyODQxNDcwMDk5MjBmMTViOTk3LTNmNzMtNDA5OS1iMjNlLTMyZGUzNDNhODYwNg==";
+              };
+            };
+          }
+        ];
+      }
+      {
+        Monitoring = [
+          {
+            Grafana = {
+              description = "Grafana";
+              href = "http://nas.local:3000";
+              siteMonitor = "http://nas.local:3000";
+              icon = "sh-grafana";
+              widget = {
+                type = "grafana";
+                url = "http://nas.local:3000";
+                username = "admin";
+                password = "admin";
               };
             };
           }

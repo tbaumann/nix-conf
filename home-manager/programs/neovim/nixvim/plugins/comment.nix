@@ -1,8 +1,9 @@
 {
-  programs.nixvim.plugins.comment-nvim = {
+  programs.nixvim.plugins.comment = {
     enable = true;
-
-    opleader = {line = "<C-b>";};
-    toggler = {line = "<C-b>";};
+    settings = {
+      opleader = {line = "<C-b>";};
+      toggler = {line = "<C-b>";};
+    };
   };
 }

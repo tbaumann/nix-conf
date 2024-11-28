@@ -23,11 +23,11 @@
         };
 
         servers = {
-          bashls.enable = true;
+          helm-ls.enable = true;
           clangd.enable = true;
           dockerls.enable = true;
           eslint.enable = true;
-          nil_ls.enable = true;
+          nil-ls.enable = true;
           nixd.enable = true;
           svelte.enable = true;
           tailwindcss.enable = true;

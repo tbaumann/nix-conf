@@ -11,13 +11,14 @@
     ./openscad.nix
     ./sip.nix
     ./ssh.nix
-    ./starship.nix
+    #./starship.nix
     ./terminal
   ];
 
   programs = {
     firefox.enable = true;
     home-manager.enable = true;
+    yazi.enable = true;
     lsd.enable = true;
     lsd.enableAliases = true;
     nix-index-database.comma.enable = true;

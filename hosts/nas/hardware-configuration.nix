@@ -25,4 +25,10 @@
       #options = ["subvol=media"];
     };
   };
+  swapDevices = [
+    {
+      device = "/dev/disk/by-partlabel/swap";
+      #    randomEncryption.enable = true;  maybe not for suspend
+    }
+  ];
 }

@@ -1,12 +1,13 @@
 {
   programs.nixvim = {
-    options.completeopt = ["menu" "menuone" "noselect"];
+    opts.completeopt = ["menu" "menuone" "noselect"];
 
     plugins = {
       cmp = {
         enable = true;
         autoEnableSources = true;
         settings = {
+          completion.keyword_length = 2;
           sources = [
             {name = "nvim_lsp";}
             {name = "copilot-cmp";}
@@ -36,12 +37,6 @@
         cmp = {
           enable = true;
         };
-      };
-
-      nvim-cmp = {
-        enable = true;
-
-        completion.keywordLength = 2;
       };
     };
   };

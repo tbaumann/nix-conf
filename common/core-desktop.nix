@@ -39,7 +39,6 @@
     pulseaudio # provides `pactl`, which is required by some apps(e.g. sonic-pi)
     libreoffice
     wev
-    betterbird
     thunderbird
     restique
     kanshi
@@ -49,6 +48,7 @@
     #    hplip
     gnome.simple-scan
     speedtest-cli
+    zoom-us
   ];
 
   programs = {

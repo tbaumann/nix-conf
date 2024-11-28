@@ -53,5 +53,17 @@
       mode = "600";
       owner = "tilli";
     };
+    arr-api-key = {
+      file = ../secrets/arr-api-key.age;
+      group = "media";
+    };
+    grafana-password = {
+      file = ../secrets/grafana-password.age;
+      owner = "grafana";
+    };
+    grafana-secret = {
+      file = ../secrets/grafana-secret.age;
+      owner = "grafana";
+    };
   };
 }

@@ -42,9 +42,11 @@
       #      dashboard.enable = false;
       gitsigns = {
         enable = true;
-        signs = {
-          add.text = "+";
-          change.text = "~";
+        settings = {
+          signs = {
+            add.text = "+";
+            change.text = "~";
+          };
         };
       };
 

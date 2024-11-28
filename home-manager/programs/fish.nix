@@ -10,9 +10,48 @@
     enableFishIntegration = true;
     flags = ["--disable-up-arrow"];
   };
-  programs.fish.enable = true;
-  programs.fish.interactiveShellInit = ''
-    ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-  '';
+  home.packages = [pkgs.grc pkgs.fzf];
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      set theme_color_scheme catppuccin
+    '';
+    plugins = [
+      {
+        name = "grc";
+        src = pkgs.fishPlugins.grc.src;
+      }
+      {
+        name = "colored-man-pages";
+        src = pkgs.fishPlugins.colored-man-pages.src;
+      }
+      /*
+      {
+        name = "forgit";
+        src = pkgs.fishPlugins.forgit.src;
+      }
+      {
+        name = "hydro";
+        src = pkgs.fishPlugins.hydro.src;
+      }
+      {
+        name = "pure";
+        src = pkgs.fishPlugins.pure.src;
+      }
+      */
+      {
+        name = "bobthefisher";
+        src = pkgs.fishPlugins.bobthefisher.src;
+      }
+    ];
+    functions = {
+      fish_greeting = "echo ;";
+    };
+  };
+  xdg.configFile."fish/themes/" = {
+    source = "${inputs.catppuccin-fish}/themes";
+    recursive = true;
+  };
   stylix.targets.fish.enable = false;
 }

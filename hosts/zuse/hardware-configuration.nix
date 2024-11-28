@@ -84,5 +84,8 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  #services.ucodenix.enable = true;
+  #services.ucodenix.cpuModelId = "00830f10";
+
   services.auto-cpufreq.enable = false;
 }

@@ -69,6 +69,10 @@
     };
 
     nixarr.url = "github:rasmus-kirk/nixarr";
+    # argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
+    argon40-nix.url = "/home/tilli/git/argon40-nix";
+
+    ucodenix.url = "github:e-tho/ucodenix";
 
     # color scheme - catppuccin
     catppuccin-i3 = {
@@ -83,6 +87,10 @@
       url = "github:catppuccin/starship";
       flake = false;
     };
+    catppuccin-fish = {
+      url = "github:catppuccin/fish";
+      flake = false;
+    };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -91,20 +99,23 @@
 
     impermanence.url = "github:nix-community/impermanence";
     niri-flake.url = "github:sodiboo/niri-flake";
+    ghostty.url = "github:clo4/ghostty-hm-module";
 
     nix-topology.url = "github:oddlama/nix-topology";
     nix-topology.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    selfhostblocks.url = "github:ibizaman/selfhostblocks";
   };
   outputs = {
     self,
     base16,
     flake-parts,
+    ghostty,
     home-manager,
     impermanence,
     microvm,
+    niri-flake,
     nix-flatpak,
     nix-index-database,
     nix-topology,
@@ -115,12 +126,13 @@
     nixpkgs-unstable,
     nixvim,
     ragenix,
+    selfhostblocks,
     stylix,
+    ucodenix,
     update-systemd-resolved,
     waybar_media_display,
     waybar_weather_display,
     wpaperd,
-    niri-flake,
     ...
   } @ inputs: let
     pkgs = import nixpkgs {
@@ -137,11 +149,13 @@
         base16.nixosModule
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
+        selfhostblocks.nixosModules.${system}.default
         #auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
         nixos-sbc.nixosModules.cache
         nix-topology.nixosModules.default
         niri-flake.nixosModules.niri
+        ucodenix.nixosModules.default
         # FIXME curently depends on unstable	nixarr.nixosModules.default
 
         home-manager.nixosModules.home-manager
@@ -152,6 +166,7 @@
             ragenix.homeManagerModules.default
             nix-flatpak.homeManagerModules.nix-flatpak
             nixvim.homeManagerModules.nixvim
+            ghostty.homeModules.default
           ];
           home-manager.extraSpecialArgs = {
             inherit inputs;
@@ -190,6 +205,7 @@
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
           nixos-sbc.nixosModules.boards.bananapi.bpir4
+          nix-index-database.nixosModules.nix-index
           ./common/profiles/minimal.nix
           ./common/profiles/perlless.nix
         ];
@@ -207,6 +223,8 @@
           impermanence.nixosModules.impermanence
           nixos-sbc.nixosModules.default
           nixos-sbc.nixosModules.boards.raspberrypi.rpi4
+          inputs.argon40-nix.nixosModules.default
+          nix-index-database.nixosModules.nix-index
           ./common/profiles/minimal.nix
           ./common/profiles/perlless.nix
         ];

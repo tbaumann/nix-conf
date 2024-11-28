@@ -13,7 +13,7 @@
     ./sway.nix
     ./wpaperd.nix
     ./waybar.nix
-    ./gnome.nix  #Gnome xdg portal grashes. Don't need it anyway.
+    ./gnome.nix #Gnome xdg portal grashes. Don't need it anyway.
   ];
 
   services.displayManager.enable = true;
