@@ -30,9 +30,9 @@
       filetype.extension.gin = "gin";
       plugins = {
         treesitter.languageRegister.python = ["gin"];
-        lsp-format.lspServersToEnable = ["ruff-lsp"];
+        lsp-format.lspServersToEnable = ["ruff_lsp"];
         lsp.servers = {
-          ruff-lsp.enable = true;
+          ruff_lsp.enable = true;
           pylsp = {
             enable = true;
             settings = {

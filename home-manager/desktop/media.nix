@@ -30,7 +30,7 @@
     # video
     vlc
     libdvdcss
-    gnome.totem
+    totem
 
     # images
     viu # Terminal image viewer with native support for iTerm and Kitty
@@ -40,8 +40,8 @@
   programs = {
     mpv = {
       enable = true;
-      defaultProfiles = ["gpu-hq"];
-      scripts = [pkgs.mpvScripts.mpris];
+      #defaultProfiles = ["gpu-hq"];
+      #scripts = [pkgs.mpvScripts.mpris];
     };
   };
 

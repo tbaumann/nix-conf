@@ -5,7 +5,7 @@
 
       settings = {
         theme = "dark";
-        auto_close = false;
+        auto_close = 1;
       };
     };
 

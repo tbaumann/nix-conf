@@ -15,11 +15,11 @@
     entr
     epiphany
     file
-    gnome.adwaita-icon-theme
-    gnome.dconf-editor
-    gnome.eog
-    gnome.gnome-system-monitor
-    gnome.nautilus
+    adwaita-icon-theme
+    dconf-editor
+    eog
+    gnome-system-monitor
+    nautilus
     grim
     gtk4
     intel-gpu-tools

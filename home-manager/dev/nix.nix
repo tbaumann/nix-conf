@@ -11,7 +11,7 @@
   ];
 
   programs.nixvim = {
-    plugins.lsp.servers.nil-ls.enable = true;
+    plugins.lsp.servers.nil_ls.enable = true;
 
     autoCmd = [
       {

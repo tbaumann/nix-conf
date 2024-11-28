@@ -210,8 +210,8 @@
     command-not-found.enable = false;
     fish.enable = true;
     neovim.enable = true;
-    #vim.enable = true;
-    vim.defaultEditor = true;
+    neovim.defaultEditor = true;
+    vim.enable = true;
   };
 
   # FUCK Morocco

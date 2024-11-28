@@ -46,7 +46,7 @@
     zathura
     ghostscript
     #    hplip
-    gnome.simple-scan
+    simple-scan
     speedtest-cli
     zoom-us
   ];
@@ -66,12 +66,10 @@
 
   # rtkit is optional but recommended
   security.rtkit.enable = true;
-  # Remove sound.enable or turn it off if you had it set previously, it seems to cause conflicts with pipewire
-  sound.enable = false;
   # Disable pulseaudio, it conflicts with pipewire too.
   hardware.pulseaudio.enable = false;
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   hardware.bluetooth.enable = true;
   hardware.logitech.wireless.enable = true;
@@ -113,7 +111,7 @@
     geoclue2.enable = true;
 
     udev.packages = with pkgs; [
-      gnome.gnome-settings-daemon
+      gnome-settings-daemon
       platformio # udev rules for platformio
       openocd # required by paltformio, see https://github.com/NixOS/nixpkgs/issues/224895
       android-udev-rules
@@ -144,7 +142,7 @@
       font-awesome
 
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       noto-fonts-extra
 

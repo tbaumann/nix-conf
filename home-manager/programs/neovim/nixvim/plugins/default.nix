@@ -59,8 +59,10 @@
       illuminate.enable = true;
       lastplace.enable = true;
       oil.enable = true;
-      surround.enable = true;
+      vim-surround.enable = true;
       which-key.enable = true;
+      #icons
+      web-devicons.enable = true;
     };
   };
 }

@@ -1,20 +1,18 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    stylix.url = "github:danth/stylix/release-24.05";
+    stylix.url = "github:danth/stylix";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      #url = "github:nix-community/home-manager/";
-      #      url = "github:tbaumann/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -40,9 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      #url = "github:nix-community/nixvim/";
-      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -149,7 +145,7 @@
         base16.nixosModule
         nix-index-database.nixosModules.nix-index
         nixvim.nixosModules.nixvim
-        selfhostblocks.nixosModules.${system}.default
+        #selfhostblocks.nixosModules.${system}.default
         #auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
         nixos-sbc.nixosModules.cache
