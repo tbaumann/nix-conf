@@ -33,7 +33,6 @@
       cores = 3;
     };
   };
-  boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
   networking.hostName = "zuse-klappi";
   system.stateVersion = "23.05"; # Did you read the comment?
 }

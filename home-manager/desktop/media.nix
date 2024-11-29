@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  catppuccin-cava,
   ...
 }:
 # media - control and enjoy audio/video
@@ -19,7 +18,6 @@
     amdgpu_top
 
     # video/audio tools
-    cava # for visualizing audio
     libva-utils
     vdpauinfo
     vulkan-tools

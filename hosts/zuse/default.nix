@@ -66,7 +66,7 @@
       cores = 3;
     };
   };
-  boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+  # FIXME broken boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
   boot.extraModprobeConfig = "options kvm_amd nested=1";
   environment.systemPackages = with pkgs; [
     liquidctl

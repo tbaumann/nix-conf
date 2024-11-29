@@ -72,8 +72,8 @@
     openvpn
     pv
     qmk-udev-rules
-    quickemu
-    quickgui
+    # FIXME Broken quickemu
+    # FIXME Broken quickgui
     sbctl
     spice
     spice-gtk
