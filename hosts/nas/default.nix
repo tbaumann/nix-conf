@@ -59,6 +59,9 @@
 
   programs.nix-index-database.comma.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "aspnetcore-runtime-wrapped-6.0.36"
+  ];
   nixarr = {
     enable = true;
     mediaDir = "/media";
