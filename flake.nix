@@ -7,7 +7,7 @@
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/d13ffb381c83b6139b9d67feff7addf18f8408fe";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";

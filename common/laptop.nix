@@ -3,6 +3,7 @@
   config,
   pkgs,
   environment,
+  lib,
   ...
 }: {
   imports = [
@@ -20,6 +21,7 @@
       criticalPowerAction = "PowerOff";
     };
   };
+  services.power-profiles-daemon.enable = lib.mkForce false;
   services.auto-cpufreq = {
     enable = true;
     settings = {

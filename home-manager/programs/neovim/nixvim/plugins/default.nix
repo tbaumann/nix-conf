@@ -34,9 +34,11 @@
     plugins = {
       #      auto-session.enable = true;
       commentary.enable = true;
+      /*
       copilot-lua.enable = true;
       copilot-lua.panel.enabled = false;
       copilot-lua.suggestion.enabled = false;
+      */
       coverage.enable = true;
       cursorline.enable = true;
       #      dashboard.enable = false;

@@ -12,7 +12,6 @@
     ./waybar.nix
     ./wlogout.nix
     ./xdg.nix
-    ./dt.nix
   ];
 
   home.packages = with pkgs; [
