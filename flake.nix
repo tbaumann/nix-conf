@@ -47,6 +47,7 @@
       url = "github:AstroNvim/AstroNvim/v3.37.8";
       flake = false;
     };
+    khanelivim.url = "github:tbaumann/khanelivim";
     /*
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
@@ -144,7 +145,7 @@
         stylix.nixosModules.stylix
         base16.nixosModule
         nix-index-database.nixosModules.nix-index
-        nixvim.nixosModules.nixvim
+        #nixvim.nixosModules.nixvim
         #selfhostblocks.nixosModules.${system}.default
         #auto-cpufreq.nixosModules.default
         microvm.nixosModules.host
@@ -161,7 +162,7 @@
             nix-index-database.hmModules.nix-index
             ragenix.homeManagerModules.default
             nix-flatpak.homeManagerModules.nix-flatpak
-            nixvim.homeManagerModules.nixvim
+            #nixvim.homeManagerModules.nixvim
             ghostty.homeModules.default
           ];
           home-manager.extraSpecialArgs = {

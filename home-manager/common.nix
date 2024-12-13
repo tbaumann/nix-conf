@@ -5,7 +5,7 @@
     ./programs
     ./services.nix
     ./flatpak.nix
-    ./dev
+    #    ./dev
   ];
 
   stylix.enable = true;
