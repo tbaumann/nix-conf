@@ -5,7 +5,8 @@
   environment,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     #    inputs.nixos-hardware.nixosModules.common-gpu-intel
@@ -24,8 +25,10 @@
     };
   };
 
-  #use the big box
-  nix.distributedBuilds = true;
+  systemd.tpm2.enable = false;
+  boot.initrd.systemd.tpm2.enable = false;
+  services.btrfs.autoScrub.enable = true;
+
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {

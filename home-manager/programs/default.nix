@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./beets.nix
     ./chromium.nix
@@ -7,7 +8,6 @@
     ./librewolf.nix
     ./neovim
     ./nushell.nix
-    ./obsidian.nix
     ./openscad.nix
     ./sip.nix
     ./ssh.nix
@@ -36,13 +36,17 @@
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
-    "x-scheme-handler/http" = ["firefox.desktop"];
-    "x-scheme-handler/https" = ["firefox.desktop"];
-    "text/html" = ["firefox.desktop"];
-    "application/pdf" = ["zathura.desktop" "evince.desktop" "firefox.desktop"];
+    "x-scheme-handler/http" = [ "firefox.desktop" ];
+    "x-scheme-handler/https" = [ "firefox.desktop" ];
+    "text/html" = [ "firefox.desktop" ];
+    "application/pdf" = [
+      "zathura.desktop"
+      "evince.desktop"
+      "firefox.desktop"
+    ];
   };
   xdg.mimeApps.associations.removed = {
-    "application/pdf" = ["chromium-browser.desktop"];
-    "image/png" = ["chromium-browser.desktop"];
+    "application/pdf" = [ "chromium-browser.desktop" ];
+    "image/png" = [ "chromium-browser.desktop" ];
   };
 }

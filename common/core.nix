@@ -3,7 +3,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./user-group.nix
   ];
@@ -25,7 +26,7 @@
     settings = {
       builders-use-substitutes = true;
       auto-optimise-store = true;
-      trusted-users = ["@wheel"];
+      trusted-users = [ "@wheel" ];
       substituters = [
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
@@ -34,22 +35,34 @@
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "selfhostblocks.cachix.org-1:H5h6Uj188DObUJDbEbSAwc377uvcjSFOfpxyCFP7cVs="
+        "nixbuild.net/FLELOM-1:ldxJ63EiVA7Om51j9FH/TNNookFcggx8Kv/uA8QpEG4="
       ];
       cores = 24;
       max-jobs = 24;
-      # access-tokens = "github.com=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";
+    };
+    sshServe = {
+      enable = true;
+      protocol = "ssh-ng";
+      keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMC+zeZIYgHWrRHFvz60tWfN3nuOlXt9JljGX7QhphcY root@nas"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHt8WgsMjrt+0FVzxAjv+5FwHfMZuSMfFdJy7Hr5X5sV root@zuse"
+      ];
     };
     buildMachines = [
       {
         hostName = "zuse.local";
         system = "x86_64-linux";
-        systems = ["x86_64-linux" "aarch64-linux"];
         protocol = "ssh-ng";
         # if the builder supports building for multiple architectures,
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
-        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-        mandatoryFeatures = [];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
       }
       {
         hostName = "nas.local";
@@ -59,8 +72,13 @@
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
         speedFactor = 3;
-        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-        mandatoryFeatures = [];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
       }
       {
         hostName = "router.local";
@@ -70,8 +88,12 @@
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
         speedFactor = 2;
-        supportedFeatures = ["nixos-test" "benchmark" "kvm"];
-        mandatoryFeatures = [];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
       }
     ];
   };
@@ -97,7 +119,7 @@
   time.timeZone = "Africa/Casablanca";
 
   i18n.defaultLocale = "en_GB.UTF-8";
-  i18n.supportedLocales = ["all"];
+  i18n.supportedLocales = [ "all" ];
   console = {
     keyMap = "us";
   };
@@ -119,6 +141,7 @@
     inputs.ragenix.packages.x86_64-linux.default
     nix-output-monitor
     nixpkgs-review
+    nixos-rebuild
     parallel
     ripgrep
     rsync
@@ -131,8 +154,17 @@
   services = {
     prometheus.exporters.node = {
       enable = true;
-      enabledCollectors = ["systemd" "softirqs" "tcpstat" "wifi" "ethtool" "interrupts" "zoneinfo" "network_route"];
-      extraFlags = ["--collector.filesystem.fs-types-exclude=tmpfs,overlay,erofs"];
+      enabledCollectors = [
+        "systemd"
+        "softirqs"
+        "tcpstat"
+        "wifi"
+        "ethtool"
+        "interrupts"
+        "zoneinfo"
+        "network_route"
+      ];
+      extraFlags = [ "--collector.filesystem.fs-types-exclude=tmpfs,overlay,erofs" ];
     };
     promtail = {
       enable = true;
@@ -160,27 +192,27 @@
             };
             relabel_configs = [
               {
-                source_labels = ["__journal__systemd_unit"];
+                source_labels = [ "__journal__systemd_unit" ];
                 target_label = "unit";
               }
               {
-                source_labels = ["__journal__hostname"];
+                source_labels = [ "__journal__hostname" ];
                 target_label = "hostname";
               }
               {
-                source_labels = ["__journal_syslog_identifier"];
+                source_labels = [ "__journal_syslog_identifier" ];
                 target_label = "syslog_identifier";
               }
               {
                 # A priority value between 0 ("emerg") and 7 ("debug") formatted as a decimal string.
                 # This field is compatible with syslog's priority concept.
-                source_labels = ["__journal_priority"];
+                source_labels = [ "__journal_priority" ];
                 target_label = "priority";
               }
               {
                 # How the entry was received by the journal service. Valid transports are:
                 #  audit, driver, syslog, journal, stdout, kernel
-                source_labels = ["__journal__transport"];
+                source_labels = [ "__journal__transport" ];
                 target_label = "transport";
               }
             ];
@@ -223,9 +255,9 @@
   services.openssh.enable = true;
 
   users.groups = {
-    "plugdev" = {};
-    "netdev" = {};
-    "pulse" = {};
-    "power" = {};
+    "plugdev" = { };
+    "netdev" = { };
+    "pulse" = { };
+    "power" = { };
   };
 }

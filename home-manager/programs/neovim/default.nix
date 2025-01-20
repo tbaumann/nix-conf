@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  astronvim,
   lib,
   ...
 }: {

@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
   ];
 
@@ -16,6 +17,7 @@
       passwordFile = config.age.secrets.restic-password.path;
       paths = [
         "/home/tilli/"
+        "/home/chaimae/"
       ];
       extraBackupArgs = [
         "--tag home"
@@ -27,6 +29,13 @@
         OnCalendar = "daily";
         Persistent = true;
       };
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 5"
+        "--keep-monthly 12"
+        "--keep-yearly 2"
+        "--keep-tag archive"
+      ];
       exclude = [
         "/home/tilli/.mozilla/firefox/*/cache2"
         "/home/tilli/.mozilla/firefox/*/OfflineCache"
@@ -111,23 +120,47 @@
         "/home/tilli/.mozilla/firefox/**/minidumps"
         "/home/tilli/git/uhernfr/powerdns-docker/mysql-data"
         "node_modules"
+        "/home/chaimae/.mozilla/firefox/*/cache2"
+        "/home/chaimae/.mozilla/firefox/*/OfflineCache"
+        "/home/chaimae/.mozilla/firefox/*/safebrowsing"
+        "/home/chaimae/.mozilla/firefox/*/startupCache"
+        "/home/chaimae/.mozilla/firefox/*/thumbnails"
+        "/home/chaimae/.mozilla/firefox/*/bookmarkbackups"
+        "/home/chaimae/.mozilla/firefox/*/sessionstore-backups"
+        "/home/chaimae/.cache/*"
+        "/home/chaimae/.local/share/Trash/*"
+        "/home/chaimae/.rescript/lock/*"
+        "/home/chaimae/.gvfs"
+        "/home/chaimae/.dbus"
+        "/home/chaimae/.local/share/gvfs-metadata"
+        "/home/chaimae/restic"
+        "/home/chaimae/cache"
+        "/home/chaimae/Backup"
       ];
     };
-    garage = {
+    nas = {
       passwordFile = config.age.secrets.restic-password.path;
-      environmentFile = config.age.secrets.restic-garage-credentials.path;
       paths = [
         "/home/tilli/"
+        "/home/chaimae/"
       ];
       extraBackupArgs = [
         "--tag home"
         "--tag nixos"
+        "--verbose"
       ];
-      repository = "s3:s3.m.upthedownstair.com/tb-restic";
+      repository = "rest:http://tilli@nas.local:8000/";
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
       };
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 5"
+        "--keep-monthly 12"
+        "--keep-yearly 2"
+        "--keep-tag archive"
+      ];
       exclude = [
         "/home/tilli/.mozilla/firefox/*/cache2"
         "/home/tilli/.mozilla/firefox/*/OfflineCache"
@@ -212,7 +245,28 @@
         "/home/tilli/.mozilla/firefox/**/minidumps"
         "/home/tilli/git/uhernfr/powerdns-docker/mysql-data"
         "node_modules"
+        "/home/chaimae/.mozilla/firefox/*/cache2"
+        "/home/chaimae/.mozilla/firefox/*/OfflineCache"
+        "/home/chaimae/.mozilla/firefox/*/safebrowsing"
+        "/home/chaimae/.mozilla/firefox/*/startupCache"
+        "/home/chaimae/.mozilla/firefox/*/thumbnails"
+        "/home/chaimae/.mozilla/firefox/*/bookmarkbackups"
+        "/home/chaimae/.mozilla/firefox/*/sessionstore-backups"
+        "/home/chaimae/.cache/*"
+        "/home/chaimae/.local/share/Trash/*"
+        "/home/chaimae/.rescript/lock/*"
+        "/home/chaimae/.gvfs"
+        "/home/chaimae/.dbus"
+        "/home/chaimae/.local/share/gvfs-metadata"
+        "/home/chaimae/restic"
+        "/home/chaimae/cache"
+        "/home/chaimae/Backup"
       ];
     };
+  };
+  services.prometheus.exporters.restic = {
+    enable = true;
+    repository = "${config.services.restic.backups.rsync_net.repository}";
+    passwordFile = "${config.services.restic.backups.rsync_net.passwordFile}";
   };
 }

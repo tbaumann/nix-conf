@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.homepage-dashboard = {
     enable = true;
     settings = {
@@ -126,7 +127,7 @@
               widget = {
                 type = "jellyseerr";
                 url = "http://nas.local:5055";
-                key = "MTcyODQxNDcwMDk5MjBmMTViOTk3LTNmNzMtNDA5OS1iMjNlLTMyZGUzNDNhODYwNg==";
+                key = "MTczNjQyOTEyNzg2MWQzMTEyZTMyLTJkMTAtNDJiYy1iYzE5LTEyN2VmNzc1MmYyMQ==";
               };
             };
           }

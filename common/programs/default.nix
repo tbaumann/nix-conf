@@ -22,6 +22,6 @@
   };
   stylix.targets.fish.enable = false;
   services = {
-    boinc.enable = false;
+    boinc.enable = true;
   };
 }
