@@ -4,8 +4,7 @@
   config,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../common/core.nix
@@ -20,54 +19,15 @@
       network = "home"; # Use the network we define below
     };
   };
-  nix = {
-    distributedBuilds = true;
-    settings = {
-      /*
-            substituters = [
-              "ssh://eu.nixbuild.net"
-        ];
-      */
-      trusted-public-keys = [
-        "nixbuild.net/FLELOM-1:ldxJ63EiVA7Om51j9FH/TNNookFcggx8Kv/uA8QpEG4="
-      ];
-    };
-    buildMachines = [
-      {
-        hostName = "eu.nixbuild.net";
-        system = "x86_64-linux";
-        maxJobs = 100;
-        supportedFeatures = [
-          "benchmark"
-          "big-parallel"
-        ];
-      }
-    ];
-  };
 
-  systemd.sysusers.enable = false; # FIXME https://github.com/ryantm/agenix/issues/238
-  networking = {
-    useNetworkd = true;
-    nameservers = [
-      "8.8.8.8"
-      "1.1.1.1"
-      "1.0.0.1"
-      "8.8.4.4"
-    ];
-    interfaces.end0 = {
-      useDHCP = false;
-      ipv4.addresses = [
-        {
-          address = "192.168.1.2";
-          prefixLength = 24;
-        }
-      ];
-    };
-    defaultGateway = {
-      address = "192.168.1.1";
-      interface = "end0";
-    };
+  systemd.sysusers.enable = false; #FIXME https://github.com/ryantm/agenix/issues/238
+  systemd.network.enable = true;
+  systemd.network.networks."10-lan" = {
+    name = "end0";
+    DHCP = "ipv4";
+    dns = ["8.8.8.8" "1.1.1.1" "1.0.0.1" "8.8.4.4"];
   };
+  networking.useDHCP = false;
 
   services.openssh.enable = true;
   programs.argon.eon = {
@@ -78,14 +38,7 @@
     settings = {
       oled = {
         switchDuration = 10;
-        screenList = [
-          "clock"
-          "cpu"
-          "storage"
-          "ram"
-          "temp"
-          "ip"
-        ];
+        screenList = ["clock" "cpu" "storage" "ram" "temp" "ip"];
       };
       fanspeed = [
         {
@@ -103,7 +56,6 @@
       ];
     };
   };
-  services.btrfs.autoScrub.enable = true;
 
   programs.nix-index-database.comma.enable = true;
 
@@ -117,10 +69,7 @@
     enable = true;
     mediaDir = "/media";
     stateDir = "/media/.state/nixarr";
-    mediaUsers = [
-      "tilli"
-      "chaimae"
-    ];
+    mediaUsers = ["tilli" "chaimae"];
 
     jellyfin.enable = true;
     transmission = {
@@ -153,14 +102,6 @@
   services.jellyseerr.enable = true;
   #  systemd.services.jellyseerr.environment.LOG_LEVEL = "warning";
 
-  services.restic.server = {
-    enable = true;
-    prometheus = true;
-    extraFlags = [
-      "--no-auth"
-    ];
-    dataDir = "/media/restic";
-  };
   environment.systemPackages = [
     pkgs.recyclarr
     pkgs.i2c-tools
@@ -200,7 +141,7 @@
         job_name = "ntp-rs";
         static_configs = [
           {
-            targets = [ "localhost:9975" ];
+            targets = ["localhost:9975"];
           }
         ];
       }
@@ -215,10 +156,6 @@
               "zuse.local:${toString config.services.prometheus.exporters.node.port}"
               "router.local:${toString config.services.prometheus.exporters.node.port}"
               "zuse-klappi.local:${toString config.services.prometheus.exporters.node.port}"
-
-              "zuse.local:${toString config.services.prometheus.exporters.restic.port}"
-              "localhost:${toString config.services.prometheus.exporters.restic.port}"
-              "zuse-klappi.local:${toString config.services.prometheus.exporters.restic.port}"
             ];
           }
         ];
@@ -226,6 +163,7 @@
     ];
   };
 
+  /**/
   services.loki = {
     enable = true;
     configuration = {
@@ -299,17 +237,17 @@
   };
 
   /*
-    services.immich = {
-      port = 2282;
-      host = "nas.local";
-      enable = true;
-      mediaLocation = "${config.nixarr.mediaDir}/immich";
-      machine-learning.enable = false;
-    };
-    services.prometheus.exporters.postgres = {
-      enable = true;
-      runAsLocalSuperUser = true;
-    };
+  services.immich = {
+    port = 2282;
+    host = "nas.local";
+    enable = true;
+    mediaLocation = "${config.nixarr.mediaDir}/immich";
+    machine-learning.enable = false;
+  };
+  services.prometheus.exporters.postgres = {
+    enable = true;
+    runAsLocalSuperUser = true;
+  };
   */
   services.resolved.enable = true;
   services.resolved.dnssec = "false";
