@@ -17,7 +17,7 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
@@ -26,6 +26,8 @@
       libvdpau-va-gl
     ];
   };
+  services.btrfs.autoScrub.enable = true;
+  hardware.sensor.iio.enable = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-partlabel/disk-disk1-root";
@@ -51,12 +53,20 @@
     options = ["subvol=DATA/persist"];
   };
 
+  /*
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-partlabel/disk-disk1-root";
+    fsType = "btrfs";
+    options = ["subvol=swap"];
+  };
+  */
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/disk-disk1-ESP";
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [{device = "/swap/swapfile";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

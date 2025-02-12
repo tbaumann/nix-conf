@@ -37,12 +37,6 @@
     tailscale-key = {
       file = ../secrets/tailscale-key.age;
     };
-    stack_baumann-cbxgate_cbxnet_de_ovpn = {
-      file = ../secrets/stack_baumann-cbxgate.cbxnet.de.ovpn.age;
-    };
-    stack_baumann-cbxgate_cbxnet_de-password = {
-      file = ../secrets/stack_baumann-cbxgate_cbxnet_de-password.age;
-    };
     nix-access-tokens-github = {
       file = ../secrets/nix-access-tokens-github.age;
       mode = "644";

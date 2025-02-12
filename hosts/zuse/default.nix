@@ -5,8 +5,7 @@
   environment,
   lib,
   ...
-}:
-{
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
@@ -19,22 +18,22 @@
     ../../common/core-pc.nix
   ];
   /*
-    shb.arr = {
-      sonarr.enable = true;
-      sonarr.settings.ApiKey.source = config.age.secrets.arr-api-key.path;
-      sonarr.subdomain = "radarr";
-      sonarr.domain = "rak.baumann.ma";
-    };
-    users.groups.media = {};
-    shb.monitoring = {
-      enable = true;
-      subdomain = "grafana";
-      domain = "rak.baumann.ma";
-      contactPoints = [ "tilman.baumann@tilman.baumann.name" ];
-      lokiMajorVersion = 3;
-     # adminPassword = config.age.secrets.grafana-password;
-     # secretKey = config.age.secrets.grafana-secret;
-    };
+  shb.arr = {
+    sonarr.enable = true;
+    sonarr.settings.ApiKey.source = config.age.secrets.arr-api-key.path;
+    sonarr.subdomain = "radarr";
+    sonarr.domain = "rak.baumann.ma";
+  };
+  users.groups.media = {};
+  shb.monitoring = {
+    enable = true;
+    subdomain = "grafana";
+    domain = "rak.baumann.ma";
+    contactPoints = [ "tilman.baumann@tilman.baumann.name" ];
+    lokiMajorVersion = 3;
+   # adminPassword = config.age.secrets.grafana-password;
+   # secretKey = config.age.secrets.grafana-secret;
+  };
   */
   topology.self = {
     hardware.info = "24 core Threadripper workstation";
@@ -43,10 +42,9 @@
     };
   };
 
-  services.esphome.enable = true;
   # BTRFS stuff
   services.btrfs.autoScrub.enable = true;
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   services.hardware.openrgb = {
     enable = true;

@@ -37,7 +37,7 @@
     polychromatic
     pre-commit
     razergenie
-    rink
+    # rink
     scc
     slurp
     swaylock-effects

@@ -39,11 +39,6 @@
             devices = ["zuse" "zuse-klappi"];
             ignorePerms = false;
           };
-          "git" = {
-            path = "/home/tilli/git";
-            devices = ["zuse" "zuse-klappi"];
-            ignorePerms = false;
-          };
           "Music" = {
             path = "/home/tilli/Music";
             devices = ["zuse" "zuse-klappi"];

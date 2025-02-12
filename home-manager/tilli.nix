@@ -57,19 +57,6 @@
         '')
     ];
   };
-  programs.openstackclient.enable = true;
-  programs.ssh.matchBlocks.grafanacbx = {
-    hostname = "212.87.48.34";
-    user = "stack_baumann";
-    localForwards = [
-      {
-        bind.port = 12345;
-        host.address = "10.172.4.100";
-        host.port = 3000;
-      }
-    ];
-  };
-
   programs.git.enable = true;
   programs.git.userEmail = "tilman@baumann.name";
   programs.git.userName = "Tilman Baumann";

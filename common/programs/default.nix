@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    ./nix-alien.nix
     ./git.nix
   ];
 
@@ -22,6 +21,6 @@
   };
   stylix.targets.fish.enable = false;
   services = {
-    boinc.enable = true;
+    boinc.enable = false;
   };
 }

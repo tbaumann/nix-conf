@@ -35,19 +35,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    #    hplip
+    appimage-run
+    ghostscript
+    kanshi
+    libreoffice
     psmisc # killall/pstree/prtstat/fuser/...
     pulseaudio # provides `pactl`, which is required by some apps(e.g. sonic-pi)
-    libreoffice
-    wev
-    thunderbird
     restique
-    kanshi
-    wine
-    zathura
-    ghostscript
-    #    hplip
     simple-scan
     speedtest-cli
+    thunderbird
+    wev
+    wine
+    zathura
     zoom-us
   ];
 
@@ -101,8 +102,6 @@
     printing.enable = true;
     printing.cups-pdf.enable = true;
 
-    # https://flatpak.org/setup/NixOS
-    flatpak.enable = true;
 
     dbus.packages = [pkgs.gcr];
     geoclue2.enable = true;
@@ -149,15 +148,6 @@
       source-han-serif
 
       nerdfonts
-      /*
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "JetBrainsMono"
-          "Iosevka"
-        ];
-      })
-      */
     ];
   };
 

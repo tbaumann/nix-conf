@@ -13,7 +13,7 @@
   programs.fuzzel.enable = true;
   programs.fuzzel.settings = {
     main = {
-      terminal = "${pkgs.foot}/bin/foot";
+      terminal = "${pkgs.ghostty}/bin/ghostty";
     };
   };
   programs.i3status-rust.enable = true;
@@ -155,6 +155,9 @@
       "indicator-radius" = "100";
     };
   };
+
+  programs.iio-sway.enable = true;
+
   wayland.windowManager.sway = {
     enable = true;
     package = null;

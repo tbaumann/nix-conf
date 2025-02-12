@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     #./vscode.nix
     ./gtk.nix
@@ -25,9 +24,9 @@
   programs.zathura.enable = true;
 
   /*
-    services.syncthing.tray = true;
-    systemd.user.services.syncthingtray.Service.ExecStart = pkgs.lib.mkForce
-      "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 5; ${pkgs.syncthingtray-minimal}/bin/syncthingtray'";
+  services.syncthing.tray = true;
+  systemd.user.services.syncthingtray.Service.ExecStart = pkgs.lib.mkForce
+    "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 5; ${pkgs.syncthingtray-minimal}/bin/syncthingtray'";
   */
   stylix.targets.kde.enable = false;
   programs.wpaperd = {

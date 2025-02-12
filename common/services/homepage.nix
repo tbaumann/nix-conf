@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   services.homepage-dashboard = {
     enable = true;
     settings = {
