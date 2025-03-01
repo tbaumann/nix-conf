@@ -59,5 +59,10 @@
       file = ../secrets/grafana-secret.age;
       owner = "grafana";
     };
+    my-nixbuild-key = {
+      file = ../secrets/my-nixbuild-key.age;
+      mode = "600";
+      owner = "tilli";
+    };
   };
 }

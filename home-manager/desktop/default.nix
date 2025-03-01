@@ -17,11 +17,17 @@
   home.packages = with pkgs; [
     # misc
     flameshot
-    joplin-desktop
     syncthingtray-minimal
     sway-audio-idle-inhibit
   ];
   programs.zathura.enable = true;
+  programs.joplin-desktop = {
+    enable = true;
+    sync = {
+      target = "joplin-cloud";
+      interval = "30m";
+    };
+  };
 
   /*
   services.syncthing.tray = true;

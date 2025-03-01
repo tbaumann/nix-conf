@@ -174,6 +174,7 @@
       };
       modifier = "Mod4";
       terminal = "foot";
+      #terminal = "${pkgs.ghostty}/bin/ghostty";
       menu = "${pkgs.fuzzel}/bin/fuzzel";
       input = {
         "type:pointer" = {

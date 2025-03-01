@@ -1,18 +1,19 @@
 {pkgs, ...}: {
   imports = [
+    #./neovim
+    #./starship.nix
     ./beets.nix
     ./chromium.nix
     ./ente.nix
     ./fish.nix
     ./kicad.nix
     ./librewolf.nix
-    #./neovim
-    ./nvf.nix
     ./nushell.nix
+    ./nvf.nix
     ./openscad.nix
     ./sip.nix
     ./ssh.nix
-    #./starship.nix
+    # FIXME only works with h-m unstable right now ./syncthing.nix
     ./terminal
   ];
 
@@ -32,7 +33,7 @@
 
   home.packages = with pkgs; [
     croc
-    # FIXME  still in  unstable wush
+    wush
   ];
 
   xdg.mimeApps.enable = true;

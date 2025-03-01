@@ -25,8 +25,7 @@
     swappy
     wlr-randr
   ];
-  /*
-     FIXME https://github.com/NixOS/nixpkgs/pull/335625 not merged yet
+
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors = {
     sway = {
@@ -35,5 +34,4 @@
       binPath = "/run/current-system/sw/bin/sway";
     };
   };
-  */
 }

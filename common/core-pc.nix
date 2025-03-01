@@ -44,6 +44,7 @@
     printing.enable = true;
     udisks2.enable = true;
   };
+  /*
   networking.bridges = {
     lan = {
       interfaces = [
@@ -51,6 +52,7 @@
       ];
     };
   };
+  */
   environment.systemPackages = with pkgs; [
     btop
     dfu-util
@@ -72,8 +74,8 @@
     openvpn
     pv
     qmk-udev-rules
-    # FIXME Broken quickemu
-    # FIXME Broken quickgui
+    quickemu
+    quickgui
     sbctl
     spice
     spice-gtk

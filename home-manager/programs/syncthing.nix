@@ -1,15 +1,16 @@
-{inputs, ...}: {
+{...}: {
   services = {
     syncthing = {
       enable = true;
-      user = "tilli";
-      configDir = "/home/tilli/.config/syncthing"; # Folder for Syncthing's settings and keys
-      dataDir = "/home/tilli/.config/syncthing/db"; # Folder for Syncthing's database
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       settings = {
         gui.enabled = true; # Enable the WebUI
-        options.localAnnounceEnabled = true;
-        options.urAccepted = -1;
+        tray.enable = true;
+        options = {
+          localAnnounceEnabled = true;
+          urAccepted = -1;
+          relaysEnabled = true;
+        };
         # FIXME information leak. Ue AGE
         devices = {
           "zuse" = {id = "GHTDDYR-6RQRJUI-5A2Z5LO-3ST4SUQ-44VQWBW-FBV73TI-WIU3VWC-3T2RKQX";};
@@ -19,49 +20,42 @@
         overrideFolders = true; # overrides any folders added or deleted through the WebUI
         folders = {
           "Documents" = {
-            # Name of folder in Syncthing, also the folder ID
-            path = "/home/tilli/Documents"; # Which folder to add to Syncthing
+            path = "~/Documents"; # Which folder to add to Syncthing
             devices = ["zuse" "zuse-klappi"];
           };
           "Downloads" = {
-            path = "/home/tilli/Downloads/";
+            path = "~/Downloads/";
             devices = ["zuse" "zuse-klappi"];
           };
           "Pictures" = {
-            path = "/home/tilli/Pictures/";
+            path = "~/Pictures/";
             devices = ["zuse" "zuse-klappi"];
           };
           "Phone Camera" = {
-            path = "/home/tilli/Pictures/Phone";
+            path = "~/Pictures/Phone";
             devices = ["zuse" "phone"];
           };
           "Music" = {
-            path = "/home/tilli/Music";
+            path = "~/Music";
             devices = ["zuse" "zuse-klappi"];
             autoNormalize = false;
           };
           "Phone Music" = {
-            path = "/home/tilli/Music/Phone";
+            path = "~/Music/Phone";
             devices = ["zuse" "phone"];
             autoNormalize = false;
           };
           "Videos" = {
-            path = "/home/tilli/Videos";
+            path = "~/Videos";
             devices = ["zuse" "zuse-klappi"];
             autoNormalize = false;
           };
           "Wallpapers" = {
-            path = "/home/tilli/wallpapers";
+            path = "~/wallpapers";
             devices = ["zuse" "zuse-klappi"];
           };
         };
       };
     };
   };
-  # Syncthing ports: 8384 for remote access to GUI
-  # 22000 TCP and/or UDP for sync traffic
-  # 21027/UDP for discovery
-  # source: https://docs.syncthing.net/users/firewall.html
-  networking.firewall.allowedTCPPorts = [8384 22000];
-  networking.firewall.allowedUDPPorts = [22000 21027];
 }

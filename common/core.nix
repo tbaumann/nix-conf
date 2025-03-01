@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./user-group.nix
+    ./nixbuild.nix
   ];
   nix = {
     daemonCPUSchedPolicy = "idle";
@@ -125,7 +126,7 @@
     bcachefs-tools
     btop
     nix-index
-    # FIXME next version wcurl
+    wcurl
   ];
 
   services = {
@@ -213,9 +214,6 @@
     neovim.defaultEditor = true;
     vim.enable = true;
   };
-
-  # FUCK Morocco
-  networking.enableIPv6 = false;
 
   networking.firewall.enable = false;
 

@@ -51,7 +51,7 @@
           enable = true;
         };
         spellcheck = {
-          enable = true;
+          enable = false;
         };
 
         lsp = {
@@ -87,7 +87,7 @@
           java.enable = false;
           kotlin.enable = false;
           ts.enable = false;
-          go.enable = false;
+          go.enable = true;
           lua.enable = false;
           zig.enable = false;
           python.enable = true;
@@ -210,7 +210,7 @@
           motion = {
             hop.enable = true;
             leap.enable = true;
-            precognition.enable = true;
+            precognition.enable = false;
           };
 
           images = {

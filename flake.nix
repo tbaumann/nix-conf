@@ -7,14 +7,12 @@
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    #stylix.url = "github:danth/stylix/d13ffb381c83b6139b9d67feff7addf18f8408fe";
     stylix.url = "github:danth/stylix/release-24.11";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
-
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-networkmanager-profiles = {
@@ -22,7 +20,6 @@
       flake = false;
     };
     ragenix = {
-      #url = "github:ryantm/agenix";
       url = "github:yaxitech/ragenix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -42,30 +39,14 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # AstroNvim is an aesthetic and feature-rich neovim config.
-    astronvim = {
-      url = "github:AstroNvim/AstroNvim/v3.37.8";
-      flake = false;
-    };
     khanelivim.url = "github:tbaumann/khanelivim";
     nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
-    /*
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    */
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
     waybar_media_display.url = "github:tbaumann/waybar_media_display";
     iio-sway.url = "github:tbaumann/iio-sway";
-    #    nixvim-config.url = "github:mikaelfangel/nixvim-config";
-    nixvim-kickstart = {
-      url = "github:JMartJonesy/kickstart.nixvim";
-      flake = false;
-    };
 
     nixarr.url = "github:rasmus-kirk/nixarr";
     # argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
@@ -104,6 +85,10 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     selfhostblocks.url = "github:ibizaman/selfhostblocks";
+    ghostty-shaders = {
+      url = "github:hackr-sh/ghostty-shaders";
+      flake = false;
+    };
   };
   outputs = {self, ...} @ inputs:
     with inputs; let

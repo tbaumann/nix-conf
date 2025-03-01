@@ -24,4 +24,5 @@ in {
   "arr-api-key.age".publicKeys = users ++ systems;
   "grafana-password.age".publicKeys = users ++ systems;
   "grafana-secret.age".publicKeys = users ++ systems;
+  "my-nixbuild-key.age".publicKeys = users ++ systems;
 }
