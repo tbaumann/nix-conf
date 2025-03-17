@@ -117,6 +117,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    bat
     inputs.ragenix.packages.x86_64-linux.default
     nix-output-monitor
     nixpkgs-review
@@ -225,5 +226,10 @@
     "netdev" = {};
     "pulse" = {};
     "power" = {};
+  };
+  environment.variables = {
+    # fix https://github.com/NixOS/nixpkgs/issues/238025
+    TZ = "${config.time.timeZone}";
+    PAGER = "${pkgs.bat}/bin/bat";
   };
 }

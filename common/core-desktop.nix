@@ -102,7 +102,6 @@
     printing.enable = true;
     printing.cups-pdf.enable = true;
 
-
     dbus.packages = [pkgs.gcr];
     geoclue2.enable = true;
 
@@ -149,10 +148,5 @@
 
       nerdfonts
     ];
-  };
-
-  environment.variables = {
-    # fix https://github.com/NixOS/nixpkgs/issues/238025
-    TZ = "${config.time.timeZone}";
   };
 }
