@@ -11,7 +11,7 @@
     #./hyprland.nix
     ./budgie.nix
     ./sway.nix
-    ./wpaperd.nix
+    # FIXME remove file if no longer needed ./wpaperd.nix
     ./waybar.nix
     ./gnome.nix #Gnome xdg portal grashes. Don't need it anyway.
   ];
@@ -28,7 +28,7 @@
     };
   };
   stylix.image = pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
   stylix.targets.nixos-icons.enable = true;
   stylix.targets.plymouth.enable = true;
   stylix.targets.plymouth.logoAnimated = true;

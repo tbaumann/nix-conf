@@ -9,7 +9,6 @@
   #Global theming off
   stylix.targets.sway.enable = false;
 
-  #stylix.targets.fuzzel.enable = true;
   programs.fuzzel.enable = true;
   programs.fuzzel.settings = {
     main = {
@@ -115,15 +114,18 @@
     events = [
       {
         event = "before-sleep";
-        command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+        #command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+        command = "${pkgs.hyprlock}/bin/hyprlock";
       }
       {
         event = "lock";
-        command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
+        #command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
+        command = "${pkgs.hyprlock}/bin/hyprlock --immediate";
       }
       {
         event = "unlock";
-        command = "pkill -SIGUSR1 swaylock";
+        #command = "pkill -SIGUSR1 swaylock";
+        command = "pkill -SIGUSR1 hyprlock";
       }
       {
         event = "after-resume";
@@ -133,7 +135,8 @@
     timeouts = [
       {
         timeout = 1800;
-        command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+        #command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+        command = "${pkgs.hyprlock}/bin/hyprlock";
       }
       {
         timeout = 2000;
@@ -157,6 +160,47 @@
   };
 
   programs.iio-sway.enable = true;
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      "$font" = "JetBrainsMono Nerd Font";
+      grace = 3;
+      # TIME
+      label = [
+        {
+          text = ''cmd[update:30000] echo "$(date +"%R")"'';
+          font_size = 90;
+          font_family = "$font";
+          position = "-30, 0";
+          halign = "right";
+          valign = "top";
+        }
+
+        # DATE
+        {
+          text = ''cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"'';
+          font_size = 25;
+          font_family = "$font";
+          position = "-30, -150";
+          halign = "right";
+          valign = "top";
+        }
+      ];
+
+      # USER AVATAR
+
+      image = [
+        {
+          path = "~/.face";
+          size = 100;
+
+          position = "0, 100";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+    };
+  };
 
   wayland.windowManager.sway = {
     enable = true;
@@ -164,7 +208,7 @@
     wrapperFeatures.base = true;
     wrapperFeatures.gtk = true;
     swaynag.enable = true;
-    #systemd.xdgAutostart = true;
+    systemd.xdgAutostart = true;
 
     config = {
       output = {
@@ -173,8 +217,8 @@
         };
       };
       modifier = "Mod4";
-      terminal = "foot";
-      #terminal = "${pkgs.ghostty}/bin/ghostty";
+      #terminal = "foot";
+      terminal = "${pkgs.ghostty}/bin/ghostty";
       menu = "${pkgs.fuzzel}/bin/fuzzel";
       input = {
         "type:pointer" = {
@@ -201,7 +245,6 @@
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
         }
       ];
-
       colors = let
         # https://github.com/catppuccin/i3/blob/main/themes/catppuccin-mocha
         rosewater = "#f5e0dc";
@@ -268,7 +311,6 @@
         };
         background = "${sapphire}";
       };
-
       keybindings = let
         terminal = config.wayland.windowManager.sway.config.terminal;
         menu = config.wayland.windowManager.sway.config.menu;
@@ -352,7 +394,8 @@
         #        "Shift+Print" = "~/.config/hypr/scripts/screenshot --now";
         "Ctrl+Alt+Delete" = "exit";
         "F12" = "exec ${pkgs.wlogout}/bin/wlogout";
-        "${modifier}+Shift+l" = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
+        #"${modifier}+Shift+l" = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
+        "${modifier}+Shift+l" = "${pkgs.hyprlock}/bin/hyprlock --immediate";
       };
       window.commands = [
         {

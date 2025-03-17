@@ -17,10 +17,11 @@
   #   1. ~/.gtkrc-2.0
   #   2. ~/.config/gtk-3.0/settings.ini
   #   3. ~/.config/gtk-4.0/settings.ini
+  stylix.targets.gtk.enable = false;
   gtk = {
     enable = true;
 
-    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    #gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
     /*
     iconTheme = {

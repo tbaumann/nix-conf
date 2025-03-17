@@ -39,11 +39,11 @@
         name = "pure";
         src = pkgs.fishPlugins.pure.src;
       }
-      */
       {
         name = "bobthefisher";
         src = pkgs.fishPlugins.bobthefisher.src;
       }
+      */
     ];
     functions = {
       fish_greeting = "echo ;";
@@ -54,4 +54,8 @@
     recursive = true;
   };
   stylix.targets.fish.enable = false;
+  programs.oh-my-posh = {
+    enable = true;
+    useTheme = "catppuccin_mocha";
+  };
 }

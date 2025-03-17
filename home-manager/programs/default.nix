@@ -8,6 +8,7 @@
     ./fish.nix
     ./kicad.nix
     ./librewolf.nix
+    ./librewolf.nix
     ./nushell.nix
     ./nvf.nix
     ./openscad.nix
