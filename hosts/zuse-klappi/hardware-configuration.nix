@@ -29,6 +29,13 @@
   services.btrfs.autoScrub.enable = true;
   hardware.sensor.iio.enable = true;
 
+  services.tlp = {
+    enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0 = 60;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+  };
   fileSystems."/" = {
     device = "/dev/disk/by-partlabel/disk-disk1-root";
     fsType = "btrfs";

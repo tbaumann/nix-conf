@@ -49,8 +49,8 @@
     iio-sway.url = "github:tbaumann/iio-sway";
 
     nixarr.url = "github:rasmus-kirk/nixarr";
-    # argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
-    argon40-nix.url = "/home/tilli/git/argon40-nix";
+    argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
+    #argon40-nix.url = "/home/tilli/git/argon40-nix";
 
     ucodenix.url = "github:e-tho/ucodenix";
 
