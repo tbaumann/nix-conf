@@ -44,15 +44,6 @@
     printing.enable = true;
     udisks2.enable = true;
   };
-  /*
-  networking.bridges = {
-    lan = {
-      interfaces = [
-        "eno1"
-      ];
-    };
-  };
-  */
   environment.systemPackages = with pkgs; [
     btop
     dfu-util

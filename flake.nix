@@ -1,7 +1,12 @@
 {
+  description = "My flake for everything";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    clan = {
+      url = "git+https://git.clan.lol/clan/clan-core";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
@@ -23,6 +28,7 @@
       url = "github:yaxitech/ragenix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    terranix.url = "github:terranix/terranix";
 
     # anyrun - a wayland launcher
     anyrun = {
@@ -34,12 +40,6 @@
       url = "github:Narice/wpaperd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    khanelivim.url = "github:tbaumann/khanelivim";
     nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
@@ -84,13 +84,12 @@
     nix-topology.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    selfhostblocks.url = "github:ibizaman/selfhostblocks";
     ghostty-shaders = {
       url = "github:hackr-sh/ghostty-shaders";
       flake = false;
     };
   };
-  outputs = {self, ...} @ inputs:
+  outputs = inputs @ {flake-parts, ...}:
     with inputs; let
       pkgs = import nixpkgs {
         #inherit system;
@@ -106,9 +105,6 @@
           base16.nixosModule
           nix-index-database.nixosModules.nix-index
           nvf.nixosModules.default
-          #nixvim.nixosModules.nixvim
-          #selfhostblocks.nixosModules.${system}.default
-          #auto-cpufreq.nixosModules.default
           microvm.nixosModules.host
           nixos-sbc.nixosModules.cache
           nix-topology.nixosModules.default
@@ -124,7 +120,6 @@
               ragenix.homeManagerModules.default
               nix-flatpak.homeManagerModules.nix-flatpak
               nvf.homeManagerModules.default
-              #nixvim.homeManagerModules.nixvim
               iio-sway.homeManagerModules.default
             ];
             home-manager.extraSpecialArgs = {
@@ -143,65 +138,77 @@
             inherit inputs;
           };
         };
-    in {
-      formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
-      nixosConfigurations = {
-        zuse-klappi = mkNixosConfiguration {
-          extraModules = [
-            ./hosts/zuse-klappi
+    in
+      flake-parts.lib.mkFlake {inherit inputs;} (
+        {...}: {
+          systems = [
+            "x86_64-linux"
+            "aarch64-linux"
+            #"x86_64-darwin"
+            #"aarch64-darwin"
           ];
-        };
-        zuse = mkNixosConfiguration {
-          extraModules = [
-            ./hosts/zuse
+
+          imports = [
+            #./checks.nix
+            #FIXME ./topology.nix
+            inputs.terranix.flakeModule
+            ./clan.nix
+            ./devshells.nix
+            ./formatter.nix
+            ./topology.nix
           ];
-        };
-        router = mkNixosConfiguration {
-          baseModules = [
-            ./common/secrets.nix
-            ragenix.nixosModules.default
-            nix-topology.nixosModules.default
-            impermanence.nixosModules.impermanence
-            nixos-sbc.nixosModules.default
-            nixos-sbc.nixosModules.boards.bananapi.bpir4
-            nix-index-database.nixosModules.nix-index
-            ./common/profiles/minimal.nix
-            ./common/profiles/perlless.nix
-          ];
-          extraModules = [
-            ./hosts/router
-          ];
-          system = "aarch64-linux";
-        };
-        nas = mkNixosConfiguration {
-          baseModules = [
-            ./common/secrets.nix
-            ragenix.nixosModules.default
-            nix-topology.nixosModules.default
-            nixarr.nixosModules.default
-            impermanence.nixosModules.impermanence
-            nixos-sbc.nixosModules.default
-            nixos-sbc.nixosModules.boards.raspberrypi.rpi4
-            inputs.argon40-nix.nixosModules.default
-            nix-index-database.nixosModules.nix-index
-            ./common/profiles/minimal.nix
-            ./common/profiles/perlless.nix
-          ];
-          extraModules = [
-            ./hosts/nas
-          ];
-          system = "aarch64-linux";
-          nixpkgs = inputs.nixpkgs-unstable;
-        };
-      };
-      topology.x86_64-linux = import nix-topology {
-        inherit pkgs;
-        modules = [
-          # Your own file to define global topology. Works in principle like a nixos module but uses different options.
-          ./topology.nix
-          # Inline module to inform topology of your existing NixOS hosts.
-          {nixosConfigurations = self.nixosConfigurations;}
-        ];
-      };
-    };
+
+          flake = {
+            nixosConfigurations = {
+              zuse-klappi = mkNixosConfiguration {
+                extraModules = [
+                  ./hosts/zuse-klappi
+                ];
+              };
+              zuse = mkNixosConfiguration {
+                extraModules = [
+                  ./hosts/zuse
+                ];
+              };
+              router = mkNixosConfiguration {
+                baseModules = [
+                  ./common/secrets.nix
+                  ragenix.nixosModules.default
+                  nix-topology.nixosModules.default
+                  impermanence.nixosModules.impermanence
+                  nixos-sbc.nixosModules.default
+                  nixos-sbc.nixosModules.boards.bananapi.bpir4
+                  nix-index-database.nixosModules.nix-index
+                  ./common/profiles/minimal.nix
+                  ./common/profiles/perlless.nix
+                ];
+                extraModules = [
+                  ./hosts/router
+                ];
+                system = "aarch64-linux";
+              };
+              nas = mkNixosConfiguration {
+                baseModules = [
+                  ./common/secrets.nix
+                  ragenix.nixosModules.default
+                  nix-topology.nixosModules.default
+                  nixarr.nixosModules.default
+                  impermanence.nixosModules.impermanence
+                  nixos-sbc.nixosModules.default
+                  nixos-sbc.nixosModules.boards.raspberrypi.rpi4
+                  inputs.argon40-nix.nixosModules.default
+                  nix-index-database.nixosModules.nix-index
+                  ./common/profiles/minimal.nix
+                  ./common/profiles/perlless.nix
+                ];
+                extraModules = [
+                  ./hosts/nas
+                ];
+                system = "aarch64-linux";
+                nixpkgs = inputs.nixpkgs-unstable;
+              };
+            };
+          };
+        }
+      );
 }

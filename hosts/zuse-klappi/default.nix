@@ -1,5 +1,6 @@
 {
   inputs,
+  nixpkgs,
   config,
   pkgs,
   environment,
@@ -10,6 +11,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     #    inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
+    inputs.microvm.nixosModules.host
 
     ./hardware-configuration.nix
     ../../common/core.nix
