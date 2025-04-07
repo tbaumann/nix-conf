@@ -1,0 +1,15 @@
+{
+  "machines": {
+    "zuse-klappi": {
+      "name": "zuse-klappi",
+      "tags": [
+        "laptop",
+        "pc",
+        "desktop"
+      ],
+      "deploy": {
+        "targetHost": "zuse-klappi.local"
+      }
+    }
+  }
+}
