@@ -13,7 +13,7 @@
   # Backups
   services.restic.backups = {
     rsync_net = {
-      passwordFile = config.age.secrets.restic-password.path;
+      passwordFile = config.sops.secrets.restic-password.path;
       paths = [
         "/home/tilli/"
         "/home/chaimae/"
@@ -138,7 +138,7 @@
       ];
     };
     nas = {
-      passwordFile = config.age.secrets.restic-password.path;
+      passwordFile = config.sops.secrets.restic-password.path;
       paths = [
         "/home/tilli/"
         "/home/chaimae/"
@@ -262,10 +262,5 @@
         "/home/chaimae/Backup"
       ];
     };
-  };
-  services.prometheus.exporters.restic = {
-    enable = true;
-    repository = "${config.services.restic.backups.rsync_net.repository}";
-    passwordFile = "${config.services.restic.backups.rsync_net.passwordFile}";
   };
 }

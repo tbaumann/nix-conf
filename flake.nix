@@ -160,11 +160,13 @@
 
           flake = {
             nixosConfigurations = {
+              /*
               zuse-klappi = mkNixosConfiguration {
                 extraModules = [
                   ./hosts/zuse-klappi
                 ];
               };
+              */
               zuse = mkNixosConfiguration {
                 extraModules = [
                   ./hosts/zuse

@@ -8,7 +8,7 @@
       PubkeyAcceptedKeyTypes ssh-ed25519
       ServerAliveInterval 60
       IPQoS throughput
-      IdentityFile ${config.age.secrets.my-nixbuild-key.path}
+      IdentityFile ${config.sops.secrets.my-nixbuild-key.path}
   '';
 
   programs.ssh.knownHosts = {

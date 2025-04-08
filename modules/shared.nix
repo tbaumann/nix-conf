@@ -1,19 +1,37 @@
- config, clan-core, ... }:
 {
-  imports = [
-    # Enables the OpenSSH server for remote access
-    clan-core.clanModules.sshd
-    # Set a root password
-    clan-core.clanModules.root-password
-    clan-core.clanModules.state-version
-
-    ../common/user-group.nix
-    ../common/core.nix
+  config,
+  inputs,
+  ...
+}: {
+  imports = with inputs; [
+    update-systemd-resolved.nixosModules.update-systemd-resolved
+    nix-flatpak.nixosModules.nix-flatpak
+    stylix.nixosModules.stylix
+    base16.nixosModule
+    nix-index-database.nixosModules.nix-index
+    nvf.nixosModules.default
+    microvm.nixosModules.host
+    nixos-sbc.nixosModules.cache
+    nix-topology.nixosModules.default
+    niri-flake.nixosModules.niri
+    ucodenix.nixosModules.default
+    home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.backupFileExtension = "hm.bak";
+      home-manager.sharedModules = [
+        nix-index-database.hmModules.nix-index
+        ragenix.homeManagerModules.default
+        nix-flatpak.homeManagerModules.nix-flatpak
+        nvf.homeManagerModules.default
+        iio-sway.homeManagerModules.default
+      ];
+      home-manager.extraSpecialArgs = {
+        inherit inputs;
+      };
+    }
   ];
 
   # Locale service discovery and mDNS
   services.avahi.enable = true;
-
-
 }
-

@@ -9,11 +9,6 @@
     ./tilli
   ];
 
-  age.secrets = {
-    vpn-password = {
-      file = ../secrets/vpn-password.age;
-    };
-  };
   home = {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
@@ -22,7 +17,6 @@
 
     packages = with pkgs; [
       cloak
-      openvpn
       vial
       qmk
       via

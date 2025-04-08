@@ -513,6 +513,7 @@
         {command = "openrgb --startminimized";}
         {command = "linphone --iconified";}
         {command = "blueman-applet";}
+        {command = "${pkgs.fractal}/bin/fractal";}
       ];
     };
   };

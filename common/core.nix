@@ -15,7 +15,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
       builders-use-substitutes = true
-      !include ${config.age.secrets.nix-access-tokens-github.path}
+      !include ${config.sops.secrets.nix-access-tokens-github.path}
     '';
     optimise.automatic = true;
     gc = {
@@ -95,7 +95,7 @@
   security.sudo-rs.execWheelOnly = true;
   security.sudo-rs.wheelNeedsPassword = false;
 
-  time.timeZone = "Africa/Casablanca";
+  time.timeZone = "Europe/Berlin";
 
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.supportedLocales = ["all"];

@@ -16,12 +16,12 @@
         ];
       };
       importer.base = {
-        roles.default.tags = ["all"];
-        roles.default.extraModules = with inputs.clan; [
-          "./common/core.nix"
-          clanModules.state-version
-          clanModules.sshd
-          clanModules.root-password
+        roles.default.machines = ["all"];
+        roles.default.extraModules = with inputs; [
+          clan.clanModules.state-version
+          #clan.clanModules.sshd
+          clan.clanModules.root-password
+          clan-core.clanModules.trusted-nix-caches
         ];
       };
     };
