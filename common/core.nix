@@ -117,8 +117,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    inputs.clan-core.packages.x86_64-linux.clan-cli
     bat
-    inputs.ragenix.packages.x86_64-linux.default
     nix-output-monitor
     nixpkgs-review
     parallel

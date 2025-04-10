@@ -24,5 +24,5 @@
   # Check that the system does not contain a Nix store path that contains the
   # string "perl".
   #FIXME https://github.com/ryantm/agenix/issues/238
-  #system.forbiddenDependenciesRegexes = ["perl"];
+  system.forbiddenDependenciesRegexes = ["perl"];
 }

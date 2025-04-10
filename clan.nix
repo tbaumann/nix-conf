@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    inputs.clan.flakeModules.default
+    inputs.clan-core.flakeModules.default
   ];
   clan = {
     meta.name = "prawns";

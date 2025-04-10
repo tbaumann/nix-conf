@@ -11,9 +11,9 @@
     #./hyprland.nix
     ./budgie.nix
     ./sway.nix
-    # FIXME remove file if no longer needed ./wpaperd.nix
     ./waybar.nix
     ./gnome.nix #Gnome xdg portal grashes. Don't need it anyway.
+    ./e9s.nix
   ];
 
   services.displayManager.enable = true;
