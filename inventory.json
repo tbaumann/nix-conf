@@ -6,6 +6,13 @@
       "deploy": {
         "targetHost": "tilli@zuse-klappi.local"
       }
+    },
+    "zuse": {
+      "name": "zuse",
+      "tags": ["big", "pc", "desktop"],
+      "deploy": {
+        "targetHost": "tilli@zuse.local"
+      }
     }
   }
 }

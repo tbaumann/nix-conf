@@ -4,8 +4,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     clan-core = {
+      #url = "git+https://git.clan.lol/clan/clan-core?ref=bfdf40869d42c6fa2beed559f8600113ff45cd88";
       url = "git+https://git.clan.lol/clan/clan-core";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
@@ -166,12 +166,12 @@
                   ./hosts/zuse-klappi
                 ];
               };
-              */
               zuse = mkNixosConfiguration {
                 extraModules = [
                   ./hosts/zuse
                 ];
               };
+              */
               router = mkNixosConfiguration {
                 baseModules = [
                   ./common/secrets.nix

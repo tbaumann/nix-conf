@@ -263,4 +263,9 @@
       ];
     };
   };
+  sops.secrets.direnv-backup-rsync-net = {
+    mode = "600";
+    owner = "tilli";
+    path = "/home/tilli/direnvs/backup/rsync.net/.envrc";
+  };
 }
