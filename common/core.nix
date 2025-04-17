@@ -8,6 +8,7 @@
     ./user-group.nix
     ./nixbuild.nix
   ];
+  sops.secrets.nix-access-tokens-github.mode = "0444";
   nix = {
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
