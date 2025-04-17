@@ -1,4 +1,5 @@
 {...}: {
+  stylix.targets.nvf.enable = false;
   programs.nvf = {
     enable = true;
     # your settings need to go into the settings attribute set

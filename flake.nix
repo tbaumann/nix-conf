@@ -1,7 +1,8 @@
 {
   description = "My flake for everything";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     clan-core = {
       #url = "git+https://git.clan.lol/clan/clan-core?ref=bfdf40869d42c6fa2beed559f8600113ff45cd88";
@@ -12,12 +13,14 @@
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    stylix.url = "github:danth/stylix/release-24.11";
+    #stylix.url = "github:danth/stylix/release-24.11";
+    stylix.url = "github:danth/stylix/";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      #url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-networkmanager-profiles = {
@@ -32,7 +35,8 @@
 
     # anyrun - a wayland launcher
     anyrun = {
-      url = "github:Kirottu/anyrun";
+      #url = "github:Kirottu/anyrun";
+      url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
@@ -41,6 +45,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
+    #nvf.url = "github:notashelf/nvf/";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -150,7 +155,6 @@
 
           imports = [
             #./checks.nix
-            #FIXME ./topology.nix
             inputs.terranix.flakeModule
             ./clan.nix
             ./devshells.nix
@@ -158,20 +162,9 @@
             ./topology.nix
           ];
 
+          /*
           flake = {
             nixosConfigurations = {
-              /*
-              zuse-klappi = mkNixosConfiguration {
-                extraModules = [
-                  ./hosts/zuse-klappi
-                ];
-              };
-              zuse = mkNixosConfiguration {
-                extraModules = [
-                  ./hosts/zuse
-                ];
-              };
-              */
               router = mkNixosConfiguration {
                 baseModules = [
                   ./common/secrets.nix
@@ -211,6 +204,7 @@
               };
             };
           };
+          */
         }
       );
 }

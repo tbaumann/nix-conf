@@ -146,7 +146,8 @@
       source-han-sans
       source-han-serif
 
-      nerdfonts
+      nerd-fonts._0xproto
+      nerd-fonts.droid-sans-mono
     ];
   };
 }
