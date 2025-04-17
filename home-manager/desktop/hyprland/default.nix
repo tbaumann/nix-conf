@@ -6,7 +6,7 @@
   imports = [
     #     hyprland.homeManagerModules.default
 
-    ./anyrun.nix
+    #    ./anyrun.nix
     ./wayland-apps.nix
   ];
 
