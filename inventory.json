@@ -2,17 +2,30 @@
   "machines": {
     "zuse-klappi": {
       "name": "zuse-klappi",
-      "tags": ["laptop", "pc", "desktop"],
+      "tags": [
+        "laptop",
+        "pc",
+        "desktop"
+      ],
       "deploy": {
         "targetHost": "tilli@zuse-klappi.local"
       }
     },
     "zuse": {
       "name": "zuse",
-      "tags": ["big", "pc", "desktop"],
+      "tags": [
+        "big",
+        "pc",
+        "desktop"
+      ],
       "deploy": {
         "targetHost": "tilli@zuse.local"
       }
+    },
+    "nas": {
+      "name": "nas",
+      "tags": [],
+      "deploy": {}
     }
   }
 }
