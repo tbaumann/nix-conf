@@ -33,12 +33,6 @@
     };
     terranix.url = "github:terranix/terranix";
 
-    # anyrun - a wayland launcher
-    anyrun = {
-      #url = "github:Kirottu/anyrun";
-      url = "github:anyrun-org/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     wpaperd = {
       url = "github:Narice/wpaperd";
@@ -162,7 +156,6 @@
             ./topology.nix
           ];
 
-          /*
           flake = {
             nixosConfigurations = {
               router = mkNixosConfiguration {
@@ -204,7 +197,6 @@
               };
             };
           };
-          */
         }
       );
 }

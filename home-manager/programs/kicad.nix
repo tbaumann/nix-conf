@@ -1,13 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-  ];
-
+{pkgs, ...}: {
   home.packages = with pkgs; [
     kicad
     kikit
