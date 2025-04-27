@@ -24,8 +24,13 @@
     },
     "nas": {
       "name": "nas",
-      "tags": [],
-      "deploy": {}
+      "tags": [
+	      "arm",
+	      "nas",
+	      "sbc"
+      ],
+      "deploy": {
+      }
     }
   }
 }

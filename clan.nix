@@ -19,9 +19,10 @@
         roles.default.machines = ["all"];
         roles.default.extraModules = with inputs; [
           clan.clanModules.state-version
-          #clan.clanModules.sshd
+          clan.clanModules.sshd
           clan.clanModules.root-password
           clan-core.clanModules.trusted-nix-caches
+          clan-core.clanModules.trusted-nixpkgs
         ];
       };
     };

@@ -3,6 +3,10 @@
   config,
   ...
 }: {
+  sops.secrets.my-nixbuild-key = {
+    mode = "0440";
+    group = "users";
+  };
   programs.ssh.extraConfig = ''
     Host eu.nixbuild.net
       PubkeyAcceptedKeyTypes ssh-ed25519

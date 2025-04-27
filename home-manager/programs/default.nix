@@ -1,12 +1,12 @@
 {pkgs, ...}: {
   imports = [
-    #./neovim
     #./starship.nix
     ./beets.nix
     ./chromium.nix
     ./ente.nix
     ./fish.nix
     ./kicad.nix
+    ./helix.nix
     ./librewolf.nix
     ./librewolf.nix
     ./nushell.nix

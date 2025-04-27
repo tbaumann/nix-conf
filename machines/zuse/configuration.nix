@@ -19,24 +19,10 @@
     ../../common/core-desktop.nix
     ../../common/core-pc.nix
   ];
-  /*
-  shb.arr = {
-    sonarr.enable = true;
-    sonarr.settings.ApiKey.source = config.age.secrets.arr-api-key.path;
-    sonarr.subdomain = "radarr";
-    sonarr.domain = "rak.baumann.ma";
-  };
-  users.groups.media = {};
-  shb.monitoring = {
+  clan.core.networking.zerotier.controller = {
     enable = true;
-    subdomain = "grafana";
-    domain = "rak.baumann.ma";
-    contactPoints = [ "tilman.baumann@tilman.baumann.name" ];
-    lokiMajorVersion = 3;
-   # adminPassword = config.age.secrets.grafana-password;
-   # secretKey = config.age.secrets.grafana-secret;
+    public = true;
   };
-  */
   topology.self = {
     hardware.info = "24 core Threadripper workstation";
     interfaces.eno1 = {

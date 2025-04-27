@@ -38,8 +38,8 @@
       url = "github:Narice/wpaperd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
-    #nvf.url = "github:notashelf/nvf/";
+    #nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
+    nvf.url = "github:notashelf/nvf/";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -155,48 +155,6 @@
             ./formatter.nix
             ./topology.nix
           ];
-
-          flake = {
-            nixosConfigurations = {
-              router = mkNixosConfiguration {
-                baseModules = [
-                  ./common/secrets.nix
-                  ragenix.nixosModules.default
-                  nix-topology.nixosModules.default
-                  impermanence.nixosModules.impermanence
-                  nixos-sbc.nixosModules.default
-                  nixos-sbc.nixosModules.boards.bananapi.bpir4
-                  nix-index-database.nixosModules.nix-index
-                  ./common/profiles/minimal.nix
-                  ./common/profiles/perlless.nix
-                ];
-                extraModules = [
-                  ./hosts/router
-                ];
-                system = "aarch64-linux";
-              };
-              nas = mkNixosConfiguration {
-                baseModules = [
-                  ./common/secrets.nix
-                  ragenix.nixosModules.default
-                  nix-topology.nixosModules.default
-                  nixarr.nixosModules.default
-                  impermanence.nixosModules.impermanence
-                  nixos-sbc.nixosModules.default
-                  nixos-sbc.nixosModules.boards.raspberrypi.rpi4
-                  inputs.argon40-nix.nixosModules.default
-                  nix-index-database.nixosModules.nix-index
-                  ./common/profiles/minimal.nix
-                  ./common/profiles/perlless.nix
-                ];
-                extraModules = [
-                  ./hosts/nas
-                ];
-                system = "aarch64-linux";
-                nixpkgs = inputs.nixpkgs-unstable;
-              };
-            };
-          };
         }
       );
 }

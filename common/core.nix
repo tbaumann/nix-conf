@@ -132,6 +132,7 @@
   ];
 
   services = {
+    /*
     prometheus.exporters.node = {
       enable = true;
       enabledCollectors = ["systemd" "softirqs" "tcpstat" "wifi" "ethtool" "interrupts" "zoneinfo" "network_route"];
@@ -192,6 +193,7 @@
       };
       # extraFlags
     };
+    */
     ntpd-rs.enable = true;
     resolved.enable = true;
     avahi = {
@@ -212,8 +214,6 @@
   programs = {
     command-not-found.enable = false;
     fish.enable = true;
-    neovim.enable = true;
-    neovim.defaultEditor = true;
     vim.enable = true;
   };
 

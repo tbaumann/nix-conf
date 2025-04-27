@@ -9,6 +9,7 @@
     netflix
   ];
   home = {
+/*
     language = {
       base = "ar_MA.utf8";
       address = "ar_MA.utf8";
@@ -22,6 +23,7 @@
       telephone = "ar_MA.utf8";
       time = "ar_MA.utf8";
     };
+*/
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     username = "chaimae";
