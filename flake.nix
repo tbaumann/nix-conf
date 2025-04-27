@@ -27,10 +27,6 @@
       url = "github:jmackie/nixos-networkmanager-profiles";
       flake = false;
     };
-    ragenix = {
-      url = "github:yaxitech/ragenix/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     terranix.url = "github:terranix/terranix";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";

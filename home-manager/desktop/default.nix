@@ -35,7 +35,7 @@
     "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 5; ${pkgs.syncthingtray-minimal}/bin/syncthingtray'";
   */
   stylix.targets.kde.enable = false;
-  programs.wpaperd = {
+  services.wpaperd = {
     enable = true;
     settings = {
       default = {

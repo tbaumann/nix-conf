@@ -21,7 +21,6 @@
       home-manager.backupFileExtension = "hm.bak";
       home-manager.sharedModules = [
         nix-index-database.hmModules.nix-index
-        ragenix.homeManagerModules.default
         nix-flatpak.homeManagerModules.nix-flatpak
         nvf.homeManagerModules.default
         iio-sway.homeManagerModules.default
