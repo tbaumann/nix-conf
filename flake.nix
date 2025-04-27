@@ -95,8 +95,8 @@
         ];
 
         imports = [
-          #./checks.nix
           inputs.terranix.flakeModule
+          ./checks.nix
           ./clan.nix
           ./devshells.nix
           ./formatter.nix
