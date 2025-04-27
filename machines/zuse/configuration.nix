@@ -27,6 +27,7 @@
     hardware.info = "24 core Threadripper workstation";
     interfaces.eno1 = {
       network = "home"; # Use the network we define below
+      wakeOnLan.enable = true;
     };
   };
 
