@@ -8,7 +8,7 @@
         "desktop"
       ],
       "deploy": {
-        "targetHost": "tilli@zuse-klappi.local"
+        "targetHost": "tilli@zuse-klappi.tail84117.ts.net"
       }
     },
     "zuse": {
@@ -19,7 +19,7 @@
         "desktop"
       ],
       "deploy": {
-        "targetHost": "tilli@zuse.local"
+        "targetHost": "tilli@zuse.tail84117.ts.net"
       }
     },
     "nas": {
@@ -30,6 +30,7 @@
 	      "sbc"
       ],
       "deploy": {
+        "targetHost": "tilli@nas.tail84117.ts.net"
       }
     }
   }
