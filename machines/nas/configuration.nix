@@ -24,6 +24,7 @@
     ../../common/services/homepage.nix
     ../../common/user-group.nix
     ../../common/tailscale.nix
+    ./storage.nix
   ];
 
   nixpkgs.hostPlatform.system = "aarch64-linux";
@@ -78,8 +79,9 @@
     "dotnet-sdk-wrapped-6.0.428"
     "dotnet-sdk-6.0.428"
   ];
+  /*
   nixarr = {
-    enable = false;
+    enable = true;
     mediaDir = "/media";
     stateDir = "/media/.state/nixarr";
     mediaUsers = ["tilli" "chaimae"];
@@ -114,6 +116,7 @@
 
   services.jellyseerr.enable = true;
   #  systemd.services.jellyseerr.environment.LOG_LEVEL = "warning";
+  */
 
   environment.systemPackages = [
     pkgs.recyclarr

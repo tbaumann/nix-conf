@@ -85,72 +85,24 @@
     };
   };
   outputs = inputs @ {flake-parts, ...}:
-    with inputs; let
-      pkgs = import nixpkgs {
-        #inherit system;
-        overlays = [nix-topology.overlays.default];
-      };
-      mkNixosConfiguration = {
-        baseModules ? [
-          ./common/secrets.nix
-          ragenix.nixosModules.default
-          nix-flatpak.nixosModules.nix-flatpak
-          update-systemd-resolved.nixosModules.update-systemd-resolved
-          stylix.nixosModules.stylix
-          base16.nixosModule
-          nix-index-database.nixosModules.nix-index
-          nvf.nixosModules.default
-          microvm.nixosModules.host
-          nixos-sbc.nixosModules.cache
-          nix-topology.nixosModules.default
-          niri-flake.nixosModules.niri
-          ucodenix.nixosModules.default
-          # FIXME curently depends on unstable	nixarr.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.backupFileExtension = "hm.bak";
-            home-manager.sharedModules = [
-              nix-index-database.hmModules.nix-index
-              ragenix.homeManagerModules.default
-              nix-flatpak.homeManagerModules.nix-flatpak
-              nvf.homeManagerModules.default
-              iio-sway.homeManagerModules.default
-            ];
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
-          }
-        ],
-        extraModules ? [],
-        system ? "x86_64-linux",
-        nixpkgs ? inputs.nixpkgs,
-      }:
-        nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = baseModules ++ extraModules;
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-    in
-      flake-parts.lib.mkFlake {inherit inputs;} (
-        {...}: {
-          systems = [
-            "x86_64-linux"
-            "aarch64-linux"
-            #"x86_64-darwin"
-            #"aarch64-darwin"
-          ];
+    flake-parts.lib.mkFlake {inherit inputs;} (
+      {...}: {
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          #"x86_64-darwin"
+          #"aarch64-darwin"
+        ];
 
-          imports = [
-            #./checks.nix
-            inputs.terranix.flakeModule
-            ./clan.nix
-            ./devshells.nix
-            ./formatter.nix
-            ./topology.nix
-          ];
-        }
-      );
+        imports = [
+          #./checks.nix
+          inputs.terranix.flakeModule
+          ./clan.nix
+          ./devshells.nix
+          ./formatter.nix
+          ./topology.nix
+          ./pkgs.nix
+        ];
+      }
+    );
 }
