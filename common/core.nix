@@ -7,7 +7,17 @@
   imports = [
     ./user-group.nix
     ./nixbuild.nix
+    ../modules/email.nix
   ];
+
+  email = {
+    enable = true;
+    fromAddress = "admin@tilman.baumann.name";
+    toAddress = "tilman.baumann@tilman.baumann.name";
+    smtpServer = "smtp.migadu.com";
+    smtpUsername = "tilman.baumann@tilman.baumann.name";
+    smtpPasswordPath = config.sops.secrets.smtpPassword.path;
+  };
   sops.secrets.nix-access-tokens-github.mode = "0444";
   nix = {
     daemonCPUSchedPolicy = "idle";
@@ -132,68 +142,6 @@
   ];
 
   services = {
-    /*
-    prometheus.exporters.node = {
-      enable = true;
-      enabledCollectors = ["systemd" "softirqs" "tcpstat" "wifi" "ethtool" "interrupts" "zoneinfo" "network_route"];
-      extraFlags = ["--collector.filesystem.fs-types-exclude=tmpfs,overlay,erofs"];
-    };
-    promtail = {
-      enable = true;
-      configuration = {
-        server = {
-          http_listen_port = 3031;
-          grpc_listen_port = 0;
-        };
-        positions = {
-          filename = "/tmp/positions.yaml";
-        };
-        clients = [
-          {
-            url = "http://nas.local:3030/loki/api/v1/push";
-          }
-        ];
-        scrape_configs = [
-          {
-            job_name = "journal";
-            journal = {
-              max_age = "12h";
-              labels = {
-                job = "systemd-journal";
-              };
-            };
-            relabel_configs = [
-              {
-                source_labels = ["__journal__systemd_unit"];
-                target_label = "unit";
-              }
-              {
-                source_labels = ["__journal__hostname"];
-                target_label = "hostname";
-              }
-              {
-                source_labels = ["__journal_syslog_identifier"];
-                target_label = "syslog_identifier";
-              }
-              {
-                # A priority value between 0 ("emerg") and 7 ("debug") formatted as a decimal string.
-                # This field is compatible with syslog's priority concept.
-                source_labels = ["__journal_priority"];
-                target_label = "priority";
-              }
-              {
-                # How the entry was received by the journal service. Valid transports are:
-                #  audit, driver, syslog, journal, stdout, kernel
-                source_labels = ["__journal__transport"];
-                target_label = "transport";
-              }
-            ];
-          }
-        ];
-      };
-      # extraFlags
-    };
-    */
     ntpd-rs.enable = true;
     resolved.enable = true;
     avahi = {
@@ -209,6 +157,17 @@
     fstrim.enable = true;
     dbus.implementation = "broker";
     dbus.enable = true;
+    smartd = {
+      enable = true;
+      notifications = {
+        systembus-notify.enable = true;
+        mail = {
+          enable = true;
+          sender = config.email.fromAddress;
+          recipient = config.email.toAddress;
+        };
+      };
+    };
   };
 
   programs = {
