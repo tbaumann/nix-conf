@@ -79,7 +79,7 @@
     "dotnet-sdk-6.0.428"
   ];
   nixarr = {
-    enable = true;
+    enable = false;
     mediaDir = "/media";
     stateDir = "/media/.state/nixarr";
     mediaUsers = ["tilli" "chaimae"];
