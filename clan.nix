@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  self,
+  ...
+}: {
   imports = [
     inputs.clan-core.flakeModules.default
   ];
@@ -6,6 +10,7 @@
     meta.name = "prawns";
     specialArgs = {
       inherit inputs;
+      inherit self;
     };
     inventory.services = {
       admin.me = {

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }: let
   disks = [
@@ -13,7 +14,7 @@
     {
       type = "data";
       name = "data1";
-      label = "data2";
+      label = "data1";
     }
     {
       type = "data";
@@ -88,9 +89,10 @@
     dataDisks);
 in {
   environment.systemPackages = with pkgs; [
+    snapraid
     mergerfs
-    #self.aarch64-linux.packages.snapraid-btrfs
-    #self'.packages.snapraid-btrfs-runner
+    self.packages."${system}".snapraid-btrfs
+    self.packages."${system}".snapraid-btrfs-runner
   ];
 
   fileSystems =
@@ -126,13 +128,12 @@ in {
     configs = snapperConfigs;
   };
 
-  /*
   systemd.services.snapraid-btrfs-sync = {
     description = "Run the snapraid-btrfs sync with the runner";
     startAt = "01:00";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
+      ExecStart = "${self.packages.aarch64-linux.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
       Nice = 19;
       IOSchedulingPriority = 7;
       CPUSchedulingPolicy = "batch";
@@ -169,5 +170,4 @@ in {
           );
     };
   };
-  */
 }
