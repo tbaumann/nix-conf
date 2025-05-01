@@ -174,6 +174,7 @@
     command-not-found.enable = false;
     fish.enable = true;
     vim.enable = true;
+    vim.defaultEditor = true;
   };
 
   networking.firewall.enable = false;

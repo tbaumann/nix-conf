@@ -15,6 +15,7 @@
     ./desktops
     ./syncthing.nix
     ../home-manager/default.nix
+    ./mullvad.nix
   ];
 
   nixpkgs.overlays = [inputs.nix-topology.overlays.default];
