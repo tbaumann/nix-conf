@@ -12,60 +12,68 @@ in {
       description = "Path to the private key file";
     };
     locations = mkOption {
-      type = types.attrsOf (types.submodule {
+      type = types.attrsOf (types.listOf (types.submodule {
         options = {
-          servers = mkOption {
-            type = types.listOf (types.submodule {
-              options = {
-                endpoint = mkOption {
-                  type = types.str;
-                  description = "Server endpoint address";
-                };
-                publicKey = mkOption {
-                  type = types.str;
-                  description = "Public key for this server";
-                };
-              };
-            });
-            description = "List of servers for this location";
+          endpoint = mkOption {
+            type = types.str;
+            description = "Server endpoint address with port";
+          };
+          publicKey = mkOption {
+            type = types.str;
+            description = "Server's public key";
           };
         };
-      });
+      }));
       default = {};
-      description = "VPN locations and their servers";
+      description = "VPN locations mapping directly to server lists";
     };
   };
 
   config = let
     cfg = config.mullvad;
 
-    # Function to create all interfaces
-    mkAllInterfaces = lib.concatLists (lib.mapAttrsToList (
-        locationName: location:
+    # Generate all interfaces as { name, server } pairs
+    allInterfaces = lib.concatLists (lib.mapAttrsToList (
+        locationName: servers:
           lib.imap1 (index: server: {
             name = "${lib.strings.sanitizeDerivationName locationName}-${lib.strings.fixedWidthNumber 3 (index + 1)}";
-            value = {
-              dns = ["10.64.0.1"];
-              address = [
-                "10.75.3.80/32"
-                "fc00:bbbb:bbbb:bb01::c:34f/128"
-              ];
-              privateKeyFile = cfg.privateKeyFile;
-              peers = [
-                {
-                  publicKey = server.publicKey;
-                  allowedIPs = ["0.0.0.0/0" "::0/0"];
-                  endpoint = server.endpoint;
-                }
-              ];
-              autostart = false;
-            };
+            inherit server;
           })
-          location.servers
+          servers
       )
       cfg.locations);
   in
     lib.mkIf cfg.enable {
-      networking.wg-quick.interfaces = lib.listToAttrs mkAllInterfaces;
+      networking.wg-quick.interfaces = lib.listToAttrs (map ({
+          name,
+          server,
+        }: {
+          inherit name;
+          value = {
+            dns = ["10.64.0.1"];
+            address = [
+              "10.75.3.80/32"
+              "fc00:bbbb:bbbb:bb01::c:34f/128"
+            ];
+            privateKeyFile = cfg.privateKeyFile;
+            peers = [
+              {
+                publicKey = server.publicKey;
+                allowedIPs = ["0.0.0.0/0" "::0/0"];
+                endpoint = server.endpoint;
+              }
+            ];
+            autostart = false;
+          };
+        })
+        allInterfaces);
+
+      systemd.services = let
+        serviceNames = map ({name, ...}: "wg-quick-${name}") allInterfaces;
+        serviceNamesWithSuffix = map (n: "${n}.service") serviceNames;
+      in
+        lib.genAttrs serviceNames (serviceName: {
+          conflicts = lib.filter (n: n != "${serviceName}.service") serviceNamesWithSuffix;
+        });
     };
 }
