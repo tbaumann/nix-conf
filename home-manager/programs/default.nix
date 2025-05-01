@@ -24,7 +24,6 @@
     home-manager.enable = true;
     yazi.enable = true;
     lsd.enable = true;
-    lsd.enableAliases = true;
     nix-index-database.comma.enable = true;
     fastfetch.enable = true;
     fd.enable = true;
