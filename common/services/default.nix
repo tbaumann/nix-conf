@@ -3,7 +3,7 @@
     ./docker.nix
     ./homepage.nix
     ./kmscon.nix
-    ./libvirt.nix
+    # ./libvirt.nix
     ./lorri.nix
     ./openvpn.nix
   ];

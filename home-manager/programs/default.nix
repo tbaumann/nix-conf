@@ -14,7 +14,7 @@
     ./openscad.nix
     ./sip.nix
     ./ssh.nix
-    # FIXME only works with h-m unstable right now ./syncthing.nix
+    ./syncthing.nix
     ./terminal
   ];
 

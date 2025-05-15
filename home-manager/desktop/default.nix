@@ -29,11 +29,6 @@
     };
   };
 
-  /*
-  services.syncthing.tray = true;
-  systemd.user.services.syncthingtray.Service.ExecStart = pkgs.lib.mkForce
-    "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 5; ${pkgs.syncthingtray-minimal}/bin/syncthingtray'";
-  */
   stylix.targets.kde.enable = false;
   services.wpaperd = {
     enable = true;

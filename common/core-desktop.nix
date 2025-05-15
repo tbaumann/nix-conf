@@ -13,7 +13,7 @@
 
   imports = [
     ./desktops
-    ./syncthing.nix
+    # ./syncthing.nix
     ../home-manager/default.nix
     ./mullvad.nix
   ];

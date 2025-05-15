@@ -509,7 +509,7 @@
         #{command = "rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
         {command = "sway-audio-idle-inhibit";}
         {command = "thunderbird";}
-        {command = "syncthingtray --wait";}
+        # {command = "syncthingtray --wait";}
         {command = "openrgb --startminimized";}
         {command = "linphone --iconified";}
         {command = "blueman-applet";}

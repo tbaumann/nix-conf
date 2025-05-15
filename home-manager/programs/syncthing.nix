@@ -14,7 +14,7 @@
         # FIXME information leak. Ue AGE
         devices = {
           "zuse" = {id = "GHTDDYR-6RQRJUI-5A2Z5LO-3ST4SUQ-44VQWBW-FBV73TI-WIU3VWC-3T2RKQX";};
-          "zuse-klappi" = {id = "GPCIPUK-DLVJIY3-AXF5DFV-C2RKI22-WKI2TIQ-PWGWPLH-MRSKYTW-GRZFAQR";};
+          "zuse-klappi" = {id = "YJZO5EB-PQPWOYF-S7ZXQLV-MRAQIH4-4XVSVRU-VTNYXII-VSJBAEO-LWMZ3QB";};
           "phone" = {id = "Z3EPAXF-JMPX7BH-SY3HTXR-5TWJNSR-RMHUR3D-WP4Q2OU-DPPUTLQ-CJUYGQE";};
         };
         overrideFolders = true; # overrides any folders added or deleted through the WebUI
