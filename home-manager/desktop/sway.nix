@@ -484,6 +484,12 @@
           };
           command = "floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10";
         }
+        {
+          criteria = {
+            class = "xwaylandvideobridge";
+          };
+          command = "floating enable";
+        }
       ];
       assigns = {
         "1" = [
@@ -492,7 +498,10 @@
         ];
         "2" = [{app_id = "firefox";}];
         "8" = [{app_id = "chromium-browser";}];
-        "9" = [{title = "CoolerControl";}];
+        "9" = [
+          {title = "CoolerControl";}
+          {class = "xwaylandvideobridge";}
+        ];
       };
       startup = [
         #        {command = "nwg-panel";}
