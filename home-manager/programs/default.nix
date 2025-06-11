@@ -35,6 +35,13 @@
   home.packages = with pkgs; [
     croc
     wush
+    duf
+    termshark
+    procs
+    ts
+    unp
+    asciinema
+    asciinema-agg
   ];
 
   xdg.mimeApps.enable = true;
