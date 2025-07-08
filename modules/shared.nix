@@ -24,6 +24,7 @@
         nix-flatpak.homeManagerModules.nix-flatpak
         nvf.homeManagerModules.default
         iio-sway.homeManagerModules.default
+        stylix.homeModules.stylix
       ];
       home-manager.extraSpecialArgs = {
         inherit inputs;

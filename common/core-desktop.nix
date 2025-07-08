@@ -16,6 +16,7 @@
     # ./syncthing.nix
     ../home-manager/default.nix
     ./mullvad.nix
+    ./work/secunet
   ];
 
   nixpkgs.overlays = [inputs.nix-topology.overlays.default];
@@ -103,7 +104,7 @@
     printing.enable = true;
     printing.cups-pdf.enable = true;
 
-    dbus.packages = [pkgs.gcr];
+    # dbus.packages = [pkgs.gcr];
     geoclue2.enable = true;
 
     udev.packages = with pkgs; [

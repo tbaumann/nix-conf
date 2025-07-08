@@ -78,7 +78,7 @@
           # Languages that are enabled in the maximal configuration.
           bash.enable = true;
           clang.enable = true;
-          css.enable = true;
+          css.enable = false;
           html.enable = true;
           sql.enable = true;
           java.enable = false;

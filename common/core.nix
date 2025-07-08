@@ -91,7 +91,6 @@
   # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
   system.switch = {
     enable = false;
-    enableNg = true;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -140,6 +139,16 @@
     nix-index
     wcurl
   ];
+
+  /*
+  # Override the default Python version
+  nixpkgs.overlays = [
+    (self: super: {
+      python3 = super.python312;
+      #  https://chat.deepseek.com/a/chat/s/e5900358-07d3-4a14-b21a-d76968d96f9f
+    })
+  ];
+  */
 
   services = {
     ntpd-rs.enable = true;

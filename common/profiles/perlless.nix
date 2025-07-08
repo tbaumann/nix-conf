@@ -2,12 +2,6 @@
 # configuration and thus you will not be able to rebuild your system with
 # nixos-rebuild!
 {lib, ...}: {
-  # Disable switching to a new configuration. This is not a necessary
-  # limitation of a perlless system but just a current one. In the future,
-  # perlless switching might be possible.
-  #system.switch.enable = lib.mkDefault false;
-  system.switch.enableNg = true;
-
   # Remove perl from activation
   boot.initrd.systemd.enable = lib.mkDefault true;
   system.etc.overlay.enable = lib.mkDefault true;

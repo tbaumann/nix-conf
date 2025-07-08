@@ -4,8 +4,7 @@
   ...
 }: {
   sops.secrets.my-nixbuild-key = {
-    mode = "0440";
-    group = "users";
+    mode = "0400";
   };
   programs.ssh.extraConfig = ''
     Host eu.nixbuild.net

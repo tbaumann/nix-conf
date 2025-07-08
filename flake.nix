@@ -1,11 +1,10 @@
 {
   description = "My flake for everything";
   inputs = {
-    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     clan-core = {
-      #url = "git+https://git.clan.lol/clan/clan-core?ref=bfdf40869d42c6fa2beed559f8600113ff45cd88";
       url = "git+https://git.clan.lol/clan/clan-core";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -14,13 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
     #stylix.url = "github:danth/stylix/release-24.11";
-    stylix.url = "github:danth/stylix/";
+    stylix.url = "github:danth/stylix/release-25.05";
+    #stylix.url = "github:danth/stylix/";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      #url = "github:nix-community/home-manager/release-24.11";
-      url = "github:nix-community/home-manager/";
+      url = "github:nix-community/home-manager/release-25.05";
+      #url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-networkmanager-profiles = {
@@ -45,7 +45,6 @@
 
     nixarr.url = "github:rasmus-kirk/nixarr";
     argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
-    #argon40-nix.url = "/home/tilli/git/argon40-nix";
 
     ucodenix.url = "github:e-tho/ucodenix";
 

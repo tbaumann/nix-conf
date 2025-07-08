@@ -12,7 +12,7 @@
     ./budgie.nix
     ./sway.nix
     ./waybar.nix
-    ./gnome.nix #Gnome xdg portal grashes. Don't need it anyway.
+    # ./gnome.nix
     ./e9s.nix
   ];
 

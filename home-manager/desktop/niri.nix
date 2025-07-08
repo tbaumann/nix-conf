@@ -1,5 +1,9 @@
-{pkgs, ...}: {
-  stylix.targets.niri.enable = true;
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  #stylix.targets.niri.enable = true;
   programs.niri.settings.binds = {
     "Mod+D".action.spawn = "anyrun";
     "Mod+T".action.spawn = "foot";

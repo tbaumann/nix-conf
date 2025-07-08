@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./desktop
     ./packages.nix
@@ -9,6 +9,7 @@
   ];
 
   stylix.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
   home = {
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
