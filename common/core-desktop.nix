@@ -16,6 +16,7 @@
     # ./syncthing.nix
     ../home-manager/default.nix
     ./mullvad.nix
+    ./music.nix
     ./work/secunet
   ];
 
@@ -23,6 +24,10 @@
 
   # to install chrome, you need to enable unfree packages
   nixpkgs.config.allowUnfree = lib.mkForce true;
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "rambox"
+    ];
 
   boot.plymouth.enable = true;
 

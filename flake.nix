@@ -82,6 +82,7 @@
       url = "github:hackr-sh/ghostty-shaders";
       flake = false;
     };
+    felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} (

@@ -44,6 +44,8 @@
     printing.enable = true;
     udisks2.enable = true;
   };
+  systemd.tpm2.enable = true;
+  security.tpm2.enable = true;
   environment.systemPackages = with pkgs; [
     btop
     dfu-util

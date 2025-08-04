@@ -17,10 +17,9 @@
     ucodenix.nixosModules.default
     home-manager.nixosModules.home-manager
     {
-      home-manager.useGlobalPkgs = true;
       home-manager.backupFileExtension = "hm.bak";
       home-manager.sharedModules = [
-        nix-index-database.hmModules.nix-index
+        nix-index-database.homeModules.nix-index
         nix-flatpak.homeManagerModules.nix-flatpak
         nvf.homeManagerModules.default
         iio-sway.homeManagerModules.default

@@ -13,10 +13,10 @@
     mako = {
       enable = true;
       settings = {
-        borderRadius = 5;
-        borderSize = 2;
+        border-radius = 5;
+        border-size = 2;
         layer = "overlay";
-        defaultTimeout = 5000;
+        default-timeout = 5000;
       };
     };
     flameshot = {

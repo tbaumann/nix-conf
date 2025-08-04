@@ -3,7 +3,6 @@
   ];
 
   home-manager = {
-    useGlobalPkgs = true;
     useUserPackages = true;
     users = {
       tilli = {...}: {

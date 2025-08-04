@@ -390,12 +390,15 @@
         "Mod4+c" = "kill";
         "Mod4+j" = "workspace prev";
         "Mod4+l" = "workspace next";
+        # Colemak VI nav
+        "Mod4+m" = "workspace prev";
+        "Mod4+i" = "workspace next";
         #        "Print" = "~/.config/hypr/scripts/screenshot --area";
         #        "Shift+Print" = "~/.config/hypr/scripts/screenshot --now";
         "Ctrl+Alt+Delete" = "exit";
         "F12" = "exec ${pkgs.wlogout}/bin/wlogout";
         #"${modifier}+Shift+l" = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
-        "${modifier}+Shift+l" = "${pkgs.hyprlock}/bin/hyprlock --immediate";
+        "Mod4+Shift+l" = "${pkgs.hyprlock}/bin/hyprlock --immediate";
       };
       window.commands = [
         {
@@ -523,7 +526,6 @@
         {command = "linphone --iconified";}
         {command = "blueman-applet";}
         {command = "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator";}
-        {command = "${pkgs.fractal}/bin/fractal";}
       ];
     };
   };

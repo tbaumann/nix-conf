@@ -19,6 +19,8 @@
     smtpPasswordPath = config.sops.secrets.smtpPassword.path;
   };
   sops.secrets.nix-access-tokens-github.mode = "0444";
+  clan.core.settings.state-version.enable = true;
+  clan.core.settings.machine-id.enable = true;
   nix = {
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
@@ -90,7 +92,7 @@
 
   # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
   system.switch = {
-    enable = false;
+    enableNg = true;
   };
 
   nixpkgs.config.allowUnfree = true;
