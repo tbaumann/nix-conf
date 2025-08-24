@@ -12,7 +12,6 @@
     ./budgie.nix
     ./sway.nix
     ./waybar.nix
-    # ./gnome.nix
     ./e9s.nix
   ];
 
@@ -33,6 +32,8 @@
   stylix.targets.plymouth.enable = true;
   stylix.targets.plymouth.logoAnimated = true;
   stylix.targets.console.enable = true;
+  #  stylix.targets.kde.enable = false;
+  stylix.targets.qt.enable = false;
   stylix.autoEnable = true;
 
   programs.regreet = {

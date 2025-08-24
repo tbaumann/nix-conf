@@ -9,7 +9,6 @@
   ...
 }: {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
@@ -28,6 +27,7 @@
   };
   services.btrfs.autoScrub.enable = true;
   hardware.sensor.iio.enable = true;
+  security.tpm2.enable = true;
 
   services.tlp = {
     enable = true;
@@ -82,8 +82,8 @@
   networking.useDHCP = lib.mkDefault true;
   #  networking.interfaces.wlp60s0.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   services.thermald.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = lib.mkForce "x86_64-linux";
 }

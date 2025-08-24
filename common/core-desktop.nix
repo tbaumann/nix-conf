@@ -22,13 +22,6 @@
 
   nixpkgs.overlays = [inputs.nix-topology.overlays.default];
 
-  # to install chrome, you need to enable unfree packages
-  nixpkgs.config.allowUnfree = lib.mkForce true;
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "rambox"
-    ];
-
   boot.plymouth.enable = true;
 
   # add user's shell into /etc/shells
@@ -42,9 +35,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #    hplip
     appimage-run
     ghostscript
+    inkscape-with-extensions
     kanshi
     libreoffice
     psmisc # killall/pstree/prtstat/fuser/...
@@ -56,13 +49,9 @@
     wev
     wine
     zathura
-    zoom-us
   ];
 
   programs = {
-    # The OpenSSH agent remembers private keys for you
-    # so that you don’t have to type in passphrases every time you make an SSH connection.
-    # Use `ssh-add` to add a key to the agent.
     ssh.startAgent = true;
     # dconf is a low-level configuration system.
     dconf.enable = true;
@@ -122,26 +111,23 @@
 
   xdg.portal = {
     enable = true;
-    # Sets environment variable NIXOS_XDG_OPEN_USE_PORTAL to 1
-    # This will make xdg-open use the portal to open programs,
-    # which resolves bugs involving programs opening inside FHS envs or with unexpected env vars set from wrappers.
-    # xdg-open is used by almost all programs to open a unknown file/uri
-    # alacritty as an example, it use xdg-open as default, but you can also custom this behavior
-    # and vscode has open like `External Uri Openers`
     xdgOpenUsePortal = false;
     wlr.enable = true;
   };
 
-  # all fonts are linked to /nix/var/nix/profiles/system/sw/share/X11/fonts
   fonts = {
     # use fonts specified by user rather than default ones
-    enableDefaultPackages = false;
+    fontconfig.enable = true;
+    enableDefaultPackages = true;
     fontDir.enable = true;
 
     packages = with pkgs; [
       # icon fonts
       material-design-icons
       font-awesome
+      corefonts
+      open-fonts
+      liberation_ttf
 
       noto-fonts
       noto-fonts-cjk-sans

@@ -115,12 +115,12 @@
       {
         event = "before-sleep";
         #command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
-        command = "${pkgs.hyprlock}/bin/hyprlock";
+        command = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock --immediate";
       }
       {
         event = "lock";
         #command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize --grace 0";
-        command = "${pkgs.hyprlock}/bin/hyprlock --immediate";
+        command = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock --immediate";
       }
       {
         event = "unlock";
@@ -136,7 +136,7 @@
       {
         timeout = 1800;
         #command = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
-        command = "${pkgs.hyprlock}/bin/hyprlock";
+        command = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
       }
       {
         timeout = 2000;

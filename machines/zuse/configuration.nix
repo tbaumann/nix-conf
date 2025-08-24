@@ -1,8 +1,6 @@
 {
   inputs,
-  config,
   pkgs,
-  environment,
   lib,
   ...
 }: {
@@ -19,10 +17,6 @@
     ../../common/core-desktop.nix
     ../../common/core-pc.nix
   ];
-  clan.core.networking.zerotier.controller = {
-    enable = true;
-    public = true;
-  };
   topology.self = {
     hardware.info = "24 core Threadripper workstation";
     interfaces.eno1 = {
@@ -30,6 +24,7 @@
       wakeOnLan.enable = true;
     };
   };
+  networking.useNetworkd = lib.mkForce true;
 
   # BTRFS stuff
   services.btrfs.autoScrub.enable = true;
@@ -38,16 +33,8 @@
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
-    package = pkgs.openrgb;
   };
   programs.coolercontrol.enable = true;
-  virtualisation.vmVariant = {
-    # following configuration is added only when building VM with build-vm
-    virtualisation = {
-      memorySize = 2048; # Use 2048MiB memory.
-      cores = 3;
-    };
-  };
   # FIXME broken boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
   boot.extraModprobeConfig = "options kvm_amd nested=1";
   environment.systemPackages = with pkgs; [

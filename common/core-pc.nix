@@ -20,6 +20,7 @@
     };
     efi.canTouchEfiVariables = true;
   };
+  systemd.oomd.enable = true;
   programs = {
     dconf.enable = true;
     minipro.enable = true;

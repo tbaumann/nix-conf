@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   nix.settings.trusted-users = ["tilli"];
+  users.mutableUsers = false;
+  services.userborn.enable = true;
 
   users.users = {
     root = {

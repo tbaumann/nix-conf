@@ -4,9 +4,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    clan-core = {
-      url = "git+https://git.clan.lol/clan/clan-core";
-    };
+    clan-core.url = "git+https://git.clan.lol/clan/clan-core";
+    #nixpkgs.follows = "clan-core/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
@@ -18,6 +17,7 @@
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       #url = "github:nix-community/home-manager/";
@@ -83,6 +83,7 @@
       flake = false;
     };
     felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} (
@@ -96,12 +97,13 @@
 
         imports = [
           inputs.terranix.flakeModule
+          inputs.treefmt-nix.flakeModule
           ./checks.nix
           ./clan.nix
           ./devshells.nix
-          ./formatter.nix
-          ./topology.nix
+          ./hooks.nix
           ./pkgs.nix
+          ./topology.nix
         ];
       }
     );

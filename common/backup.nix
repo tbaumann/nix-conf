@@ -17,6 +17,7 @@
       paths = [
         "/home/tilli/"
         "/home/chaimae/"
+        "/.rw-etc/upper"
       ];
       extraBackupArgs = [
         "--tag home"

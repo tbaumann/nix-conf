@@ -2,12 +2,14 @@
   config,
   inputs,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
     ./user-group.nix
     ./nixbuild.nix
     ../modules/email.nix
+    #./syncthing.nix
   ];
 
   email = {
@@ -90,9 +92,8 @@
     ];
   };
 
-  # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
   system.switch = {
-    enableNg = true;
+    enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -151,6 +152,7 @@
     })
   ];
   */
+  system.rebuild.enableNg = true;
 
   services = {
     ntpd-rs.enable = true;
