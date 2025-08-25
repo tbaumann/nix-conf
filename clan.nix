@@ -27,6 +27,10 @@
           tags = ["pc" "desktop" "laptop"];
           deploy.targetHost = "tilli@zuse-klappi.tail84117.ts.net";
         };
+        sina-open = {
+          tags = ["pc" "desktop"];
+          deploy.targetHost = "tilli@sina-open.tail84117.ts.net";
+        };
       };
       ## Clan Services
       instances = {
