@@ -1,0 +1,12 @@
+{
+  "machines": {
+    "sina-open": {
+      "deploy": {
+        "targetHost": "nixos@nixos.tail84117.ts.net"
+      },
+      "tags": [
+        "desktop  pc"
+      ]
+    }
+  }
+}
