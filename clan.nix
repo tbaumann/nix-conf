@@ -76,6 +76,7 @@
           roles.default.tags.all = {};
           roles.default.settings = {
             user = "tilli";
+            share = true;
             groups = [
               "adbusers"
               "cdrom"
@@ -105,6 +106,7 @@
           roles.default.tags.desktop = {};
           roles.default.settings = {
             user = "chaimae";
+            share = true;
             groups = [
               "cdrom"
               "input"
