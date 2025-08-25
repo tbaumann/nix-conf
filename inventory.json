@@ -8,6 +8,9 @@
       "deploy": {
         "targetHost": "nixos@nixos.tail84117.ts.net"
       }
+    },
+    "sina-open": {
+      "installedAt": 1756121306
     }
   }
 }
