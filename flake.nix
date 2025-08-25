@@ -4,7 +4,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    clan-core.url = "git+https://git.clan.lol/clan/clan-core";
+    #clan-core.url = "git+https://git.clan.lol/clan/clan-core";
+    clan-core.url = "git+file:///home/tilli/git/clan/clan-core";
     #nixpkgs.follows = "clan-core/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
@@ -82,7 +83,7 @@
       url = "github:hackr-sh/ghostty-shaders";
       flake = false;
     };
-    felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
+    # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
   outputs = inputs @ {flake-parts, ...}:

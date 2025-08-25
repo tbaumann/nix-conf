@@ -5,14 +5,8 @@
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-gpu-amd
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
-
     ../../modules/shared.nix
 
-    ./hardware-configuration.nix
     ../../common/core.nix
     ../../common/core-desktop.nix
     ../../common/core-pc.nix
