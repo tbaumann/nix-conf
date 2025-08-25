@@ -1,7 +1,7 @@
 # ---
 # schema = "single-disk"
 # [placeholders]
-# mainDisk = "" 
+# mainDisk = "/dev/disk/by-id/nvme-ORCL-VBOX-NVME-VER12_VB1234-56789" 
 # ---
 # This file was automatically generated!
 # CHANGING this configuration requires wiping and reinstalling the machine
@@ -13,8 +13,8 @@
   disko.devices = {
     disk = {
       main = {
-        name = "main-f6c77bbf567d47fe9f310ed3cf0966cb";
-        device = "";
+        name = "main-a39ca73c143f442391598298002993c1";
+        device = "/dev/disk/by-id/nvme-ORCL-VBOX-NVME-VER12_VB1234-56789";
         type = "disk";
         content = {
           type = "gpt";
