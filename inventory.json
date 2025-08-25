@@ -1,0 +1,13 @@
+{
+  "machines": {
+    "test": {
+      "tags": [
+        "desktop",
+        "pc"
+      ],
+      "deploy": {
+        "targetHost": "nixos@nixos.tail84117.ts.net"
+      }
+    }
+  }
+}
