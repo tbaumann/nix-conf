@@ -18,8 +18,8 @@
   };
   #systemd.network.wait-online.enable = lib.mkForce true;
   networking.useNetworkd = lib.mkForce true;
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   #use the big box
   nix.distributedBuilds = true;
-  networking.hostName = "zuse-klappi";
 }

@@ -1,15 +1,14 @@
 # ---
 # schema = "single-disk"
 # [placeholders]
-# mainDisk = "/dev/disk/by-id/nvme-ORCL-VBOX-NVME-VER12_VB1234-56789" 
+# mainDisk = "/dev/disk/by-id/nvme-ORCL-VBOX-NVME-VER12_VB1234-56789"
 # ---
 # This file was automatically generated!
 # CHANGING this configuration requires wiping and reinstalling the machine
 {
-
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.enable = true;
+  #boot.loader.grub.efiSupport = true;
+  #boot.loader.grub.efiInstallAsRemovable = true;
+  #boot.loader.grub.enable = true;
   disko.devices = {
     disk = {
       main = {
@@ -31,7 +30,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = ["umask=0077"];
               };
             };
             root = {

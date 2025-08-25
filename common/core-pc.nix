@@ -18,7 +18,7 @@
       memtest86.enable = true;
       netbootxyz.enable = true;
     };
-    efi.canTouchEfiVariables = true;
+    # conflicts with facter efi.canTouchEfiVariables = true;
   };
   systemd.oomd.enable = true;
   programs = {
