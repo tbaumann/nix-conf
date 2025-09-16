@@ -42,11 +42,12 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [gutenprint hplip foomatic-db-ppds];
+    };
     udisks2.enable = true;
   };
-  systemd.tpm2.enable = true;
-  security.tpm2.enable = true;
   environment.systemPackages = with pkgs; [
     btop
     dfu-util
