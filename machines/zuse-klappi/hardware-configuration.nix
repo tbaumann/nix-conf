@@ -26,9 +26,8 @@
     ];
   };
   services.btrfs.autoScrub.enable = true;
-  hardware.sensor.iio.enable = true;
-  security.tpm2.enable = true;
 
+  hardware.sensor.iio.enable = true;
   services.tlp = {
     enable = true;
     settings = {
