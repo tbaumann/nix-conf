@@ -44,26 +44,14 @@
           block = "music";
           format = "$icon {$combo.str(max_w:20,rot_interval:0.5) $play $next |}";
         }
-        /*
-        {
-          block = "notify";
-          click = [
-            {
-              button = "left";
-              action = "show";
-            }
-            {
-              button = "right";
-              action = "toggle_paused";
-            }
-          ];
-        }
-        */
         {
           block = "privacy";
           driver = [
             {
               name = "v4l";
+            }
+            {
+              name = "pipewire";
             }
           ];
         }
@@ -90,12 +78,26 @@
           json = true;
         }
         {
+          block = "kdeconnect";
+        }
+        {
+          block = "net";
+          missing_format = "";
+          format = " $icon  {$signal_strength $ssid|Wired connection} ";
+        }
+        {
           block = "battery";
           missing_format = "";
+          click = [
+            {
+              button = "right";
+              cmd = "${pkgs.lxqt.lxqt-sudo}/bin/lxqt-sudo ${pkgs.tlp}/bin/tlp fullcharge";
+            }
+          ];
         }
         {
           block = "custom";
-          format = " ";
+          format = "\\uf011";
           command = "/run/current-system/sw/bin/false";
           interval = "once";
           click = [
@@ -512,7 +514,7 @@
         {command = "solaar -w hide";}
         {command = "polychromatic-tray-applet";}
         {command = "coolercontrol";}
-        {command = "joplin-desktop";}
+        {command = "NIXOS_OZONE_WL='' joplin-desktop";}
         {command = "wl-clip-persist --clipboard regular";}
         {command = "wpaperd";}
         {command = "firefox";}
