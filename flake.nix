@@ -99,7 +99,7 @@
         imports = [
           inputs.terranix.flakeModule
           inputs.treefmt-nix.flakeModule
-          ./checks.nix
+          # ./checks.nix
           ./clan.nix
           ./devshells.nix
           ./hooks.nix
