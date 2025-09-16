@@ -20,11 +20,11 @@
       ## Machines
       machines = {
         zuse = {
-          tags = ["pc" "desktop"];
+          tags = ["pc" "desktop" "kmscon"];
           deploy.targetHost = "tilli@zuse.tail84117.ts.net";
         };
         zuse-klappi = {
-          tags = ["pc" "desktop" "laptop"];
+          tags = ["pc" "desktop" "laptop" "kmscon"];
           deploy.targetHost = "tilli@zuse-klappi.tail84117.ts.net";
         };
         sina-open = {
@@ -41,6 +41,14 @@
           };
           roles.default.tags.laptop = {};
           roles.default.extraModules = ["common/laptop.nix"];
+        };
+        kmscon = {
+          module = {
+            name = "importer";
+            input = "clan-core";
+          };
+          roles.default.tags.kmscon = {};
+          roles.default.extraModules = ["common/services/kmscon.nix"];
         };
         clan-cache = {
           module = {
