@@ -3,7 +3,6 @@
     enable = true;
     qemu = {
       runAsRoot = true;
-      swtpm.enable = true;
       ovmf = {
         enable = true;
       };
