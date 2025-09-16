@@ -51,8 +51,6 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "selfhostblocks.cachix.org-1:H5h6Uj188DObUJDbEbSAwc377uvcjSFOfpxyCFP7cVs="
       ];
-      cores = 24;
-      max-jobs = 24;
       # access-tokens = "github.com=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";
     };
     buildMachines = [
@@ -202,8 +200,6 @@
     "power" = {};
   };
   environment.variables = {
-    # fix https://github.com/NixOS/nixpkgs/issues/238025
-    TZ = "${config.time.timeZone}";
     PAGER = "${pkgs.bat}/bin/bat";
   };
 }

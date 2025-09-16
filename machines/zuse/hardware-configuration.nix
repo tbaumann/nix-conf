@@ -79,7 +79,10 @@
       #    randomEncryption.enable = true;  maybe not for suspend
     }
   ];
-
+  nix.settings = {
+    cores = 24;
+    max-jobs = 24;
+  };
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
