@@ -2,26 +2,23 @@
   description = "My flake for everything";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #clan-core.url = "git+https://git.clan.lol/clan/clan-core";
-    clan-core.url = "git+file:///home/tilli/git/clan/clan-core";
-    #nixpkgs.follows = "clan-core/nixpkgs";
+    clan-core.url = "git+https://git.clan.lol/clan/clan-core";
+
+    #clan-core.url = "git+file:///home/tilli/git/clan/clan-core";
+    nixpkgs.follows = "clan-core/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "nixpkgs"; # optional
     };
-    #stylix.url = "github:danth/stylix/release-24.11";
-    stylix.url = "github:danth/stylix/release-25.05";
-    #stylix.url = "github:danth/stylix/";
+    stylix.url = "github:danth/stylix/";
     base16.url = "github:SenchoPens/base16.nix";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      #url = "github:nix-community/home-manager/";
+      #url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-networkmanager-profiles = {
@@ -74,6 +71,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
     niri-flake.url = "github:sodiboo/niri-flake";
+    reticulum-flake.url = "git+https://codeberg.org/adingbatponder/reticulum_nixos_flake.git";
 
     nix-topology.url = "github:oddlama/nix-topology";
     nix-topology.inputs.nixpkgs.follows = "nixpkgs";
@@ -85,6 +83,7 @@
     };
     # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    meshcoretomqtt.url = "github:tbaumann/meshcoretomqtt";
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} (

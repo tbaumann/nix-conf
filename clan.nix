@@ -24,7 +24,7 @@
           deploy.targetHost = "tilli@zuse.tail84117.ts.net";
         };
         zuse-klappi = {
-          tags = ["pc" "desktop" "laptop" "kmscon"];
+          tags = ["pc" "desktop" "laptop" "kmscon" "meshcore"];
           deploy.targetHost = "tilli@zuse-klappi.tail84117.ts.net";
         };
         sina-open = {
@@ -49,6 +49,14 @@
           };
           roles.default.tags.kmscon = {};
           roles.default.extraModules = ["common/services/kmscon.nix"];
+        };
+        meshcore = {
+          module = {
+            name = "importer";
+            input = "clan-core";
+          };
+          roles.default.tags.meshcore = {};
+          roles.default.extraModules = ["common/meshcore.nix"];
         };
         clan-cache = {
           module = {

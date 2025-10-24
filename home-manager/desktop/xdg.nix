@@ -33,6 +33,7 @@
       };
     };
     desktopEntries = {
+      /*
       baby = {
         name = "Baby Monitor";
         # MPV is natve waiyland but has audio issues with this camera
@@ -41,7 +42,6 @@
         terminal = false;
         categories = ["Application"];
       };
-      /*
       Jellyfin = {
         name = "Jellyfin";
         type = "Link";

@@ -51,6 +51,7 @@
     zathura
   ];
 
+  services.gnome.gcr-ssh-agent.enable = false;
   programs = {
     ssh.startAgent = true;
     # dconf is a low-level configuration system.

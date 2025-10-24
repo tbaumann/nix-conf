@@ -11,7 +11,8 @@
     builtins.elem (lib.getName pkg) [
       "rambox"
     ];
-  home.packages = [
-    pkgs.rambox
+  home.packages = with pkgs; [
+    rambox
+    signal-desktop-bin
   ];
 }

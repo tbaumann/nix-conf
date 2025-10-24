@@ -1,14 +1,7 @@
-{pkgs, ...}: let
-  unstable = import <nixos-unstable> {
-    config = {
-      allowUnfree = true;
-    };
-  };
-in {
+{pkgs, ...}: {
   stylix.targets.librewolf.profileNames = ["default"];
   programs.librewolf = {
     # package = (pkgs.wrapFirefox (pkgs.firefox-devedition-unwrapped.override { pipewireSupport = true; }) { });
-    #package = unstable.librewolf;
     enable = true;
     policies = {
       ExtensionSettings = {

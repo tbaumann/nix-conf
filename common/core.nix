@@ -39,6 +39,7 @@
       randomizedDelaySec = "1h";
     };
     settings = {
+      download-buffer-size = 500000000; # 500 MB
       builders-use-substitutes = true;
       auto-optimise-store = true;
       trusted-users = ["@wheel"];
@@ -138,18 +139,8 @@
     bcachefs-tools
     btop
     nix-index
-    wcurl
   ];
 
-  /*
-  # Override the default Python version
-  nixpkgs.overlays = [
-    (self: super: {
-      python3 = super.python312;
-      #  https://chat.deepseek.com/a/chat/s/e5900358-07d3-4a14-b21a-d76968d96f9f
-    })
-  ];
-  */
   system.rebuild.enableNg = true;
 
   services = {

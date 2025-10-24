@@ -14,6 +14,7 @@
     ./openscad.nix
     ./sip.nix
     ./ssh.nix
+    ./zoxide.nix
     #./syncthing.nix
     ./terminal
   ];
