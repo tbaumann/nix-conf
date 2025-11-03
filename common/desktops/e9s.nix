@@ -5,5 +5,5 @@
 }: {
   imports = [
   ];
-  services.xserver.desktopManager.enlightenment.enable = true;
+  services.xserver.desktopManager.enlightenment.enable = false;
 }
