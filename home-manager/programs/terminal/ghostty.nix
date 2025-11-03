@@ -1,12 +1,12 @@
 {inputs, ...}: {
-  #stylix.targets.ghostty.enable = false;
+  stylix.targets.ghostty.enable = false;
   programs.ghostty = {
     enable = true;
     installVimSyntax = true;
     enableFishIntegration = true;
     settings = {
       font-family = "TX-02";
-      theme = "catppuccin-mocha";
+      #theme = "catppuccin-mocha";
       font-size = 19;
       font-thicken = true;
       keybind = [
