@@ -12,6 +12,8 @@
       ServerAliveInterval 60
       IPQoS throughput
       IdentityFile ${config.sops.secrets.my-nixbuild-key.path}
+      SetEnv NIXBUILDNET_REUSE_BUILD_FAILURES=false
+      SendEnv NIXBUILDNET_*
   '';
 
   programs.ssh.knownHosts = {
@@ -26,7 +28,27 @@
     buildMachines = [
       {
         hostName = "eu.nixbuild.net";
+        system = "x86_64-linux";
+        maxJobs = 100;
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+        ];
+      }
+      {
+        hostName = "eu.nixbuild.net";
         system = "aarch64-linux";
+        maxJobs = 100;
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+          "kvm"
+          "nixos-test"
+        ];
+      }
+      {
+        hostName = "eu.nixbuild.net";
+        system = "armv71-linux";
         maxJobs = 100;
         supportedFeatures = [
           "benchmark"
