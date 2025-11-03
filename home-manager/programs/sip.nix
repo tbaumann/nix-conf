@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     twinkle
-    linphone
+    # FIXME broken build linphone
   ];
 }
