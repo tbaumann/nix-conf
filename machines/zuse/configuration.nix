@@ -33,7 +33,6 @@
   environment.systemPackages = with pkgs; [
     liquidctl
   ];
-  #  hardware.gkraken.enable = true;
   #  hardware.openrazer.enable = true;
   #  hardware.openrazer.users = ["tilli"];
   networking.hostName = "zuse";

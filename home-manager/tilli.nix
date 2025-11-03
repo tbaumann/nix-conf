@@ -52,10 +52,14 @@
     ];
   };
   programs.git.enable = true;
-  programs.git.userEmail = "tilman@baumann.name";
-  programs.git.userName = "Tilman Baumann";
-  programs.git.aliases = {
-    pr = "pull --rebase";
+  programs.git.settings = {
+    user = {
+      email = "tilman@baumann.name";
+      name = "Tilman Baumann";
+    };
+    aliases = {
+      pr = "pull --rebase";
+    };
   };
   home.file.".face" = {
     source = ./tilli/tilli-face.png;

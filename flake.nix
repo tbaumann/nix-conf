@@ -9,7 +9,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
-      inputs.nixpkgs.follows = "nixpkgs"; # optional
+      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
     stylix.url = "github:danth/stylix/";
     base16.url = "github:SenchoPens/base16.nix";
@@ -19,7 +19,7 @@
     home-manager = {
       #url = "github:nix-community/home-manager/release-25.05";
       url = "github:nix-community/home-manager/";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     nixos-networkmanager-profiles = {
       url = "github:jmackie/nixos-networkmanager-profiles";
@@ -30,7 +30,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     wpaperd = {
       url = "github:Narice/wpaperd";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     #nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
     nvf.url = "github:notashelf/nvf/";
@@ -41,7 +41,6 @@
     waybar_media_display.url = "github:tbaumann/waybar_media_display";
     iio-sway.url = "github:tbaumann/iio-sway";
 
-    nixarr.url = "github:rasmus-kirk/nixarr";
     argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
 
     ucodenix.url = "github:e-tho/ucodenix";
@@ -65,16 +64,20 @@
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
 
-    impermanence.url = "github:nix-community/impermanence";
-    niri-flake.url = "github:sodiboo/niri-flake";
+    #impermanence.url = "github:nix-community/impermanence";
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
+    };
+
     reticulum-flake.url = "git+https://codeberg.org/adingbatponder/reticulum_nixos_flake.git";
 
     nix-topology.url = "github:oddlama/nix-topology";
-    nix-topology.inputs.nixpkgs.follows = "nixpkgs";
+    nix-topology.inputs.nixpkgs.follows = "clan-core/nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     ghostty-shaders = {
@@ -83,7 +86,10 @@
     };
     # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    meshcoretomqtt.url = "github:tbaumann/meshcoretomqtt";
+    meshcoretomqtt = {
+      url = "github:tbaumann/meshcoretomqtt";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
+    };
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} (

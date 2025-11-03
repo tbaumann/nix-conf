@@ -117,6 +117,7 @@
   system.etc.overlay.enable = true;
   system.etc.overlay.mutable = true;
   boot.initrd.systemd.enable = true;
+  system.nixos-init.enable = true;
 
   # add user's shell into /etc/shells
   environment.shells = with pkgs; [
@@ -140,8 +141,6 @@
     btop
     nix-index
   ];
-
-  system.rebuild.enableNg = true;
 
   services = {
     ntpd-rs.enable = true;

@@ -11,7 +11,7 @@
     wrapperFeatures.base = true;
     wrapperFeatures.gtk = true;
   };
-  services.logind.killUserProcesses = true;
+  services.logind.settings.Login.killUserProcesses = true;
   environment.systemPackages = with pkgs; [
     yambar
     nwg-launchers
