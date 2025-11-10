@@ -26,7 +26,6 @@
   nix = {
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
-    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
       builders-use-substitutes = true

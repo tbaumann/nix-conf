@@ -8,7 +8,6 @@
     ./lxqt.nix
     ./gtk-lock.nix
     ./niri.nix
-    #./hyprland.nix
     ./budgie.nix
     ./sway.nix
     ./waybar.nix
@@ -69,7 +68,6 @@
     wf-recorder # creen recording
     grim # taking screenshots
     slurp # selecting a region to screenshot
-    # TODO replace by `flameshot gui --raw | wl-copy`
 
     mako # the notification daemon, the same as dunst
 

@@ -3,7 +3,6 @@
     #./vscode.nix
     ./gtk.nix
     ./gtk-lock.nix
-    ./hyprland
     ./media.nix
     ./messenger.nix
     ./niri.nix

@@ -15,13 +15,15 @@
     ./sip.nix
     ./ssh.nix
     ./zoxide.nix
-    #./syncthing.nix
     ./terminal
   ];
 
   stylix.targets.firefox.enable = false;
   programs = {
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-wayland;
+    };
     home-manager.enable = true;
     yazi.enable = true;
     lsd.enable = true;
