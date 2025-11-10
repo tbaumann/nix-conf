@@ -91,7 +91,7 @@
           typst.enable = false;
           rust = {
             enable = true;
-            crates.enable = true;
+            # crates.enable = true;
           };
 
           # Language modules that are not as common.
