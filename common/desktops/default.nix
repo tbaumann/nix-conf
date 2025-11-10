@@ -27,12 +27,24 @@
   };
   stylix.image = pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
-  stylix.targets.nixos-icons.enable = true;
-  stylix.targets.plymouth.enable = true;
-  stylix.targets.plymouth.logoAnimated = true;
-  stylix.targets.console.enable = true;
+  stylix = {
+    targets = {
+      nixos-icons = {
+        enable = true;
+      };
+      plymouth = {
+        enable = true;
+        logoAnimated = true;
+      };
+      console = {
+        enable = true;
+      };
+      qt = {
+        enable = false;
+      };
+    };
+  };
   #  stylix.targets.kde.enable = false;
-  stylix.targets.qt.enable = false;
   stylix.autoEnable = true;
 
   programs.regreet = {

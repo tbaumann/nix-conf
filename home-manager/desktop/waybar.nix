@@ -4,10 +4,16 @@
   config,
   ...
 }: {
-  stylix.targets.waybar.enable = true;
-  stylix.targets.waybar.enableLeftBackColors = true;
-  stylix.targets.waybar.enableCenterBackColors = true;
-  stylix.targets.waybar.enableRightBackColors = true;
+  stylix = {
+    targets = {
+      waybar = {
+        enable = true;
+        enableLeftBackColors = true;
+        enableCenterBackColors = true;
+        enableRightBackColors = true;
+      };
+    };
+  };
 
   programs.waybar.enable = true;
   programs.waybar.settings = {
