@@ -1,21 +1,21 @@
 {pkgs, ...}: {
   imports = [
-    #./starship.nix
     ./beets.nix
     ./chromium.nix
     ./ente.nix
     ./fish.nix
-    ./kicad.nix
     ./helix.nix
+    ./kicad.nix
     ./librewolf.nix
     ./librewolf.nix
+    ./llm.nix
     ./nushell.nix
     ./nvf.nix
     ./openscad.nix
     ./sip.nix
     ./ssh.nix
-    ./zoxide.nix
     ./terminal
+    ./zoxide.nix
   ];
 
   stylix.targets.firefox.enable = false;
