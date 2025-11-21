@@ -13,7 +13,7 @@
     microvm.nixosModules.host
     nixos-sbc.nixosModules.cache
     nix-topology.nixosModules.default
-    niri-flake.nixosModules.niri
+    #niri-flake.nixosModules.niri
     ucodenix.nixosModules.default
     home-manager.nixosModules.home-manager
     {
@@ -21,6 +21,7 @@
       home-manager.sharedModules = [
         nix-index-database.homeModules.nix-index
         nix-flatpak.homeManagerModules.nix-flatpak
+        #niri-flake.homeModules.niri
         nvf.homeManagerModules.default
         iio-sway.homeManagerModules.default
         stylix.homeModules.stylix
