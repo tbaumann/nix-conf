@@ -5,7 +5,8 @@ project to help agents and contributors maintain consistency.
 
 ## Formatting
 
-- Use `nix fmt` for consistent code formatting
+- Use `nix fmt` for consistent code formatting. (`nix fmt` formats the entire
+  tree. For individual files `nixfmt` can be used.)
 - Run the formatter after making changes to ensure consistent styling
 
 ## Attribute Assignment Style

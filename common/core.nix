@@ -139,6 +139,7 @@
     bcachefs-tools
     btop
     nix-index
+    nixfmt-rfc-style
   ];
 
   services = {

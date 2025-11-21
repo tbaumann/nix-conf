@@ -222,7 +222,7 @@
         "format" = "{}°";
         "tooltip" = true;
         "interval" = 3600;
-        "exec" = "${pkgs.wttrbar}/bin/wttrbar --location Marrakech";
+        "exec" = "${pkgs.wttrbar}/bin/wttrbar --location Frankenberg,Hessen,Germany";
         "return-type" = "json";
       };
       "sway/language" = {

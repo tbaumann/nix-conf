@@ -1,11 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     #./vscode.nix
     ./gtk.nix
     ./gtk-lock.nix
     ./media.nix
     ./messenger.nix
-    ./niri.nix
+    ./niri
     ./nwg-panel.nix
     ./sway.nix
     ./waybar.nix
@@ -18,6 +22,7 @@
     flameshot
     syncthingtray-minimal
     sway-audio-idle-inhibit
+    #inputs.quickshell.packages.${pkgs.system}.default
   ];
   programs.zathura.enable = true;
   programs.joplin-desktop = {

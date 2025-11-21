@@ -27,6 +27,15 @@
     };
     terranix.url = "github:terranix/terranix";
 
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+    };
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+    };
+
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     wpaperd = {
       url = "github:Narice/wpaperd";

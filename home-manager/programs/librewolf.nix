@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  programs.floorp.enable = true; # FIMXE give it's own module if it turns out good
+  stylix.targets.floorp.profileNames = ["default"];
   stylix.targets.librewolf.profileNames = ["default"];
   programs.librewolf = {
     # package = (pkgs.wrapFirefox (pkgs.firefox-devedition-unwrapped.override { pipewireSupport = true; }) { });
