@@ -73,7 +73,7 @@
         {
           block = "custom";
           interval = 1200;
-          command = "wttrbar --location Marrakech";
+          command = "wttrbar --location Frankenberg,Hessen,Germany";
           format = "{ $icon|} $text.pango-str()°";
           json = true;
         }
