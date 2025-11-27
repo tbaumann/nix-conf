@@ -32,7 +32,7 @@
         {command = ["firefox"];}
         {command = ["chromium"];}
         {command = ["thunderbird"];}
-        {command = ["rambox" "--enable-features=WaylandWindowDecorations" "--ozone-platform-hint=auto" "--enable-webrtc-pipewire-capturer"];}
+        {sh = "NIXOS_OZONE_WL=1 rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
         {command = ["openrgb" "--startminimized"];}
         {command = ["linphone" "--iconified"];}
         {command = ["blueman-applet"];}
@@ -40,7 +40,7 @@
       ];
       input = {
         keyboard.xkb = {
-          layout = "us";
+          layout = "us,ara";
           options = "compose:ralt,compose:rwin";
         };
 
@@ -62,7 +62,7 @@
           enable = true;
           max-scroll-amount = "90%";
         };
-        warp-mouse-to-focus.enable = true;
+        #warp-mouse-to-focus.enable = true;
         workspace-auto-back-and-forth = true;
       };
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
@@ -108,7 +108,7 @@
           proportion = 0.5;
         };
 
-        gaps = 6;
+        gaps = 2;
         struts = {
           left = 0;
           right = 0;
@@ -170,10 +170,10 @@
               app-id = "thunderbird";
               at-startup = true;
             }
-            #{app-id = "rambox";}
+            {app-id = "rambox";}
           ];
 
-          open-on-workspace = "09video";
+          open-on-workspace = "01comms";
           default-column-width.proportion = 0.5;
         }
       ];

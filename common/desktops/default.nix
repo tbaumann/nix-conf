@@ -81,8 +81,6 @@
     grim # taking screenshots
     slurp # selecting a region to screenshot
 
-    mako # the notification daemon, the same as dunst
-
     yad # a fork of zenity, for creating dialogs
 
     # audio

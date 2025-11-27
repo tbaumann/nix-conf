@@ -1,6 +1,4 @@
 {pkgs, ...}: {
-  programs.floorp.enable = true; # FIMXE give it's own module if it turns out good
-  stylix.targets.floorp.profileNames = ["default"];
   stylix.targets.librewolf.profileNames = ["default"];
   programs.librewolf = {
     # package = (pkgs.wrapFirefox (pkgs.firefox-devedition-unwrapped.override { pipewireSupport = true; }) { });
@@ -269,11 +267,6 @@
         "devtools.cache.disabled" = true; # disable caching in devtools
         "media.ffmpeg.vaapi.enabled" = true; # enable hardware acceleration
 
-        # Fonts
-        "font.size.fixed.x-western" = 15;
-        "font.minimum-size.x-western" = 13;
-        "font.size.variable.x-western" = 15;
-        "font.size.monospace.x-western" = 15;
         "browser.display.use_document_fonts" = 1;
         "browser.link.open_newwindow.restriction" = 0;
 

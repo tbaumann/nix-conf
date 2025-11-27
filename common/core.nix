@@ -143,7 +143,12 @@
   ];
 
   services = {
-    ntpd-rs.enable = true;
+    ntpd-rs = {
+      enable = true;
+      settings = {
+        observability.log-level = "warn";
+      };
+    };
     resolved.enable = true;
     avahi = {
       enable = true;

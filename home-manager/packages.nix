@@ -6,26 +6,27 @@
   programs.nix-index.enable = true;
   home.packages = with pkgs; [
     act
+    adwaita-icon-theme
     alejandra
     baobab
-    bitwarden
+    bitwarden-desktop
     bitwarden-cli
     cmake
-    du-dust
+    dconf-editor
+    dust
     entr
+    eog
     epiphany
     file
-    adwaita-icon-theme
-    dconf-editor
-    eog
+    fractal
     gnome-system-monitor
-    nautilus
     grim
     gtk4
     intel-gpu-tools
     lftp
     lshw
     mullvad-vpn
+    nautilus
     networkmanagerapplet
     ninja
     nodejs
@@ -37,10 +38,10 @@
     polychromatic
     pre-commit
     razergenie
-    # rink
     scc
     slurp
     swaylock-effects
+    tsukimi
     usbutils # For lsusb
     vlc
     wget

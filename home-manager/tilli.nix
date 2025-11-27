@@ -20,8 +20,6 @@
       vial
       qmk
       via
-      terraform
-      terraform-providers.openstack
       (pkgs.writers.writePython3Bin
         "ofx-fix"
         {libraries = [python312Packages.ofxparse];}

@@ -14,5 +14,6 @@
   home.packages = with pkgs; [
     rambox
     signal-desktop-bin
+    fractal
   ];
 }

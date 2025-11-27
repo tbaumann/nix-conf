@@ -110,7 +110,7 @@
       ];
     };
   };
-
+  /*
   services.swayidle = {
     enable = true;
     events = [
@@ -147,6 +147,7 @@
       }
     ];
   };
+  */
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;

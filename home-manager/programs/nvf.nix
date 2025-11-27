@@ -190,7 +190,7 @@
         };
 
         notify = {
-          nvim-notify.enable = true;
+          nvim-notify.enable = false;
         };
 
         projects = {

@@ -59,7 +59,6 @@
     inotify-tools
     jq
     just
-    libnotify
     lm_sensors
     localsend
     lsb-release

@@ -45,6 +45,7 @@
     restique
     simple-scan
     speedtest-cli
+    tsukimi
     thunderbird
     wev
     wine
@@ -106,7 +107,6 @@
       gnome-settings-daemon
       platformio # udev rules for platformio
       openocd # required by paltformio, see https://github.com/NixOS/nixpkgs/issues/224895
-      android-udev-rules
     ];
   };
 
@@ -132,8 +132,7 @@
 
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
-      noto-fonts-extra
+      noto-fonts-color-emoji
 
       source-sans
       source-serif

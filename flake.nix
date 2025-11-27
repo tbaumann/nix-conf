@@ -1,11 +1,11 @@
 {
   description = "My flake for everything";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     clan-core.url = "git+https://git.clan.lol/clan/clan-core";
 
     #clan-core.url = "git+file:///home/tilli/git/clan/clan-core";
-    nixpkgs.follows = "clan-core/nixpkgs";
+    #    nixpkgs.follows = "clan-core/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
@@ -17,8 +17,8 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     home-manager = {
-      #url = "github:nix-community/home-manager/release-25.05";
-      url = "github:nix-community/home-manager/";
+      url = "github:nix-community/home-manager/release-25.11";
+      #url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     nixos-networkmanager-profiles = {

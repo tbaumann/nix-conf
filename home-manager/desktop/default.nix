@@ -10,7 +10,6 @@
     ./media.nix
     ./messenger.nix
     ./niri
-    ./nwg-panel.nix
     ./sway.nix
     ./waybar.nix
     ./wlogout.nix

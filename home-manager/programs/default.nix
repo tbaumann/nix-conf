@@ -22,7 +22,6 @@
   programs = {
     firefox = {
       enable = true;
-      package = pkgs.firefox-wayland;
     };
     home-manager.enable = true;
     yazi.enable = true;

@@ -11,7 +11,7 @@
       notify = true;
     };
     mako = {
-      enable = true;
+      enable = false;
       settings = {
         border-radius = 5;
         border-size = 2;
