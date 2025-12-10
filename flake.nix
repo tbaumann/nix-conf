@@ -26,6 +26,7 @@
       flake = false;
     };
     terranix.url = "github:terranix/terranix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
