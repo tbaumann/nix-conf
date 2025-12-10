@@ -77,17 +77,27 @@
             };
           };
         };
+        /*
         sshd = {
           module = {
             name = "sshd";
             input = "clan-core";
           };
-          roles.server.tags.all = {};
-          roles.client.tags.all = {};
-          roles.server.settings = {
-            hostKeys.rsa.enable = true;
+          roles.client = {
+            tags.all = {};
+            settings = {
+              certificate.searchDomains = ["tail84117.ts.net" "local"];
+            };
+          };
+          roles.server = {
+            tags.all = {};
+            settings = {
+              hostKeys.rsa.enable = true;
+              certificate.searchDomains = ["tail84117.ts.net" "local"];
+            };
           };
         };
+        */
         user-tilli = {
           module = {
             name = "users";
@@ -100,8 +110,8 @@
             groups = [
               "adbusers"
               "cdrom"
-              "disk"
               "dialout"
+              "disk"
               "docker"
               "input"
               "kvm"
@@ -112,6 +122,7 @@
               "plugdev"
               "podman"
               "scanner"
+              "tss"
               "users"
               "wheel"
               "wireshark"
