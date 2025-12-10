@@ -19,11 +19,6 @@
         XDG_SESSION_TYPE = "wayland";
       };
       spawn-at-startup = [
-        {command = ["wl-paste" "--watch" "cliphist" "store"];}
-        {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
-
-        #{command = "nm-applet";}
-        #{command = "wl-clip-persist --clipboard regular";}
         # {command = "syncthingtray --wait";}
         {command = ["solaar" "-w" "hide"];}
         {command = ["polychromatic-tray-applet"];}

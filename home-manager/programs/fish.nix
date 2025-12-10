@@ -26,28 +26,7 @@
         name = "colored-man-pages";
         src = pkgs.fishPlugins.colored-man-pages.src;
       }
-      /*
-      {
-        name = "forgit";
-        src = pkgs.fishPlugins.forgit.src;
-      }
-      {
-        name = "hydro";
-        src = pkgs.fishPlugins.hydro.src;
-      }
-      {
-        name = "pure";
-        src = pkgs.fishPlugins.pure.src;
-      }
-      {
-        name = "bobthefisher";
-        src = pkgs.fishPlugins.bobthefisher.src;
-      }
-      */
     ];
-    functions = {
-      fish_greeting = "echo ;";
-    };
   };
   xdg.configFile."fish/themes/" = {
     source = "${inputs.catppuccin-fish}/themes";
@@ -57,5 +36,6 @@
   programs.oh-my-posh = {
     enable = true;
     useTheme = "catppuccin_mocha";
+    enableFishIntegration = true;
   };
 }

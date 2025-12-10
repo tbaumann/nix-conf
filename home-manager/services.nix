@@ -28,7 +28,9 @@
 
           disabledTrayIcon = false;
           showDesktopNotification = true;
-          showHelp = true;
+          showHelp = false;
+          showStartupLaunchMessage = false;
+          useGrimAdapter = true;
         };
       };
     };

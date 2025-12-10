@@ -31,7 +31,6 @@
     ninja
     nodejs
     nvd
-    openrazer-daemon
     optipng
     pavucontrol
     pciutils # For lspci
