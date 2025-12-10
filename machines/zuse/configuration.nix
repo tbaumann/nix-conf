@@ -34,8 +34,6 @@
   environment.systemPackages = with pkgs; [
     liquidctl
   ];
-  #  hardware.openrazer.enable = true;
-  #  hardware.openrazer.users = ["tilli"];
   networking.hostName = "zuse";
   system.stateVersion = "23.05"; # Did you read the comment?
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
