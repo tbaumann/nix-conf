@@ -15,7 +15,7 @@
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action.screenshot-window = [];
     "Mod+Shift+S".action.screenshot = {show-pointer = false;};
-    "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
+    "Mod+Return".action = spawn "${pkgs.foot}/bin/foot";
 
     "Mod+C".action = close-window;
     "Mod+S".action = switch-preset-column-width;

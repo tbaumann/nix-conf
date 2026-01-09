@@ -217,12 +217,6 @@
       UMask = "0077";
     };
   };
-  systemd.services."nixos-rebuild-switch-to-configuration" = {
-    serviceConfig = {
-      ProtectHome = true;
-      NoNewPrivileges = true; # Prevent gaining new privileges
-    };
-  };
   systemd.services."dbus" = {
     serviceConfig = {
       PrivateTmp = true;

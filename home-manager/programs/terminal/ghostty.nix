@@ -7,7 +7,7 @@
     settings = {
       font-family = "TX-02";
       #theme = "catppuccin-mocha";
-      font-size = 19;
+      font-size = 12;
       font-thicken = true;
       keybind = [
         #"global:cmd+grave_accent=toggle_quick_terminal"

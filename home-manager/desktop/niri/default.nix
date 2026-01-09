@@ -6,14 +6,14 @@
   nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
   imports = [
     inputs.niri-flake.homeModules.niri
-    inputs.dms.homeModules.dankMaterialShell.default
-    inputs.dms.homeModules.dankMaterialShell.niri
+    inputs.dms.homeModules.dank-material-shell
+    inputs.dms.homeModules.niri
     ./settings.nix
     ./binds.nix
     ./rules.nix
   ];
 
-  programs.dankMaterialShell = {
+  programs.dank-material-shell = {
     enable = true;
     enableDynamicTheming = false;
     niri = {

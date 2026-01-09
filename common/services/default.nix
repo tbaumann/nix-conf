@@ -8,7 +8,7 @@
   ];
   services.ollama = {
     enable = true;
-    acceleration = "vulkan";
+    #acceleration = "vulkan";
     loadModels = ["qwen2.5-coder" "qwen3-coder" "gemma3"];
   };
 }

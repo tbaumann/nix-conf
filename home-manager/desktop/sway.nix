@@ -12,7 +12,7 @@
   programs.fuzzel.enable = true;
   programs.fuzzel.settings = {
     main = {
-      terminal = "${pkgs.ghostty}/bin/ghostty";
+      terminal = "${pkgs.foot}/bin/foot";
     };
   };
   programs.i3status-rust.enable = true;

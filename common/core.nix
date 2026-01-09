@@ -10,6 +10,8 @@
     ./nixbuild.nix
     ../modules/email.nix
     #./syncthing.nix
+    # perl is bleeding in via git (inputs.nixpkgs + "/nixos/modules/profiles/perlless.nix")
+    ./profiles/perlless.nix
   ];
 
   email = {
@@ -46,12 +48,13 @@
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
         "https://selfhostblocks.cachix.org"
+        "https://numtide.cachix.org"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "selfhostblocks.cachix.org-1:H5h6Uj188DObUJDbEbSAwc377uvcjSFOfpxyCFP7cVs="
+        "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       ];
-      # access-tokens = "github.com=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";
     };
     buildMachines = [
       {
@@ -88,10 +91,6 @@
         mandatoryFeatures = [];
       }
     ];
-  };
-
-  system.switch = {
-    enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -132,7 +131,6 @@
     inputs.clan-core.packages.x86_64-linux.clan-cli
     bat
     nix-output-monitor
-    nixpkgs-review
     parallel
     ripgrep
     rsync

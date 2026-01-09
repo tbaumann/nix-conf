@@ -43,9 +43,7 @@ project to help agents and contributors maintain consistency.
         enable = true;
         logoAnimated = true;
       };
-      console = {
-        enable = true;
-      };
+      console.enable = true;
     };
   };
   ```

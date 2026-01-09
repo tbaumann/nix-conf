@@ -19,7 +19,6 @@
       isNormalUser = true;
       description = "Tilman Baumann";
       extraGroups = [
-        "adbusers"
         "cdrom"
         "dialout"
         "docker"

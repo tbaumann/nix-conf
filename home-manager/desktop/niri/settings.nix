@@ -6,7 +6,7 @@
 }: {
   programs.niri = with config.lib.stylix.colors; {
     enable = true;
-    package = lib.mkForce pkgs.niri-stable;
+    package = lib.mkForce pkgs.niri-unstable;
     settings = {
       environment = {
         CLUTTER_BACKEND = "wayland";
@@ -78,7 +78,9 @@
         workspace-shadow.enable = false;
         backdrop-color = "transparent";
       };
-      gestures = {hot-corners.enable = true;};
+      gestures = {
+        hot-corners.enable = false;
+      };
       cursor = {
         size = 20;
       };

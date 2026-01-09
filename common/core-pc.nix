@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   imports = [
     ./programs
     ./services
@@ -8,7 +13,7 @@
   ];
   system.etc.overlay.enable = true;
   boot.initrd.systemd.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_6_17;
   boot.loader = {
     timeout = 10;
     systemd-boot = {
@@ -23,8 +28,6 @@
   systemd.oomd.enable = true;
   programs = {
     dconf.enable = true;
-    minipro.enable = true;
-    adb.enable = true; #adbusers group
     yazi.enable = true;
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
@@ -53,6 +56,9 @@
     pkcs11.enable = true;
     abrmd.enable = true;
     tctiEnvironment.enable = true;
+  };
+  services.logind.settings.Login = {
+    HandlePowerKey = "poweroff";
   };
   environment.systemPackages = with pkgs; [
     btop

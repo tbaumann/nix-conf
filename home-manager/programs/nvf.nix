@@ -259,6 +259,7 @@
             enable = false;
             cmp.enable = true;
           };
+          codecompanion-nvim.enable = true;
         };
 
         session = {

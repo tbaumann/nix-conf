@@ -1,7 +1,8 @@
 {
-  inputs,
   pkgs,
   lib,
+  config,
+  inputs,
   ...
 }: {
   imports = [
@@ -19,22 +20,29 @@
     };
   };
   networking.useNetworkd = lib.mkForce true;
+  networking.hostName = "zuse";
+
+  services.k3s.enable = true;
 
   # BTRFS stuff
   services.btrfs.autoScrub.enable = true;
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
   };
   programs.coolercontrol.enable = true;
-  # FIXME broken boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+  boot.extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+
   boot.extraModprobeConfig = "options kvm_amd nested=1";
   environment.systemPackages = with pkgs; [
     liquidctl
   ];
-  networking.hostName = "zuse";
+  services.pcscd = {
+    enable = true;
+    plugins = [pkgs.pcsc-cyberjack];
+  };
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
   system.stateVersion = "23.05"; # Did you read the comment?
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

@@ -27,10 +27,6 @@
           tags = ["pc" "desktop" "laptop" "kmscon"];
           deploy.targetHost = "tilli@zuse-klappi.tail84117.ts.net";
         };
-        sina-open = {
-          tags = ["pc" "desktop"];
-          deploy.targetHost = "tilli@sina-open.tail84117.ts.net";
-        };
       };
       ## Clan Services
       instances = {
@@ -49,14 +45,6 @@
           };
           roles.default.tags.kmscon = {};
           roles.default.extraModules = [./common/services/kmscon.nix];
-        };
-        meshcore = {
-          module = {
-            name = "importer";
-            input = "clan-core";
-          };
-          roles.default.tags.meshcore = {};
-          roles.default.extraModules = [./common/meshcore.nix];
         };
         clan-cache = {
           module = {
@@ -157,6 +145,7 @@
           roles.default.tags.all = {};
           roles.default.settings.networks.home = {};
         };
+        /*
         syncthing = {
           module = {
             name = "syncthing";
@@ -181,6 +170,7 @@
             extraModules = [./common/syncthing.nix];
           };
         };
+        */
       };
     };
   };

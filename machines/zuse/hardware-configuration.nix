@@ -81,7 +81,6 @@
   ];
   nix.settings = {
     cores = 24;
-    max-jobs = 24;
   };
   networking.useDHCP = lib.mkDefault true;
 

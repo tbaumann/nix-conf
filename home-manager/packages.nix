@@ -18,7 +18,6 @@
     eog
     epiphany
     file
-    fractal
     gnome-system-monitor
     grim
     gtk4
@@ -39,7 +38,6 @@
     razergenie
     scc
     slurp
-    swaylock-effects
     tsukimi
     usbutils # For lsusb
     vlc

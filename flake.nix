@@ -1,105 +1,88 @@
 {
   description = "My flake for everything";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    clan-core.url = "git+https://git.clan.lol/clan/clan-core";
-
-    #clan-core.url = "git+file:///home/tilli/git/clan/clan-core";
-    #    nixpkgs.follows = "clan-core/nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    update-systemd-resolved = {
-      url = "github:jonathanio/update-systemd-resolved";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
-    };
-    stylix.url = "github:danth/stylix/";
-    base16.url = "github:SenchoPens/base16.nix";
-    nix-index-database.url = "github:Mic92/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks-nix.url = "github:cachix/git-hooks.nix";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      #url = "github:nix-community/home-manager/";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
-    nixos-networkmanager-profiles = {
-      url = "github:jmackie/nixos-networkmanager-profiles";
-      flake = false;
-    };
-    terranix.url = "github:terranix/terranix";
-    llm-agents.url = "github:numtide/llm-agents.nix";
-
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    wpaperd = {
-      url = "github:Narice/wpaperd";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
-    #nvf.url = "github:notashelf/nvf/ff31e0fe25ab21e138efa8d7a3f8628c75a845fd";
-    nvf.url = "github:notashelf/nvf/";
-    microvm.url = "github:astro/microvm.nix";
-    microvm.inputs.nixpkgs.follows = "nixpkgs";
-
-    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
-    waybar_media_display.url = "github:tbaumann/waybar_media_display";
-    iio-sway.url = "github:tbaumann/iio-sway";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     argon40-nix.url = "github:guusvanmeerveld/argon40-nix";
-
-    ucodenix.url = "github:e-tho/ucodenix";
-
-    # color scheme - catppuccin
-    catppuccin-i3 = {
-      url = "github:catppuccin/i3";
+    base16.url = "github:SenchoPens/base16.nix";
+    catppuccin-fish = {
+      url = "github:catppuccin/fish";
       flake = false;
     };
     catppuccin-foot = {
       url = "github:catppuccin/foot";
       flake = false;
     };
+    catppuccin-i3 = {
+      url = "github:catppuccin/i3";
+      flake = false;
+    };
     catppuccin-starship = {
       url = "github:catppuccin/starship";
       flake = false;
     };
-    catppuccin-fish = {
-      url = "github:catppuccin/fish";
+    clan-core.url = "git+https://git.clan.lol/clan/clan-core";
+    # nixpkgs.follows = "clan-core/nixpkgs";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
+    ghostty-shaders = {
+      url = "github:hackr-sh/ghostty-shaders";
       flake = false;
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      #url = "github:nix-community/home-manager/";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+    };
+    iio-sway.url = "github:tbaumann/iio-sway";
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
+    };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
-
-    #impermanence.url = "github:nix-community/impermanence";
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
+    nvf.url = "github:notashelf/nvf/";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+    };
+    stylix.url = "github:danth/stylix/";
+    terranix.url = "github:terranix/terranix";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    ucodenix.url = "github:e-tho/ucodenix";
+    update-systemd-resolved = {
+      url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
-
-    reticulum-flake.url = "git+https://codeberg.org/adingbatponder/reticulum_nixos_flake.git";
-
-    nix-topology.url = "github:oddlama/nix-topology";
-    nix-topology.inputs.nixpkgs.follows = "clan-core/nixpkgs";
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    ghostty-shaders = {
-      url = "github:hackr-sh/ghostty-shaders";
-      flake = false;
+    waybar_media_display.url = "github:tbaumann/waybar_media_display";
+    waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
+    wpaperd = {
+      url = "github:Narice/wpaperd";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    meshcoretomqtt = {
-      url = "github:tbaumann/meshcoretomqtt";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
-    };
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} (
@@ -114,7 +97,6 @@
         imports = [
           inputs.terranix.flakeModule
           inputs.treefmt-nix.flakeModule
-          # ./checks.nix
           ./clan.nix
           ./devshells.nix
           ./hooks.nix
