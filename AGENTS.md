@@ -1,104 +1,129 @@
-# Style Preferences for This Project
+# Agent Guide for Nix Configuration
 
-This document outlines the coding style preferences for this Nix configuration
-project to help agents and contributors maintain consistency.
+This guide helps agentic coding assistants work effectively with this Clan-based NixOS configuration.
 
-## Formatting
+## Build & Development Commands
 
-- Use `nix fmt` for consistent code formatting. (`nix fmt` formats the entire
-  tree. For individual files `nixfmt` can be used.)
-- Run the formatter after making changes to ensure consistent styling
+### Primary Commands (via `justfile` - preferred):
+- `nix fmt` - Format code (uses nixfmt-rfc-style)
+- `nix flake update` - Update inputs
+- `nix flake show` - Show available outputs
+- `nixos-rebuild switch --flake '.#machine'` - Manual rebuild
 
-## Attribute Assignment Style
+### Testing:
+- No formal test suite exists
+- Use `nixos-rebuild build` to test configurations without switching
+- Use `nix flake check` to verify flake outputs (if implemented)
 
-### Single Line Assignments
+## Code Style & Formatting
 
-- Prefer single line assignments for single values:
-  ```nix
-  # Preferred
-  programs = {
-      git.enable = true;
-      yazi.enable = true;
-  };
-  stylix.targets.firefox.enable = false;
-  ```
+### Formatting Rules:
+- Use `nix fmt` for consistent code formatting (nixfmt-rfc-style)
+- Pre-commit hooks enforce nixfmt-rfc-style automatically
+- Format after making changes to ensure consistent styling
 
-### Grouping Multiple Attributes
+### Attribute Assignment Style:
 
-- Group multiple attributes under the same prefix into nested structures:
-  ```nix
-  # When you have multiple related assignments like:
-  stylix.targets.nixos-icons.enable = true;
-  stylix.targets.plymouth.enable = true;
-  stylix.targets.plymouth.logoAnimated = true;
-  stylix.targets.console.enable = true;
-
-  # Group them as:
-  stylix = {
-    targets = {
-      nixos-icons = {
-        enable = true;
-      };
-      plymouth = {
-        enable = true;
-        logoAnimated = true;
-      };
-      console.enable = true;
-    };
-  };
-  ```
-
-### When to Group
-
-- Group attributes when the same prefix appears multiple times in a file
-- Leave single attribute assignments as single lines
-- The goal is improved readability and organization, not unnecessary nesting
-
-## Examples
-
-### Good - Single attributes remain as single lines:
-
+#### Single Line Assignments (Preferred for single values):
 ```nix
-programs = {
-    git.enable = true;
-    yazi.enable = true;
-};
+# Good
+programs.git.enable = true;
 services.openssh.enable = true;
+stylix.targets.firefox.enable = false;
 ```
 
-### Good - Multiple related attributes are grouped:
-
+#### Grouped Assignments (For multiple related attributes):
 ```nix
-programs = {
-  git = {
-    enable = true;
-    userName = "John Doe";
-    userEmail = "john@example.com";
-  };
-  yazi = {
-    enable = true;
-    package = pkgs.yazi;
+# When multiple attributes share prefix, group them:
+stylix = {
+  targets = {
+    nixos-icons.enable = true;
+    plymouth = {
+      enable = true;
+      logoAnimated = true;
+    };
+    console.enable = true;
   };
 };
 ```
 
-### Bad - Unnecesary nesting for single values
+#### When to Group:
+- Group when same prefix appears multiple times in a file
+- Keep single attributes as single lines
+- Goal: improved readability, not unnecessary nesting
 
-```nix
-programs = {
-    git = {
-        enable = true;
-    };
-    yazi = {
-        enable = true;
-    };
-};
+### Import & Module Organization:
+- Clan modules preferred for modularization
+- Place common configurations in `common/` directory
+- User configs in `home-manager/` directory
+- Machine-specific configs in `machines/` directory
+- Custom modules in `modules/` directory
+
+### Naming Conventions:
+- Use kebab-case for file names and machine names
+- Use camelCase for Nix option names (following Nixpkgs conventions)
+- Clan service names use kebab-case
+
+## Project Structure
+
+```
+nix-config/
+├── flake.nix              # Main flake definition
+├── clan.nix               # Clan inventory and services
+├── machines/              # Individual machine configurations
+├── common/                # Shared system configurations
+├── home-manager/          # User-specific configurations
+├── modules/               # Custom modules
+├── pkgs/                 # Custom packages
+└── vars/                 # Clan variables/secrets
 ```
 
-# Expected practices
+## Clan Integration
 
-- Use Clan modules when appropriate for modularisation. See
-  https://docs.clan.lol/guides/services/community/
-- Only use plain NixosModules over clan services in common or home-manager, when
-  the use is indeed common. Modularisation of the existing code base is lacking,
-  gentle efforts should be taken to improve the situation.
+### Clan Modules (Preferred):
+- Use Clan modules for service modularization
+- See: https://docs.clan.lol/guides/services/community/
+- Clan services defined in `clan.nix` inventory
+- Secrets managed via `vars/` directory
+
+### Regular NixOS Modules:
+- Use only for truly common functionality
+- Place in `modules/` or `common/` as appropriate
+- Avoid duplicating Clan functionality
+
+## Development Workflow
+
+1. Make changes to configuration files
+2. Run `nix fmt` to format code
+3. Test with `nixos-rebuild build` before switching
+
+## Common Patterns
+
+### System Configuration:
+- Layered imports: machines → common → specific
+- Profile-based customization (e.g., `perlless.nix`)
+- Service-oriented separation
+
+### Home Manager:
+- User-centric configurations
+- Program modularization
+- Desktop environment separation
+
+### Build Configuration:
+- Distributed builds across multiple machines
+- Cross-compilation support (x86_64-linux, aarch64-linux)
+- Binary cache configuration
+
+## Error Handling
+
+- Test configurations before deployment
+- Use `--show-trace` flag for debugging
+- Check flake outputs with `just show`
+- Use `nom` for better log formatting (configured in justfile)
+
+## Security Practices
+
+- Never commit secrets to repository
+- Use Clan vars for secret management
+- Review build machine configurations
+- Validate external inputs before updating
