@@ -19,6 +19,10 @@
     niri = {
       enableSpawn = true;
       enableKeybinds = true;
+      includes = {
+        enable = true;
+        filesToInclude = ["alttab" "binds" "layout" "wpblur"];
+      };
     };
   };
 

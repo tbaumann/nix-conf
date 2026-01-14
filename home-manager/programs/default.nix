@@ -27,7 +27,114 @@
     yazi.enable = true;
     lsd.enable = true;
     nix-index-database.comma.enable = true;
-    fastfetch.enable = true;
+    fastfetch = {
+      enable = true;
+      settings = 
+      {
+  "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+  modules = [
+    "title"
+    "separator"
+    "os"
+    #"host"
+    #"bios"
+    "bootmgr"
+    #"board"
+    #"chassis"
+    "kernel"
+    #"initsystem"
+    #"uptime"
+    #"loadavg"
+    #"processes"
+    "packages"
+    "shell"
+    "editor"
+    "display"
+    "brightness"
+    "monitor"
+    #"lm"
+    "de"
+    "wm"
+    #"wmtheme"
+    #"theme"
+    #"icons"
+    #"font"
+    #"cursor"
+    #"wallpaper"
+    "terminal"
+    #"terminalfont"
+    #"terminalsize"
+    #"terminaltheme"
+    {
+      type = "cpu";
+      showPeCoreCount = true;
+      temp = true;
+    }
+    #"cpucache"
+    "cpuusage"
+    /*
+    {
+      type = "gpu";
+      driverSpecific = true;
+      temp = true;
+    }
+    */
+    "memory"
+    "physicalmemory"
+    {
+      type = "swap";
+      separate = true;
+    }
+    "disk"
+    "btrfs"
+    "zpool"
+    {
+      type = "battery";
+      temp = true;
+    }
+    "poweradapter"
+    #"player"
+    #"media"
+    {
+      type = "publicip";
+      timeout = 1000;
+    }
+    {
+      type = "localip";
+      showIpv6 = true;
+    }
+    #"dns"
+    "wifi"
+    "datetime"
+    #"locale"
+    "vulkan"
+    "opengl"
+    "opencl"
+    #"users"
+    "bluetooth"
+    "bluetoothradio"
+    #"sound"
+    #"camera"
+    #"gamepad"
+    #"mouse"
+    #"keyboard"
+    /*
+    {
+      type = "weather";
+      timeout = 1000;
+    }
+    */
+    "netio"
+    "diskio"
+    {
+      type = "physicaldisk";
+      temp = true;
+    }
+    #"tpm"
+    #"version"
+  ];
+};
+    };
     fd.enable = true;
     fd.ignores = [
       ".git/"

@@ -63,6 +63,8 @@
           otter-nvim.enable = false;
           nvim-docs-view.enable = false;
         };
+#treesitter.enable = false;
+
 
         # This section does not include a comprehensive list of available language modules.
         # To list all available language module options, please visit the nvf manual.
@@ -84,6 +86,7 @@
           java.enable = false;
           kotlin.enable = false;
           ts.enable = false;
+          ts.treesitter.enable = false;
           go.enable = true;
           lua.enable = false;
           zig.enable = false;
@@ -109,7 +112,6 @@
           elixir.enable = false;
           haskell.enable = false;
           ruby.enable = false;
-
           tailwind.enable = false;
           svelte.enable = false;
 
@@ -259,7 +261,7 @@
             enable = false;
             cmp.enable = true;
           };
-          codecompanion-nvim.enable = true;
+          # codecompanion-nvim.enable = true;
         };
 
         session = {

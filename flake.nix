@@ -25,7 +25,7 @@
     # nixpkgs.follows = "clan-core/nixpkgs";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+      #inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
