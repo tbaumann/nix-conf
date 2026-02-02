@@ -1,9 +1,9 @@
-{inputs, ...}: {
+{...}: {
   imports = [
-    inputs.git-hooks-nix.flakeModule
   ];
   perSystem = {
-    pre-commit.settings.hooks.nixfmt-rfc-style.enable = true;
+    pre-commit.settings.enable = true;
+    pre-commit.settings.hooks.treefmt.enable = true;
     treefmt.programs = {
       statix = {
         enable = true;

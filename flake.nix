@@ -70,7 +70,6 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     stylix.url = "github:danth/stylix/";
-    terranix.url = "github:terranix/terranix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     ucodenix.url = "github:e-tho/ucodenix";
     update-systemd-resolved = {
@@ -99,7 +98,7 @@
         ];
 
         imports = [
-          inputs.terranix.flakeModule
+          inputs.git-hooks-nix.flakeModule
           inputs.treefmt-nix.flakeModule
           ./clan.nix
           ./devshells.nix
