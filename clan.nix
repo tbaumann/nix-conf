@@ -27,6 +27,14 @@
           tags = ["pc" "desktop" "laptop" "kmscon"];
           deploy.targetHost = "tilli@zuse-klappi.tail84117.ts.net";
         };
+        saugbox = {
+          tags = ["pc" "kmscon"];
+          deploy.targetHost = "tilli@saugbox.tail84117.ts.net";
+        };
+        nas = {
+          tags = ["nixos"];
+          deploy.targetHost = "root@192.168.2.20";
+        };
       };
       ## Clan Services
       instances = {

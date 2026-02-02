@@ -58,6 +58,7 @@
     aliases = {
       pr = "pull --rebase";
     };
+    push.autoSetupRemote = true;
   };
   home.file.".face" = {
     source = ./tilli/tilli-face.png;

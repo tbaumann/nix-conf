@@ -1,4 +1,9 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  osConfig,
+  ...
+}: {
   imports = [
     ./scripts
   ];

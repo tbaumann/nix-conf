@@ -64,6 +64,7 @@ in {
               }
             ];
             autostart = false;
+            mtu = 1280; # Telekom Hybrid
           };
         })
         allInterfaces);

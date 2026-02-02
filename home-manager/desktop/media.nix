@@ -17,8 +17,6 @@
     vdpauinfo
     vulkan-tools
     mesa-demos
-    ffmpeg-full
-    handbrake
 
     # video
     vlc

@@ -8,6 +8,7 @@
     ./programs
     ./services
     ./backup.nix
+    ./mullvad.nix
     ./wifi.nix
     ./tailscale.nix
   ];
@@ -16,6 +17,7 @@
   #boot.kernelPackages = pkgs.linuxPackages_6_17;
   boot.loader = {
     timeout = 10;
+    grub.enable = false;
     systemd-boot = {
       enable = true;
       consoleMode = "0";
@@ -24,6 +26,7 @@
       netbootxyz.enable = true;
     };
     # conflicts with facter efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot";
   };
   systemd.oomd.enable = true;
   programs = {

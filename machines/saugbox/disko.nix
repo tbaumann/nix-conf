@@ -1,20 +1,17 @@
 # ---
 # schema = "single-disk"
 # [placeholders]
-# mainDisk = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7783C781FA" 
+# mainDisk = "/dev/disk/by-id/ata-HFS120G32TND-N1A0A_EJ74N155711204G0Z" 
 # ---
 # This file was automatically generated!
 # CHANGING this configuration requires wiping and reinstalling the machine
 {
 
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.enable = true;
   disko.devices = {
     disk = {
       main = {
-        name = "main-f32fb008d44644fa97c90977f1d5cddd";
-        device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7783C781FA";
+        name = "main-c753e4a43a6948dbbbb0d7b13fb5b289";
+        device = "/dev/disk/by-id/ata-HFS120G32TND-N1A0A_EJ74N155711204G0Z";
         type = "disk";
         content = {
           type = "gpt";

@@ -15,7 +15,6 @@
     ./desktops
     # ./syncthing.nix
     ../home-manager/default.nix
-    ./mullvad.nix
     ./music.nix
     ./work/secunet
   ];

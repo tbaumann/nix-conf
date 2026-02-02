@@ -26,6 +26,7 @@
   clan.core.settings.state-version.enable = true;
   clan.core.settings.machine-id.enable = true;
   nix = {
+    channel.enable = false;
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
     extraOptions = ''
@@ -59,6 +60,7 @@
     buildMachines = [
       {
         hostName = "zuse.local";
+        speedFactor = 3;
         system = "x86_64-linux";
         systems = ["x86_64-linux" "aarch64-linux"];
         protocol = "ssh-ng";

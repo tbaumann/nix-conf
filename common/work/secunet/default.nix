@@ -9,7 +9,7 @@
       "198.18.2.11/15"
       "fd00:5ec::20b/48"
     ];
-    mtu = 1300;
+    mtu = 1280;
     peers = [
       {
         allowedIPs = [
@@ -34,6 +34,8 @@
     substituters = ["http://cache.factory.secunet.com/factory-1"];
     trusted-public-keys = ["factory-1:Ai12PqfDkRmLzju4eE5/ucuDGXw4J31d3aTrz4TZKrk="];
   };
+  /*
+     Too slow
   nix.buildMachines = [
     {
       hostName = "nixbuilder-arm-01.factory.secunet.com";
@@ -52,6 +54,11 @@
       supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
     }
   ];
+  */
+  sops.secrets.factory-builder-key = {
+    group = "wheel";
+    mode = "0440";
+  };
 
   programs.ssh.extraConfig = ''
     Host nixbuilder-arm-01.factory.secunet.com

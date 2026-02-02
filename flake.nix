@@ -64,6 +64,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
     nvf.url = "github:notashelf/nvf/";
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
@@ -82,6 +83,7 @@
       url = "github:Narice/wpaperd";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    cinephage.url = "github:MoldyTaint/Cinephage";
     # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
   };
   outputs = inputs @ {flake-parts, ...}:
