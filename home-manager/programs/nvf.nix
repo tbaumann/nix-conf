@@ -5,7 +5,9 @@
     # your settings need to go into the settings attribute set
     # most settings are documented in the appendix
     settings = {
-      vim = {
+      vim = let
+        isMaximal = false;
+      in {
         options = {
           # Line numbers
           relativenumber = true; # Relative line numbers
@@ -49,22 +51,32 @@
         viAlias = false;
         vimAlias = true;
         spellcheck = {
-          enable = false;
+          enable = true;
+          programmingWordlist.enable = true;
         };
 
         lsp = {
+          # This must be enabled for the language modules to hook into
+          # the LSP API.
           enable = true;
+
           formatOnSave = true;
           lspkind.enable = false;
           lightbulb.enable = true;
           lspsaga.enable = false;
           trouble.enable = true;
-          lspSignature.enable = true;
-          otter-nvim.enable = false;
-          nvim-docs-view.enable = false;
+          lspSignature.enable = !isMaximal; # conflicts with blink in maximal
+          otter-nvim.enable = isMaximal;
+          nvim-docs-view.enable = isMaximal;
+          harper-ls.enable = isMaximal;
         };
-#treesitter.enable = false;
 
+        debugger = {
+          nvim-dap = {
+            enable = true;
+            ui.enable = true;
+          };
+        };
 
         # This section does not include a comprehensive list of available language modules.
         # To list all available language module options, please visit the nvf manual.
@@ -78,24 +90,25 @@
           markdown.enable = true;
 
           # Languages that are enabled in the maximal configuration.
-          bash.enable = true;
-          clang.enable = true;
-          css.enable = false;
-          html.enable = true;
-          sql.enable = true;
-          java.enable = false;
-          kotlin.enable = false;
-          ts.enable = false;
-          ts.treesitter.enable = false;
-          go.enable = true;
-          lua.enable = false;
-          zig.enable = false;
-          python.enable = true;
-          typst.enable = false;
+          bash.enable = isMaximal;
+          clang.enable = isMaximal;
+          css.enable = isMaximal;
+          html.enable = isMaximal;
+          json.enable = isMaximal;
+          sql.enable = isMaximal;
+          java.enable = isMaximal;
+          kotlin.enable = isMaximal;
+          ts.enable = isMaximal;
+          go.enable = isMaximal;
+          lua.enable = isMaximal;
+          zig.enable = isMaximal;
+          python.enable = isMaximal;
+          typst.enable = isMaximal;
           rust = {
-            enable = true;
-            # crates.enable = true;
+            enable = isMaximal;
+            extensions.crates-nvim.enable = isMaximal;
           };
+          toml.enable = isMaximal;
 
           # Language modules that are not as common.
           assembly.enable = false;
@@ -111,7 +124,11 @@
           ocaml.enable = false;
           elixir.enable = false;
           haskell.enable = false;
+          hcl.enable = false;
           ruby.enable = false;
+          fsharp.enable = false;
+          just.enable = false;
+          qml.enable = false;
           tailwind.enable = false;
           svelte.enable = false;
 
@@ -153,7 +170,15 @@
 
         autopairs.nvim-autopairs.enable = true;
 
-        autocomplete.nvim-cmp.enable = true;
+        # nvf provides various autocomplete options. The tried and tested nvim-cmp
+        # is enabled in default package, because it does not trigger a build. We
+        # enable blink-cmp in maximal because it needs to build its rust fuzzy
+        # matcher library.
+        autocomplete = {
+          nvim-cmp.enable = !isMaximal;
+          blink-cmp.enable = isMaximal;
+        };
+
         snippets.luasnip.enable = true;
 
         filetree = {
@@ -179,49 +204,56 @@
           enable = true;
           gitsigns.enable = true;
           gitsigns.codeActions.enable = false; # throws an annoying debug message
+          neogit.enable = isMaximal;
         };
 
         minimap = {
           minimap-vim.enable = false;
-          codewindow.enable = true; # lighter, faster, and uses lua for configuration
+          codewindow.enable = isMaximal; # lighter, faster, and uses lua for configuration
         };
 
         dashboard = {
           dashboard-nvim.enable = false;
-          alpha.enable = true;
+          alpha.enable = isMaximal;
         };
 
         notify = {
-          nvim-notify.enable = false;
+          nvim-notify.enable = true;
         };
 
         projects = {
-          project-nvim.enable = false;
+          project-nvim.enable = isMaximal;
         };
 
         utility = {
           ccc.enable = false;
           vim-wakatime.enable = false;
-          icon-picker.enable = false;
-          surround.enable = false;
           diffview-nvim.enable = true;
           yanky-nvim.enable = false;
+          qmk-nvim.enable = false; # requires hardware specific options
+          icon-picker.enable = isMaximal;
+          surround.enable = isMaximal;
+          leetcode-nvim.enable = isMaximal;
+          multicursors.enable = isMaximal;
+          smart-splits.enable = isMaximal;
+          undotree.enable = isMaximal;
+          nvim-biscuits.enable = isMaximal;
+
           motion = {
             hop.enable = true;
             leap.enable = true;
-            precognition.enable = false;
+            precognition.enable = isMaximal;
           };
-
           images = {
             image-nvim.enable = false;
+            img-clip.enable = isMaximal;
           };
         };
 
         notes = {
-          obsidian.enable = false; # FIXME: neovim fails to build if obsidian is enabled
           neorg.enable = false;
           orgmode.enable = false;
-          mind-nvim.enable = false;
+          mind-nvim.enable = isMaximal;
           todo-comments.enable = true;
         };
 
@@ -239,8 +271,8 @@
           modes-nvim.enable = false; # the theme looks terrible with catppuccin
           illuminate.enable = true;
           breadcrumbs = {
-            enable = true;
-            navbuddy.enable = true;
+            enable = isMaximal;
+            navbuddy.enable = isMaximal;
           };
           smartcolumn = {
             enable = true;
@@ -259,9 +291,10 @@
           chatgpt.enable = false;
           copilot = {
             enable = false;
-            cmp.enable = true;
+            cmp.enable = isMaximal;
           };
-          # codecompanion-nvim.enable = true;
+          codecompanion-nvim.enable = false;
+          avante-nvim.enable = isMaximal;
         };
 
         session = {
