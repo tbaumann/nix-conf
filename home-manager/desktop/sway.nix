@@ -315,9 +315,9 @@
         background = "${sapphire}";
       };
       keybindings = let
-        terminal = config.wayland.windowManager.sway.config.terminal;
-        menu = config.wayland.windowManager.sway.config.menu;
-        modifier = config.wayland.windowManager.sway.config.modifier;
+        inherit (config.wayland.windowManager.sway.config) terminal;
+        inherit (config.wayland.windowManager.sway.config) menu;
+        inherit (config.wayland.windowManager.sway.config) modifier;
       in {
         # Default keybindings
         "${modifier}+Return" = "exec ${terminal}";

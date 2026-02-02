@@ -55,12 +55,12 @@ in {
               "10.75.3.80/32"
               "fc00:bbbb:bbbb:bb01::c:34f/128"
             ];
-            privateKeyFile = cfg.privateKeyFile;
+            inherit (cfg) privateKeyFile;
             peers = [
               {
-                publicKey = server.publicKey;
+                inherit (server) publicKey;
                 allowedIPs = ["0.0.0.0/0" "::0/0"];
-                endpoint = server.endpoint;
+                inherit (server) endpoint;
               }
             ];
             autostart = false;

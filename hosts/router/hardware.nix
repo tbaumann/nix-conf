@@ -13,7 +13,7 @@
   hardware.firmware = lib.mkBefore [
     (pkgs.stdenvNoCC.mkDerivation {
       name = "BPiR4WiFiFirmware";
-      src = config.boot.kernelPackages.kernel.src;
+      inherit (config.boot.kernelPackages.kernel) src;
       dontPatch = true;
       dontConfigure = true;
       dontBuild = true;
