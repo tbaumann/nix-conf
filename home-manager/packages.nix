@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   programs.nix-index.enable = true;
   home.packages = with pkgs; [
     act

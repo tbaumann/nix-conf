@@ -5,7 +5,8 @@
   environment,
   lib,
   ...
-}: {
+}:
+{
   imports = [
   ];
   hardware.bluetooth.enable = true;

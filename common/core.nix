@@ -4,7 +4,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./user-group.nix
     ./nixbuild.nix
@@ -44,7 +45,7 @@
       download-buffer-size = 500000000; # 500 MB
       builders-use-substitutes = true;
       auto-optimise-store = true;
-      trusted-users = ["@wheel"];
+      trusted-users = [ "@wheel" ];
       substituters = [
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
@@ -62,13 +63,21 @@
         hostName = "zuse.local";
         speedFactor = 3;
         system = "x86_64-linux";
-        systems = ["x86_64-linux" "aarch64-linux"];
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+        ];
         protocol = "ssh-ng";
         # if the builder supports building for multiple architectures,
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
-        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-        mandatoryFeatures = [];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
       }
       {
         hostName = "nas.local";
@@ -78,8 +87,13 @@
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
         speedFactor = 3;
-        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-        mandatoryFeatures = [];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
       }
       {
         hostName = "router.local";
@@ -89,8 +103,12 @@
         # replace the previous line by, e.g.
         # systems = ["x86_64-linux" "aarch64-linux"];
         speedFactor = 2;
-        supportedFeatures = ["nixos-test" "benchmark" "kvm"];
-        mandatoryFeatures = [];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
       }
     ];
   };
@@ -110,7 +128,7 @@
   time.timeZone = "Europe/Berlin";
 
   i18n.defaultLocale = "en_GB.UTF-8";
-  i18n.supportedLocales = ["all"];
+  i18n.supportedLocales = [ "all" ];
   console = {
     keyMap = "us";
   };
@@ -189,10 +207,10 @@
   services.openssh.enable = true;
 
   users.groups = {
-    "plugdev" = {};
-    "netdev" = {};
-    "pulse" = {};
-    "power" = {};
+    "plugdev" = { };
+    "netdev" = { };
+    "pulse" = { };
+    "power" = { };
   };
   environment.variables = {
     PAGER = "${pkgs.bat}/bin/bat";

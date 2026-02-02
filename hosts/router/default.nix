@@ -3,13 +3,14 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ../../common/core.nix
     ./hardware.nix
   ];
 
-  systemd.sysusers.enable = false; #FIXME https://github.com/ryantm/agenix/issues/238
+  systemd.sysusers.enable = false; # FIXME https://github.com/ryantm/agenix/issues/238
   #boot.initrd.systemd.enable = lib.mkForce false;
 
   topology.self = {
@@ -18,7 +19,7 @@
     interfaces.wan1 = {
     };
     interfaces.eno1 = {
-      addresses = ["192.168.1.1"];
+      addresses = [ "192.168.1.1" ];
       network = "home"; # Use the network we define below
     };
   };
@@ -33,7 +34,7 @@
 
   users.users.example = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
   };
 
   environment.systemPackages = with pkgs; [

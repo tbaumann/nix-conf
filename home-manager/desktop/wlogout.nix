@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.wlogout.enable = true;
   programs.wlogout.layout = [
     {

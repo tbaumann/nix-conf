@@ -4,7 +4,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/shared.nix
 
@@ -68,7 +69,7 @@
         enable = true;
         package = pkgs.ffmpeg-headless;
       };
-      media = ["/media/"];
+      media = [ "/media/" ];
     };
     # sabnzbd.enable = true;
     nzbget = {
@@ -76,9 +77,9 @@
       settings = {
         DestDir = "/media/Downloads";
         /*
-        "Server1.Name" = "Prepad-Usenet";
-        "Server1.Host" = "news.ssl.nl.prepaid-usenet.de";
-        "Server1.Username" = "WonkoTheSane@prepaid-usenet.de";
+          "Server1.Name" = "Prepad-Usenet";
+          "Server1.Host" = "news.ssl.nl.prepaid-usenet.de";
+          "Server1.Username" = "WonkoTheSane@prepaid-usenet.de";
         */
       };
     };

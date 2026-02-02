@@ -3,7 +3,8 @@
   config,
   osConfig,
   ...
-}: {
+}:
+{
   imports = [
     ./scripts
   ];

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./docker.nix
     # ./firefly-iii.nix

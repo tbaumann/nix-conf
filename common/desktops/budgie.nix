@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
   ];
   #  services.xserver.desktopManager.budgie.enable = true;

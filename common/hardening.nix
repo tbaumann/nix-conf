@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   systemd.services.systemd-rfkill = {
     serviceConfig = {
       ProtectSystem = "strict";
@@ -14,11 +15,36 @@
       ProtectProc = "invisible";
       ProcSubset = "pid";
       PrivateTmp = true;
-      MemoryDenyWriteExecute = true; #
+      MemoryDenyWriteExecute = true;
       NoNewPrivileges = true;
-      LockPersonality = true; #
-      RestrictRealtime = true; #
-      SystemCallFilter = ["write" "read" "openat" "close" "brk" "fstat" "lseek" "mmap" "mprotect" "munmap" "rt_sigaction" "rt_sigprocmask" "ioctl" "nanosleep" "select" "access" "execve" "getuid" "arch_prctl" "set_tid_address" "set_robust_list" "prlimit64" "pread64" "getrandom"];
+      LockPersonality = true;
+      RestrictRealtime = true;
+      SystemCallFilter = [
+        "write"
+        "read"
+        "openat"
+        "close"
+        "brk"
+        "fstat"
+        "lseek"
+        "mmap"
+        "mprotect"
+        "munmap"
+        "rt_sigaction"
+        "rt_sigprocmask"
+        "ioctl"
+        "nanosleep"
+        "select"
+        "access"
+        "execve"
+        "getuid"
+        "arch_prctl"
+        "set_tid_address"
+        "set_robust_list"
+        "prlimit64"
+        "pread64"
+        "getrandom"
+      ];
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -27,7 +53,11 @@
   systemd.services.syslog = {
     serviceConfig = {
       PrivateNetwork = true;
-      CapabilityBoundingSet = ["CAP_DAC_READ_SEARCH" "CAP_SYSLOG" "CAP_NET_BIND_SERVICE"];
+      CapabilityBoundingSet = [
+        "CAP_DAC_READ_SEARCH"
+        "CAP_SYSLOG"
+        "CAP_NET_BIND_SERVICE"
+      ];
       NoNewPrivileges = true;
       PrivateDevices = true;
       ProtectClock = true;
@@ -76,9 +106,13 @@
       PrivateTmp = true;
       PrivateUsers = true;
       ProtectProc = true;
-      ReadOnlyPaths = ["/"];
-      InaccessiblePaths = ["/home" "/root" "/proc"];
-      SystemCallFilter = ["@system-service"];
+      ReadOnlyPaths = [ "/" ];
+      InaccessiblePaths = [
+        "/home"
+        "/root"
+        "/proc"
+      ];
+      SystemCallFilter = [ "@system-service" ];
       SystemCallArchitectures = "native";
       UMask = "0077";
     };
@@ -103,7 +137,32 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET";
       RestrictNamespaces = true;
-      SystemCallFilter = ["write" "read" "openat" "close" "brk" "fstat" "lseek" "mmap" "mprotect" "munmap" "rt_sigaction" "rt_sigprocmask" "ioctl" "nanosleep" "select" "access" "execve" "getuid" "arch_prctl" "set_tid_address" "set_robust_list" "prlimit64" "pread64" "getrandom"];
+      SystemCallFilter = [
+        "write"
+        "read"
+        "openat"
+        "close"
+        "brk"
+        "fstat"
+        "lseek"
+        "mmap"
+        "mprotect"
+        "munmap"
+        "rt_sigaction"
+        "rt_sigprocmask"
+        "ioctl"
+        "nanosleep"
+        "select"
+        "access"
+        "execve"
+        "getuid"
+        "arch_prctl"
+        "set_tid_address"
+        "set_robust_list"
+        "prlimit64"
+        "pread64"
+        "getrandom"
+      ];
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -138,7 +197,32 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET";
       RestrictNamespaces = true;
-      SystemCallFilter = ["write" "read" "openat" "close" "brk" "fstat" "lseek" "mmap" "mprotect" "munmap" "rt_sigaction" "rt_sigprocmask" "ioctl" "nanosleep" "select" "access" "execve" "getuid" "arch_prctl" "set_tid_address" "set_robust_list" "prlimit64" "pread64" "getrandom"];
+      SystemCallFilter = [
+        "write"
+        "read"
+        "openat"
+        "close"
+        "brk"
+        "fstat"
+        "lseek"
+        "mmap"
+        "mprotect"
+        "munmap"
+        "rt_sigaction"
+        "rt_sigprocmask"
+        "ioctl"
+        "nanosleep"
+        "select"
+        "access"
+        "execve"
+        "getuid"
+        "arch_prctl"
+        "set_tid_address"
+        "set_robust_list"
+        "prlimit64"
+        "pread64"
+        "getrandom"
+      ];
       UMask = "0077";
       IPAddressDeny = "any";
     };
@@ -165,7 +249,32 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET";
       RestrictNamespaces = true;
-      SystemCallFilter = ["write" "read" "openat" "close" "brk" "fstat" "lseek" "mmap" "mprotect" "munmap" "rt_sigaction" "rt_sigprocmask" "ioctl" "nanosleep" "select" "access" "execve" "getuid" "arch_prctl" "set_tid_address" "set_robust_list" "prlimit64" "pread64" "getrandom"];
+      SystemCallFilter = [
+        "write"
+        "read"
+        "openat"
+        "close"
+        "brk"
+        "fstat"
+        "lseek"
+        "mmap"
+        "mprotect"
+        "munmap"
+        "rt_sigaction"
+        "rt_sigprocmask"
+        "ioctl"
+        "nanosleep"
+        "select"
+        "access"
+        "execve"
+        "getuid"
+        "arch_prctl"
+        "set_tid_address"
+        "set_robust_list"
+        "prlimit64"
+        "pread64"
+        "getrandom"
+      ];
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -193,7 +302,32 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET";
       RestrictNamespaces = true;
-      SystemCallFilter = ["write" "read" "openat" "close" "brk" "fstat" "lseek" "mmap" "mprotect" "munmap" "rt_sigaction" "rt_sigprocmask" "ioctl" "nanosleep" "select" "access" "execve" "getuid" "arch_prctl" "set_tid_address" "set_robust_list" "prlimit64" "pread64" "getrandom"];
+      SystemCallFilter = [
+        "write"
+        "read"
+        "openat"
+        "close"
+        "brk"
+        "fstat"
+        "lseek"
+        "mmap"
+        "mprotect"
+        "munmap"
+        "rt_sigaction"
+        "rt_sigprocmask"
+        "ioctl"
+        "nanosleep"
+        "select"
+        "access"
+        "execve"
+        "getuid"
+        "arch_prctl"
+        "set_tid_address"
+        "set_robust_list"
+        "prlimit64"
+        "pread64"
+        "getrandom"
+      ];
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -226,14 +360,52 @@
       SystemCallFilter = "~@clock @cpu-emulation @module @mount @obsolete @raw-io @reboot @swap";
       ProtectKernelTunables = true;
       NoNewPrivileges = true;
-      CapabilityBoundingSet = ["~CAP_SYS_TIME" "~CAP_SYS_PACCT" "~CAP_KILL" "~CAP_WAKE_ALARM" "~CAP_SYS_BOOT" "~CAP_SYS_CHROOT" "~CAP_LEASE" "~CAP_MKNOD" "~CAP_NET_ADMIN" "~CAP_SYS_ADMIN" "~CAP_SYSLOG" "~CAP_NET_BIND_SERVICE" "~CAP_NET_BROADCAST" "~CAP_AUDIT_WRITE" "~CAP_AUDIT_CONTROL" "~CAP_SYS_RAWIO" "~CAP_SYS_NICE" "~CAP_SYS_RESOURCE" "~CAP_SYS_TTY_CONFIG" "~CAP_SYS_MODULE" "~CAP_IPC_LOCK" "~CAP_LINUX_IMMUTABLE" "~CAP_BLOCK_SUSPEND" "~CAP_MAC_*" "~CAP_DAC_*" "~CAP_FOWNER" "~CAP_IPC_OWNER" "~CAP_SYS_PTRACE" "~CAP_SETUID" "~CAP_SETGID" "~CAP_SETPCAP" "~CAP_FSETID" "~CAP_SETFCAP" "~CAP_CHOWN"];
+      CapabilityBoundingSet = [
+        "~CAP_SYS_TIME"
+        "~CAP_SYS_PACCT"
+        "~CAP_KILL"
+        "~CAP_WAKE_ALARM"
+        "~CAP_SYS_BOOT"
+        "~CAP_SYS_CHROOT"
+        "~CAP_LEASE"
+        "~CAP_MKNOD"
+        "~CAP_NET_ADMIN"
+        "~CAP_SYS_ADMIN"
+        "~CAP_SYSLOG"
+        "~CAP_NET_BIND_SERVICE"
+        "~CAP_NET_BROADCAST"
+        "~CAP_AUDIT_WRITE"
+        "~CAP_AUDIT_CONTROL"
+        "~CAP_SYS_RAWIO"
+        "~CAP_SYS_NICE"
+        "~CAP_SYS_RESOURCE"
+        "~CAP_SYS_TTY_CONFIG"
+        "~CAP_SYS_MODULE"
+        "~CAP_IPC_LOCK"
+        "~CAP_LINUX_IMMUTABLE"
+        "~CAP_BLOCK_SUSPEND"
+        "~CAP_MAC_*"
+        "~CAP_DAC_*"
+        "~CAP_FOWNER"
+        "~CAP_IPC_OWNER"
+        "~CAP_SYS_PTRACE"
+        "~CAP_SETUID"
+        "~CAP_SETGID"
+        "~CAP_SETPCAP"
+        "~CAP_FSETID"
+        "~CAP_SETFCAP"
+        "~CAP_CHOWN"
+      ];
       ProtectKernelModules = true;
       ProtectKernelLogs = true;
       ProtectClock = true;
       ProtectControlGroups = true;
       RestrictNamespaces = true;
       MemoryDenyWriteExecute = true;
-      RestrictAddressFamilies = ["~AF_PACKET" "~AF_NETLINK"];
+      RestrictAddressFamilies = [
+        "~AF_PACKET"
+        "~AF_NETLINK"
+      ];
       ProtectHostname = true;
       LockPersonality = true;
       RestrictRealtime = true;
@@ -288,7 +460,32 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6"; # Networking might be necessary in rescue mode
       RestrictNamespaces = true;
-      SystemCallFilter = ["write" "read" "openat" "close" "brk" "fstat" "lseek" "mmap" "mprotect" "munmap" "rt_sigaction" "rt_sigprocmask" "ioctl" "nanosleep" "select" "access" "execve" "getuid" "arch_prctl" "set_tid_address" "set_robust_list" "prlimit64" "pread64" "getrandom"];
+      SystemCallFilter = [
+        "write"
+        "read"
+        "openat"
+        "close"
+        "brk"
+        "fstat"
+        "lseek"
+        "mmap"
+        "mprotect"
+        "munmap"
+        "rt_sigaction"
+        "rt_sigprocmask"
+        "ioctl"
+        "nanosleep"
+        "select"
+        "access"
+        "execve"
+        "getuid"
+        "arch_prctl"
+        "set_tid_address"
+        "set_robust_list"
+        "prlimit64"
+        "pread64"
+        "getrandom"
+      ];
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any"; # May need to be relaxed for network troubleshooting in rescue mode
@@ -316,7 +513,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6";
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # A more permissive filter
+      SystemCallFilter = [ "@system-service" ]; # A more permissive filter
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -344,7 +541,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6";
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # A more permissive filter
+      SystemCallFilter = [ "@system-service" ]; # A more permissive filter
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -372,12 +569,12 @@
       RestrictSUIDSGID = true;
       CapabilityBoundingSet = "";
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"];
+      SystemCallFilter = [ "@system-service" ];
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
-      DeviceAllow = [];
-      RestrictAddressFamilies = [];
+      DeviceAllow = [ ];
+      RestrictAddressFamilies = [ ];
     };
   };
   systemd.services."user@1000" = {
@@ -402,7 +599,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6";
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # Adjust based on user needs
+      SystemCallFilter = [ "@system-service" ]; # Adjust based on user needs
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any";
@@ -430,7 +627,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6";
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # Adjust as necessary
+      SystemCallFilter = [ "@system-service" ]; # Adjust as necessary
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any"; # May need adjustment for network operations
@@ -458,7 +655,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6";
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # Adjust based on log management needs
+      SystemCallFilter = [ "@system-service" ]; # Adjust based on log management needs
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any"; # May need to be relaxed for network-based log collection
@@ -486,7 +683,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6"; # Necessary for networked containers
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # Adjust based on container operations
+      SystemCallFilter = [ "@system-service" ]; # Adjust based on container operations
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any"; # May need to be relaxed for network functionality
@@ -514,7 +711,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6"; # Necessary for networked VMs
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # Adjust based on VM operations
+      SystemCallFilter = [ "@system-service" ]; # Adjust based on VM operations
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any"; # May need to be relaxed for network functionality
@@ -542,7 +739,7 @@
       RestrictSUIDSGID = true;
       RestrictAddressFamilies = "AF_INET AF_INET6"; # Necessary for networked VMs
       RestrictNamespaces = true;
-      SystemCallFilter = ["@system-service"]; # Adjust based on VM operations
+      SystemCallFilter = [ "@system-service" ]; # Adjust based on VM operations
       SystemCallArchitectures = "native";
       UMask = "0077";
       IPAddressDeny = "any"; # May need to be relaxed for network functionality

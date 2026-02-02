@@ -5,7 +5,8 @@
   lib,
   ...
 }:
-with lib; {
+with lib;
+{
   documentation.enable = mkDefault false;
 
   documentation.doc.enable = mkDefault false;
@@ -17,7 +18,7 @@ with lib; {
   documentation.nixos.enable = mkDefault false;
 
   # Perl is a default package.
-  environment.defaultPackages = mkDefault [];
+  environment.defaultPackages = mkDefault [ ];
 
   environment.stub-ld.enable = false;
 

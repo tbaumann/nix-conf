@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.niri = with config.lib.stylix.colors; {
     enable = true;
     package = lib.mkForce pkgs.niri-unstable;
@@ -20,18 +21,36 @@
       };
       spawn-at-startup = [
         # {command = "syncthingtray --wait";}
-        {command = ["solaar" "-w" "hide"];}
-        {command = ["polychromatic-tray-applet"];}
-        {command = ["coolercontrol"];}
-        {sh = "NIXOS_OZONE_WL='' joplin-desktop";}
-        {command = ["firefox"];}
-        {command = ["chromium"];}
-        {command = ["thunderbird"];}
-        {sh = "NIXOS_OZONE_WL=1 rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";}
-        {command = ["openrgb" "--startminimized"];}
-        {command = ["linphone" "--iconified"];}
-        {command = ["blueman-applet"];}
-        {command = ["${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator"];}
+        {
+          command = [
+            "solaar"
+            "-w"
+            "hide"
+          ];
+        }
+        { command = [ "polychromatic-tray-applet" ]; }
+        { command = [ "coolercontrol" ]; }
+        { sh = "NIXOS_OZONE_WL='' joplin-desktop"; }
+        { command = [ "firefox" ]; }
+        { command = [ "chromium" ]; }
+        { command = [ "thunderbird" ]; }
+        {
+          sh = "NIXOS_OZONE_WL=1 rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";
+        }
+        {
+          command = [
+            "openrgb"
+            "--startminimized"
+          ];
+        }
+        {
+          command = [
+            "linphone"
+            "--iconified"
+          ];
+        }
+        { command = [ "blueman-applet" ]; }
+        { command = [ "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator" ]; }
       ];
       input = {
         keyboard.xkb = {
@@ -96,10 +115,10 @@
           enable = false;
         };
         preset-column-widths = [
-          {proportion = 0.25;}
-          {proportion = 0.5;}
-          {proportion = 0.75;}
-          {proportion = 1.0;}
+          { proportion = 0.25; }
+          { proportion = 0.5; }
+          { proportion = 0.75; }
+          { proportion = 1.0; }
         ];
         default-column-width = {
           proportion = 0.5;
@@ -167,7 +186,7 @@
               app-id = "thunderbird";
               at-startup = true;
             }
-            {app-id = "rambox";}
+            { app-id = "rambox"; }
           ];
 
           open-on-workspace = "01comms";

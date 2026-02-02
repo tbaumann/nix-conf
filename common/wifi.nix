@@ -4,7 +4,8 @@
   pkgs,
   environment,
   ...
-}: {
+}:
+{
   imports = [
   ];
   #  networking.networkmanager.enable = true;

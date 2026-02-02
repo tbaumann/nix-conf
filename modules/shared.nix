@@ -2,7 +2,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs; [
     update-systemd-resolved.nixosModules.update-systemd-resolved
     nix-flatpak.nixosModules.nix-flatpak

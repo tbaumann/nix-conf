@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   home.packages = [
     (
       let
@@ -14,10 +15,10 @@
           hash = "sha256-cYq9YEybQsssOor/lN1k6/OVnO5l6HQgdzpFuw24q08=";
         };
       in
-        pkgs.appimageTools.wrapType2 {
-          pname = "ente-io";
-          inherit version src;
-        }
+      pkgs.appimageTools.wrapType2 {
+        pname = "ente-io";
+        inherit version src;
+      }
     )
   ];
 }

@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   ###################################################################################
   #
   #  NixOS's core configuration suitable for my desktop computer
@@ -19,7 +20,7 @@
     ./work/secunet
   ];
 
-  nixpkgs.overlays = [inputs.nix-topology.overlays.default];
+  nixpkgs.overlays = [ inputs.nix-topology.overlays.default ];
 
   boot.plymouth.enable = true;
 
@@ -83,7 +84,10 @@
 
   #Scanner
   hardware.sane.enable = true;
-  hardware.sane.extraBackends = [pkgs.hplipWithPlugin pkgs.sane-airscan];
+  hardware.sane.extraBackends = [
+    pkgs.hplipWithPlugin
+    pkgs.sane-airscan
+  ];
 
   #QMK
   hardware.keyboard.qmk.enable = true;

@@ -3,6 +3,7 @@
   pkgs,
   lib,
   ...
-}: {
-  home.packages = with pkgs; [openscad];
+}:
+{
+  home.packages = with pkgs; [ openscad ];
 }

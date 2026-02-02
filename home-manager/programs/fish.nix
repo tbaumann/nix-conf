@@ -2,14 +2,18 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
   ];
-  home.packages = [pkgs.grc pkgs.fzf];
+  home.packages = [
+    pkgs.grc
+    pkgs.fzf
+  ];
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
-    flags = ["--disable-up-arrow"];
+    flags = [ "--disable-up-arrow" ];
   };
   programs.fish = {
     enable = true;

@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = with inputs; [
     nixos-sbc.nixosModules.default
     nixos-sbc.nixosModules.boards.raspberrypi.rpi4

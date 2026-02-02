@@ -4,7 +4,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/shared.nix
 
@@ -20,8 +21,8 @@
     };
   };
   boot = {
-    binfmt.emulatedSystems = ["aarch64-linux"];
-    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    extraModulePackages = with config.boot.kernelPackages; [ liquidtux ];
 
     extraModprobeConfig = "options kvm_amd nested=1";
   };
@@ -42,7 +43,7 @@
     };
     pcscd = {
       enable = true;
-      plugins = [pkgs.pcsc-cyberjack];
+      plugins = [ pkgs.pcsc-cyberjack ];
     };
   };
   programs.coolercontrol.enable = true;

@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   stylix = {
     targets = {
       waybar = {
@@ -164,20 +165,24 @@
           "default" = "";
         };
         "persistent-workspaces" = {
-          "1" = [];
-          "2" = [];
-          "3" = [];
-          "4" = [];
-          "5" = [];
-          "6" = [];
-          "7" = [];
-          "8" = [];
+          "1" = [ ];
+          "2" = [ ];
+          "3" = [ ];
+          "4" = [ ];
+          "5" = [ ];
+          "6" = [ ];
+          "7" = [ ];
+          "8" = [ ];
         };
       };
       wireplumber = {
         format = "{volume}% {icon}";
         format-muted = "";
-        "format-icons" = ["" "" ""];
+        "format-icons" = [
+          ""
+          ""
+          ""
+        ];
         on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         on-click-right = "${pkgs.pwvucontrol}/bin/pwvucontrol";
         max-volume = 150;

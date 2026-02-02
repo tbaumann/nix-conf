@@ -1,7 +1,7 @@
 # ---
 # schema = "single-disk"
 # [placeholders]
-# mainDisk = "/dev/disk/by-id/ata-HFS120G32TND-N1A0A_EJ74N155711204G0Z" 
+# mainDisk = "/dev/disk/by-id/ata-HFS120G32TND-N1A0A_EJ74N155711204G0Z"
 # ---
 # This file was automatically generated!
 # CHANGING this configuration requires wiping and reinstalling the machine

@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   services = {
     poweralertd.enable = true;
     udiskie = {

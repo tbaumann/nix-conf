@@ -7,7 +7,8 @@
 # media - control and enjoy audio/video
 {
   nixpkgs.config.allowUnfree = lib.mkForce true;
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "rambox"
     ];

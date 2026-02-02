@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   #nixpkgs.config.permittedInsecurePackages = [ "electron-24.8.6" ];
   #environment.systemPackages = with pkgs; [ obsidian-wayland ];
   nixpkgs.config.permittedInsecurePackages = [

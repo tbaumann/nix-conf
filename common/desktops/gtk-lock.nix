@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  security.pam.services.gtklock = {};
+{ pkgs, ... }:
+{
+  security.pam.services.gtklock = { };
   environment.systemPackages = with pkgs; [
     gtklock
     gtklock-powerbar-module

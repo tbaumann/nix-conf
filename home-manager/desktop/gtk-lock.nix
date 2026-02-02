@@ -2,9 +2,11 @@
   pkgs,
   lib,
   ...
-}: let
-  toINI = pkgs.lib.generators.toINI {};
-in {
+}:
+let
+  toINI = pkgs.lib.generators.toINI { };
+in
+{
   home.packages = with pkgs; [
     gtklock
   ];

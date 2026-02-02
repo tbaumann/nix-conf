@@ -4,9 +4,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.email;
-in {
+in
+{
   options.email = {
     enable = lib.mkEnableOption "Email sending functionality";
     fromAddress = lib.mkOption {

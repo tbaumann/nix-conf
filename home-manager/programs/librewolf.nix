@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  stylix.targets.librewolf.profileNames = ["default"];
+{ pkgs, ... }:
+{
+  stylix.targets.librewolf.profileNames = [ "default" ];
   programs.librewolf = {
     # package = (pkgs.wrapFirefox (pkgs.firefox-devedition-unwrapped.override { pipewireSupport = true; }) { });
     enable = true;
@@ -76,7 +77,7 @@
                 ];
               }
             ];
-            definedAliases = [",d"];
+            definedAliases = [ ",d" ];
           };
           "google" = {
             urls = [
@@ -90,7 +91,7 @@
                 ];
               }
             ];
-            definedAliases = [",g"];
+            definedAliases = [ ",g" ];
           };
           "Home Manager Options" = {
             urls = [
@@ -104,7 +105,7 @@
                 ];
               }
             ];
-            definedAliases = ["ho"];
+            definedAliases = [ "ho" ];
           };
           "Nix Packages" = {
             urls = [
@@ -122,7 +123,7 @@
                 ];
               }
             ];
-            definedAliases = ["np"];
+            definedAliases = [ "np" ];
           };
           "youtube" = {
             urls = [
@@ -136,7 +137,7 @@
                 ];
               }
             ];
-            definedAliases = ["y"];
+            definedAliases = [ "y" ];
           };
           "Wikipedia" = {
             urls = [
@@ -150,7 +151,7 @@
                 ];
               }
             ];
-            definedAliases = ["wik"];
+            definedAliases = [ "wik" ];
           };
           "DockerHub" = {
             urls = [
@@ -164,7 +165,7 @@
                 ];
               }
             ];
-            definedAliases = ["dh"];
+            definedAliases = [ "dh" ];
           };
           "GitHub" = {
             urls = [
@@ -178,7 +179,7 @@
                 ];
               }
             ];
-            definedAliases = ["gh"];
+            definedAliases = [ "gh" ];
           };
         };
         default = "ddg";

@@ -3,7 +3,8 @@
   inputs,
   system,
   ...
-}: {
+}:
+{
   imports = [
     ./programs
     ./services
@@ -39,7 +40,7 @@
     irqbalance.enable = true;
     fwupd = {
       enable = true;
-      extraRemotes = ["lvfs-testing"];
+      extraRemotes = [ "lvfs-testing" ];
     };
     gvfs.enable = true;
     pipewire = {
@@ -50,7 +51,11 @@
     };
     printing = {
       enable = true;
-      drivers = with pkgs; [gutenprint hplip foomatic-db-ppds];
+      drivers = with pkgs; [
+        gutenprint
+        hplip
+        foomatic-db-ppds
+      ];
     };
     udisks2.enable = true;
   };
@@ -92,5 +97,5 @@
     update-systemd-resolved
     zip
   ];
-  environment.pathsToLink = ["/libexec"];
+  environment.pathsToLink = [ "/libexec" ];
 }

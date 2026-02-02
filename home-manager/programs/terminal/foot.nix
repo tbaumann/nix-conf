@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   #stylix.targets.foot.enable = false;
   programs.foot = {
     enable = true;
