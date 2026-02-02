@@ -4,5 +4,13 @@
   ];
   perSystem = {
     pre-commit.settings.hooks.nixfmt-rfc-style.enable = true;
+    treefmt.programs.statix = {
+      enable = true;
+      disabled-lints = [
+        "empty_pattern"
+        "redundant_pattern_bind"
+        "unquoted_splice"
+      ];
+    };
   };
 }
