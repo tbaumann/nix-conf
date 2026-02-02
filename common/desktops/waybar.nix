@@ -1,9 +1,6 @@
 {
-  config,
   pkgs,
   inputs,
-  waybar_weather_display,
-  waybar_media_display,
   ...
 }:
 {

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 {
   stylix.targets.ghostty.enable = false;
   programs.ghostty = {

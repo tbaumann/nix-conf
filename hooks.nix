@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   imports = [
     inputs.git-hooks-nix.flakeModule
   ];
@@ -14,7 +13,7 @@
           "unquoted_splice"
         ];
       };
-      deadnix.enable = false; # # Not yet
+      deadnix.enable = true;
       nixfmt.enable = true;
     };
   };

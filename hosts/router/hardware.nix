@@ -1,6 +1,5 @@
 {
   modulesPath,
-  nixos-hardware,
   pkgs,
   config,
   lib,
