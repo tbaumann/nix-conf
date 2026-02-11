@@ -58,7 +58,8 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
-    nix-openclaw.url = "github:jeanlucthumm/nix-openclaw/userseg";
+    #nix-openclaw.url = "github:jeanlucthumm/nix-openclaw/userseg";
+    nix-openclaw.url = "github:jeanlucthumm/nix-openclaw";
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
