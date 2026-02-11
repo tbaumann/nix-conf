@@ -3,8 +3,7 @@
   pkgs,
   modulesPath,
   ...
-}:
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -16,20 +15,15 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [];
   boot.kernelModules = [
     "kvm-amd"
-    "kvm-intel"
   ];
-  #boot.kernelParams = ["badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af" "memtest=2" "amd_prefcore=enable" "amd_pstate=active" "initcall_blacklist=dw_i2c_init_driver"];
   boot.kernelParams = [
-    "amd_prefcore=enable"
-    "amd_pstate=active"
+    #"badram=0x0000000fdbdaa7a8,0xfffffffffffffff8" "memmap=0x0000000fdbdaa7a8$0x0000000fdbdaa7af"
     "initcall_blacklist=dw_i2c_init_driver"
   ];
-  boot.blacklistedKernelModules = [ "qcserial" ];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+  boot.blacklistedKernelModules = ["qcserial"];
   nix.settings.system-features = [
     "kvm"
     "big-parallel"
@@ -47,38 +41,38 @@
   fileSystems."/" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = [ "subvol=SYSTEM/rootfs" ];
+    options = ["subvol=SYSTEM/rootfs"];
   };
 
   fileSystems."/nix" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = [ "subvol=SYSTEM/nix" ];
+    options = ["subvol=SYSTEM/nix"];
   };
 
   fileSystems."/home" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = [ "subvol=DATA/home" ];
+    options = ["subvol=DATA/home"];
   };
   fileSystems."/home-old" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = [ "subvol=DATA/home-old" ];
+    options = ["subvol=DATA/home-old"];
   };
 
   fileSystems."/persist" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = [ "subvol=DATA/persist" ];
+    options = ["subvol=DATA/persist"];
   };
 
   /*
-    fileSystems."/media" = {
-      device = "/dev/nvme0n1p4";
-      fsType = "btrfs";
-      options = ["subvol=DATA/media"];
-    };
+  fileSystems."/media" = {
+    device = "/dev/nvme0n1p4";
+    fsType = "btrfs";
+    options = ["subvol=DATA/media"];
+  };
   */
 
   fileSystems."/boot" = {

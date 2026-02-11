@@ -1,11 +1,9 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./desktop
     ./packages.nix
     ./programs
     ./services.nix
-    ./flatpak.nix
     #    ./dev
   ];
 

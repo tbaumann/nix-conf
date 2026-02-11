@@ -3,8 +3,7 @@
   lib,
   config,
   ...
-}:
-{
+}: {
   imports = [
     ../../modules/shared.nix
 
@@ -20,8 +19,8 @@
     };
   };
   boot = {
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
-    extraModulePackages = with config.boot.kernelPackages; [ liquidtux ];
+    binfmt.emulatedSystems = ["aarch64-linux"];
+    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
 
     extraModprobeConfig = "options kvm_amd nested=1";
   };
@@ -34,7 +33,7 @@
   };
 
   services = {
-    k3s.enable = true;
+    #    k3s.enable = true;
     btrfs.autoScrub.enable = true;
     hardware.openrgb = {
       enable = true;
@@ -42,7 +41,7 @@
     };
     pcscd = {
       enable = true;
-      plugins = [ pkgs.pcsc-cyberjack ];
+      plugins = [pkgs.pcsc-cyberjack];
     };
   };
   programs.coolercontrol.enable = true;

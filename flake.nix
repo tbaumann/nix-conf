@@ -44,11 +44,6 @@
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
-    };
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,6 +58,11 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
+    nix-openclaw.url = "github:jeanlucthumm/nix-openclaw/userseg";
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
+    };
     nvf.url = "github:notashelf/nvf/";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     quickshell = {
@@ -85,11 +85,9 @@
     cinephage.url = "github:MoldyTaint/Cinephage";
     # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
   };
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      { ... }:
-      {
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} (
+      {...}: {
         systems = [
           "x86_64-linux"
           "aarch64-linux"

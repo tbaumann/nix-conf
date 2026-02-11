@@ -3,8 +3,7 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./user-group.nix
     ./nixbuild.nix
@@ -44,7 +43,7 @@
       download-buffer-size = 500000000; # 500 MB
       builders-use-substitutes = true;
       auto-optimise-store = true;
-      trusted-users = [ "@wheel" ];
+      trusted-users = ["@wheel"];
       substituters = [
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
@@ -76,7 +75,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
       }
       {
         hostName = "nas.local";
@@ -92,7 +91,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
       }
       {
         hostName = "router.local";
@@ -107,17 +106,15 @@
           "benchmark"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
       }
     ];
   };
 
   nixpkgs.config.allowUnfree = true;
 
+  zramSwap.enable = true;
   boot.tmp.useTmpfs = true;
-  systemd.services.nix-daemon = {
-    environment.TMPDIR = "/var/tmp";
-  };
 
   security.sudo.wheelNeedsPassword = false;
   security.sudo-rs.enable = true;
@@ -127,7 +124,7 @@
   time.timeZone = "Europe/Berlin";
 
   i18n.defaultLocale = "en_GB.UTF-8";
-  i18n.supportedLocales = [ "all" ];
+  i18n.supportedLocales = ["all"];
   console = {
     keyMap = "us";
   };
@@ -148,7 +145,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     inputs.clan-core.packages.x86_64-linux.clan-cli
-    bat
     nix-output-monitor
     parallel
     ripgrep
@@ -206,10 +202,18 @@
   services.openssh.enable = true;
 
   users.groups = {
-    "plugdev" = { };
-    "netdev" = { };
-    "pulse" = { };
-    "power" = { };
+    "plugdev" = {};
+    "netdev" = {};
+    "pulse" = {};
+    "power" = {};
+  };
+  programs.bat = {
+    enable = true;
+    settings = {
+      paging = "never";
+      theme = "Catppuccin Mocha";
+      style = "header-filename,snip";
+    };
   };
   environment.variables = {
     PAGER = "${pkgs.bat}/bin/bat";
