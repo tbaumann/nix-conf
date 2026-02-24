@@ -15,7 +15,6 @@
       home-manager.sharedModules = [
         iio-sway.homeManagerModules.default
         nix-index-database.homeModules.nix-index
-        nix-openclaw.homeManagerModules.openclaw
         nvf.homeManagerModules.default
         stylix.homeModules.stylix
       ];

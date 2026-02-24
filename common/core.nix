@@ -93,21 +93,6 @@
         ];
         mandatoryFeatures = [];
       }
-      {
-        hostName = "router.local";
-        system = "aarch64-linux";
-        protocol = "ssh-ng";
-        # if the builder supports building for multiple architectures,
-        # replace the previous line by, e.g.
-        # systems = ["x86_64-linux" "aarch64-linux"];
-        speedFactor = 2;
-        supportedFeatures = [
-          "nixos-test"
-          "benchmark"
-          "kvm"
-        ];
-        mandatoryFeatures = [];
-      }
     ];
   };
 
@@ -210,8 +195,7 @@
   programs.bat = {
     enable = true;
     settings = {
-      paging = "never";
-      theme = "Catppuccin Mocha";
+      theme = "Dracula";
       style = "header-filename,snip";
     };
   };
