@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   ###################################################################################
   #
   #  NixOS's core configuration suitable for my desktop computer
@@ -18,7 +17,7 @@
     ./work/secunet
   ];
 
-  nixpkgs.overlays = [ inputs.nix-topology.overlays.default ];
+  nixpkgs.overlays = [inputs.nix-topology.overlays.default];
 
   boot.plymouth.enable = true;
 
@@ -48,6 +47,7 @@
     wev
     wine
     zathura
+    inputs.graphite.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
 
   services.gnome.gcr-ssh-agent.enable = false;
