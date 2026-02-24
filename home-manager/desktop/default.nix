@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     #./vscode.nix
     ./gtk.nix
@@ -21,7 +17,7 @@
     flameshot
     syncthingtray-minimal
     sway-audio-idle-inhibit
-    #inputs.quickshell.packages.${pkgs.system}.default
+    #inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   programs.zathura.enable = true;
   programs.joplin-desktop = {
