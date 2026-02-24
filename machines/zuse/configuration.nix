@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: {
   imports = [
@@ -20,7 +21,7 @@
   };
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
-    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+    #    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
 
     extraModprobeConfig = "options kvm_amd nested=1";
   };
@@ -30,10 +31,35 @@
   networking = {
     useNetworkd = lib.mkForce true;
     hostName = "zuse";
+    nat = {
+      enable = true;
+      internalInterfaces = ["microbr"];
+      externalInterface = "enp69s0";
+    };
+  };
+  systemd.network = {
+    netdevs."20-microbr".netdevConfig = {
+      Kind = "bridge";
+      Name = "microbr";
+    };
+
+    networks = {
+      "20-microbr" = {
+        matchConfig.Name = "microbr";
+        addresses = [{Address = "192.168.83.1/24";}];
+        networkConfig = {
+          ConfigureWithoutCarrier = true;
+        };
+      };
+
+      "21-microvm-tap" = {
+        matchConfig.Name = "microvm*";
+        networkConfig.Bridge = "microbr";
+      };
+    };
   };
 
   services = {
-    #    k3s.enable = true;
     btrfs.autoScrub.enable = true;
     hardware.openrgb = {
       enable = true;
