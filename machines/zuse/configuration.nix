@@ -19,9 +19,16 @@
       network = "home"; # Use the network we define below
     };
   };
+  boot.kernelPackages = pkgs.linuxPackages.extend (
+    self: super: {
+      kernel = super.kernel.override {
+        moduleBuildDependencies = super.kernel.moduleBuildDependencies or [] ++ [pkgs.python3Minimal];
+      };
+    }
+  );
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
-    #    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
+    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
 
     extraModprobeConfig = "options kvm_amd nested=1";
   };
@@ -71,5 +78,5 @@
     };
   };
   programs.coolercontrol.enable = true;
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  #nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
