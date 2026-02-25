@@ -71,7 +71,7 @@
     };
     stylix.url = "github:danth/stylix/";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    ucodenix.url = "github:e-tho/ucodenix";
+    ucodenix.url = "github:e-tho/ucodenix/a2b36038ce5276cb32a3b5db20423992ecddf3f9";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
