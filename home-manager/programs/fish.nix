@@ -2,8 +2,7 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
   ];
   home.packages = [
@@ -13,13 +12,14 @@
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
-    flags = [ "--disable-up-arrow" ];
+    flags = ["--disable-up-arrow"];
   };
   programs.fish = {
     enable = true;
     shellInitLast = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
       set theme_color_scheme catppuccin
+      fish_add_path ~/.cargo/bin/
     '';
   };
   xdg.configFile."fish/themes/" = {

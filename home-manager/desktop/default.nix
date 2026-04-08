@@ -17,7 +17,6 @@
     flameshot
     syncthingtray-minimal
     sway-audio-idle-inhibit
-    #inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   programs.zathura.enable = true;
   programs.joplin-desktop = {
@@ -47,7 +46,5 @@
     "SDL_VIDEODRIVER" = "wayland,x11";
 
     "XDG_SESSION_TYPE" = "wayland";
-    "WLR_NO_HARDWARE_CURSORS" = "1";
-    "WLR_EGL_NO_MODIFIRES" = "1";
   };
 }

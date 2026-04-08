@@ -48,6 +48,34 @@
           autoindent = true; # Do clever autoindenting
           smartindent = true;
         };
+        /*
+        keymaps = [
+          {
+            key = "m";
+            action = "h";
+            mode = ["n" "o" "x"];
+            noremap = true;
+          }
+          {
+            key = "n";
+            action = "j";
+            mode = ["n" "o" "x"];
+            noremap = true;
+          }
+          {
+            key = "e";
+            action = "k";
+            mode = ["n" "o" "x"];
+            noremap = true;
+          }
+          {
+            key = "e";
+            action = "l";
+            mode = ["n" "o" "x"];
+            noremap = true;
+          }
+        ];
+        */
         viAlias = false;
         vimAlias = true;
         spellcheck = {

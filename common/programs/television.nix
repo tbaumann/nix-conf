@@ -1,0 +1,5 @@
+{}: {
+  programs.television = {
+    enable = true;
+  };
+}

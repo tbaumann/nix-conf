@@ -11,6 +11,7 @@
     #./syncthing.nix
     # perl is bleeding in via git (inputs.nixpkgs + "/nixos/modules/profiles/perlless.nix")
     ./profiles/perlless.nix
+    ./overlays
   ];
 
   email = {
@@ -57,6 +58,7 @@
       ];
     };
     buildMachines = [
+      /*
       {
         hostName = "zuse.local";
         speedFactor = 3;
@@ -93,6 +95,7 @@
         ];
         mandatoryFeatures = [];
       }
+      */
     ];
   };
 

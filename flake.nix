@@ -27,17 +27,22 @@
       url = "github:AvengeMedia/DankMaterialShell";
       #inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     ghostty-shaders = {
       url = "github:hackr-sh/ghostty-shaders";
       flake = false;
     };
-    graphite.url = "github:GraphiteEditor/Graphite/?dir=.nix";
+    graphite.url = "github:GraphiteEditor/Graphite/";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       #url = "github:nix-community/home-manager/";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
+      #inputs.nixpkgs.follows = "clan-core/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     iio-sway.url = "github:tbaumann/iio-sway";
     llm-agents.url = "github:numtide/llm-agents.nix";
@@ -64,12 +69,12 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
     nvf.url = "github:notashelf/nvf/";
+    onemcp.url = "github:tbaumann/onemcp-flake";
+    openfang.url = "github:tbaumann/openfang";
+    goclaw.url = "github:tbaumann/goclaw";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
-    stylix.url = "github:danth/stylix/";
+    stylix.url = "github:danth/stylix/release-25.11";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     ucodenix.url = "github:e-tho/ucodenix/a2b36038ce5276cb32a3b5db20423992ecddf3f9";
     update-systemd-resolved = {
@@ -83,6 +88,14 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     cinephage.url = "github:MoldyTaint/Cinephage";
+    quickshell = {
+      # add ?ref=<tag> to track a tag
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+
+      # THIS IS IMPORTANT
+      # Mismatched system dependencies will lead to crashes and other issues.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
   };
   outputs = inputs @ {flake-parts, ...}:

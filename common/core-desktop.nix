@@ -14,7 +14,6 @@
     # ./syncthing.nix
     ../home-manager/default.nix
     ./music.nix
-    ./work/secunet
   ];
 
   nixpkgs.overlays = [inputs.nix-topology.overlays.default];
@@ -47,7 +46,8 @@
     wev
     wine
     zathura
-    inputs.graphite.packages."${pkgs.stdenv.hostPlatform.system}".default
+    dos2unix # qmk dependency
+    # FIXME Can't afford the build times inputs.graphite.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
 
   services.gnome.gcr-ssh-agent.enable = false;

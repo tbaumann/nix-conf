@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   programs.niri = with config.lib.stylix.colors; {
     enable = true;
     package = lib.mkForce pkgs.niri-unstable;
@@ -28,15 +27,17 @@
             "hide"
           ];
         }
-        { command = [ "polychromatic-tray-applet" ]; }
-        { command = [ "coolercontrol" ]; }
-        { sh = "NIXOS_OZONE_WL='' joplin-desktop"; }
-        { command = [ "firefox" ]; }
-        { command = [ "chromium" ]; }
-        { command = [ "thunderbird" ]; }
+        {command = ["polychromatic-tray-applet"];}
+        {command = ["coolercontrol"];}
+        {sh = "NIXOS_OZONE_WL='' joplin-desktop";}
+        {command = ["firefox"];}
+        {command = ["chromium"];}
+        {command = ["thunderbird"];}
+        /*
         {
           sh = "NIXOS_OZONE_WL=1 rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";
         }
+        */
         {
           command = [
             "openrgb"
@@ -49,8 +50,9 @@
             "--iconified"
           ];
         }
-        { command = [ "blueman-applet" ]; }
-        { command = [ "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator" ]; }
+        {command = ["${pkgs.ferdium}/bin/ferdium"];}
+        {command = ["blueman-applet"];}
+        {command = ["${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator"];}
       ];
       input = {
         keyboard.xkb = {
@@ -115,10 +117,10 @@
           enable = false;
         };
         preset-column-widths = [
-          { proportion = 0.25; }
-          { proportion = 0.5; }
-          { proportion = 0.75; }
-          { proportion = 1.0; }
+          {proportion = 0.25;}
+          {proportion = 0.5;}
+          {proportion = 0.75;}
+          {proportion = 1.0;}
         ];
         default-column-width = {
           proportion = 0.5;
@@ -186,7 +188,8 @@
               app-id = "thunderbird";
               at-startup = true;
             }
-            { app-id = "rambox"; }
+            {app-id = "rambox";}
+            {app-id = "ferdium";}
           ];
 
           open-on-workspace = "01comms";

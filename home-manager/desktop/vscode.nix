@@ -1,12 +1,9 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   #nixpkgs.config.permittedInsecurePackages = [ "electron-24.8.6" ];
   #environment.systemPackages = with pkgs; [ obsidian-wayland ];
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
+    "electron-38.8.4"
   ];
 
   programs.vscode = {

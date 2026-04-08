@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     ./git.nix
   ];
@@ -23,4 +20,7 @@
   services = {
     boinc.enable = false;
   };
+  environment.systemPackages = with pkgs; [
+    poppler-utils
+  ];
 }

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     ./kde.nix
     ./lxqt.nix
@@ -57,9 +53,6 @@
   programs.wshowkeys.enable = true;
   programs = {
     xwayland.enable = true;
-
-    # monitor backlight control
-    light.enable = true;
 
     # thunar file manager(part of xfce) related options
     thunar.enable = true;

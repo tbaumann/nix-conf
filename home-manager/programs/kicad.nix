@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     kicad
-    kikit
-    librepcb
+    # FIXME openscad dependency broken    kikit
+    #    librepcb
   ];
 }
