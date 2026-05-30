@@ -2,20 +2,28 @@
 
 jobs:
   check:
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: Setup Tailscale
         uses: tailscale/github-action@v4
         with:
-          oauth-client-id: '{{ secrets.TS_OAUTH_CLIENT_ID }}'
-          oauth-secret: '{{ secrets.TS_OAUTH_SECRET }}'
-          tags: ci
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          ping: nas.tail84117.ts.net
+          tags: tag:ci
       - name: Setup Nix
-        uses: nixbuild/nix-quick-install-action@v18
-      - name: Check Nix flake
-        run: nix flake check
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Deploy Clan
+        run: nix run git+https://git.clan.lol/clan/clan-core -- machines update --tags ci
 name: Check Nix configuration
 "on":
   pull_request:
