@@ -32,6 +32,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    github-actions-nix.url = "github:synapdeck/github-actions-nix";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     ghostty-shaders = {
       url = "github:hackr-sh/ghostty-shaders";
@@ -111,7 +112,9 @@
 
         imports = [
           inputs.git-hooks-nix.flakeModule
+          inputs.github-actions-nix.flakeModules.default
           inputs.treefmt-nix.flakeModule
+          ./actions.nix
           ./clan.nix
           ./devshells.nix
           ./hooks.nix
