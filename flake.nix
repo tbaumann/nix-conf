@@ -50,6 +50,7 @@
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    moltis.url = "github:tbaumann/moltis";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

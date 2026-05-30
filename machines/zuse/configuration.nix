@@ -4,8 +4,7 @@
   config,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ../../modules/shared.nix
 
@@ -23,13 +22,13 @@
   boot.kernelPackages = pkgs.linuxPackages.extend (
     self: super: {
       liquidtux = super.liquidtux.overrideAttrs (oldAttrs: {
-        nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.python3Minimal ];
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [pkgs.python3Minimal];
       });
     }
   );
   boot = {
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
-    extraModulePackages = with config.boot.kernelPackages; [ liquidtux ];
+    binfmt.emulatedSystems = ["aarch64-linux"];
+    extraModulePackages = with config.boot.kernelPackages; [liquidtux];
 
     extraModprobeConfig = "options kvm_amd nested=1";
   };
@@ -43,10 +42,11 @@
     hostName = "zuse";
     nat = {
       enable = true;
-      internalInterfaces = [ "microbr" ];
+      internalInterfaces = ["microbr"];
       externalInterface = "enp69s0";
     };
   };
+  networking.enableIPv6 = false; ## Fuck you Telekom
   systemd.network = {
     netdevs."20-microbr".netdevConfig = {
       Kind = "bridge";
@@ -56,7 +56,7 @@
     networks = {
       "20-microbr" = {
         matchConfig.Name = "microbr";
-        addresses = [ { Address = "192.168.83.1/24"; } ];
+        addresses = [{Address = "192.168.83.1/24";}];
         networkConfig = {
           ConfigureWithoutCarrier = true;
         };
@@ -83,7 +83,12 @@
       "gpt-oss:20b"
     ];
   };
-  services.open-webui.enable = true;
+  # services.open-webui.enable = true;
+  location = {
+    provider = "manual";
+    longitude = "51.028791";
+    latitude = "8.851719";
+  };
 
   services = {
     btrfs.autoScrub.enable = true;

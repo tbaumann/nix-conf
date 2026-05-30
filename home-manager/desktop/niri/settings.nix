@@ -6,7 +6,7 @@
 }: {
   programs.niri = with config.lib.stylix.colors; {
     enable = true;
-    package = lib.mkForce pkgs.niri-unstable;
+    package = lib.mkForce pkgs.niri;
     settings = {
       environment = {
         CLUTTER_BACKEND = "wayland";
