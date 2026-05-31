@@ -55,7 +55,6 @@
                   uses = "tailscale/github-action@v4";
                   with_ = {
                     authkey = "\${{ secrets.TAILSCALE_AUTHKEY }}";
-                    tags = "tag:ci";
                     ping = "nas.tail84117.ts.net";
                   };
                 }

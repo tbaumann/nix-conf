@@ -19,7 +19,6 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           ping: nas.tail84117.ts.net
-          tags: tag:ci
       - name: Setup Nix
         uses: DeterminateSystems/determinate-nix-action@v3
       - name: Deploy Clan
