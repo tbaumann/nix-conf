@@ -28,7 +28,9 @@ in {
   with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
     bat
     jq
+    gh
     playwright
+    nodejs_26
     /*
     llm-agents.qmd
     llm-agents.ck
@@ -40,12 +42,16 @@ in {
   services.openssh.enable = true;
   networking.firewall.enable = false;
   services.logind.settings.Login.KillUserProcesses = false;
+  services.tailscale.extraUpFlags = ["--ssh=false"];
   services.hermes-agent = {
     enable = true;
     settings = {
+      gateway.platforms.telegram.gateway_restart_notification = false;
       smart_model_routing.enabled = true;
+      unauthorized_dm_behavior = "pair";
+      worktree = false;
       model = {
-        default = "openai/gpt-5.4-nano";
+        default = "qwen/qwen3.6-plus";
         provider = "nous";
       };
       fallback_model = {
@@ -76,10 +82,14 @@ in {
         use_gateway = true;
       };
       tts = {
-        provider = "openai";
+        provider = "elevenlabs";
         openai = {
           model = "gpt-4o-mini-tts";
           voice = "alloy";
+        };
+        elevenlabs = {
+          voice_id = "OfGMGmhShO8iL9jCkXy8";
+          model_id = "eleven_multilingual_v2";
         };
         use_gateway = true;
         #provider = "nous";

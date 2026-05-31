@@ -75,13 +75,18 @@
     "char-ttyACM"
   ];
   services.ollama = {
-    enable = true;
+    enable = false;
     package = pkgs.ollama-vulkan;
     loadModels = [
       "erwan2/DeepSeek-R1-Distill-Qwen-14B"
       "hhao/qwen2.5-coder-tools:14b"
       "gpt-oss:20b"
     ];
+  };
+
+  services.llama-cpp = {
+    enable = true;
+    package = pkgs.llama-cpp-vulkan;
   };
   # services.open-webui.enable = true;
   location = {
