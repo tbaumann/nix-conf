@@ -3,21 +3,21 @@
   inputs,
   lib,
   pkgs,
+  self,
   ...
-}: let
-  goclaw = inputs.goclaw.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (
-    attrs: {doCheck = false;}
-  );
-in {
-  imports = with inputs; [
-    nixos-sbc.nixosModules.default
-    nixos-sbc.nixosModules.boards.raspberrypi.rpi4
-    onemcp.nixosModules.default
-    hermes-agent.nixosModules.default
-    ../../modules/shared.nix
-    ../../common/core.nix
-    ../../common/tailscale.nix
-  ];
+}: {
+  imports =
+    (with inputs; [
+      nixos-sbc.nixosModules.default
+      nixos-sbc.nixosModules.boards.raspberrypi.rpi4
+      hermes-agent.nixosModules.default
+      odysseus.nixosModules.default
+    ])
+    ++ [
+      ../../modules/shared.nix
+      ../../common/core.nix
+      ../../common/tailscale.nix
+    ];
   system.etc.overlay.enable = true;
   #boot.initrd.systemd.enable = true;
   system.nixos-init.enable = lib.mkForce false;
@@ -25,26 +25,47 @@ in {
   documentation.enable = false;
   documentation.man.enable = false;
   environment.systemPackages = with pkgs;
-  with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
-    bat
-    jq
-    gh
-    playwright
-    nodejs_26
-    /*
-    llm-agents.qmd
-    llm-agents.ck
-    */
-    agent-browser
-    rtk
-  ];
-  #    moltis.packages.${pkgs.stdenv.hostPlatform.system}.default
+    (with pkgs; [
+      bat
+      jq
+      gh
+      playwright
+      nodejs_26
+    ])
+    ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+      /*
+      llm-agents.qmd
+      llm-agents.ck
+      */
+      #      agent-browser
+      rtk
+      icm
+      hermes-hud
+    ])
+    ++ [
+      self.packages.${pkgs.stdenv.hostPlatform.system}.icm
+    ];
   services.openssh.enable = true;
   networking.firewall.enable = false;
   services.logind.settings.Login.KillUserProcesses = false;
-  services.tailscale.extraUpFlags = ["--ssh=false"];
+
   services.hermes-agent = {
     enable = true;
+    mcpServers = {
+      epicure = {
+        url = "https://epicure-mcp.kaikaku.ai/mcp";
+        enabled = true;
+      };
+      icm = {
+        command = "/run/current-system/sw/bin/icm";
+        args = [
+          "serve"
+          #"--no-embeddings"
+        ];
+        timeout = 120;
+        connect_timeout = 30;
+      };
+    };
     settings = {
       gateway.platforms.telegram.gateway_restart_notification = false;
       smart_model_routing.enabled = true;
@@ -58,13 +79,9 @@ in {
         model = "openrouter/free";
         provider = "openrouter";
       };
-      plugins.enabled = [
-        "hermes-lcm"
-        "rtk-rewrite"
-        "disk-cleanup"
-        "image_gen/fal"
-        "web/brave_free"
-      ];
+      memory.provider = "hermes-icm-memory";
+      context.engine = "lcm";
+      plugins.hermes-icm-memory.use_embeddings = true;
       memory = {
         memory_enabled = true;
         user_profile_enabled = true;
@@ -72,7 +89,6 @@ in {
       web = {
         backend = "firecrawl";
         use_gateway = true;
-        provider = "nous";
       };
       browser = {
         backend = "nous";
@@ -82,21 +98,23 @@ in {
         use_gateway = true;
       };
       tts = {
-        provider = "elevenlabs";
+        provider = "openai";
         openai = {
           model = "gpt-4o-mini-tts";
-          voice = "alloy";
+          voice = "nova";
         };
         elevenlabs = {
           voice_id = "OfGMGmhShO8iL9jCkXy8";
           model_id = "eleven_multilingual_v2";
         };
         use_gateway = true;
-        #provider = "nous";
       };
       image_gen = {
         use_gateway = true;
-        provider = "nous";
+      };
+      video_gen = {
+        provider = "fal";
+        use_gateway = true;
       };
       voice = {
         record_key = "ctrl+b"; # Push-to-talk key inside the CLI
@@ -115,10 +133,47 @@ in {
       };
     };
     environmentFiles = [config.sops.secrets."hermes-env".path];
+    environment.LCM_ENABLE_SLASH_COMMAND = "1";
     addToSystemPackages = true;
-    extraDependencyGroups = ["messaging" "tts-premium" "voice" "firecrawl" "exa"];
+    extraDependencyGroups = [
+      "messaging"
+      "tts-premium"
+      "voice"
+      "firecrawl"
+      "exa"
+    ];
+    settings.plugins.enabled = [
+      "rtk-rewrite"
+      "weather"
+      "disk-cleanup"
+      "image_gen/fal"
+      "web/brave_free"
+      "hermes-icm-memory"
+      "hermes-lcm"
+    ];
+    # Directory-style plugins: a plugin.yaml lives at the package root and
+    # hermes discovers them by symlinking into its plugins directory.
     extraPlugins = [
-      /*
+      (pkgs.fetchFromGitHub {
+        name = "plugin-icm-memory";
+        owner = "ta3pks";
+        repo = "hermes-icm-memory";
+        rev = "v0.4.0";
+        hash = "sha256-djLy4jBYEYurLoabZzNMKhJzqy6t/OlsWC4V+AZoNGI=";
+      })
+      (pkgs.fetchFromGitHub {
+        name = "plugin-hermes-lcm";
+        owner = "stephenschoettler";
+        repo = "hermes-lcm";
+        rev = "v0.16.1";
+        hash = "sha256-Pks7Mf3d90lHEYwNq7dA3BGR9YgZawTav6nHpHgH9nk=";
+      })
+    ];
+    # Entry-point plugins: pip-packaged, register via the
+    # `hermes_agent.plugins` entry-point group and are added to PYTHONPATH.
+    # (Their plugin.yaml lives inside the installed package, not at the root,
+    # so they do NOT belong in extraPlugins.)
+    extraPythonPackages = [
       (pkgs.python312Packages.buildPythonPackage {
         pname = "plugin-rtk-hermes";
         version = "1.2.3";
@@ -131,49 +186,12 @@ in {
         format = "pyproject";
         build-system = [pkgs.python312Packages.setuptools];
       })
-      (
-        pkgs.fetchFromGitHub {
-          owner = "stephenschoettler";
-          repo = "hermes-lcm";
-          rev = "v0.14.0";
-          hash = "sha256-3pB/tQ6DSdjaPDTFTulIXkiPeRap0yLBq22LLTn2rs8=";
-        }
-      )
-      (
-        pkgs.fetchFromGitHub {
-          owner = "FahrenheitResearch";
-          repo = "hermes-weather-plugin";
-          rev = "d474493ef4ffeefabad9dbf0188f72bce3b47b67";
-          hash = "";
-        }
-      )
-      */
+      # Built from ./pkgs/python-weather (see common/overlays). Pulls in the
+      # full FahrenheitResearch Rust-backed weather stack as dependencies.
+      pkgs.python312Packages.hermes-weather-plugin
     ];
   };
   sops.secrets."hermes-env".owner = "hermes";
-  /*
-  services.onemcp-agent = {
-    enable = true;
-    port = 3000; # Default port
-    args = ["--lazy-mode"];
-
-    # Declarative MCP Server Configuration
-    servers = {
-      # Use Nix packages directly (Stdio transport)
-      # This handles absolute paths automatically
-      "nixos-mcp" = {
-        transport = "stdio";
-        command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
-        tags = ["nixos" "system"];
-      };
-      "google" = {
-        transport = "http";
-        url = "https://workspace-developer.goog/mcp";
-        tags = ["remote"];
-      };
-    };
-  };
-  */
   sbc.version = "0.3";
   networking.useNetworkd = lib.mkForce true;
   networking.useDHCP = lib.mkDefault true;

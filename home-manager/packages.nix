@@ -1,15 +1,10 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   programs.nix-index.enable = true;
   home.packages = with pkgs; [
     act
     adwaita-icon-theme
     alejandra
     baobab
-    bitwarden-desktop
     bitwarden-cli
     cmake
     dconf-editor

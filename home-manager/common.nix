@@ -24,6 +24,6 @@
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     # changes in each release.
-    stateVersion = "23.11";
+    stateVersion = "26.05";
   };
 }

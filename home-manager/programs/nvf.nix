@@ -96,7 +96,7 @@
           lspSignature.enable = !isMaximal; # conflicts with blink in maximal
           otter-nvim.enable = isMaximal;
           nvim-docs-view.enable = isMaximal;
-          harper-ls.enable = isMaximal;
+          presets.harper.enable = isMaximal;
         };
 
         debugger = {
@@ -126,7 +126,7 @@
           sql.enable = isMaximal;
           java.enable = isMaximal;
           kotlin.enable = isMaximal;
-          ts.enable = isMaximal;
+          typescript.enable = isMaximal;
           go.enable = isMaximal;
           lua.enable = isMaximal;
           zig.enable = isMaximal;
@@ -157,7 +157,6 @@
           fsharp.enable = false;
           just.enable = false;
           qml.enable = false;
-          tailwind.enable = false;
           svelte.enable = false;
 
           # Nim LSP is broken on Darwin and therefore

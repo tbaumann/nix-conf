@@ -12,6 +12,7 @@
     ../../common/core-desktop.nix
     ../../common/core-pc.nix
     ./hardware-configuration.nix
+    inputs.odysseus.nixosModules.default
   ];
   topology.self = {
     hardware.info = "24 core Threadripper workstation";
@@ -36,6 +37,9 @@
     liquidctl
     esphome
     python3Minimal
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.hermes-desktop
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.hermes-agent
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.hermes-hud
   ];
   networking = {
     useNetworkd = lib.mkForce true;
@@ -46,6 +50,21 @@
       externalInterface = "enp69s0";
     };
   };
+  services.odysseus = {
+    enable = true;
+    environmentFile = config.sops.secrets."odysseus-env".path;
+    llamaCpp = {
+      enable = true;
+      package = pkgs.llama-cpp-vulkan;
+    };
+    extraEnvironmentVariables = {
+      AUTH_ENABLED = "true";
+      ODYSSEUS_ADMIN_USER = "admin";
+      #LOCALHOST_BYPASS = "true";
+      APP_BIND = "0.0.0.0";
+    };
+  };
+  sops.secrets."odysseus-env".owner = "odysseus";
   networking.enableIPv6 = false; ## Fuck you Telekom
   systemd.network = {
     netdevs."20-microbr".netdevConfig = {
@@ -75,17 +94,18 @@
     "char-ttyACM"
   ];
   services.ollama = {
-    enable = false;
-    package = pkgs.ollama-vulkan;
+    enable = true;
+    #package = pkgs.ollama-vulkan;
     loadModels = [
-      "erwan2/DeepSeek-R1-Distill-Qwen-14B"
+      "gemma4:12b"
+      "hf.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive:Q6_K_P"
       "hhao/qwen2.5-coder-tools:14b"
       "gpt-oss:20b"
     ];
   };
 
   services.llama-cpp = {
-    enable = true;
+    enable = false;
     package = pkgs.llama-cpp-vulkan;
   };
   # services.open-webui.enable = true;

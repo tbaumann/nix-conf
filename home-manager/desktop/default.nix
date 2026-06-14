@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    #./vscode.nix
     ./gtk.nix
     ./gtk-lock.nix
     ./media.nix

@@ -8,7 +8,7 @@
     inputs.niri-flake.homeModules.niri
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
-    inputs.dms-plugin-registry.modules.default
+    inputs.dms-plugin-registry.nixosModules.default
     ./settings.nix
     ./binds.nix
     ./rules.nix

@@ -15,7 +15,7 @@
   xdg = {
     enable = true;
     cacheHome = config.home.homeDirectory + "/.local/cache";
-    configFile."mimeapps.list".force = true;
+    #configFile."mimeapps.list".force = true;
 
     # manage $XDG_CONFIG_HOME/mimeapps.list
     # xdg search all desktop entries from $XDG_DATA_DIRS, check it by command:
@@ -29,9 +29,6 @@
     userDirs = {
       enable = true;
       createDirectories = true;
-      extraConfig = {
-        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
-      };
     };
     desktopEntries = {
       /*

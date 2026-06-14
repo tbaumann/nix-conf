@@ -40,7 +40,7 @@
     };
     graphite.url = "github:GraphiteEditor/Graphite/";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       #url = "github:nix-community/home-manager/";
       #inputs.nixpkgs.follows = "clan-core/nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,12 +71,14 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
     nvf.url = "github:notashelf/nvf/";
-    onemcp.url = "github:tbaumann/onemcp-flake";
-    openfang.url = "github:tbaumann/openfang";
-    goclaw.url = "github:tbaumann/goclaw";
-    hermes-agent.url = "github:NousResearch/hermes-agent";
+    odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
+    hermes-agent = {
+      url = "github:tbaumann/hermes-agent";
+      #url = "github:NousResearch/hermes-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
-    stylix.url = "github:danth/stylix/release-25.11";
+    stylix.url = "github:danth/stylix/release-26.05";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     ucodenix.url = "github:e-tho/ucodenix/a2b36038ce5276cb32a3b5db20423992ecddf3f9";
     update-systemd-resolved = {

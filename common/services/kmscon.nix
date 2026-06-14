@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   console = {
     earlySetup = true;
     packages = with pkgs; [
@@ -11,6 +10,6 @@
 
   services.kmscon = {
     enable = true;
-    hwRender = true;
+    config.hwaccel = true;
   };
 }
