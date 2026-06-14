@@ -43,8 +43,14 @@
   #  stylix.targets.kde.enable = false;
   stylix.autoEnable = true;
 
-  programs.regreet = {
+  #services.displayManager.gdm.enable = true;
+  #programs.dank-material-shell.greeter.enable = true;
+  services.displayManager.dms-greeter = {
     enable = true;
+    compositor.name = "niri"; # Or "hyprland" or "sway"
+  };
+  programs.regreet = {
+    enable = false;
     settings.background = {
       path = pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath;
       fit = "Cover";
