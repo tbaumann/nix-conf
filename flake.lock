@@ -282,11 +282,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1781950706,
-        "narHash": "sha256-lTCBUc2mBUffrg+fdsFHJfZFEYBGY6MYohM2vlVNr14=",
+        "lastModified": 1782055136,
+        "narHash": "sha256-hwPGfy83+wINX2QYLtDFQc6L41PcZPrcxsKqQIJRP3M=",
         "ref": "refs/heads/main",
-        "rev": "418ca77cf9e70bcdb3f428b618f9c2325f2e01ff",
-        "revCount": 14632,
+        "rev": "0d677dac734a734355ed4de7365f5a96ef3ab20f",
+        "revCount": 14640,
         "type": "git",
         "url": "https://git.clan.lol/clan/clan-core"
       },
@@ -417,11 +417,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1781983399,
-        "narHash": "sha256-k+wfwLcTM5xVafxxmXDF4y61vy2irxA4IrKIWCZj4dQ=",
+        "lastModified": 1782028628,
+        "narHash": "sha256-kNGFx+8UMfbuF+2BWznu1oxBEUc4Yx8bk9q5XRHkJ3E=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "de91b78943d7ce811def71139a43e92aea24d3dd",
+        "rev": "4cbe766cbd016fc6dade29d014772232744f9bb6",
         "type": "github"
       },
       "original": {
@@ -437,11 +437,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781922826,
-        "narHash": "sha256-0ZYx2LmBj9fvF3Y8gIlYhGaIvKOh5CQb9TwSXd4wINw=",
+        "lastModified": 1782010083,
+        "narHash": "sha256-GIBK5Gr4s++G3x+Yezrvv+Uw2MWrioPSY53hJ088X84=",
         "owner": "AvengeMedia",
         "repo": "dms-plugin-registry",
-        "rev": "46504c36544b88000a23c41b2cfe9e10dc7fde3c",
+        "rev": "253f25c20849780a2747bd42aeb7747785a2580f",
         "type": "github"
       },
       "original": {
@@ -964,11 +964,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1781904025,
-        "narHash": "sha256-t2w3kufTt6dlm/ML4dYolTGRhCOFDHaQ1IWXvOjZxvY=",
+        "lastModified": 1782058621,
+        "narHash": "sha256-DzdZ4i1bvt7oB8FMchFdqxXw1FXz//SOWs4SRk1MnUw=",
         "owner": "GraphiteEditor",
         "repo": "Graphite",
-        "rev": "674b3a213f18cb443ae738d9bb043dc7964b1db9",
+        "rev": "b45cc312ddb887ed6a8f0a25f6426056e914c6ed",
         "type": "github"
       },
       "original": {
@@ -1071,11 +1071,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1781982982,
-        "narHash": "sha256-+pHK35DmUEAbKTSfmkG4eSBDQ2gt1JgctDB01Mmavms=",
+        "lastModified": 1782022885,
+        "narHash": "sha256-bV6dokkCL/qBdHLGYPmibz2BgQ84IZljyI+2gkA2ekQ=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "bae2a1116c222b47c7974ada5161b658531a46ac",
+        "rev": "6b704a00ef4211936ce6815770386638ddf1d0e3",
         "type": "github"
       },
       "original": {
@@ -1249,11 +1249,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781422160,
-        "narHash": "sha256-W7S8O86bVrw2gaomEwkHStOzmPpnFIHQ6lS4Q2HffJ0=",
+        "lastModified": 1782030356,
+        "narHash": "sha256-h4WpMr455AfRub0FXBaon6Vcpe0waUyJ4GivIW6oyd4=",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "854d04e2368fb2e9c328a36b3c0a04cd713bfae1",
+        "rev": "3017088b49efd404f78e3b104f553b97e4af786b",
         "type": "github"
       },
       "original": {
@@ -1879,11 +1879,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1781940103,
-        "narHash": "sha256-Vsb9xERZ7w1LivhWB7tuB07f8/sOz17k0KHzcGdASc8=",
+        "lastModified": 1781997110,
+        "narHash": "sha256-6D6xtYN5t1kZGNd69eMZsRBkgX5Df1roErn/kFR1C+A=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "d390177b7f0a19fa7065935bd394607278ae1a13",
+        "rev": "320f60b97075a58d38b90fc5e39f478421dbd38a",
         "type": "github"
       },
       "original": {
@@ -2093,11 +2093,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781925477,
-        "narHash": "sha256-QT9/mwEXqfrB9v7E2YGPeYTowXZP8c34behjJ9HuQKA=",
+        "lastModified": 1782012058,
+        "narHash": "sha256-9mWUnReOUXfKjZuJAL/bAFH3LUyECTRtXgSNVjRw3UY=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "e8e2021ee8cf3b58b000953ed3bee0d16b5e98e0",
+        "rev": "8534567325bd8a8d2928e6afd81e0a87d19efd3c",
         "type": "github"
       },
       "original": {

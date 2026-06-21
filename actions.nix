@@ -5,7 +5,7 @@
     ...
   }: {
     githubActions = {
-      enable = true;
+      enable = false;
 
       workflows = {
         check = {
