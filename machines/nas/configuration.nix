@@ -41,10 +41,7 @@
       rtk
       icm
       hermes-hud
-    ])
-    ++ [
-      self.packages.${pkgs.stdenv.hostPlatform.system}.icm
-    ];
+    ]);
   services.openssh.enable = true;
   networking.firewall.enable = false;
   services.logind.settings.Login.KillUserProcesses = false;
