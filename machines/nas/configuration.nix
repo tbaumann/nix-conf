@@ -194,20 +194,32 @@
           rev = "21d2900c392247dc52d706fee956f08dbfc3c5ea";
           hash = "sha256-eDJJmkPsFjEy92XLO/P9Dg/RQD1BGJoG1A7N2i2RmNU=";
         };
-        # FIXME OmniVoice is optional dependency and thus not installed
         propagatedBuildInputs = [
           pkgs.python312Packages.pyyaml
           pkgs.python312Packages.torch
           (pkgs.python312Packages.pysoundfile.overridePythonAttrs (old: {
             doCheck = false;
           }))
+          pkgs.python312Packages.torchaudio
+          pkgs.python312Packages.soundfile
+          (pkgs.python312Packages.buildPythonPackage {
+            pname = "omnivoice";
+            version = "0.1.5";
+            src = pkgs.fetchFromGitHub {
+              owner = "k2-fsa";
+              repo = "OmniVoice";
+              rev = "0.1.5";
+              hash = "sha256-cbtMvtz1N96aa7RmcAJiCaxLT+kFOGlirbeOkgMo+cU=";
+            };
+            format = "pyproject";
+            build-system = [pkgs.python312Packages.setuptools];
+            doCheck = false;
+          })
         ];
         doCheck = false;
         format = "pyproject";
         build-system = [pkgs.python312Packages.setuptools];
       })
-      pkgs.python312Packages.pyyaml
-      pkgs.python312Packages.torch
       # Built from ./pkgs/python-weather (see common/overlays). Pulls in the
       # full FahrenheitResearch Rust-backed weather stack as dependencies.
       # pkgs.python312Packages.hermes-weather-plugin
