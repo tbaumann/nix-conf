@@ -95,7 +95,7 @@
         use_gateway = true;
       };
       tts = {
-        provider = "openai";
+        provider = "openai"; #"omnivoice";
         openai = {
           model = "gpt-4o-mini-tts";
           voice = "nova";
@@ -138,6 +138,7 @@
       "voice"
       "firecrawl"
       "exa"
+      "fal"
     ];
     settings.plugins.enabled = [
       "rtk-rewrite"
@@ -147,6 +148,7 @@
       "web/brave_free"
       "hermes-icm-memory"
       "hermes-lcm"
+      "omnivoice"
     ];
     # Directory-style plugins: a plugin.yaml lives at the package root and
     # hermes discovers them by symlinking into its plugins directory.
@@ -183,9 +185,32 @@
         format = "pyproject";
         build-system = [pkgs.python312Packages.setuptools];
       })
+      (pkgs.python312Packages.buildPythonPackage {
+        pname = "hermes-omnivoice";
+        version = "0.1.0";
+        src = pkgs.fetchFromGitHub {
+          owner = "ThaungThanHan";
+          repo = "hermes-omnivoice";
+          rev = "21d2900c392247dc52d706fee956f08dbfc3c5ea";
+          hash = "sha256-eDJJmkPsFjEy92XLO/P9Dg/RQD1BGJoG1A7N2i2RmNU=";
+        };
+        # FIXME OmniVoice is optional dependency and thus not installed
+        propagatedBuildInputs = [
+          pkgs.python312Packages.pyyaml
+          pkgs.python312Packages.torch
+          (pkgs.python312Packages.pysoundfile.overridePythonAttrs (old: {
+            doCheck = false;
+          }))
+        ];
+        doCheck = false;
+        format = "pyproject";
+        build-system = [pkgs.python312Packages.setuptools];
+      })
+      pkgs.python312Packages.pyyaml
+      pkgs.python312Packages.torch
       # Built from ./pkgs/python-weather (see common/overlays). Pulls in the
       # full FahrenheitResearch Rust-backed weather stack as dependencies.
-      pkgs.python312Packages.hermes-weather-plugin
+      # pkgs.python312Packages.hermes-weather-plugin
     ];
   };
   sops.secrets."hermes-env".owner = "hermes";
