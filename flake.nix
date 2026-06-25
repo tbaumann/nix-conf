@@ -13,14 +13,6 @@
       url = "github:catppuccin/foot";
       flake = false;
     };
-    catppuccin-i3 = {
-      url = "github:catppuccin/i3";
-      flake = false;
-    };
-    catppuccin-starship = {
-      url = "github:catppuccin/starship";
-      flake = false;
-    };
     clan-core.url = "git+https://git.clan.lol/clan/clan-core";
     # nixpkgs.follows = "clan-core/nixpkgs";
     dms = {
@@ -51,7 +43,7 @@
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    moltis.url = "github:tbaumann/moltis";
+    # moltis.url = "github:tbaumann/moltis";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,10 +52,12 @@
       url = "github:oddlama/nix-topology";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    /*
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    */
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
     niri-flake = {
@@ -80,7 +74,7 @@
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     stylix.url = "github:danth/stylix/release-26.05";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    ucodenix.url = "github:e-tho/ucodenix/a2b36038ce5276cb32a3b5db20423992ecddf3f9";
+    ucodenix.url = "github:e-tho/ucodenix/";
     update-systemd-resolved = {
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
@@ -100,7 +94,6 @@
       # Mismatched system dependencies will lead to crashes and other issues.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # felschr.url = "git+https://git.felschr.com/felschr/nixos-config.git";
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} (
