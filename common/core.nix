@@ -30,8 +30,6 @@
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
     extraOptions = ''
-      experimental-features = nix-command flakes
-      builders-use-substitutes = true
       !include ${config.sops.secrets.nix-access-tokens-github.path}
     '';
     optimise.automatic = true;
@@ -41,6 +39,7 @@
       randomizedDelaySec = "1h";
     };
     settings = {
+      experimental-features = ["nix-command" "flakes" "ca-derivations"];
       download-buffer-size = 500000000; # 500 MB
       builders-use-substitutes = true;
       auto-optimise-store = true;
@@ -100,7 +99,10 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    # too broken contentAddressedByDefault = true;
+  };
 
   zramSwap.enable = true;
   boot.tmp.useTmpfs = true;
