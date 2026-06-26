@@ -95,7 +95,8 @@
         use_gateway = true;
       };
       tts = {
-        provider = "openai"; #"omnivoice";
+        provider = "omnivoice";
+        omnivoice.voice = "female, young adult, british accent, Moroccan Arabic";
         openai = {
           model = "gpt-4o-mini-tts";
           voice = "nova";
@@ -173,6 +174,20 @@
     # (Their plugin.yaml lives inside the installed package, not at the root,
     # so they do NOT belong in extraPlugins.)
     extraPythonPackages = [
+      # NOTE: torch MUST be listed explicitly here, even though it already
+      # comes in transitively via torchaudio/omnivoice below. Reason: nixpkgs
+      # torch is a multi-output derivation (out, dev, lib, cxxdev, dist) and
+      # torchaudio depends on torch's *dev* output (headers/linking), which has
+      # NO python site-packages. When torch only arrives transitively,
+      # requiredPythonModules yields just torch.dev, so hermes's
+      # resolve-plugin-pythonpath.py sees no site-packages dir and silently
+      # drops torch from PYTHONPATH. Listing torch directly pulls in its
+      # default *out* output (which has site-packages), so `import torch` works.
+      ((pkgs.python312Packages.torch.override {
+        mklDnnSupport = false;
+      }).overridePythonAttrs (old: {
+        doCheck = false;
+      }))
       (pkgs.python312Packages.buildPythonPackage {
         pname = "plugin-rtk-hermes";
         version = "1.2.3";
@@ -196,12 +211,15 @@
         };
         propagatedBuildInputs = [
           pkgs.python312Packages.pyyaml
-          pkgs.python312Packages.torch
-          (pkgs.python312Packages.pysoundfile.overridePythonAttrs (old: {
+          ((pkgs.python312Packages.torch.override {
+            mklDnnSupport = false;
+          }).overridePythonAttrs (old: {
             doCheck = false;
           }))
-          pkgs.python312Packages.torchaudio
           pkgs.python312Packages.soundfile
+          (pkgs.python312Packages.torchaudio.overridePythonAttrs (old: {
+            doCheck = false;
+          }))
           (pkgs.python312Packages.buildPythonPackage {
             pname = "omnivoice";
             version = "0.1.5";
@@ -212,7 +230,28 @@
               hash = "sha256-cbtMvtz1N96aa7RmcAJiCaxLT+kFOGlirbeOkgMo+cU=";
             };
             format = "pyproject";
-            build-system = [pkgs.python312Packages.setuptools];
+            build-system = [pkgs.python312Packages.hatchling];
+            propagatedBuildInputs = with pkgs.python312Packages; [
+              numpy
+              soundfile
+              ((torch.override {
+                mklDnnSupport = false;
+              }).overridePythonAttrs (old: {
+                doCheck = false;
+              }))
+              (torchaudio.overridePythonAttrs (old: {
+                doCheck = false;
+              }))
+              transformers
+              accelerate
+              pydub
+              gradio
+              tensorboardx
+              webdataset
+              (librosa.overridePythonAttrs (old: {
+                doCheck = false;
+              }))
+            ];
             doCheck = false;
           })
         ];

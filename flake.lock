@@ -923,11 +923,11 @@
         "uv2nix": "uv2nix_2"
       },
       "locked": {
-        "lastModified": 1782313724,
-        "narHash": "sha256-QXXVFshb3tin1FwWRkowY12uxcYox/6GT9jRd7ImkjM=",
+        "lastModified": 1782432124,
+        "narHash": "sha256-kw4ywzbBFhM8TCq20F6Yc2bcgIAe+Q1TSNILbBxaeyQ=",
         "owner": "tbaumann",
         "repo": "hermes-agent",
-        "rev": "027b3c0fcf46a5faca2fcefe21851b1641aadd9d",
+        "rev": "f0220e404c00e13f9f8dc9d892d4fc990462ef34",
         "type": "github"
       },
       "original": {
