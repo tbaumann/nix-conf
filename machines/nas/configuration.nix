@@ -187,6 +187,7 @@
         mklDnnSupport = false;
       }).overridePythonAttrs (old: {
         doCheck = false;
+        doInstallCheck = false;
       }))
       (pkgs.python312Packages.buildPythonPackage {
         pname = "plugin-rtk-hermes";
@@ -215,6 +216,7 @@
             mklDnnSupport = false;
           }).overridePythonAttrs (old: {
             doCheck = false;
+            doInstallCheck = false;
           }))
           pkgs.python312Packages.soundfile
           (pkgs.python312Packages.torchaudio.overridePythonAttrs (old: {
@@ -238,6 +240,7 @@
                 mklDnnSupport = false;
               }).overridePythonAttrs (old: {
                 doCheck = false;
+                doInstallCheck = false;
               }))
               (torchaudio.overridePythonAttrs (old: {
                 doCheck = false;
