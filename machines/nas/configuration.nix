@@ -96,7 +96,7 @@
       };
       tts = {
         provider = "omnivoice";
-        omnivoice.voice = "female, young adult, british accent, Moroccan Arabic";
+        omnivoice.voice = "female, young adult, british accent";
         openai = {
           model = "gpt-4o-mini-tts";
           voice = "nova";
@@ -173,33 +173,9 @@
     # `hermes_agent.plugins` entry-point group and are added to PYTHONPATH.
     # (Their plugin.yaml lives inside the installed package, not at the root,
     # so they do NOT belong in extraPlugins.)
+    # Torch is provided by the sealed hermes-agent venv (override in
+    # hermes-agent's nix/python.nix with mklDnnSupport=false for aarch64-linux).
     extraPythonPackages = [
-      # NOTE: torch MUST be listed explicitly here, even though it already
-      # comes in transitively via torchaudio/omnivoice below. Reason: nixpkgs
-      # torch is a multi-output derivation (out, dev, lib, cxxdev, dist) and
-      # torchaudio depends on torch's *dev* output (headers/linking), which has
-      # NO python site-packages. When torch only arrives transitively,
-      # requiredPythonModules yields just torch.dev, so hermes's
-      # resolve-plugin-pythonpath.py sees no site-packages dir and silently
-      # drops torch from PYTHONPATH. Listing torch directly pulls in its
-      # default *out* output (which has site-packages), so `import torch` works.
-      ((pkgs.python312Packages.torch.override {
-        mklDnnSupport = false;
-      }).overridePythonAttrs (old: {
-        doCheck = false;
-        doInstallCheck = false;
-        # Disable import check (runs in fixup phase, fails on nixbuild.net because
-        # /sys/devices/system/cpu/{possible,present} aren't readable)
-        pythonImportsCheck = [ ];
-        # Disable disallowedReferences checks that may trip on override artifacts
-        outputChecks = {
-          out = { disallowedReferences = [ ]; };
-          dev = { disallowedReferences = [ ]; };
-          lib = { disallowedReferences = [ ]; };
-          cxxdev = { disallowedReferences = [ ]; };
-          dist = { disallowedReferences = [ ]; };
-        };
-      }))
       (pkgs.python312Packages.buildPythonPackage {
         pname = "plugin-rtk-hermes";
         version = "1.2.3";
@@ -223,12 +199,6 @@
         };
         propagatedBuildInputs = [
           pkgs.python312Packages.pyyaml
-          ((pkgs.python312Packages.torch.override {
-            mklDnnSupport = false;
-          }).overridePythonAttrs (old: {
-            doCheck = false;
-            pythonImportsCheck = [ ];
-          }))
           pkgs.python312Packages.soundfile
           (pkgs.python312Packages.torchaudio.overridePythonAttrs (old: {
             doCheck = false;
@@ -247,12 +217,6 @@
             propagatedBuildInputs = with pkgs.python312Packages; [
               numpy
               soundfile
-              ((torch.override {
-                mklDnnSupport = false;
-              }).overridePythonAttrs (old: {
-                doCheck = false;
-                pythonImportsCheck = [ ];
-              }))
               (torchaudio.overridePythonAttrs (old: {
                 doCheck = false;
               }))
