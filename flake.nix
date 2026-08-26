@@ -53,10 +53,10 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     /*
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
+      nixos-generators = {
+        url = "github:nix-community/nixos-generators";
+        inputs.nixpkgs.follows = "clan-core/nixpkgs";
+      };
     */
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
@@ -98,13 +98,15 @@
   };
   nixConfig = {
     netrc-file = "/run/secrets/netrc";
-    post-build-hook = "./scripts/push-to-nix-ci-cache";
+    #post-build-hook = "./scripts/push-to-nix-ci-cache";
+    post-build-hook = "/run/current-system/sw/bin/push-to-nix-ci-cache";
     extra-substituters = "https://cache.nix-ci.com";
     extra-trusted-public-keys = "nix-ci:g3xV5BDTLtIBZr/A00IU1x0EtKKlb7YLgBN2SgYgM6A=";
   };
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} (
-      {...}: {
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }: {
         systems = [
           "x86_64-linux"
           "aarch64-linux"

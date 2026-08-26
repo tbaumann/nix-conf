@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{ pkgs, ... }: {
   imports = [
     ./programs
     ./services
@@ -94,6 +90,20 @@
     unzip
     update-systemd-resolved
     zip
+    (writeShellScriptBin "push-to-nix-ci-cache" ''
+      set -eu
+      set -f # disable globbing
+      export IFS=' '
+
+      # Upload with a narinfo cache we discard, so that the narinfo
+      # `nix copy` remembers here cannot shadow the signed one the
+      # cache serves.
+      XDG_CACHE_HOME="$(mktemp -d)"
+      export XDG_CACHE_HOME
+      trap 'rm -rf "$XDG_CACHE_HOME"' EXIT
+
+      nix copy --to 'https://cache.nix-ci.com?compression=xz&parallel-compression=true' $OUT_PATHS
+    '')
   ];
   environment.pathsToLink = [ "/libexec" ];
 }
