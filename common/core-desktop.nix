@@ -71,7 +71,7 @@
 
   hardware.bluetooth.enable = true;
   hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
+  programs.solaar.enable = true;
   services.blueman.enable = true;
 
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot

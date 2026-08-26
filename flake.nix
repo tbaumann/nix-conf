@@ -113,6 +113,7 @@
           inputs.treefmt-nix.flakeModule
           ./actions.nix
           ./clan.nix
+          ./checks.nix
           ./devshells.nix
           ./hooks.nix
           ./pkgs.nix
