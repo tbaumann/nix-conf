@@ -73,11 +73,5 @@
         };
       };
     };
-
-    # Create a package that copies the workflows to .github/workflows
-    packages.workflows = pkgs.runCommand "copy-workflows" {} ''
-      mkdir -p $out/.github/workflows
-      cp -r ${config.githubActions.workflowsDir}/* $out/.github/workflows/
-    '';
   };
 }
