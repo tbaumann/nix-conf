@@ -3,7 +3,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -15,7 +16,7 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-amd"
   ];
@@ -24,7 +25,7 @@
     "initcall_blacklist=dw_i2c_init_driver"
     "microcode.amd_sha_check=off"
   ];
-  boot.blacklistedKernelModules = ["qcserial"];
+  boot.blacklistedKernelModules = [ "qcserial" ];
   nix.settings.system-features = [
     "kvm"
     "big-parallel"
@@ -42,38 +43,38 @@
   fileSystems."/" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = ["subvol=SYSTEM/rootfs"];
+    options = [ "subvol=SYSTEM/rootfs" ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = ["subvol=SYSTEM/nix"];
+    options = [ "subvol=SYSTEM/nix" ];
   };
 
   fileSystems."/home" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = ["subvol=DATA/home"];
+    options = [ "subvol=DATA/home" ];
   };
   fileSystems."/home-old" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = ["subvol=DATA/home-old"];
+    options = [ "subvol=DATA/home-old" ];
   };
 
   fileSystems."/persist" = {
     device = "/dev/nvme0n1p4";
     fsType = "btrfs";
-    options = ["subvol=DATA/persist"];
+    options = [ "subvol=DATA/persist" ];
   };
 
   /*
-  fileSystems."/media" = {
-    device = "/dev/nvme0n1p4";
-    fsType = "btrfs";
-    options = ["subvol=DATA/media"];
-  };
+    fileSystems."/media" = {
+      device = "/dev/nvme0n1p4";
+      fsType = "btrfs";
+      options = ["subvol=DATA/media"];
+    };
   */
 
   fileSystems."/boot" = {

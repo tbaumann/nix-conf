@@ -2,8 +2,9 @@
   inputs,
   pkgs,
   ...
-}: {
-  nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
+}:
+{
+  nixpkgs.overlays = [ inputs.niri-flake.overlays.niri ];
   imports = [
     inputs.niri-flake.homeModules.niri
     inputs.dms.homeModules.dank-material-shell

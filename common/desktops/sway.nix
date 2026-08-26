@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ ... }: {
   imports = [
   ];
   programs.sway = {

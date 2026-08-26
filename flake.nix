@@ -53,10 +53,10 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     /*
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "clan-core/nixpkgs";
-    };
+      nixos-generators = {
+        url = "github:nix-community/nixos-generators";
+        inputs.nixpkgs.follows = "clan-core/nixpkgs";
+      };
     */
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
@@ -96,9 +96,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} (
-      {...}: {
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }: {
         systems = [
           "x86_64-linux"
           "aarch64-linux"

@@ -46,7 +46,7 @@ buildPythonPackage rec {
 
   # Rust extension module; no Python tests wired up here.
   doCheck = false;
-  pythonImportsCheck = ["metrust"];
+  pythonImportsCheck = [ "metrust" ];
 
   meta = {
     description = "Rust-powered MetPy-compatible calculation layer with optional GPU acceleration";

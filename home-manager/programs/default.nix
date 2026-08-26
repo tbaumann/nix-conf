@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./beets.nix
     ./chromium.nix
@@ -70,11 +70,11 @@
           #"cpucache"
           "cpuusage"
           /*
-          {
-            type = "gpu";
-            driverSpecific = true;
-            temp = true;
-          }
+            {
+              type = "gpu";
+              driverSpecific = true;
+              temp = true;
+            }
           */
           "memory"
           "physicalmemory"
@@ -116,10 +116,10 @@
           #"mouse"
           #"keyboard"
           /*
-          {
-            type = "weather";
-            timeout = 1000;
-          }
+            {
+              type = "weather";
+              timeout = 1000;
+            }
           */
           "netio"
           "diskio"
@@ -152,9 +152,9 @@
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
-    "x-scheme-handler/http" = ["firefox.desktop"];
-    "x-scheme-handler/https" = ["firefox.desktop"];
-    "text/html" = ["firefox.desktop"];
+    "x-scheme-handler/http" = [ "firefox.desktop" ];
+    "x-scheme-handler/https" = [ "firefox.desktop" ];
+    "text/html" = [ "firefox.desktop" ];
     "application/pdf" = [
       "zathura.desktop"
       "evince.desktop"
@@ -162,7 +162,7 @@
     ];
   };
   xdg.mimeApps.associations.removed = {
-    "application/pdf" = ["chromium-browser.desktop"];
-    "image/png" = ["chromium-browser.desktop"];
+    "application/pdf" = [ "chromium-browser.desktop" ];
+    "image/png" = [ "chromium-browser.desktop" ];
   };
 }

@@ -3,9 +3,9 @@
   inputs,
   lib,
   pkgs,
-  self,
   ...
-}: {
+}:
+{
   imports =
     (with inputs; [
       nixos-sbc.nixosModules.default
@@ -24,7 +24,8 @@
   systemd.oomd.enable = true;
   documentation.enable = false;
   documentation.man.enable = false;
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     (with pkgs; [
       bat
       jq
@@ -34,8 +35,8 @@
     ])
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       /*
-      llm-agents.qmd
-      llm-agents.ck
+        llm-agents.qmd
+        llm-agents.ck
       */
       #      agent-browser
       rtk
@@ -145,7 +146,7 @@
         file_mutation_verifier = true; # Append an advisory footer when write_file/patch calls failed this turn
       };
     };
-    environmentFiles = [config.sops.secrets."hermes-env".path];
+    environmentFiles = [ config.sops.secrets."hermes-env".path ];
     environment.LCM_ENABLE_SLASH_COMMAND = "1";
     addToSystemPackages = true;
     extraDependencyGroups = [
@@ -190,19 +191,19 @@
     # so they do NOT belong in extraPlugins.)
     extraPythonPackages = [
       /*
-      ((pkgs.python312Packages.torch.override {
-          mklDnnSupport = false;
-        }).overridePythonAttrs (old: {
-          doCheck = false;
-          pythonImportsCheck = [];
-          outputChecks = {
-            out = {disallowedReferences = [];};
-            dev = {disallowedReferences = [];};
-            lib = {disallowedReferences = [];};
-            cxxdev = {disallowedReferences = [];};
-            dist = {disallowedReferences = [];};
-          };
-        }))
+        ((pkgs.python312Packages.torch.override {
+            mklDnnSupport = false;
+          }).overridePythonAttrs (old: {
+            doCheck = false;
+            pythonImportsCheck = [];
+            outputChecks = {
+              out = {disallowedReferences = [];};
+              dev = {disallowedReferences = [];};
+              lib = {disallowedReferences = [];};
+              cxxdev = {disallowedReferences = [];};
+              dist = {disallowedReferences = [];};
+            };
+          }))
       */
       (pkgs.python312Packages.buildPythonPackage {
         pname = "plugin-rtk-hermes";
@@ -214,58 +215,58 @@
           hash = "sha256-7YRW6PODrCapfYLFn3DvgHAEME//RGC48GQt+s9ot0s=";
         };
         format = "pyproject";
-        build-system = [pkgs.python312Packages.setuptools];
+        build-system = [ pkgs.python312Packages.setuptools ];
       })
       /*
-      (pkgs.python312Packages.buildPythonPackage {
-        pname = "hermes-omnivoice";
-        version = "0.1.0";
-        src = pkgs.fetchFromGitHub {
-          owner = "ThaungThanHan";
-          repo = "hermes-omnivoice";
-          rev = "21d2900c392247dc52d706fee956f08dbfc3c5ea";
-          hash = "sha256-eDJJmkPsFjEy92XLO/P9Dg/RQD1BGJoG1A7N2i2RmNU=";
-        };
-        propagatedBuildInputs = [
-          pkgs.python312Packages.pyyaml
-          pkgs.python312Packages.soundfile
-          (pkgs.python312Packages.torchaudio.overridePythonAttrs (old: {
-            doCheck = false;
-          }))
-          (pkgs.python312Packages.buildPythonPackage {
-            pname = "omnivoice";
-            version = "0.1.5";
-            src = pkgs.fetchFromGitHub {
-              owner = "k2-fsa";
-              repo = "OmniVoice";
-              rev = "0.1.5";
-              hash = "sha256-cbtMvtz1N96aa7RmcAJiCaxLT+kFOGlirbeOkgMo+cU=";
-            };
-            format = "pyproject";
-            build-system = [pkgs.python312Packages.hatchling];
-            propagatedBuildInputs = with pkgs.python312Packages; [
-              numpy
-              soundfile
-              (torchaudio.overridePythonAttrs (old: {
-                doCheck = false;
-              }))
-              transformers
-              accelerate
-              pydub
-              gradio
-              tensorboardx
-              webdataset
-              (librosa.overridePythonAttrs (old: {
-                doCheck = false;
-              }))
-            ];
-            doCheck = false;
-          })
-        ];
-        doCheck = false;
-        format = "pyproject";
-        build-system = [pkgs.python312Packages.setuptools];
-      })
+        (pkgs.python312Packages.buildPythonPackage {
+          pname = "hermes-omnivoice";
+          version = "0.1.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "ThaungThanHan";
+            repo = "hermes-omnivoice";
+            rev = "21d2900c392247dc52d706fee956f08dbfc3c5ea";
+            hash = "sha256-eDJJmkPsFjEy92XLO/P9Dg/RQD1BGJoG1A7N2i2RmNU=";
+          };
+          propagatedBuildInputs = [
+            pkgs.python312Packages.pyyaml
+            pkgs.python312Packages.soundfile
+            (pkgs.python312Packages.torchaudio.overridePythonAttrs (old: {
+              doCheck = false;
+            }))
+            (pkgs.python312Packages.buildPythonPackage {
+              pname = "omnivoice";
+              version = "0.1.5";
+              src = pkgs.fetchFromGitHub {
+                owner = "k2-fsa";
+                repo = "OmniVoice";
+                rev = "0.1.5";
+                hash = "sha256-cbtMvtz1N96aa7RmcAJiCaxLT+kFOGlirbeOkgMo+cU=";
+              };
+              format = "pyproject";
+              build-system = [pkgs.python312Packages.hatchling];
+              propagatedBuildInputs = with pkgs.python312Packages; [
+                numpy
+                soundfile
+                (torchaudio.overridePythonAttrs (old: {
+                  doCheck = false;
+                }))
+                transformers
+                accelerate
+                pydub
+                gradio
+                tensorboardx
+                webdataset
+                (librosa.overridePythonAttrs (old: {
+                  doCheck = false;
+                }))
+              ];
+              doCheck = false;
+            })
+          ];
+          doCheck = false;
+          format = "pyproject";
+          build-system = [pkgs.python312Packages.setuptools];
+        })
       */
       # Built from ./pkgs/python-weather (see common/overlays). Pulls in the
       # full FahrenheitResearch Rust-backed weather stack as dependencies.
@@ -274,9 +275,9 @@
   };
   systemd.services.hermes-agent-web = {
     description = "Hermes Agent Web Gateway";
-    wantedBy = ["hermes-agent.target"];
-    after = ["hermes-agent.target"];
-    wants = ["hermes-agent.target"];
+    wantedBy = [ "hermes-agent.target" ];
+    after = [ "hermes-agent.target" ];
+    wants = [ "hermes-agent.target" ];
 
     environment = {
       HOME = config.services.hermes-agent.stateDir;

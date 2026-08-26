@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   console = {
     earlySetup = true;
     packages = with pkgs; [

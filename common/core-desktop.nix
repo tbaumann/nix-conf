@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   ###################################################################################
   #
   #  NixOS's core configuration suitable for my desktop computer
@@ -16,7 +17,7 @@
     ./music.nix
   ];
 
-  nixpkgs.overlays = [inputs.nix-topology.overlays.default];
+  nixpkgs.overlays = [ inputs.nix-topology.overlays.default ];
 
   boot.plymouth.enable = true;
 

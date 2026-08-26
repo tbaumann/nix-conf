@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   imports = with inputs; [
     update-systemd-resolved.nixosModules.update-systemd-resolved
     stylix.nixosModules.stylix

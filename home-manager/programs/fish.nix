@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
   ];
   home.packages = [
@@ -12,7 +13,7 @@
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
-    flags = ["--disable-up-arrow"];
+    flags = [ "--disable-up-arrow" ];
   };
   programs.fish = {
     enable = true;
