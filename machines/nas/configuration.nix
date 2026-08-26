@@ -46,6 +46,11 @@
   networking.firewall.enable = false;
   services.logind.settings.Login.KillUserProcesses = false;
 
+  services.newt = {
+    enable = true;
+    environmentFile = config.sops.secrets."newt-home-env".path;
+  };
+
   services.hermes-agent = {
     enable = true;
     mcpServers = {
@@ -61,6 +66,13 @@
         ];
         timeout = 120;
         connect_timeout = 30;
+      };
+      parcel-tracking = {
+        command = "npx";
+        args = [
+          "parcel-tracking-mcp"
+        ];
+        env.SEVENTEEN_TRACK_API_KEY = "\${SEVENTEEN_TRACK_API_KEY}";
       };
     };
     settings = {
@@ -95,8 +107,11 @@
         use_gateway = true;
       };
       tts = {
-        provider = "omnivoice";
-        omnivoice.voice = "female, young adult, british accent";
+        # probably performance issue
+        # provider = "omnivoice";
+        # omnivoice.voice = "female, young adult, british accent";
+
+        provider = "openai";
         openai = {
           model = "gpt-4o-mini-tts";
           voice = "nova";
@@ -149,7 +164,7 @@
       "web/brave_free"
       "hermes-icm-memory"
       "hermes-lcm"
-      "omnivoice"
+      #      "omnivoice"
     ];
     # Directory-style plugins: a plugin.yaml lives at the package root and
     # hermes discovers them by symlinking into its plugins directory.
@@ -173,9 +188,22 @@
     # `hermes_agent.plugins` entry-point group and are added to PYTHONPATH.
     # (Their plugin.yaml lives inside the installed package, not at the root,
     # so they do NOT belong in extraPlugins.)
-    # Torch is provided by the sealed hermes-agent venv (override in
-    # hermes-agent's nix/python.nix with mklDnnSupport=false for aarch64-linux).
     extraPythonPackages = [
+      /*
+      ((pkgs.python312Packages.torch.override {
+          mklDnnSupport = false;
+        }).overridePythonAttrs (old: {
+          doCheck = false;
+          pythonImportsCheck = [];
+          outputChecks = {
+            out = {disallowedReferences = [];};
+            dev = {disallowedReferences = [];};
+            lib = {disallowedReferences = [];};
+            cxxdev = {disallowedReferences = [];};
+            dist = {disallowedReferences = [];};
+          };
+        }))
+      */
       (pkgs.python312Packages.buildPythonPackage {
         pname = "plugin-rtk-hermes";
         version = "1.2.3";
@@ -188,6 +216,7 @@
         format = "pyproject";
         build-system = [pkgs.python312Packages.setuptools];
       })
+      /*
       (pkgs.python312Packages.buildPythonPackage {
         pname = "hermes-omnivoice";
         version = "0.1.0";
@@ -237,10 +266,33 @@
         format = "pyproject";
         build-system = [pkgs.python312Packages.setuptools];
       })
+      */
       # Built from ./pkgs/python-weather (see common/overlays). Pulls in the
       # full FahrenheitResearch Rust-backed weather stack as dependencies.
       # pkgs.python312Packages.hermes-weather-plugin
     ];
+  };
+  systemd.services.hermes-agent-web = {
+    description = "Hermes Agent Web Gateway";
+    wantedBy = ["hermes-agent.target"];
+    after = ["hermes-agent.target"];
+    wants = ["hermes-agent.target"];
+
+    environment = {
+      HOME = config.services.hermes-agent.stateDir;
+      HERMES_MANAGED = "true";
+    };
+
+    serviceConfig = {
+      User = config.services.hermes-agent.user;
+      Group = config.services.hermes-agent.group;
+      WorkingDirectory = config.services.hermes-agent.workingDirectory;
+      ExecStart = lib.concatStringsSep " " [
+        "/run/current-system/sw/bin/hermes"
+        "dashboard"
+        "--no-open"
+      ];
+    };
   };
   sops.secrets."hermes-env".owner = "hermes";
   sbc.version = "0.3";

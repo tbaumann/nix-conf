@@ -10,7 +10,10 @@
     ./e9s.nix
   ];
 
-  services.displayManager.enable = true;
+  services.displayManager = {
+    enable = true;
+    defaultSession = "niri";
+  };
   services.xserver = {
     enable = true;
     videoDrivers = [

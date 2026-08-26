@@ -71,7 +71,7 @@
           scroll-method = "two-finger";
           tap = true;
           tap-button-map = "left-right-middle";
-          middle-emulation = true;
+          middle-emulation = false;
           accel-profile = "adaptive";
         };
         focus-follows-mouse = {

@@ -40,7 +40,6 @@
     };
     settings = {
       experimental-features = ["nix-command" "flakes" "ca-derivations"];
-      download-buffer-size = 500000000; # 500 MB
       builders-use-substitutes = true;
       auto-optimise-store = true;
       trusted-users = ["@wheel"];

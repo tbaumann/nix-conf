@@ -11,8 +11,10 @@
     ../../common/core.nix
     ../../common/core-desktop.nix
     ../../common/core-pc.nix
+    ../../common/work/syseleven
     ./hardware-configuration.nix
     inputs.odysseus.nixosModules.default
+    inputs.win98se-plymouth.nixosModules.default
   ];
   topology.self = {
     hardware.info = "24 core Threadripper workstation";
@@ -43,6 +45,7 @@
   ];
   networking = {
     useNetworkd = lib.mkForce true;
+    wireguard.useNetworkd = true;
     hostName = "zuse";
     nat = {
       enable = true;
@@ -65,7 +68,7 @@
     };
   };
   sops.secrets."odysseus-env".owner = "odysseus";
-  networking.enableIPv6 = false; ## Fuck you Telekom
+  #networking.enableIPv6 = false; ## Fuck you Telekom
   systemd.network = {
     netdevs."20-microbr".netdevConfig = {
       Kind = "bridge";

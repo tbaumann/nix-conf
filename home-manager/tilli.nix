@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     ./tilli
   ];
@@ -15,10 +11,8 @@
 
     packages = with pkgs; [
       cloak
-      vial
       qmk
-      via
-      (pkgs.writers.writePython3Bin "ofx-fix" { libraries = [ python312Packages.ofxparse ]; } ''
+      (pkgs.writers.writePython3Bin "ofx-fix" {libraries = [python312Packages.ofxparse];} ''
         import argparse
         import codecs
         from ofxparse import OfxParser

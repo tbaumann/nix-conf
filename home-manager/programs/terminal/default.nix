@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
-    ./alacritty.nix
     ./ghostty.nix
     ./kitty.nix
     ./foot.nix

@@ -32,8 +32,8 @@
     };
     graphite.url = "github:GraphiteEditor/Graphite/";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
-      #url = "github:nix-community/home-manager/";
+      #url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager/";
       #inputs.nixpkgs.follows = "clan-core/nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -85,6 +85,7 @@
       url = "github:Narice/wpaperd";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    win98se-plymouth.url = "github:nilp0inter/plymouth-theme-win98se-inspired-nixos-theme";
     cinephage.url = "github:MoldyTaint/Cinephage";
     quickshell = {
       # add ?ref=<tag> to track a tag

@@ -18,8 +18,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "FahrenheitResearch";
     repo = "metrust-py";
-    rev = "a1664c245051c363a9fc2462d6ed1f2596a21e02";
-    hash = "sha256-YF7o+xwzLK60ewEwfny6WJjFP6iPqIFgCnlRafrb0yk=";
+    rev = "v0.4.7";
+    hash = "sha256-pg47p1nWhQivNXnrwdVxI+2kNQJUR7cKRyqiKvwFZ3c=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
@@ -46,7 +46,7 @@ buildPythonPackage rec {
 
   # Rust extension module; no Python tests wired up here.
   doCheck = false;
-  pythonImportsCheck = [ "metrust" ];
+  pythonImportsCheck = ["metrust"];
 
   meta = {
     description = "Rust-powered MetPy-compatible calculation layer with optional GPU acceleration";

@@ -12,6 +12,7 @@
           # Line numbers
           relativenumber = true; # Relative line numbers
           number = true; # Display the absolute line number of the current line
+          textwidth = 120;
           /*
           hidden = true; # Keep closed buffer open in the background
           mouse = "a"; # Enable mouse control
@@ -166,6 +167,7 @@
           # See: <https://github.com/PMunch/nimlsp/issues/178#issue-2128106096>
           nim.enable = false;
         };
+        formatter.conform-nvim.presets.nixfmt.enable = true;
 
         visuals = {
           nvim-scrollbar.enable = true;
@@ -236,7 +238,7 @@
 
         minimap = {
           minimap-vim.enable = false;
-          codewindow.enable = isMaximal; # lighter, faster, and uses lua for configuration
+          # codewindow.enable = false; # lighter, faster, and uses lua for configuration
         };
 
         dashboard = {
