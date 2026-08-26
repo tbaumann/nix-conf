@@ -23,7 +23,9 @@
     smtpUsername = "tilman.baumann@tilman.baumann.name";
     smtpPasswordPath = config.sops.secrets.smtpPassword.path;
   };
-  sops.secrets.nix-access-tokens-github.mode = "0444";
+  sops.secrets.nix-access-tokens-github.mode = "0440";
+  sops.secrets.netrc.group = "wheel";
+  sops.secrets.netrc.mode = "0444";
   clan.core.settings.state-version.enable = true;
   clan.core.settings.machine-id.enable = true;
   nix = {
@@ -60,6 +62,7 @@
         "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
         "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       ];
+      #netrc-file = config.sops.secrets.netrc.path;
     };
     buildMachines = [
       /*

@@ -97,7 +97,7 @@
     };
   };
   nixConfig = {
-    netrc-file = "/home/tilli/.netrc";
+    netrc-file = "/run/secrets/netrc";
     post-build-hook = "./scripts/push-to-nix-ci-cache";
     extra-substituters = "https://cache.nix-ci.com";
     extra-trusted-public-keys = "nix-ci:g3xV5BDTLtIBZr/A00IU1x0EtKKlb7YLgBN2SgYgM6A=";
