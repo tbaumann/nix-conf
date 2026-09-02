@@ -75,6 +75,11 @@
         ];
         env.SEVENTEEN_TRACK_API_KEY = "\${SEVENTEEN_TRACK_API_KEY}";
       };
+      ha = {
+        url = "http://homeassistant.local/api/mcp";
+        headers.Authorization = "Bearer \${MCP_HA_API_KEY}";
+        enabled = true;
+      };
     };
     settings = {
       gateway.platforms.telegram.gateway_restart_notification = false;
