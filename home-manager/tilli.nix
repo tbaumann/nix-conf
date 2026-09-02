@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./tilli
   ];
@@ -12,7 +12,7 @@
     packages = with pkgs; [
       cloak
       qmk
-      (pkgs.writers.writePython3Bin "ofx-fix" { libraries = [ python312Packages.ofxparse ]; } ''
+      (pkgs.writers.writePython3Bin "ofx-fix" {libraries = [python312Packages.ofxparse];} ''
         import argparse
         import codecs
         from ofxparse import OfxParser
@@ -48,6 +48,7 @@
       pr = "pull --rebase";
     };
     push.autoSetupRemote = true;
+    init.defaultBranch = "main";
   };
   home.file.".face" = {
     source = ./tilli/tilli-face.png;
