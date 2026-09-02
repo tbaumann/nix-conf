@@ -28,17 +28,20 @@
             "hide"
           ];
         }
-        { command = [ "polychromatic-tray-applet" ]; }
         { command = [ "coolercontrol" ]; }
         { sh = "NIXOS_OZONE_WL='' joplin-desktop"; }
         { command = [ "firefox" ]; }
-        { command = [ "chromium" ]; }
+        #{ command = [ "chromium" ]; }
         { command = [ "thunderbird" ]; }
-        /*
-          {
-            sh = "NIXOS_OZONE_WL=1 rambox --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer";
-          }
-        */
+        {
+          command = [
+            "firefox"
+            "-P"
+            "video"
+            "--name"
+            "firefox-video"
+          ];
+        }
         {
           command = [
             "openrgb"
@@ -101,7 +104,7 @@
         backdrop-color = "transparent";
       };
       gestures = {
-        hot-corners.enable = false;
+        #   hot-corners.enable = false;
       };
       cursor = {
         size = 20;
@@ -177,6 +180,10 @@
           matches = [
             {
               app-id = "chromium";
+              at-startup = true;
+            }
+            {
+              app-id = "firefox-video";
               at-startup = true;
             }
           ];
