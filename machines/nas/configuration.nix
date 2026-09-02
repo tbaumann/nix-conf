@@ -186,8 +186,8 @@
         name = "plugin-hermes-lcm";
         owner = "stephenschoettler";
         repo = "hermes-lcm";
-        rev = "v0.16.1";
-        hash = "sha256-Pks7Mf3d90lHEYwNq7dA3BGR9YgZawTav6nHpHgH9nk=";
+        rev = "v0.20.0";
+        hash = "sha256-yJ1Nn+su7YbKd+cgVOizXChzLbKHqTprSprF1p9/HYk=";
       })
     ];
     # Entry-point plugins: pip-packaged, register via the
@@ -302,6 +302,7 @@
   };
   sops.secrets."hermes-env".owner = "hermes";
   sbc.version = "0.3";
+  sbc.filesystem.useDefaultLayout = false;
   networking.useNetworkd = lib.mkForce true;
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = "aarch64-linux";

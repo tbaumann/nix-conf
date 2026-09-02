@@ -78,7 +78,7 @@
     nvf.url = "github:notashelf/nvf/";
     odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
     hermes-agent = {
-      url = "github:tbaumann/hermes-agent";
+      url = "github:tbaumann/hermes-agent/fix/issue-43810-filter-extraPythonPackages-deps";
       #url = "github:NousResearch/hermes-agent";
       inputs.nixpkgs.follows = "nixpkgs";
     };

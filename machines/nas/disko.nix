@@ -1,47 +1,13 @@
-# ---
-# schema = "btrfs-single-disk-subvolumes-impermanance-tmpfs"
-# [placeholders]
-# mainDisk = "/dev/disk/by-id/mmc-SD128_0x792032f5" 
-# ---
-# This file was automatically generated!
-# CHANGING this configuration requires wiping and reinstalling the machine
-{
-  boot.loader.grub = {
-    efiInstallAsRemovable = true;
-    efiSupport = true;
-  };
-
+{ lib, ... }: {
   disko.devices = {
     disk = {
       "main" = {
-        name = "main-f787779d91b74d1cbad44c9ea3965292";
-        device = "/dev/disk/by-id/mmc-SD128_0x792032f5";
+        name = "mmc";
+        device = "/dev/mmcblk0";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            "boot" = {
-              size = "1M";
-              type = "EF02"; # for grub MBR
-              priority = 1;
-            };
-            "ESP" = {
-              type = "EF00";
-              size = "500M";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
-              };
-            };
-            "swap" = {
-              size = "8G"; # adjust
-              content = {
-                type = "swap";
-                discardPolicy = "both";
-              };
-            };
             "root" = {
               size = "100%";
               content = {
@@ -75,7 +41,7 @@
     };
 
     nodev = {
-      "/" = {
+      "/" = lib.mkForce {
         fsType = "tmpfs";
         mountOptions = [
           "size=3G"

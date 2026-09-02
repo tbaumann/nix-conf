@@ -10,6 +10,7 @@ _: {
         default = pkgs.mkShellNoCC {
           packages = [
             inputs'.clan-core.packages.clan-cli
+            pkgs.nix-update
           ];
         };
       };
