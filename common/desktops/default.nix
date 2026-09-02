@@ -1,10 +1,12 @@
 { pkgs, ... }: {
   imports = [
+    ./caelestia.nix
     ./kde.nix
     ./lxqt.nix
     ./gtk-lock.nix
     ./niri.nix
     ./budgie.nix
+    ./gnome.nix
     ./sway.nix
     ./waybar.nix
     ./e9s.nix

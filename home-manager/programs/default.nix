@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     ./beets.nix
     ./chromium.nix
@@ -148,6 +153,8 @@
     unp
     asciinema
     asciinema-agg
+    inputs.vireo.packages.${pkgs.stdenv.hostPlatform.system}.vireo
+    inputs.funkuino.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   xdg.mimeApps.enable = true;

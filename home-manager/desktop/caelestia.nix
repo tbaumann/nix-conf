@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }: {
   imports = [
-    inputs.caelestia-shell.homeModules.default
+    inputs.caelestia-shell.homeManagerModules.default
   ];
   programs.caelestia = {
     enable = true;

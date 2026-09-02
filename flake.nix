@@ -13,8 +13,11 @@
       url = "github:catppuccin/foot";
       flake = false;
     };
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     clan-core.url = "git+https://git.clan.lol/clan/clan-core";
-    # nixpkgs.follows = "clan-core/nixpkgs";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       #inputs.nixpkgs.follows = "clan-core/nixpkgs";
@@ -23,7 +26,15 @@
       url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dankcalendar = {
+      url = "github:AvengeMedia/dankcalendar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    funkuino = {
+      url = "github:tbaumann/Funkuino";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     github-actions-nix.url = "github:synapdeck/github-actions-nix";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     ghostty-shaders = {
@@ -61,7 +72,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
     niri-flake = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake/";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
     nvf.url = "github:notashelf/nvf/";
@@ -79,6 +90,7 @@
       url = "github:jonathanio/update-systemd-resolved";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
+    vireo.url = "github:tbaumann/vireo";
     waybar_media_display.url = "github:tbaumann/waybar_media_display";
     waybar_weather_display.url = "github:tbaumann/waybar_weather_display";
     wpaperd = {

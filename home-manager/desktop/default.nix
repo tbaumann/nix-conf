@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ./caelestia.nix
     ./gtk.nix
     ./gtk-lock.nix
     ./media.nix
