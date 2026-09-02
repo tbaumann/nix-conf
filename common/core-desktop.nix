@@ -18,6 +18,7 @@
   ];
 
   nixpkgs.overlays = [ inputs.nix-topology.overlays.default ];
+  services.scx.enable = true; # BPF scheduler
 
   boot.plymouth.enable = true;
 
