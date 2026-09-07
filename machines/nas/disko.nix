@@ -1,90 +1,50 @@
-{ lib, ... }: {
+# ---
+# schema = "ext4-single-disk"
+# [placeholders]
+# mainDisk = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7783C781FA" 
+# ---
+# This file was automatically generated!
+# CHANGING this configuration requires wiping and reinstalling the machine
+{
+  boot.loader.grub = {
+    efiInstallAsRemovable = true;
+    efiSupport = true;
+  };
+
   disko.devices = {
     disk = {
-      "main" = {
-        name = "mmc";
-        device = "/dev/mmcblk0";
+      main = {
+        name = "main-8d427d5333bb4be58db641135b1a953c";
+        device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7783C781FA";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            "root" = {
+            "boot" = {
+              size = "1M";
+              type = "EF02"; # for grub MBR
+              priority = 1;
+            };
+            ESP = {
+              type = "EF00";
+              size = "500M";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+                mountOptions = [ "umask=0077" ];
+              };
+            };
+            root = {
               size = "100%";
               content = {
-                type = "btrfs";
-                extraArgs = [
-                  "--force"
-                  "--label root"
-                ];
-                subvolumes = {
-                  "@nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@home" = {
-                    mountpoint = "/home";
-                    mountOptions = [ "compress=zstd" ];
-                  };
-                  "@persist" = {
-                    mountpoint = "/persist";
-                    mountOptions = [ "compress=zstd" ];
-                  };
-                };
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
               };
             };
           };
         };
-      };
-    };
-
-    nodev = {
-      "/" = lib.mkForce {
-        fsType = "tmpfs";
-        mountOptions = [
-          "size=3G"
-          "mode=0755"
-          "noexec"
-        ];
-      };
-    };
-  };
-
-  fileSystems."/persist".neededForBoot = true;
-
-  # Automatic local snapshots
-  # https://digint.ch/btrbk/doc/readme.html
-  #$ systemctl start btrbk-<instance>
-  services.btrbk = {
-    instances."nix" = {
-      onCalendar = "0/2:00";
-      settings = {
-        subvolume = "/nix";
-        snapshot_create = "onchange";
-        snapshot_dir = "/nix";
-        snapshot_preserve = "16h 7d 2w";
-        snapshot_preserve_min = "3d";
-      };
-    };
-    instances."home" = {
-      onCalendar = "0/2:00";
-      settings = {
-        subvolume = "/home";
-        snapshot_create = "onchange";
-        snapshot_dir = "/home";
-        snapshot_preserve = "16h 7d 3w 2m";
-        snapshot_preserve_min = "3d";
-      };
-    };
-    instances."persist" = {
-      onCalendar = "0/2:00";
-      settings = {
-        subvolume = "/persist";
-        snapshot_dir = "/persist";
-        snapshot_preserve = "16h 7d 3w 2m";
-        snapshot_preserve_min = "3d";
       };
     };
   };
