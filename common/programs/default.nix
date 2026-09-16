@@ -22,5 +22,6 @@
   };
   environment.systemPackages = with pkgs; [
     poppler-utils
+    magic-wormhole-rs
   ];
 }

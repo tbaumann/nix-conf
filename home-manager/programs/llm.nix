@@ -4,6 +4,7 @@
   ...
 }:
 {
+  imports = [ inputs.omp.homeManagerModules.default ];
   home.packages =
     with pkgs;
     with inputs;
@@ -14,8 +15,8 @@
       poppler-utils
       wl-clipboard # Opencode uses it
     ];
-  programs.opencode = {
+  programs.omp = {
     enable = true;
-    package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+    #settings.startup.quiet = true;
   };
 }

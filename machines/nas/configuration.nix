@@ -302,7 +302,7 @@
   };
   sops.secrets."hermes-env".owner = "hermes";
   sbc.version = "0.3";
-  sbc.filesystem.useDefaultLayout = false;
+  #  sbc.filesystem.useDefaultLayout = true;
   networking.useNetworkd = lib.mkForce true;
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = "aarch64-linux";

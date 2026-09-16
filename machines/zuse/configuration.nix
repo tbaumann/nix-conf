@@ -14,7 +14,6 @@
     ../../common/core-pc.nix
     ../../common/work/syseleven
     ./hardware-configuration.nix
-    inputs.odysseus.nixosModules.default
     inputs.win98se-plymouth.nixosModules.default
   ];
   topology.self = {
@@ -54,22 +53,6 @@
       externalInterface = "enp69s0";
     };
   };
-  services.odysseus = {
-    enable = true;
-    environmentFile = config.sops.secrets."odysseus-env".path;
-    llamaCpp = {
-      enable = true;
-      package = pkgs.llama-cpp-vulkan;
-    };
-    extraEnvironmentVariables = {
-      AUTH_ENABLED = "true";
-      ODYSSEUS_ADMIN_USER = "admin";
-      #LOCALHOST_BYPASS = "true";
-      APP_BIND = "0.0.0.0";
-    };
-  };
-  sops.secrets."odysseus-env".owner = "odysseus";
-  #networking.enableIPv6 = false; ## Fuck you Telekom
   systemd.network = {
     netdevs."20-microbr".netdevConfig = {
       Kind = "bridge";

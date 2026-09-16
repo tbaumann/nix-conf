@@ -143,7 +143,7 @@
             displayPreferences = [
               "all"
             ];
-            fadeWhenIdle = false;
+            fadeWhenIdle = true;
           };
         }
       ];

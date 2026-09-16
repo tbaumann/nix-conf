@@ -51,7 +51,8 @@
             "arm"
             "ci"
           ];
-          deploy.targetHost = "root@nas.tail84117.ts.net";
+          #deploy.targetHost = "root@nas.tail84117.ts.net";
+          deploy.targetHost = "root@nas.local";
         };
       };
       ## Clan Services

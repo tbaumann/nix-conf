@@ -69,17 +69,24 @@
         inputs.nixpkgs.follows = "clan-core/nixpkgs";
       };
     */
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-sbc.url = "github:nakato/nixos-sbc/main";
     niri-flake = {
       url = "github:sodiboo/niri-flake/";
       inputs.nixpkgs.follows = "clan-core/nixpkgs"; # optional
     };
     nvf.url = "github:notashelf/nvf/";
-    odysseus.url = "github:pewdiepie-archdaemon/odysseus/pull/2568/head";
+    omp.url = "github:can1357/oh-my-pi";
+    preservation = {
+      url = "github:nix-community/preservation";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hermes-agent = {
-      url = "github:tbaumann/hermes-agent/fix/issue-43810-filter-extraPythonPackages-deps";
-      #url = "github:NousResearch/hermes-agent";
+      #url = "github:tbaumann/hermes-agent/fix/issue-43810-filter-extraPythonPackages-deps";
+      url = "github:NousResearch/hermes-agent";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";

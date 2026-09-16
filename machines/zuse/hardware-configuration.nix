@@ -57,11 +57,6 @@
     fsType = "btrfs";
     options = [ "subvol=DATA/home" ];
   };
-  fileSystems."/home-old" = {
-    device = "/dev/nvme0n1p4";
-    fsType = "btrfs";
-    options = [ "subvol=DATA/home-old" ];
-  };
 
   fileSystems."/persist" = {
     device = "/dev/nvme0n1p4";
