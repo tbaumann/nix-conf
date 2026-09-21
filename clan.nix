@@ -54,6 +54,16 @@
           #deploy.targetHost = "root@nas.tail84117.ts.net";
           deploy.targetHost = "root@nas.local";
         };
+        nuc = {
+          tags = [
+            "nixos"
+            "nas"
+            "pc"
+            "ci"
+          ];
+          #deploy.targetHost = "root@nas.tail84117.ts.net";
+          deploy.targetHost = "root@nuc.local";
+        };
       };
       ## Clan Services
       instances = {

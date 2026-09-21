@@ -80,10 +80,7 @@
     };
     nvf.url = "github:notashelf/nvf/";
     omp.url = "github:can1357/oh-my-pi";
-    preservation = {
-      url = "github:nix-community/preservation";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    preservation.url = "github:nix-community/preservation";
     hermes-agent = {
       #url = "github:tbaumann/hermes-agent/fix/issue-43810-filter-extraPythonPackages-deps";
       url = "github:NousResearch/hermes-agent";
@@ -137,6 +134,7 @@
           inputs.git-hooks-nix.flakeModule
           inputs.github-actions-nix.flakeModules.default
           inputs.treefmt-nix.flakeModule
+          inputs.home-manager.flakeModules.home-manager
           ./actions.nix
           ./clan.nix
           ./checks.nix
@@ -145,6 +143,21 @@
           ./pkgs.nix
           ./topology.nix
         ];
+        flake.homeModules.common = {
+          imports = [
+            ./home-manager/common.nix
+          ];
+        };
+        /*
+          flake.homeConfigurations.tilli = inputs.home-manager.lib.homeManagerConfiguration {
+            # pkgs = import nixpkgs { system = "x86_64-linux"; };
+            pkgs = self.x86_64-linux.packages;
+            modules = [
+              inputs.self.homeModules.common
+              ./home-manager/tilli.nix
+            ];
+          };
+        */
       }
     );
 }
