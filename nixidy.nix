@@ -12,7 +12,10 @@
     {
       nixidyEnvs = inputs.nixidy.lib.mkEnvs {
         inherit pkgs;
-        envs.home.modules = [ ./nixidy/home ];
+        envs = {
+          home.modules = [ ./nixidy/home ];
+          nuc.modules = [ ./nixidy/nuc ];
+        };
       };
     };
 }

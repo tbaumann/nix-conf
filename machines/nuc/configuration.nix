@@ -89,5 +89,16 @@
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   system.etc.overlay.enable = lib.mkForce false;
 
-  # New machine!
+  # Single-node Kubernetes server, declaratively provisioned with nixidy
+  # (see ../..//nixidy/nuc).
+  services.k3s = {
+    enable = true;
+    role = "server";
+    # Make the admin kubeconfig readable so nixidy/kubectl can use it as a
+    # non-root user (e.g. `KUBECONFIG=/etc/rancher/k3s/k3s.yaml`).
+    extraFlags = "--write-kubeconfig-mode 0644";
+  };
+
+  # Allow the Kubernetes API server inbound (kubectl / nixidy apply).
+  networking.firewall.allowedTCPPorts = [ 6443 ];
 }
