@@ -11,7 +11,6 @@
       nixos-sbc.nixosModules.default
       nixos-sbc.nixosModules.boards.raspberrypi.rpi4
       hermes-agent.nixosModules.default
-      odysseus.nixosModules.default
     ])
     ++ [
       ../../modules/shared.nix

@@ -132,7 +132,7 @@
             name = "users";
             input = "clan-core";
           };
-          roles.default.tags.all = { };
+          roles.default.machines.all = { };
           roles.default.settings = {
             user = "tilli";
             share = true;
@@ -186,32 +186,6 @@
           roles.default.tags.all = { };
           roles.default.settings.networks.home = { };
         };
-        /*
-          syncthing = {
-            module = {
-              name = "syncthing";
-              input = "clan-core";
-            };
-            roles.peer = {
-              tags.all = {};
-              settings.folders = {
-                Wallpapers = {
-                  path = "~/wallpapers";
-                };
-                Documents = {
-                  path = "~/Documents";
-                };
-                Music = {
-                  path = "~/Music";
-                };
-                Phoniebox = {
-                  path = "~/phoniebox";
-                };
-              };
-              extraModules = [./common/syncthing.nix];
-            };
-          };
-        */
         monitoring = {
           module = {
             name = "monitoring";
@@ -233,6 +207,10 @@
               grafana.enable = true;
             };
           };
+        };
+        dm-dns = {
+          module.name = "dm-dns";
+          roles.default.tags = [ "all" ];
         };
       };
     };
