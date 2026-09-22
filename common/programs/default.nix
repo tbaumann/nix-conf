@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     ./git.nix
   ];
@@ -23,5 +23,7 @@
   environment.systemPackages = with pkgs; [
     poppler-utils
     magic-wormhole-rs
+    inputs.nixidy.packages.${pkgs.stdenv.hostPlatform.system}.default
+
   ];
 }

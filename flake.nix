@@ -63,6 +63,7 @@
       url = "github:oddlama/nix-topology";
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
+    nixidy.url = "github:arnarg/nixidy/latest";
     /*
       nixos-generators = {
         url = "github:nix-community/nixos-generators";
@@ -141,25 +142,17 @@
           ./clan.nix
           ./checks.nix
           ./devshells.nix
+          ./home-configurations.nix
           ./hooks.nix
           ./pkgs.nix
           ./topology.nix
+          ./nixidy.nix
         ];
         flake.homeModules.common = {
           imports = [
             ./home-manager/common.nix
           ];
         };
-        /*
-          flake.homeConfigurations.tilli = inputs.home-manager.lib.homeManagerConfiguration {
-            # pkgs = import nixpkgs { system = "x86_64-linux"; };
-            pkgs = self.x86_64-linux.packages;
-            modules = [
-              inputs.self.homeModules.common
-              ./home-manager/tilli.nix
-            ];
-          };
-        */
       }
     );
 }

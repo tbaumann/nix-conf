@@ -1,15 +1,18 @@
 { inputs, ... }: {
   imports = [
-    inputs.flake-parts.flakeModules.easyOverlay
   ];
+
+  transposition.nixidyEnvs.adHoc = true;
+
   perSystem =
     {
       pkgs,
-      self',
       ...
     }:
     {
-      packages = {
+      nixidyEnvs = inputs.nixidy.lib.mkEnvs {
+        inherit pkgs;
+        envs.home.modules = [ ./nixidy/home ];
       };
     };
 }
