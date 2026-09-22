@@ -99,6 +99,10 @@
     extraFlags = "--write-kubeconfig-mode 0644";
   };
 
-  # Allow the Kubernetes API server inbound (kubectl / nixidy apply).
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  # Allow the Kubernetes API server inbound (kubectl / nixidy apply) and the
+  # kubernetes-dashboard NodePort (https://<node-ip>:32443).
+  networking.firewall.allowedTCPPorts = [
+    6443
+    32443
+  ];
 }

@@ -25,6 +25,29 @@
       };
     };
 
+    # Kubernetes Dashboard — general-purpose web UI for the cluster.
+    # Chart repo moved from kubernetes.github.io to kubernetes-retired.github.io.
+    kubernetes-dashboard = {
+      namespace = "kubernetes-dashboard";
+      createNamespace = true;
+      helm.releases.kubernetes-dashboard = {
+        chart = lib.helm.downloadHelmChart {
+          repo = "https://kubernetes-retired.github.io/dashboard";
+          chart = "kubernetes-dashboard";
+          version = "7.14.0";
+          chartHash = "sha256-n0HvDe1+pS9Zu4JqP9PwWkubAvp9F8KGaB0tPaLShHA=";
+        };
+        # Expose the kong gateway (the dashboard entrypoint) on a NodePort so
+        # the UI is reachable over the LAN at https://<nuc-ip>:32443.
+        values = {
+          kong.proxy = {
+            type = "NodePort";
+            tls.nodePort = 32443;
+          };
+        };
+      };
+    };
+
     # Cloud Native Postgres operator — declarative PostgreSQL via Cluster CRs.
     cloudnative-pg = {
       namespace = "cnpg-system";
