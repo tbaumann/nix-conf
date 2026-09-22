@@ -46,6 +46,30 @@
           };
         };
       };
+
+      # Admin login account for the dashboard. No secret lives in the repo:
+      # the bearer token is minted on demand at login time with
+      # `kubectl -n kubernetes-dashboard create token admin-user`.
+      resources = {
+        serviceAccounts.admin-user = {
+          metadata.namespace = "kubernetes-dashboard";
+        };
+        clusterRoleBindings.admin-user = {
+          metadata.name = "admin-user";
+          roleRef = {
+            apiGroup = "rbac.authorization.k8s.io";
+            kind = "ClusterRole";
+            name = "cluster-admin";
+          };
+          subjects = [
+            {
+              kind = "ServiceAccount";
+              name = "admin-user";
+              namespace = "kubernetes-dashboard";
+            }
+          ];
+        };
+      };
     };
 
     # Cloud Native Postgres operator — declarative PostgreSQL via Cluster CRs.
