@@ -196,6 +196,13 @@
 
   networking.firewall.enable = false;
 
+  # Serve the nuc's ingress services under *.home.tilman.baumann.name via the
+  # clan p2p DNS (dm-dns/unbound). Wildcard A record so any subdomain
+  # (dashboard, traefik, …) resolves to the nuc without per-service records.
+  services.unbound.settings.server.local-data = [
+    ''"*.home.tilman.baumann.name. 300 IN A 192.168.2.85"''
+  ];
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 

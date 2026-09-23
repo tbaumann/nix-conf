@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dashboard.home.tilman.baumann.name`)
+      services:
+        - name: kubernetes-dashboard-kong-proxy
+          port: 80
+  tls:
+    certResolver: selfsigned

@@ -9,6 +9,29 @@
 
   # Base Kubernetes environment: cluster-scoped operators and control planes.
   applications = {
+    # Ingress controller. k3s's bundled Traefik is disabled so the whole config
+    # (entrypoints, cert resolver, routing) lives here declaratively. Uses the
+    # built-in `selfsigned` resolver for now; swap for a Let's Encrypt
+    # DNS-01 resolver when the domain is properly exposed.
+    traefik = {
+      namespace = "traefik";
+      createNamespace = true;
+      helm.releases.traefik = {
+        chart = lib.helm.downloadHelmChart {
+          repo = "https://helm.traefik.io/traefik";
+          chart = "traefik";
+          version = "41.6.0";
+          chartHash = "sha256-J3ndRl7lClGbEKILQaNGKcta2uhK1H6aLlvr07kheek=";
+        };
+        values = {
+          certificatesResolvers.selfsigned.selfsigned = { };
+          service.spec.type = "LoadBalancer";
+        };
+      };
+      # Per-service routes (Traefik CRD). Raw YAML until nixidy is bumped to a
+      # revision exposing generators.fromCRDModule for typed Traefik resources.
+      extraRawYamls = [ ./ingressroute-dashboard.yaml ];
+    };
     # Hermeum — control plane for HermesAgent custom resources.
     # Pulls from OCI; bundles its hermes-agent-operator subchart (operator.enabled by default).
     hermeum = {
@@ -37,12 +60,13 @@
           version = "7.14.0";
           chartHash = "sha256-n0HvDe1+pS9Zu4JqP9PwWkubAvp9F8KGaB0tPaLShHA=";
         };
-        # Expose the kong gateway (the dashboard entrypoint) on a NodePort so
-        # the UI is reachable over the LAN at https://<nuc-ip>:32443.
+        # Reachable only through the Traefik ingress (nixidy), which terminates
+        # TLS and forwards HTTP to the kong gateway on :80. See the
+        # dashboard IngressRoute in the traefik application.
         values = {
           kong.proxy = {
-            type = "NodePort";
-            tls.nodePort = 32443;
+            type = "ClusterIP";
+            http.enabled = true;
           };
         };
       };

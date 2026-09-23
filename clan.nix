@@ -11,6 +11,7 @@
     meta = {
       name = "prawns";
       description = "Tilmans home clan";
+      domain = "home.tilman.baumann.name";
     };
 
     specialArgs = {
@@ -211,6 +212,18 @@
         dm-dns = {
           module.name = "dm-dns";
           roles.default.tags = [ "all" ];
+          # nuc pushes the zone file into the data-mesher network (needs a
+          # push role, otherwise network.files stays empty and data-mesher
+          # refuses to start).
+          roles.push.machines.nuc = { };
+        };
+        # data-mesher distributes the dm-dns zone file peer-to-peer. It needs at
+        # least one bootstrap peer to form the network; nuc is the always-on
+        # server (nas is often off).
+        data-mesher = {
+          module.name = "data-mesher";
+          roles.default.tags = [ "all" ];
+          roles.bootstrap.machines.nuc = { };
         };
       };
     };
