@@ -28,6 +28,7 @@
         "/var/lib/fwupd"
         "/var/lib/kubelet"
         "/var/lib/libvirt"
+        "/var/lib/sops-nix"
         # k3s server/agent state (SQLite DB, TLS/CA, containerd images)
         "/var/lib/rancher"
         # data-mesher synced files (dm-dns zone)
