@@ -160,7 +160,17 @@
         observability.log-level = "warn";
       };
     };
-    resolved.enable = true;
+    resolved = {
+      enable = true;
+      settings.Resolve = {
+        # Route queries for the home zone (and general LAN use later) to
+        # Pi-hole on the nuc (192.168.2.85:53). External-dns keeps the zone's
+        # records up to date from inside the cluster. Full LAN-wide ad-blocking
+        # means pointing devices at Pi-hole directly via the router later.
+        DNS = [ "192.168.2.85#home.tilman.baumann.name" ];
+        Domains = [ "~home.tilman.baumann.name" ];
+      };
+    };
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -195,13 +205,6 @@
   };
 
   networking.firewall.enable = false;
-
-  # Serve the nuc's ingress services under *.home.tilman.baumann.name via the
-  # clan p2p DNS (dm-dns/unbound). Wildcard A record so any subdomain
-  # (dashboard, traefik, …) resolves to the nuc without per-service records.
-  services.unbound.settings.server.local-data = [
-    ''"*.home.tilman.baumann.name. 300 IN A 192.168.2.85"''
-  ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

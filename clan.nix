@@ -11,7 +11,7 @@
     meta = {
       name = "prawns";
       description = "Tilmans home clan";
-      domain = "home.tilman.baumann.name";
+      # -> move to k8s domain = "home.tilman.baumann.name";
     };
 
     specialArgs = {
