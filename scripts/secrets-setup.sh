@@ -18,7 +18,7 @@
 #   kubectl -n dns rollout restart statefulset pihole
 set -euo pipefail
 
-K="kubectl --kubeconfig /etc/rancher/k3s/k3s.yaml"
+K=kubectl
 RAND_HEX() { openssl rand -base64 "$1" | tr -d '\n' ; }
 
 echo "== 1/3 Pi-hole admin password =="
@@ -38,7 +38,8 @@ fi
   --dry-run=client -o yaml | "$K" apply -f -
 echo "  pihole-auth ensured in external-dns"
 
-echo "== 2/3 Hermeum better-auth (Secret hermeum-secret) =="
+echo "== 2/3 Hermeum (Secret hermeum-secret; chart uses existingSecret) =="
+DB_URL="file:/var/lib/hermeum/db.sqlite"
 BETTER_AUTH_URL="https://hermeum.home.tilman.baumann.name"
 CUR="$("$K" -n hermeum get secret hermeum-secret -o jsonpath='{.data.better-auth-secret}' 2>/dev/null || true)"
 if [ -z "$CUR" ]; then
@@ -46,9 +47,16 @@ if [ -z "$CUR" ]; then
 else
   BA="$(printf '%s' "$CUR" | base64 -d)"
 fi
-"$K" -n hermeum patch secret hermeum-secret --type=merge \
-  -p "{\"stringData\":{\"better-auth-secret\":\"$BA\",\"better-auth-url\":\"$BETTER_AUTH_URL\"}}"
-echo "  better-auth-secret + better-auth-url set"
+# The hermeum chart is in existingSecret mode, so IT never creates the secret —
+# we own it here. Create-or-upsert with all keys the deployment reads.
+# shellcheck disable=SC2086
+"$K" -n hermeum create secret generic hermeum-secret \
+  --from-literal=database-url="$DB_URL" \
+  --from-literal=better-auth-secret="$BA" \
+  --from-literal=better-auth-url="$BETTER_AUTH_URL" \
+  ${HERMEUM_SMTP_URL:+--from-literal=smtp-url="smtps://tilman.baumann@tilman.baumann.name:$(cat /run/secrets/smtpPassword)@smtp.migadu.com:465"} \
+  --dry-run=client -o yaml | "$K" apply -f -
+echo "  hermeum-secret ensured: database-url, better-auth-secret, better-auth-url${HERMEUM_SMTP_URL:+, smtp-url}"
 
 echo "== 3/3 Kubernetes Dashboard admin token =="
 TOKEN="$("$K" -n kubernetes-dashboard create token admin-user --duration=720h 2>/dev/null || true)"

@@ -167,8 +167,11 @@
         # Pi-hole on the nuc (192.168.2.85:53). External-dns keeps the zone's
         # records up to date from inside the cluster. Full LAN-wide ad-blocking
         # means pointing devices at Pi-hole directly via the router later.
-        DNS = [ "192.168.2.85#home.tilman.baumann.name" ];
+      };
+      dnsDelegates.home.Delegate = {
+        DNS = "192.168.2.85";
         Domains = [ "~home.tilman.baumann.name" ];
+
       };
     };
     avahi = {

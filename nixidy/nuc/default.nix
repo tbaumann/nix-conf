@@ -53,6 +53,24 @@
             annotations."traefik.ingress.kubernetes.io/router.tls.certresolver" = "selfsigned";
             tls.enabled = true;
           };
+          # Restrict sign-ups to this email domain.
+          config.allowedEmailDomain = "tilman.baumann.name";
+          # Chart uses an EXISTING secret (created by scripts/secrets-setup.sh)
+          # instead of templating its own — so its values survive nixidy
+          # re-applies instead of being reset to a placeholder. The deployment
+          # still reads all sensitive env vars (better-auth, smtp-url, …) from
+          # `hermeum-secret` (see secretName helper: existingSecret wins).
+          secrets = {
+            existingSecret = "hermeum-secret";
+            # The values schema requires databaseUrl XOR existingSecret; null
+            # the default (file:…) so it matches the existingSecret arm. The
+            # script seeds the real database-url into the secret.
+            databaseUrl = "";
+            # Truthy only to make the chart emit the HERMEUM_SMTP_URL env; since
+            # existingSecret is set, this value never lands in a secret. The real
+            # value is seeded by scripts/secrets-setup.sh.
+            smtpUrl = "<set-via-secrets-script>";
+          };
         };
       };
     };
