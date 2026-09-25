@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pihole
+  namespace: dns
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`pihole.home.tilman.baumann.name`)
+      services:
+        - name: pihole-web
+          port: 80
+  tls:
+    certResolver: selfsigned

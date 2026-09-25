@@ -30,7 +30,10 @@
       };
       # Per-service routes (Traefik CRD). Raw YAML until nixidy is bumped to a
       # revision exposing generators.fromCRDModule for typed Traefik resources.
-      extraRawYamls = [ ./ingressroute-dashboard.yaml ];
+      extraRawYamls = [
+        ./ingressroute-dashboard.yaml
+        ./ingressroute-pihole.yaml
+      ];
     };
     # Hermeum — control plane for HermesAgent custom resources.
     # Pulls from OCI; bundles its hermes-agent-operator subchart (operator.enabled by default).
