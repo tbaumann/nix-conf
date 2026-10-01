@@ -397,7 +397,7 @@
       window.commands = [
         {
           criteria = {
-            title = "^Syncthing Tray( \(.*\))?$";
+            title = "^Syncthing Tray( \\(.*\\))?$";
           };
           command = "floating enable, border none, resize set 450 400, move position pointer";
         }
