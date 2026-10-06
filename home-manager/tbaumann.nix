@@ -15,6 +15,10 @@
   };
   programs.git.enable = true;
 
+  programs.dank-material-shell.systemd.enable = true;
+  wayland.windowManager.niri.enable = true;
+  qt.enable = true;
+
   ## Don't clobber everything from Ubuntu
   programs.ssh.enable = lib.mkForce false;
   xdg.enable = lib.mkForce false;

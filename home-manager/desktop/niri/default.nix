@@ -174,7 +174,7 @@
       };
     };
     plugins = {
-      dankBatteryAlerts.enable = true;
+      dankBatteryAlerts.enable = false;
       aiAssistant.enable = true;
       calculator.enable = true;
       dankBitwarden.enable = true;
