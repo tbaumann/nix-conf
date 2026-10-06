@@ -2,7 +2,6 @@
   config,
   inputs,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -28,6 +27,7 @@
         "/var/lib/fwupd"
         "/var/lib/kubelet"
         "/var/lib/libvirt"
+        "/var/lib/longhorn"
         "/var/lib/sops-nix"
         # k3s server/agent state (SQLite DB, TLS/CA, containerd images)
         "/var/lib/rancher"
@@ -117,6 +117,17 @@
       "--disable"
       "traefik"
     ];
+  };
+
+  # Longhorn (node-local block storage, managed via nixidy) requires iSCSI
+  # initiator (iscsiadm) on every node for its block volumes to attach.
+  services.openiscsi = {
+    enable = true;
+    # Unique initiator name per node — reverse of a domain we own, so the
+    # namespace is ours and every host is distinguishable on a future SAN
+    # (Longhorn itself only needs iscsiadm installed; the IQN matters once we
+    # attach external iSCSI targets).
+    name = "iqn.2026-09.name.baumann.tilman:nuc";
   };
 
   # Kubernetes API server + the nixidy-managed Traefik ingress (HTTP/HTTPS).

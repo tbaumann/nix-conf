@@ -140,6 +140,30 @@
         values = { };
       };
     };
+    # Longhorn — node-local block storage. Single node today; becomes the
+    # node-spanning StorageClass (replication across nodes, PVC snapshots,
+    # backup target) once the cluster grows. Data lives in /var/lib/longhorn,
+    # which the nuc machine config preserves under /persist (impermanence).
+    # open-iscsi (iscsiadm) must be enabled on every node — see machines/nuc.
+    longhorn = {
+      namespace = "longhorn-system";
+      createNamespace = true;
+      helm.releases.longhorn = {
+        chart = lib.helm.downloadHelmChart {
+          repo = "https://charts.longhorn.io";
+          chart = "longhorn";
+          version = "1.13.0";
+          chartHash = "sha256-CK1wZ5RHhD+dzQ9x3LbcA7mUjE4pU9lfc12XCGbGLLs=";
+        };
+        values = {
+          # On the node's persisted disk (survives reboots under impermanence).
+          defaultSettings.defaultDataPath = "/var/lib/longhorn";
+          # Make the `longhorn` StorageClass the cluster default instead of
+          # k3s's local-path (which stays as a secondary/scratch class).
+          persistence.defaultClass = true;
+        };
+      };
+    };
     # Pi-hole — LAN ad-blocking DNS server. Serves the `home.tilman.baumann.name`
     # zone for the whole cluster: external-dns auto-creates a local A record for
     # every ingress host under that domain (replacing the old wildcard).
