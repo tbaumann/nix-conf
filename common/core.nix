@@ -164,12 +164,12 @@
       enable = true;
       settings.Resolve = {
         # Route queries for the home zone (and general LAN use later) to
-        # Pi-hole on the nuc (192.168.2.85:53). External-dns keeps the zone's
+        # Pi-hole on the nuc (192.168.2.93:53). External-dns keeps the zone's
         # records up to date from inside the cluster. Full LAN-wide ad-blocking
         # means pointing devices at Pi-hole directly via the router later.
       };
       dnsDelegates.home.Delegate = {
-        DNS = "192.168.2.85";
+        DNS = "192.168.2.93";
         Domains = [ "~home.tilman.baumann.name" ];
 
       };
