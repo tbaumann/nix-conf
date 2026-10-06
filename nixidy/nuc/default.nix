@@ -58,6 +58,14 @@
           };
           # Restrict sign-ups to this email domain.
           config.allowedEmailDomain = "tilman.baumann.name";
+          # Per-agent ingresses: each agent platform (api-server/webhook/teams)
+          # gets an ingress host under this base (HERMEUM_AGENT_INGRESS_BASE_HOSTNAME).
+          # external-dns (pihole, home zone) auto-creates the A records.
+          config.agentIngress = {
+            baseHostname = "hermeum.home.tilman.baumann.name";
+            className = "traefik";
+            scheme = "http";
+          };
           # Chart uses an EXISTING secret (created by scripts/secrets-setup.sh)
           # instead of templating its own — so its values survive nixidy
           # re-applies instead of being reset to a placeholder. The deployment
@@ -69,10 +77,6 @@
             # the default (file:…) so it matches the existingSecret arm. The
             # script seeds the real database-url into the secret.
             databaseUrl = "";
-            # Truthy only to make the chart emit the HERMEUM_SMTP_URL env; since
-            # existingSecret is set, this value never lands in a secret. The real
-            # value is seeded by scripts/secrets-setup.sh.
-            smtpUrl = "<set-via-secrets-script>";
           };
         };
       };

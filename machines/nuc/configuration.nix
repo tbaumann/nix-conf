@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -129,6 +130,15 @@
     # attach external iSCSI targets).
     name = "iqn.2026-09.name.baumann.tilman:nuc";
   };
+
+  # Longhorn's manager nsenters into the host mount namespace and runs
+  # `iscsiadm` with the CONTAINER's PATH (which has /usr/bin but not
+  # /run/current-system/sw/bin). NixOS only installs iscsiadm under
+  # /run/current-system/sw/bin, so Longhorn can't find it. Expose it at
+  # /usr/bin/iscsiadm via a tmpfiles symlink (survives rebuilds).
+  systemd.tmpfiles.rules = [
+    "L+ /usr/bin/iscsiadm - - - - ${pkgs.openiscsi}/bin/iscsiadm"
+  ];
 
   # Kubernetes API server + the nixidy-managed Traefik ingress (HTTP/HTTPS).
   networking.firewall.allowedTCPPorts = [
