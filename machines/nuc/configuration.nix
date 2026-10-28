@@ -117,6 +117,14 @@
       # k3s's bundled one, so its full config is declarative in this repo.
       "--disable"
       "traefik"
+      # k3s's servicelb (klipper-lb) exposes LoadBalancer Services with a
+      # hostPort, and containerd's CNI portmap then installs a wildcard DNAT for
+      # that port (`nat OUTPUT -m addrtype --dst-type LOCAL`) that also swallows
+      # 127.0.0.53 — so any client resolving through /etc/resolv.conf on this
+      # node (containerd image pulls, Go binaries) is hijacked into the LB pod.
+      # MetalLB (nixidy app `metallb`) hands out real L2 VIPs instead.
+      "--disable"
+      "servicelb"
     ];
   };
 

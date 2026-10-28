@@ -9,6 +9,40 @@
 
   # Base Kubernetes environment: cluster-scoped operators and control planes.
   applications = {
+    # MetalLB — real L2 VIPs for LoadBalancer Services, replacing k3s's
+    # servicelb (disabled in machines/nuc/configuration.nix). klipper-lb binds
+    # LB ports with hostPort, whose CNI portmap wildcard DNAT also catches
+    # 127.0.0.53 and breaks the node's own resolver whenever the backing pod is
+    # down; MetalLB answers ARP for the VIP and keys its rules on it instead.
+    # The pool (./metallb-ipaddresspool.yaml) must stay outside the DHCP range.
+    metallb = {
+      namespace = "metallb-system";
+      createNamespace = true;
+      helm.releases.metallb = {
+        chart = lib.helm.downloadHelmChart {
+          repo = "https://metallb.github.io/metallb";
+          chart = "metallb";
+          version = "0.16.1";
+          chartHash = "sha256-Z1qB6M5XxM3VXkYBzgDOjGLaoR7ICzffXT4OaDruP8k=";
+        };
+        values = {
+          # L2/ARP only — the frr-k8s subchart (and its webhooks + CRDs) is for
+          # BGP and would just add moving parts.
+          frrk8s.enabled = false;
+          # The speaker runs with hostNetwork and its memberlist wants TCP/UDP
+          # 7946 — which clan's data-mesher (`data-mesher-wr`) already owns on
+          # this node, so the speaker crash-loops with "bind: address already in
+          # use". Move MetalLB's memberlist one port up.
+          speaker.memberlist.mlBindPort = 7947;
+        };
+      };
+      # Pool + L2Advertisement CRs. Declared as parsed `yamls` (NOT
+      # extraRawYamls) so the direct `nixidy apply` path really applies them.
+      yamls = [
+        (builtins.readFile ./metallb-ipaddresspool.yaml)
+        (builtins.readFile ./metallb-l2advertisement.yaml)
+      ];
+    };
     # Ingress controller. k3s's bundled Traefik is disabled so the whole config
     # (entrypoints, cert resolver, routing) lives here declaratively. Uses the
     # built-in `selfsigned` resolver for now; swap for a Let's Encrypt
@@ -26,6 +60,8 @@
         values = {
           certificatesResolvers.selfsigned.selfsigned = { };
           service.spec.type = "LoadBalancer";
+          # Pinned MetalLB VIP (in the `lan` pool) — the LAN-facing ingress IP.
+          service.annotations."metallb.io/loadBalancerIPs" = "192.168.2.232";
         };
       };
       # Per-service routes (Traefik CRD). Raw YAML until nixidy is bumped to a
@@ -193,8 +229,14 @@
             existingSecret = "pihole-admin";
             passwordKey = "password";
           };
-          # LoadBalancer so DNS is reachable on the nuc node IP (192.168.2.85):53.
+          # LoadBalancer with a pinned MetalLB VIP (the `lan` pool): DNS is
+          # reachable from the LAN, and nothing on the node uses a hostPort, so
+          # the node's own resolver is no longer hijacked.
           serviceDns.type = "LoadBalancer";
+          serviceDns.annotations."metallb.io/loadBalancerIPs" = "192.168.2.231";
+          # The chart makes a separate TCP and UDP Service; MetalLB only hands the
+          # same VIP to both if they declare the same sharing key.
+          serviceDns.annotations."metallb.io/allow-shared-ip" = "pihole-dns";
         };
       };
     };

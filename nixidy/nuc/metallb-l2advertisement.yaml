@@ -1,0 +1,10 @@
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: lan
+  namespace: metallb-system
+spec:
+  # Answer ARP for the whole `lan` pool. With a second node MetalLB elects one
+  # speaker per VIP, so the VIP moves with the node that has the backing pod.
+  ipAddressPools:
+    - lan

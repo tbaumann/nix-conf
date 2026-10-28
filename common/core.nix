@@ -169,7 +169,9 @@
         # means pointing devices at Pi-hole directly via the router later.
       };
       dnsDelegates.home.Delegate = {
-        DNS = "192.168.2.93";
+        # The Pi-hole DNS VIP (MetalLB L2, pool `lan`) — a cluster-independent
+        # address, so it keeps working when a second node joins or the pod moves.
+        DNS = "192.168.2.231";
         Domains = [ "~home.tilman.baumann.name" ];
 
       };

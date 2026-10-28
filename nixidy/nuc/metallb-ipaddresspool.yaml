@@ -1,0 +1,11 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: lan
+  namespace: metallb-system
+spec:
+  # Everything above 192.168.2.230 that the LAN DHCP server does not hand out.
+  # DNS + ingress are pinned inside this pool via the
+  # `metallb.io/loadBalancerIPs` annotation on their Services.
+  addresses:
+    - 192.168.2.231-192.168.2.250
