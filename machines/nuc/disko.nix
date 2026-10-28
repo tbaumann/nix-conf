@@ -1,20 +1,22 @@
 # ---
 # schema = "btrfs-single-disk-subvolumes-impermanance-rollback"
 # [placeholders]
-# mainDisk = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7783C781FA" 
+# mainDisk = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7783C781FA"
 # ---
 # This file was automatically generated!
 # CHANGING this configuration requires wiping and reinstalling the machine
-{ config, ... }:
+{ config, lib, ... }:
 let
   # Adjust, to match the partition's priority.
   rootPartition = "${config.disko.devices.disk."main".device}-part3";
 in
 {
-  boot.loader.grub = {
-    efiInstallAsRemovable = true;
-    efiSupport = true;
-  };
+  /*
+    boot.loader.grub = {
+      efiInstallAsRemovable = true;
+      efiSupport = true;
+    };
+  */
 
   disko.devices = {
     disk = {
@@ -70,16 +72,12 @@ in
                     mountpoint = "/persist";
                     mountOptions = [ "compress=zstd" ];
                   };
+                  "@media" = {
+                    mountpoint = "/media";
+                  };
                 };
               };
             };
-            #"swap" = {
-            #  size = "8G"; # adjust
-            #  content = {
-            #    type = "swap";
-            #    discardPolicy = "both";
-            #  };
-            #};
           };
         };
       };
@@ -142,6 +140,8 @@ in
       onCalendar = "0/2:00";
       settings = {
         subvolume = "/nix";
+        # No sudo: the instances run as root (see the override below).
+        backend = "btrfs-progs";
         snapshot_create = "onchange";
         snapshot_dir = "/nix";
         snapshot_preserve = "16h 7d 2w";
@@ -152,6 +152,7 @@ in
       onCalendar = "0/2:00";
       settings = {
         subvolume = "/home";
+        backend = "btrfs-progs";
         snapshot_create = "onchange";
         snapshot_dir = "/home";
         snapshot_preserve = "16h 7d 3w 2m";
@@ -162,10 +163,25 @@ in
       onCalendar = "0/2:00";
       settings = {
         subvolume = "/persist";
+        backend = "btrfs-progs";
         snapshot_dir = "/persist";
         snapshot_preserve = "16h 7d 3w 2m";
         snapshot_preserve_min = "3d";
       };
     };
   };
+
+  # btrbk's NixOS module runs every instance as the unprivileged `btrbk` user
+  # and expects it to call `sudo` for the btrfs commands. That cannot work on
+  # this host: security.sudo-rs.execWheelOnly = true makes the sudo wrapper 4110
+  # (root:wheel), and `btrbk` is in neither, so every run died with
+  # "/run/wrappers/bin/sudo: Permission denied" and no snapshot was ever taken
+  # (the /nix, /home and /persist instances all failed every 2h). Run them as
+  # root instead — btrfs then needs no sudo at all (backend = btrfs-progs).
+  systemd.services = lib.genAttrs [ "btrbk-nix" "btrbk-home" "btrbk-persist" ] (_: {
+    serviceConfig = {
+      User = lib.mkForce "root";
+      Group = lib.mkForce "root";
+    };
+  });
 }

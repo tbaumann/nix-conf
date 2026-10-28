@@ -28,6 +28,11 @@
   sops.secrets.netrc.mode = "0444";
   clan.core.settings.state-version.enable = true;
   clan.core.settings.machine-id.enable = true;
+  # The machine-id is declarative (clan writes it) and gets preserved, so
+  # systemd's commit unit has nothing to do but fail: it tries to write the
+  # transient id into /etc/machine-id, which is a symlink into the read-only nix
+  # store. It fails on every boot and makes `nixos-rebuild switch` exit non-zero.
+  systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
   nix = {
     channel.enable = false;
     daemonCPUSchedPolicy = "idle";

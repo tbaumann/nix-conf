@@ -11,6 +11,7 @@
     ../../common/core.nix
     ../../common/core-pc.nix
     inputs.preservation.nixosModules.default
+    inputs.espuino-mediahub.nixosModules.default
 
   ];
   preservation = {
@@ -34,6 +35,15 @@
         "/var/lib/rancher"
         # data-mesher synced files (dm-dns zone)
         "/var/lib/data-mesher"
+        # ESPuino MediaHub state (db.json: devices/cards/projects + secret.key).
+        # Volatile by default, so a plain reboot silently wipes cards and their
+        # assignments (the media library itself lives on @media and is safe).
+        {
+          directory = "/var/lib/espuino-mediahub";
+          user = "mediahub";
+          group = "mediahub";
+          mode = "0750";
+        }
         "/var/lib/power-profiles-daemon"
         "/var/lib/systemd/coredump"
         "/var/lib/systemd/rfkill"
@@ -46,11 +56,6 @@
         {
           file = "/etc/machine-id";
           inInitrd = true;
-        }
-        {
-          file = "/etc/ssh/ssh_host_ed25519_key";
-          how = "symlink";
-          configureParent = true;
         }
         # k3s config + admin kubeconfig (contains the cluster token/CA)
         {
@@ -71,6 +76,20 @@
           file = "/var/lib/systemd/random-seed";
           how = "symlink";
           inInitrd = true;
+          configureParent = true;
+        }
+
+        # systemd's host credential key. libvirt 12.8 encrypts
+        # /var/lib/libvirt/secrets/secrets-encryption-key with `systemd-creds`
+        # using that key; since /var/lib/libvirt IS preserved, the key has to be
+        # preserved as well or the blob becomes undecryptable after a reboot
+        # (libvirtd then fails with status=243/CREDENTIALS).
+        # Bind-mounted, NOT symlinked: systemd-creds opens this file with
+        # O_NOFOLLOW, so a symlink makes it fail with ELOOP ("Too many levels of
+        # symbolic links") and it can never (re)create the key.
+        {
+          file = "/var/lib/systemd/credential.secret";
+          mode = "0400";
           configureParent = true;
         }
       ];
@@ -95,13 +114,23 @@
   systemd.oomd.enable = true;
   documentation.enable = false;
   documentation.man.enable = false;
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PermitRootLogin = "yes";
+  };
   networking.useNetworkd = lib.mkForce true;
   networking.useDHCP = lib.mkDefault true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   services.thermald.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  system.etc.overlay.enable = lib.mkForce false;
+  #system.etc.overlay.enable = lib.mkForce false;
+  users.mutableUsers = false;
+
+  services.espuino-mediahub = {
+    enable = true;
+    mediaDir = "/media/espuino-mediahub";
+    openFirewall = true;
+  };
 
   # Single-node Kubernetes server, declaratively provisioned with nixidy
   # (see ../..//nixidy/nuc).
