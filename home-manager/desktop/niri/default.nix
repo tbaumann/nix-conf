@@ -29,7 +29,7 @@
     enableVPN = true; # VPN management widget
     enableDynamicTheming = true; # Wallpaper-based theming (matugen)
     enableAudioWavelength = true; # Audio visualizer (cava)
-    enableCalendarEvents = true;
+    enableCalendarEvents = false;
 
     quickshell = with inputs; {
       package = quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;

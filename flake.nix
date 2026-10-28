@@ -13,10 +13,6 @@
       url = "github:catppuccin/foot";
       flake = false;
     };
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     clan-core.url = "git+https://git.clan.lol/clan/clan-core";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
@@ -30,6 +26,7 @@
       url = "github:AvengeMedia/dankcalendar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    espuino-mediahub.url = "github:tbaumann/ESPuino-Mediahub";
     flake-parts.url = "github:hercules-ci/flake-parts";
     funkuino = {
       url = "github:tbaumann/Funkuino";

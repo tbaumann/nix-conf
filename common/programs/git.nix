@@ -7,6 +7,13 @@
       core = {
         pager = "${pkgs.delta}/bin/delta";
       };
+      credential = {
+        helper = [
+          "netrc"
+          "cache --timeout 21600" # six hours
+          "oauth"
+        ];
+      };
       interactive = {
         diffFilter = "${pkgs.delta}/bin/delta --color-only";
       };
@@ -49,5 +56,6 @@
   };
   environment.systemPackages = with pkgs; [
     gist
+    git-credential-oauth
   ];
 }

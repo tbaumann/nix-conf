@@ -14,7 +14,6 @@
     steam.enable = false;
     mosh.enable = true;
     mtr.enable = true;
-    iotop.enable = true;
   };
   stylix.targets.fish.enable = false;
   services = {
