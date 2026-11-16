@@ -15,7 +15,8 @@
     };
     clan-core.url = "git+https://git.clan.lol/clan/clan-core";
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:duxlabs-dev/dux-shell";
+      #      url = "github:AvengeMedia/DankMaterialShell";
       #inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     dms-plugin-registry = {
@@ -27,11 +28,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     espuino-mediahub.url = "github:tbaumann/ESPuino-Mediahub";
+    # Deliberately NOT following nixpkgs: the module's `package` default is this
+    # input's own build, and the SPA in it pins an `npmDepsHash` that is
+    # generated per nixpkgs' node/npm — so following would rebuild the Rust
+    # workspace and the SPA against a different nixpkgs and can fail on that
+    # hash. Built from its own lock instead, the deployed server is exactly what
+    # its own checks built; the price is a second nixpkgs in the closure.
+    espuino-label-printer.url = "github:tbaumann/ESPuino-label-printer";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    funkuino = {
-      url = "github:tbaumann/Funkuino";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     github-actions-nix.url = "github:synapdeck/github-actions-nix";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     ghostty-shaders = {
@@ -61,6 +65,7 @@
       inputs.nixpkgs.follows = "clan-core/nixpkgs";
     };
     nixidy.url = "github:arnarg/nixidy/latest";
+    nixdatifier.url = "github:Muddyblack/nixdatifier";
     /*
       nixos-generators = {
         url = "github:nix-community/nixos-generators";

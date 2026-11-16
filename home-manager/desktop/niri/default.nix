@@ -19,7 +19,7 @@
   programs.dank-calendar = {
     enable = true;
     quickshell = with inputs; {
-      package = quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      #package = quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
 
@@ -32,7 +32,7 @@
     enableCalendarEvents = false;
 
     quickshell = with inputs; {
-      package = quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      #package = quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
     settings = {
       niriLayoutGapsOverride = -2;

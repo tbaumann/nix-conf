@@ -24,6 +24,7 @@
     smtpPasswordPath = config.sops.secrets.smtpPassword.path;
   };
   sops.secrets.nix-access-tokens-github.mode = "0440";
+  sops.secrets.nix-access-tokens-github.group = "wheel";
   sops.secrets.netrc.group = "wheel";
   sops.secrets.netrc.mode = "0444";
   clan.core.settings.state-version.enable = true;
@@ -47,10 +48,20 @@
       randomizedDelaySec = "1h";
     };
     settings = {
+      auto-allocate-uids = true;
+      use-cgroups = true;
+      extra-sandbox-paths = [
+        "/dev/net"
+      ];
+
+      extra-system-features = [ "uid-range" ];
+
       experimental-features = [
         "nix-command"
         "flakes"
         "ca-derivations"
+        "auto-allocate-uids"
+        "cgroups"
       ];
       builders-use-substitutes = true;
       auto-optimise-store = true;
@@ -113,7 +124,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    # too broken contentAddressedByDefault = true;
   };
 
   zramSwap.enable = true;
@@ -133,7 +143,6 @@
   };
   system.etc.overlay.enable = true;
   system.etc.overlay.mutable = true;
-  boot.initrd.systemd.enable = true;
   system.nixos-init.enable = true;
 
   # add user's shell into /etc/shells
@@ -182,13 +191,14 @@
       };
     };
     avahi = {
-      enable = true;
       nssmdns4 = true;
       publish = {
         enable = true;
         workstation = true;
         addresses = true;
-        userServices = true;
+      };
+      settings = {
+        publish.publish-addresses = true;
       };
     };
     fstrim.enable = true;

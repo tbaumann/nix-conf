@@ -8,7 +8,6 @@
     ./tailscale.nix
   ];
   system.etc.overlay.enable = true;
-  boot.initrd.systemd.enable = true;
   #boot.kernelPackages = pkgs.linuxPackages_6_17;
   boot.loader = {
     timeout = 10;

@@ -12,6 +12,7 @@
     ../../common/core-pc.nix
     inputs.preservation.nixosModules.default
     inputs.espuino-mediahub.nixosModules.default
+    inputs.espuino-label-printer.nixosModules.card-printer-server
 
   ];
   preservation = {
@@ -42,6 +43,15 @@
           directory = "/var/lib/espuino-mediahub";
           user = "mediahub";
           group = "mediahub";
+          mode = "0750";
+        }
+        # The card shop's state: the SQLite database and the card image blobs.
+        # Same volatile-root caveat as the hub — without this entry a reboot
+        # comes up with an empty shop.
+        {
+          directory = "/var/lib/card-printer-server";
+          user = "card-printer-server";
+          group = "card-printer-server";
           mode = "0750";
         }
         "/var/lib/power-profiles-daemon"
@@ -130,6 +140,31 @@
     enable = true;
     mediaDir = "/media/espuino-mediahub";
     openFirewall = true;
+    printerUrl = "https://kartenschmiede.home.tilman.baumann.name/";
+  };
+
+  # The card shop: order and card API, the customer SPA, and the print queue the
+  # spooler pulls. 8081 because the hub above holds 8080.
+  services.card-printer-server = {
+    enable = true;
+    port = 8081;
+    publicBaseUrl = "https://kartenschmiede.home.tilman.baumann.name";
+    emailFrom = "orders@kartenschmiede.tilman.baumann.name";
+    operatorEmail = "tilman@baumann.name";
+    # Traefik (k3s, MetalLB VIP 192.168.2.232) is what routes
+    # *.home.tilman.baumann.name, and it reaches this from the pod network on
+    # the node's own address — so the port has to be open.
+    openFirewall = true;
+    # ADMIN_TOKEN, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY:
+    #   clan secrets set card-printer-env --machine nuc -e
+    # The reference only evaluates once that secret exists (clan's sops module
+    # declares sops.secrets.<name> from sops/secrets/<name>/machines/<machine>).
+    environmentFile = config.sops.secrets."card-printer-env".path;
+  };
+
+  services.newt = {
+    enable = true;
+    environmentFile = config.sops.secrets."newt-home-env".path;
   };
 
   # Single-node Kubernetes server, declaratively provisioned with nixidy

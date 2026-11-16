@@ -15,7 +15,7 @@
       home-manager.sharedModules = [
         iio-sway.homeManagerModules.default
         nix-index-database.homeModules.nix-index
-        nvf.homeManagerModules.default
+        nvf.homeModules.default
         stylix.homeModules.stylix
       ];
       home-manager.extraSpecialArgs = {

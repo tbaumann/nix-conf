@@ -88,7 +88,6 @@ in
 
   # https://www.notashelf.dev/posts/impermanence/#impermanence
   boot.initrd.systemd = {
-    enable = true;
     services.rollback = {
       description = "Rollback BTRFS root drive to a pristine state";
 

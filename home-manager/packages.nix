@@ -33,7 +33,6 @@
     razergenie
     scc
     slurp
-    tsukimi
     usbutils # For lsusb
     vlc
     wget

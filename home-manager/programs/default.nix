@@ -19,10 +19,16 @@
     ./ssh.nix
     ./terminal
     ./zoxide.nix
+    inputs.nixdatifier.homeManagerModules.default
   ];
 
   stylix.targets.firefox.enable = false;
   programs = {
+    nixdatifier = {
+      enable = true;
+      autostart = true; # default: true, starts in tray at login
+      # ui = false;     # command line only
+    };
     firefox = {
       enable = true;
     };
@@ -155,7 +161,7 @@
     asciinema
     asciinema-agg
     inputs.vireo.packages.${pkgs.stdenv.hostPlatform.system}.vireo
-    inputs.funkuino.packages.${pkgs.stdenv.hostPlatform.system}.default
+    #    inputs.funkuino.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   xdg.mimeApps.enable = true;

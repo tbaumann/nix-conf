@@ -30,6 +30,8 @@
     "kvm"
     "big-parallel"
     "gccarch-znver2"
+    "devnet"
+    "uid-range" # should have happened automatically
   ];
 
   hardware.graphics = {
