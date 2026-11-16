@@ -42,7 +42,6 @@
     restique
     simple-scan
     speedtest-cli
-    tsukimi
     thunderbird
     wev
     wine
